@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @user.id %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @user.password %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @user.admin %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Gluten free:</strong>
+  <%= @user.gluten_free %>
+</p>
+
+<p>
+  <strong>Lactose intol:</strong>
+  <%= @user.lactose_intol %>
+</p>
+
+<p>
+  <strong>Organic:</strong>
+  <%= @user.organic %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user.address %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
