@@ -11,7 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109210445) do
+ActiveRecord::Schema.define(version: 20171115192504) do
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "prep_notes", force: :cascade do |t|
+    t.string   "note",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.string   "description",  limit: 255
+    t.text     "ingredients",  limit: 65535
+    t.string   "instructions", limit: 255
+    t.string   "note",         limit: 255
+    t.string   "tags",         limit: 255
+    t.string   "origin",       limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string   "unit",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        limit: 255

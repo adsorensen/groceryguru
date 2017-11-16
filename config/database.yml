@@ -4,8 +4,10 @@
 
 default: &default
   adapter: mysql2
+  database: c9 #grocery_guru
+  # host: 67.172.251.141
+  # port: 3306
   encoding: utf8
-  database: c9
   pool: 5
   timeout: 5000
   username: root
