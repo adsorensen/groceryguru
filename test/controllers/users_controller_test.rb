@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get signup_path
     assert_response :success
   end
 
