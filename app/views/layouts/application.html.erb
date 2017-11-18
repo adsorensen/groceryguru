@@ -7,7 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <% if logged_in? %>
+  <header>
+      <nav class="website-nav">
+        <ul>
+          <li><%= link_to 'Recipes', recipes_path %></li>
+          <li>&bull;</li>
+          <li><%= link_to 'Calendar', '/calendar' %></li>
+          <li>&bull;</li>
+          <li><%= link_to 'Cart', '/cart' %></li>
+          <li>&bull;</li>
+          <li><%= link_to 'My Profile', '/users/' + session[:user_id].to_s  %></li>
+          <li>&bull;</li>
+          <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+        </ul>
+      </nav>
+  </header>
+  <% end %>
   <div class="container">
     <% flash.each do |message_type, message| %>
     <div class="alert alert-<%= message_type %>"><%= message %></div>
