@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: session_params[:email].downcase)
     if user && user.authenticate(session_params[:password])
       log_in(user)
-      redirect_to '/users/' + session[:user_id].to_s 
+      redirect_to '/users/' + session[:user_id].to_s
     else
       flash.now[:danger] = 'Invalid credentials'
       render :new
