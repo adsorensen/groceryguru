@@ -122,9 +122,6 @@
     height: 40px;
   }
 
-  .message .text {
-  }
-
   .message:after, .website-nav:after {
     content: " ";
     display: table;
@@ -207,14 +204,4 @@
   @font-face {
   font-family: "Primetime";
   src: url("/assets/PrimeTime.ttf");
-  }
-  
-  @font-face {
-  font-family: "Primetime";
-  src: url("/assets/PrimeTime.ttf");
-  }
-  
-  @font-face {
-  font-family: "American Purpose";
-  src: url("/assets/American Purpose.ttf");
   }
