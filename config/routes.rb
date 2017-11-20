@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
-  get 'sessions/new'
+  resources :ingredients
+  resources :prep_notes
+  resources :prep_notes
+  resources :ingredients
+  resources :prep_notes
+  resources :units
   resources :recipes
   resources :users
+  get 'cart', to: 'cart#index'
+
+  get 'cart/loadcart'
+  root 'welcome#index'
+  get 'sessions/new'
+  
   get 'welcome/index'
   get  'signup',  to: 'users#new'
   get    'login',   to: 'sessions#new'

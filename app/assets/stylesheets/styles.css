@@ -9,23 +9,24 @@
     padding: 0;
     font-family: "Futura", Roboto, Arial, sans-serif;
     font-size: 62.5%;
-    color: white;
-    background: green;
+    background: #D3D3D3;
   }
+  
   body {
     font-size: 1.8rem;
+    color: green;
   }
   h1 {
-      font-weight: normal;
+    font-weight: normal;
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
   }
   h2 {
-      font-weight: normal;
+    font-weight: normal;
     text-align: center;
   }
   h3 {
-      font-weight: normal;
+    font-weight: normal;
   }
   a {
     color: white;
@@ -64,25 +65,43 @@
     font-size: 16px;
  }
   .website-nav {
-    float: right;
-    padding: 5rem;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%;
+    padding: 2rem;
+    background-color: green;
   }
 
   .website-nav ul {
     list-style: none;
-    margin: 0;
+    margin-right: 20px;
     padding: 0;
+    float: right;
+    
+  }
+
+  .website-nav title {
+    position: absolute;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    color: white;
+    padding-left: 20px;
+    font-size: x-large;
+    display: inline-block;
   }
 
   .website-nav ul li {
     float: left;
     padding: 0.5rem 2rem 0.5rem 0;
     line-height: 21px;
+    color: white;
   }
 
   .website-nav ul li a {
     color: white;
     text-decoration: none;
+    float: right;
   }
 
   .home-link {
@@ -177,14 +196,25 @@
     h1 {
       font-size: 5rem;
     }
-    .message .twitter-link img {
-      width: 80%;
-      height: 80%;
-    }
   }
 
   @media (min-aspect-ratio: 11/5)  {
     .graphics {
       display: none;
     }
+  }
+  
+  @font-face {
+  font-family: "Primetime";
+  src: url("/assets/PrimeTime.ttf");
+  }
+  
+  @font-face {
+  font-family: "Primetime";
+  src: url("/assets/PrimeTime.ttf");
+  }
+  
+  @font-face {
+  font-family: "American Purpose";
+  src: url("/assets/American Purpose.ttf");
   }

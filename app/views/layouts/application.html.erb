@@ -2,14 +2,15 @@
 <html>
 <head>
   <title>Grocery Guru</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <% if logged_in? %>
   <header>
       <nav class="website-nav">
+        <title>Grocery Guru</title>
         <ul>
           <li><%= link_to 'Recipes', recipes_path %></li>
           <li>&bull;</li>
