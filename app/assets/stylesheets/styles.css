@@ -7,7 +7,7 @@
   html {
     margin: 0;
     padding: 0;
-    font-family: "Futura", Roboto, Arial, sans-serif;
+    font-family: "Source Sans Pro", Roboto, Arial, sans-serif;
     font-size: 62.5%;
     background: #D3D3D3;
   }
@@ -204,4 +204,9 @@
   @font-face {
   font-family: "Primetime";
   src: url("/assets/PrimeTime.ttf");
+  }
+  
+  @font-face {
+  font-family: "Source Sans Pro";
+  src: url("/assets/SourceSansPro.ttf");
   }
