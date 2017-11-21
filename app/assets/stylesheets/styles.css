@@ -7,7 +7,7 @@
   html {
     margin: 0;
     padding: 0;
-    font-family: "Futura", Roboto, Arial, sans-serif;
+    font-family: "Source Sans Pro", Roboto, Arial, sans-serif;
     font-size: 62.5%;
     background: #D3D3D3;
   }
@@ -122,9 +122,6 @@
     height: 40px;
   }
 
-  .message .text {
-  }
-
   .message:after, .website-nav:after {
     content: " ";
     display: table;
@@ -210,11 +207,6 @@
   }
   
   @font-face {
-  font-family: "Primetime";
-  src: url("/assets/PrimeTime.ttf");
-  }
-  
-  @font-face {
-  font-family: "American Purpose";
-  src: url("/assets/American Purpose.ttf");
+  font-family: "Source Sans Pro";
+  src: url("/assets/SourceSansPro.ttf");
   }
