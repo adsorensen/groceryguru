@@ -4,5 +4,6 @@ class DropTables < ActiveRecord::Migration
     drop_table :units
     drop_table :prep_notes
     drop_table :ingredients
+    drop_table :instructions
   end
 end

@@ -13,7 +13,23 @@
 
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
+    <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :unit %><br>
+    <%= f.text_field :unit %>
+  </div>
+  <div class="field">
+    <%= f.label :prep_note %><br>
+    <%= f.text_field :prep_note %>
+  </div>
+  <div class="field">
+    <%= f.label :recipe_id %><br>
+    <%= f.text_field :recipe_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ingredient_id %><br>
+    <%= f.text_field :ingredient_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

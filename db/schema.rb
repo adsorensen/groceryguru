@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121202016) do
+ActiveRecord::Schema.define(version: 20171123184115) do
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "instructions", force: :cascade do |t|
+    t.integer  "recipe_id",     limit: 4,   null: false
+    t.integer  "ingredient_id", limit: 4,   null: false
+    t.integer  "amount",        limit: 4,   null: false
+    t.integer  "unit",          limit: 4
+    t.string   "prep_note",     limit: 255, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "instructions", ["ingredient_id"], name: "index_instructions_on_ingredient_id", using: :btree
+  add_index "instructions", ["recipe_id"], name: "index_instructions_on_recipe_id", using: :btree
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "name",         limit: 255,   null: false
+    t.text     "instructions", limit: 65535, null: false
+    t.string   "description",  limit: 255
+    t.string   "origin",       limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        limit: 255
@@ -28,4 +56,6 @@ ActiveRecord::Schema.define(version: 20171121202016) do
     t.datetime "updated_at",                  null: false
   end
 
+  add_foreign_key "instructions", "ingredients"
+  add_foreign_key "instructions", "recipes"
 end

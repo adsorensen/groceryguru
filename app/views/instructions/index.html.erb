@@ -6,6 +6,8 @@
   <thead>
     <tr>
       <th>Amount</th>
+      <th>Unit</th>
+      <th>Prep note</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +16,8 @@
     <% @instructions.each do |instruction| %>
       <tr>
         <td><%= instruction.amount %></td>
+        <td><%= instruction.unit %></td>
+        <td><%= instruction.prep_note %></td>
         <td><%= link_to 'Show', instruction %></td>
         <td><%= link_to 'Edit', edit_instruction_path(instruction) %></td>
         <td><%= link_to 'Destroy', instruction, method: :delete, data: { confirm: 'Are you sure?' } %></td>

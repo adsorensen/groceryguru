@@ -2,10 +2,12 @@
 
 one:
   name: MyString
-  instructions: MyString
+  instructions: MyText
+  description: MyString
   origin: MyString
 
 two:
   name: MyString
-  instructions: MyString
+  instructions: MyText
+  description: MyString
   origin: MyString

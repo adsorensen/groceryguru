@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  amount: 
+  amount: 1
+  unit: 
+  prep_note: MyString
 
 two:
-  amount: 
+  amount: 1
+  unit: 
+  prep_note: MyString
