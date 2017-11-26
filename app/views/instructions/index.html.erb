@@ -5,6 +5,8 @@
 <table>
   <thead>
     <tr>
+      <th>Recipe ID</th>
+      <th>Ingredient ID</th>
       <th>Amount</th>
       <th>Unit</th>
       <th>Prep note</th>
@@ -15,9 +17,12 @@
   <tbody>
     <% @instructions.each do |instruction| %>
       <tr>
+        <td><%= instruction.recipe_id %></td>
+        <td><%= instruction.ingredient_id %></td>
         <td><%= instruction.amount %></td>
         <td><%= instruction.unit %></td>
         <td><%= instruction.prep_note %></td>
+        <td><%= instruction.recipes %></td>
         <td><%= link_to 'Show', instruction %></td>
         <td><%= link_to 'Edit', edit_instruction_path(instruction) %></td>
         <td><%= link_to 'Destroy', instruction, method: :delete, data: { confirm: 'Are you sure?' } %></td>

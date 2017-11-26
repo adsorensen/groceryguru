@@ -55,6 +55,11 @@
   <%= @user.address %>
 </p>
 
+<p>
+  <strong>Bio:</strong>
+  <%= @user.bio %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %> | 
 <%= link_to 'Add Recipe', new_recipe_path %>
