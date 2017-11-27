@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   resources :prep_notes
   resources :prep_notes
   resources :ingredients
-  resources :prep_notes
-  resources :units
   resources :recipes
   resources :users
   resources :carts
@@ -15,6 +13,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   post 'cart', to: 'cart#create'
   delete 'cart', to: 'cart#destroy'
+  get 'calendar', to: 'calendar#index'
   get 'welcome/index'
   get  'signup',  to: 'users#new'
   get    'login',   to: 'sessions#new'
