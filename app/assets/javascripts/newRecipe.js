@@ -12,3 +12,16 @@ $('document').ready(function() {
         $("#ingredients").append(newRow);
     });
 });
+
+function tableSave() {
+    var table = [];
+    
+    $('#ingredients tr').each(function(){
+         var row = [];
+        $(this).find('td').each(function(){
+            //do your stuff, you can use $(this) to get current cell
+            row.push($(this));
+        })
+        table.push(row);
+    })
+}
