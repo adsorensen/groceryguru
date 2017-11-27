@@ -1,5 +1,97 @@
-<h1>New Recipe</h1>
+<h1>Add New Recipe</h1>
 
-<%= render 'form' %>
+<%= form_for(@recipe) do |f| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-<%= link_to 'Back', recipes_path %>
+      <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<br><br><br><br>
+<style>
+  table {
+    border: 5px solid black;
+    padding: 10px;
+    align :center
+  }
+  td{
+   
+  }
+  tr{
+    padding: 10px 20;     /* 10px top & bottom padding, 0px left & right */
+    border-width: 1px 1px; /*  1px top & bottom border,  0px left & right */
+    border-color: black;
+    border-style: solid;
+  }
+  th{
+     
+  }
+  #title{
+    position: realtive;
+    margin-left: auto; 
+    width: 70%;
+    left: 50px;
+  }
+  #desc{
+    margin-left: auto; 
+    width: 70%;
+  }
+  #instruct{
+    margin-left: auto; 
+    width: 70%;
+  }
+  #origin{
+    margin-left: auto; 
+    width: 70%;
+  }
+  #picture{
+    position: relative;
+    left: 10px;
+    top: 10px;
+  }
+</style>
+
+<%= javascript_include_tag('newRecipe.js') %>
+
+  <img id="picture" src="/assets/pic-generic.png" alt="Smiley face" height="200" width="200">
+  <div class="field" id="title">
+    <%= f.label :name, "Recipe Title" %><br>
+    <%= f.text_field :name, :size=>"100"%>
+  </div>
+  <div class="field" id="desc">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, size: "91x5"%>
+  </div>
+  <div class="field" id="instruct">
+    <%= f.label :instructions %><br>
+    <%= f.text_area :instructions, size: "91x10" %>
+  </div>
+  <div class="field" id="origin">
+    <%= f.label :origin %><br>
+    <%= f.text_field :origin %>
+  </div>
+  <div class="actions" id="create">
+    <%= f.submit %>
+  </div>
+
+
+<div class= "table-holder"><center>
+  <h3>Ingredients</h3><button id='addIngredient' type="button">Add Ingredient</button>
+  <table id="ingredients"><tbody>
+    <tr>
+      <th>Quantity</th>
+      <th>Unit</th>
+      <th>Ingredient</th>
+      <th>Preparation</th>
+    </tr>
+  </tbody></table></center>
+</div>
+
+
+<% end %>
+<%#= link_to 'Back', recipes_path %>
