@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126220051) do
+ActiveRecord::Schema.define(version: 20171127180215) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(version: 20171126220051) do
   add_index "instructions", ["recipe_id"], name: "index_instructions_on_recipe_id", using: :btree
 
   create_table "recipes", force: :cascade do |t|
-    t.string   "name",         limit: 255,   null: false
-    t.text     "instructions", limit: 65535, null: false
-    t.string   "description",  limit: 255
-    t.string   "origin",       limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name",        limit: 255,   null: false
+    t.text     "directions",  limit: 65535, null: false
+    t.string   "description", limit: 255
+    t.string   "origin",      limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "saved_recipes", force: :cascade do |t|
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20171126220051) do
     t.boolean  "personal"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.boolean  "private"
   end
 
   add_index "saved_recipes", ["recipe_id"], name: "index_saved_recipes_on_recipe_id", using: :btree
@@ -62,7 +63,6 @@ ActiveRecord::Schema.define(version: 20171126220051) do
     t.boolean  "gluten_free"
     t.boolean  "lactose_intol"
     t.boolean  "organic"
-    t.string   "address",         limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "bio",             limit: 255
