@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127180215) do
+ActiveRecord::Schema.define(version: 20171127194813) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20171127180215) do
     t.string   "origin",      limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.string   "picture",     limit: 255
   end
 
   create_table "saved_recipes", force: :cascade do |t|
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 20171127180215) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "bio",             limit: 255
+    t.string   "picture",         limit: 255
   end
 
   add_foreign_key "instructions", "ingredients"
