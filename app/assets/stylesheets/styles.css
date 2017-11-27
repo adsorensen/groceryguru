@@ -104,6 +104,12 @@
     text-decoration: none;
     float: right;
   }
+  
+  .website-nav ul li a:hover {
+    color: yellow;
+    text-decoration: none;
+    float: right;
+  }
 
   .home-link {
     font-weight: bold;
