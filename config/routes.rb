@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :saved_recipes
+  resources :recipes
+  resources :instructions
   resources :ingredients
-  resources :prep_notes
   resources :prep_notes
   resources :ingredients
   resources :recipes

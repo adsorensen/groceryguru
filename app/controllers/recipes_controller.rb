@@ -16,6 +16,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
+    #@recipe.instructions.build # build instruction attributes
   end
 
   # GET /recipes/1/edit
@@ -24,6 +25,7 @@ class RecipesController < ApplicationController
 
   # POST /recipes
   # POST /recipes.json
+  # original
   def create
     @recipe = Recipe.new(recipe_params)
 
@@ -40,6 +42,7 @@ class RecipesController < ApplicationController
 
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
+  # original
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
@@ -73,6 +76,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :ingredients, :instructions, :note, :tags, :origin)
+      params.require(:recipe).permit(:name, :directions, :description, :origin)
     end
 end
