@@ -15,8 +15,6 @@ Rails.application.routes.draw do
   
   get 'calendar', to: 'calendar#index'
   
-  get 'recipes/url'
-
   get 'welcome/index'
   get  'signup',  to: 'users#new'
   get    'login',   to: 'sessions#new'
