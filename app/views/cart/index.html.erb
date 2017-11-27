@@ -15,19 +15,23 @@
   </thead>
 
   <tbody>
-    <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.name %></td>
-        <td><%= recipe.description %></td>
-        <td><%= recipe.ingredients %></td>
-        <td><%= recipe.instructions %></td>
-        <td><%= recipe.note %></td>
-        <td><%= recipe.tags %></td>
-        <td><%= recipe.origin %></td>
-        <td><%= link_to 'Show', recipe %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @recipes_list.each do |recipe| %>
+      <% recipe.each do |recipe| %>
+        <tr>
+          <td><%= recipe.name %></td>
+          <td><%= recipe.description %></td>
+          <td><%= recipe.ingredients %></td>
+          <td><%= recipe.instructions %></td>
+          <td><%= recipe.note %></td>
+          <td><%= recipe.tags %></td>
+          <td><%= recipe.origin %></td>
+          <!-- Change to cart --!>
+          <td><%= link_to 'Remove from cart', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', recipe %></td>
+          <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+          <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

@@ -7,12 +7,14 @@ Rails.application.routes.draw do
   resources :units
   resources :recipes
   resources :users
+  resources :carts
   get 'cart', to: 'cart#index'
 
   get 'cart/loadcart'
   root 'welcome#index'
   get 'sessions/new'
-  
+  post 'cart', to: 'cart#create'
+  delete 'cart', to: 'cart#destroy'
   get 'welcome/index'
   get  'signup',  to: 'users#new'
   get    'login',   to: 'sessions#new'

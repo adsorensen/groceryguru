@@ -1,16 +1,8 @@
-class CartController < ApplicationController
+class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   
   def index
-    # get recipes in user's cart
-    recipe_ids = Cart.where(user: session['user_id']).order(created_at: :desc)
-    recipes = Array.new
-    for id_val in recipe_ids do
-      recipe = Recipe.where(id: id_val.recipe)
-      recipes << recipe
-    end
-   @recipes_list = recipes
-   @cart = Cart.all
+    @carts = Cart.all
   end
   
   def show
@@ -24,18 +16,28 @@ class CartController < ApplicationController
   end
   
   def create
-    cart = Cart.create(:user => session['user_id'], :recipe => id)
-    redirect_to cart
+    @cart = Cart.new(:user => params[:user], :recipe => params[:recipe])
+    #@like = Like.new(:user_id => params[:user_id], :property_id => params[:property_id])
+
+    respond_to do |format|
+      if @cart.save
+        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
+        format.json { render :show, status: :created, location: @cart }
+      else
+        format.html { render :new }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   def update
     respond_to do |format|
       if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Prep note was successfully updated.' }
+        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
         format.json { render :show, status: :ok, location: @cart }
       else
         format.html { render :edit }
-        format.json { render json: @prep_note.errors, status: :unprocessable_entity }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,7 +45,7 @@ class CartController < ApplicationController
   def destroy
     @cart.destroy
     respond_to do |format|
-      format.html { redirect_to cart_url, notice: 'Prep note was successfully destroyed.' }
+      format.html { redirect_to cart_url, notice: 'Cart was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
