@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   resources :prep_notes
   resources :prep_notes
   resources :ingredients
-  resources :prep_notes
-  resources :units
   resources :recipes
   resources :users
   get 'cart', to: 'cart#index'
