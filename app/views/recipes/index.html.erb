@@ -69,7 +69,6 @@ input[type=submit] {
       <th>Description</th>
       <th>Directions</th>
       <th>Origin</th>
-      <th>Picture</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -81,7 +80,6 @@ input[type=submit] {
         <td><%= recipe.description %></td>
         <td><%= recipe.directions %></td>
         <td><%= recipe.origin %></td>
-        <td><%= recipe.picture %></td>
         <td><%= link_to 'Show', recipe %></td>
         <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
         <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
