@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :prep_notes
   resources :ingredients
-  resources :prep_notes
+  resources :recipes
   resources :users
   get 'cart', to: 'cart#index'
 

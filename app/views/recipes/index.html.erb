@@ -1,6 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Recipes</h1>
+input[type=text]:focus {
+    width: 80%;
+}
+
+input[type=submit] {
+    font-size: large;
+}
+.container1 {
+  text-align: center;
+}
+
+#manualentry {
+  display: inline-block;
+}
+#copypaste {
+  display: inline-block;
+}
+#url {
+  display: inline-block;
+}
+</style>
+</head>
+<br><br><br><br>
+<h3>Search for a recipe:</h3>
+<br>
+<center>
+<%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+</center>
+
+<br>
+<hr>
+<br>
+
+<h3>Upload a recipe via:</h3>
+<div class="container1">
+  <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "100x100", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
+  <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "100x100", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Copy/Paste', new_recipe_path %></div>
+  <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "100x100", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'URL', new_recipe_path %></div>
+</div>
+
+<br>
+<hr>
+<br>
 
 <table>
   <thead>
@@ -27,7 +72,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Recipe', new_recipe_path %>
