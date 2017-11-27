@@ -27,6 +27,7 @@
   }
   h3 {
     font-weight: normal;
+    margin-left: 5rem;
   }
   a {
     color: white;
@@ -100,6 +101,12 @@
 
   .website-nav ul li a {
     color: white;
+    text-decoration: none;
+    float: right;
+  }
+  
+  .website-nav ul li a:hover {
+    color: yellow;
     text-decoration: none;
     float: right;
   }

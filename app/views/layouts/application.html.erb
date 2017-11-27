@@ -13,13 +13,13 @@
         <a href="/recipes" style="position: absolute;left: 0;text-align: center;margin: auto;color: white;padding-left: 20px;font-size: x-large;display: inline-block;">Grocery Guru</a>
         <ul>
           <li><%= link_to 'Recipes', recipes_path %></li>
-          <li>&bull;</li>
+          <li>|</li>
           <li><%= link_to 'Calendar', '/calendar' %></li>
-          <li>&bull;</li>
+          <li>|</li>
           <li><%= link_to 'Cart', '/cart' %></li>
-          <li>&bull;</li>
+          <li>|</li>
           <li><%= link_to 'My Profile', '/users/' + session[:user_id].to_s  %></li>
-          <li>&bull;</li>
+          <li>|</li>
           <li><%= link_to 'Logout', logout_path, method: :delete %></li>
         </ul>
       </nav>
