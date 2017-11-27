@@ -89,6 +89,7 @@ input[type=submit] {
         <td><%= link_to 'Show', recipe %></td>
         <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
         <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Add to cart", carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %></td>
       </tr>
     <% end %>
   </tbody>
