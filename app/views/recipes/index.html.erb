@@ -55,7 +55,7 @@ input[type=submit] {
 <div class="container1">
   <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "100x100", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
   <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "100x100", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Copy/Paste', new_recipe_path %></div>
-  <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "100x100", :style => "background-color: white;"), "recipes/url" ) %><br><%= link_to 'URL', "recipes/url" %></div>
+  <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "100x100", :style => "background-color: white;"), new_recipe_path ) %><br><%= link_to 'URL', new_recipe_path %></div>
 </div>
 
 <br>
