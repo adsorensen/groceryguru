@@ -15,23 +15,20 @@
   </thead>
 
   <tbody>
-    <% @recipes_list.each do |recipe| %>
-      <% recipe.each do |recipe| %>
+    <% @recipes_list.each do |recipeCart| %>
         <tr>
-          <td><%= recipe.name %></td>
-          <td><%= recipe.description %></td>
-          <td><%= recipe.ingredients %></td>
-          <td><%= recipe.instructions %></td>
-          <td><%= recipe.note %></td>
-          <td><%= recipe.tags %></td>
-          <td><%= recipe.origin %></td>
+          <% recipeCart.recipe.each do |recipe| %>
+            <td><%= recipe.name %></td>
+            <td><%= recipe.description %></td>
+            <td><%= recipe.ingredients %></td>
+            <td><%= recipe.instructions %></td>
+            <td><%= recipe.note %></td>
+            <td><%= recipe.tags %></td>
+            <td><%= recipe.origin %></td>
+          <% end %>
           <!-- Change to cart --!>
-          <td><%= link_to 'Remove from cart', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><%= link_to 'Show', recipe %></td>
-          <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-          <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Remove from cart', recipeCart.cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>

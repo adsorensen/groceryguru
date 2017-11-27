@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class CartController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   
@@ -6,8 +8,10 @@ class CartController < ApplicationController
     recipe_ids = Cart.where(user: session['user_id']).order(created_at: :desc)
     recipes = Array.new
     for id_val in recipe_ids do
-      recipe = Recipe.where(id: id_val.recipe)
-      recipes << recipe
+      recipeCart = OpenStruct.new
+      recipeCart.recipe = Recipe.where(id: id_val.recipe)
+      recipeCart.cart = Cart.where(user: session['user_id'], recipe: recipeCart.recipe).first
+      recipes << recipeCart
     end
    @recipes_list = recipes
    @cart = Cart.all
@@ -24,8 +28,17 @@ class CartController < ApplicationController
   end
   
   def create
-    cart = Cart.create(:user => session['user_id'], :recipe => id)
-    redirect_to cart
+    @cart = Cart.new(cart_params)
+  
+    respond_to do |format|
+      if @cart.save
+        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
+        format.json { render :show, status: :created, location: @cart }
+      else
+        format.html { render :new }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   def update
@@ -43,7 +56,7 @@ class CartController < ApplicationController
   def destroy
     @cart.destroy
     respond_to do |format|
-      format.html { redirect_to cart_url, notice: 'Prep note was successfully destroyed.' }
+      format.html { redirect_to cart_url, notice: 'Cart was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

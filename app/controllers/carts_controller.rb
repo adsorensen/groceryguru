@@ -17,8 +17,7 @@ class CartsController < ApplicationController
   
   def create
     @cart = Cart.new(:user => params[:user], :recipe => params[:recipe])
-    #@like = Like.new(:user_id => params[:user_id], :property_id => params[:property_id])
-
+  
     respond_to do |format|
       if @cart.save
         format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
