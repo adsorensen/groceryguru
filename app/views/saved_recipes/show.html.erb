@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Personal:</strong>
+  <%= @saved_recipe.personal %>
+</p>
+
+<%= link_to 'Edit', edit_saved_recipe_path(@saved_recipe) %> |
+<%= link_to 'Back', saved_recipes_path %>
