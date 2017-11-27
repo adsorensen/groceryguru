@@ -10,22 +10,15 @@
       </ul>
     </div>
   <% end %>
-<br><br><br>
-  <!--<div class="field">-->
-  <!--  <%#= f.label :id %><br>-->
-  <!--  <%#= f.number_field :id %>-->
-  <!--</div>-->
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <!--<div class="field">-->
-  <!--  <%#= f.label :admin %><br>-->
-  <!--  <%#= f.check_box :admin %>-->
-  <!--</div>-->
+<br><br><br><br><br>
+  <br><br><h1>Sign Up for an Account</h1>
   <div class="field">
     <%= f.label :username %><br>
     <%= f.text_field :username %>
+  </div>
+    <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :first_name %><br>
@@ -40,20 +33,20 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :gluten_free %><br>
+    <%= f.label :gluten_free %>
     <%= f.check_box :gluten_free %>
   </div>
   <div class="field">
-    <%= f.label :lactose_intol %><br>
+    <%= f.label :lactose_intol %>
     <%= f.check_box :lactose_intol %>
   </div>
   <div class="field">
-    <%= f.label :organic %><br>
+    <%= f.label :organic %>
     <%= f.check_box :organic %>
   </div>
   <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <%= f.label :bio %><br>
+    <%= f.text_field :bio %>
   </div>
   <div class="actions">
     <%= f.submit %>
