@@ -15,13 +15,34 @@ $('document').ready(function() {
 
 function tableSave() {
     var table = [];
-    
+    // var json = "{\"table\": [{";
     $('#ingredients tr').each(function(){
-         var row = [];
+        //  var count = 1
+        var row = [];
         $(this).find('td').each(function(){
-            //do your stuff, you can use $(this) to get current cell
-            row.push($(this));
-        })
-        table.push(row);
-    })
+            // if(count == 1){
+            //     json += "quantity\" : \"" + $(this) + "\"},{";
+            //     count++;
+            // }
+            // if(count == 2){
+            //     json += "unit\" : \"" + $(this) + "\"},{";
+            //     count++;
+            // }
+            // if(count == 3){
+            //     json += "ingredient\" : \"" + $(this) + "\"},{";
+            //     count++;
+            // }
+            // if(count == 4){
+            //     json += "prep\" : \"" + $(this) + "\"},{";
+            //     count = 1;
+            // }
+            row.append($(this));
+        });
+        table.append(row);
+    });
+    // json += "]}";
+    
+    var request  = JSON.stringify(table)
+    
+    $.ajax(url: "recipes/new");
 }

@@ -27,6 +27,11 @@ class RecipesController < ApplicationController
   # original
   def create
     @recipe = Recipe.new(recipe_params)
+    
+    # Loop here to get all ingredients, save them in this way
+    @ingredients =
+    @recipe.ingredients << @ingredient
+    @recipe.save
 
     respond_to do |format|
       if @recipe.save

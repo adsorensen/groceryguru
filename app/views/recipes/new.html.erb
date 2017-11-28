@@ -41,7 +41,7 @@
     margin-left: auto; 
     width: 70%;
   }
-  #instruct{
+  #direct{
     margin-left: auto; 
     width: 70%;
   }
@@ -50,7 +50,7 @@
     width: 70%;
   }
   #picture{
-    position: relative;
+    position: static;
     left: 10px;
     top: 10px;
   }
@@ -67,9 +67,9 @@
     <%= f.label :description %><br>
     <%= f.text_area :description, size: "91x5"%>
   </div>
-  <div class="field" id="instruct">
-    <%= f.label :instructions %><br>
-    <%= f.text_area :instructions, size: "91x10" %>
+  <div class="field" id="direct">
+    <%= f.label :directions %><br>
+    <%= f.text_area :directions, size: "91x10" %>
   </div>
   <div class="field" id="origin">
     <%= f.label :origin %><br>
