@@ -1,7 +1,7 @@
 <head>
   <style>
     /* CSS design by @jofpin */
-@import url(https://fonts.googleapis.com/css?family=Abel|Indie+Flower);
+@import url(https://fonts.googleapis.com/css?family=Abel|Indie+Flower|Lobster);
 @import url(http://weloveiconfonts.com/api/?family=entypo);
 
 [class*="entypo-"]:before {
@@ -9,28 +9,30 @@
 }
 
 .title-pen {
-  color: #333;
-  font-family: "Abel", sans-serif;
+  color: white;
+  font-family: "Lobster", cursive;
   text-align: center;
 }
 .title-pen span {
   text-align: center;
   color: green;
   font-family: "Indie Flower", sans-serif;
+  font-size: 60px;
 }
 
 .user-profile {
   margin: auto;
-	width: 25em; 
+	width: 40%; 
   height: 11em;
-  background: #fff;
+  background: #f2f2f2;
   border-radius: .3em;
 }
 
 .user-profile  .username {
   margin: auto;
-  margin-top: -4.40em;
-  margin-left: 5.80em;
+  padding-top: .5em;
+  margin-top: 0px;
+  margin-left: 6em;
   color: #1d9f1d;
   font-size: 1.53em;
   font-family: "Coda", sans-serif;
@@ -39,39 +41,35 @@
 .user-profile  .bio {
   margin: auto;
   display: inline-block;
-  margin-top: 1.35em;
-  margin-left: 10.35em;
+  margin-left: 1em;
   color: #e76043; 
   font-size: .87em;
   font-family: "varela round", sans-serif;
 }
 .user-profile > .description {
   margin: auto;
-  margin-right: 4.43em;
+  padding-left: 1.3em;
+  margin-bottom: .07em;
   width: 14em;
-  color: #c0c5c5; 
+  color: black; 
   font-size: .87em;
   font-family: "varela round", sans-serif;
 }
-.user-profile > img.avatar {
-	padding: .7em;
-  margin-left: .3em;
-  margin-top: .3em;
-  height: 6.23em;
-  width: 6.23em;
-  border-radius: 18em;
+.user-profile .avatar {
+  margin-left: .5em;
+  padding-top: 1.5em;
+  float: left;
 }
-
 .user-profile ul.data {
-	margin: 2em auto;
 	height: 3.70em;
+	margin-top: 30px;
   background: #1d9f1d;
   text-align: center;
   border-radius: 0 0 .3em .3em;
 }
 .user-profile li {
 	margin: 0 auto;
-  padding: 1.30em; 
+  padding: 1.2em; 
   width: 33.33334%;
   display: table-cell;
   text-align: center;
@@ -101,15 +99,25 @@ footer > h1 a {
   text-decoration: none;
   color: #ea4c89;
 }
+#image_id {
+  margin: 20px;
+}
   </style>
 </head>
 
 <p id="notice"><%= notice %></p>
-<br><br><br><br>
 <h1 class="title-pen"> User Profile</h1>
 <div class="user-profile">
-	<img class="avatar" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" alt="Ash" />
+    <div class="avatar">
+	  <%= image_tag @user.picture.url if @user.picture? %>
+	  </div>
     <div class="username"><%= @user.first_name %> <%= @user.last_name %></div>
+    <div class="bio">
+  	Biography:
+  </div>
+    <div class="description">
+      <%= @user.bio%> <br>
+  </div>
   <div class="bio">
   	Dietary Preferences:
   </div>
@@ -120,10 +128,7 @@ footer > h1 a {
   </div>
   <ul class="data">
     <li>
-      <span class="entypo-edit"><%= link_to 'Edit', edit_user_path(@user) %></span>
-    </li>
-    <li>
-      <span class="entypo-view"><%= link_to 'View My Profile', edit_user_path(@user) %></span>
+      <span class="entypo-edit"><%= link_to 'Edit My Profile', edit_user_path(@user) %></span>
     </li>
  </ul>
 </div>
@@ -131,10 +136,10 @@ footer > h1 a {
   </footer>
   
 <p>
-  <h1 class="title-pen"><span>Saved Recipes</span></h1>
+  <div class="title-pen"><span>Saved Recipes</span></div>
 </p>
 
 <p>
-  <h1 class="title-pen"><span>Personal Recipes</span></h1>
+  <div class="title-pen"><span>Personal Recipes</span></div>
 </p>
 

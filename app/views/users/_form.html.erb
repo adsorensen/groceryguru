@@ -1,3 +1,51 @@
+<head>
+  <style>
+    * {
+      text-align: center;
+    }
+    img.avatar {
+      padding: .7em;
+      margin-left: .3em;
+      margin-top: .3em;
+      height: 6.23em;
+      width: 6.23em;
+      border-radius: 18em;
+    }
+    form input[type=text], input[type=submit], input[type=password]{
+      width: 70%;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      outline: 0;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255);
+      border-radius: 3px;
+      padding: 10px 15px;
+      margin: 0 auto 10px auto;
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      color: black;
+      -webkit-transition-duration: 0.25s;
+      transition-duration: 0.25s;
+      font-weight: 300;
+    }
+    form input:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+    form input:focus {
+      background-color: white;
+      color: #53e3a6;
+    }
+    input[type=check_box] {
+      border-radius: 4px;
+      font-size: 16px;
+      padding: 12px 20px 12px 20px;
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;
+    }
+  </style>
+</head>
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -10,43 +58,49 @@
       </ul>
     </div>
   <% end %>
-<br><br><br><br><br>
-  <br><br><h1>Sign Up for an Account</h1>
+<br>
   <div class="field">
-    <%= f.label :username %><br>
+  <span class="picture">
+    <%= image_tag @user.picture.url if @user.picture?%>
+    <br>
+    <%= f.file_field :picture %>
+  </span>
+  </div>
+  <div class="field">
+    <%= f.label :username %>:<br>
     <%= f.text_field :username %>
   </div>
     <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :password %>:<br>
     <%= f.password_field :password, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :first_name %><br>
+    <%= f.label :first_name %>:<br>
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br>
+    <%= f.label :last_name %>:<br>
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
+    <%= f.label :email %>:<br>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :gluten_free %>
+    <%= f.label :gluten_free %>:
     <%= f.check_box :gluten_free %>
   </div>
   <div class="field">
-    <%= f.label :lactose_intol %>
+    <%= f.label :lactose_intol %>:
     <%= f.check_box :lactose_intol %>
   </div>
   <div class="field">
-    <%= f.label :organic %>
+    <%= f.label :organic %>:
     <%= f.check_box :organic %>
   </div>
   <div class="field">
-    <%= f.label :bio %><br>
-    <%= f.text_field :bio %>
+    <%= f.label :bio%>graphy:<br>
+    <%= f.text_field :bio, :maxlength => 30 %>
   </div>
   <div class="actions">
     <%= f.submit %>
