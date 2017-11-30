@@ -12,9 +12,10 @@
 #  gluten_free     :boolean
 #  lactose_intol   :boolean
 #  organic         :boolean
-#  address         :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  bio             :string(255)
+#  picture         :string(255)
 #
 
 class User < ActiveRecord::Base
