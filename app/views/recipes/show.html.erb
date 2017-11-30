@@ -26,7 +26,6 @@
 .active {
     background-color: #4CAF50; /* Add an active/current color */
 }
-<<<<<<< HEAD
 table {
     border: 5px solid black;
     padding: 10px;
@@ -67,13 +66,10 @@ table {
     left: 10px;
     top: 10px;
   }
-=======
 .recipe-image {
   margin-left: 5em;
 }
-
->>>>>>> master
-  </style>
+</style>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -94,49 +90,6 @@ table {
   <strong>Directions:</strong>
   <%= @recipe.directions %>
 </p>
-
-<<<<<<< HEAD
-<p id="notice"><%= notice %></p>
-<br><br><br><br>
-  <img id="picture" src="/assets/pic-generic.png" alt="Smiley face" height="200" width="200">
-  <div class="field" id="title">
-    <%= label :name, "Recipe Title" %><br>
-    <%= text_field @recipe.name, :size=>"100"%>
-  </div>
-  <div class="field" id="desc">
-    <%= label :description, "Description"%><br>
-    <%= text_area @recipe.description, size: "91x5"%>
-  </div>
-  <div class="field" id="direct">
-    <%= label :directions, "Directions"%><br>
-    <%= text_area @recipe.directions, size: "91x10" %>
-  </div>
-  <div class="field" id="origin">
-    <%= label :origin, "Origin"%><br>
-    <%= text_field @recipe.origin, :size=>"20" %>
-  </div>
-<div class= "table-holder"><center>
-  <h3>Ingredients</h3><button id='addIngredient' type="button">Add Ingredient</button>
-  <table id="ingredients"><tbody>
-    <tr>
-      <th>Quantity</th>
-      <th>Unit</th>
-      <th>Ingredient</th>
-      <th>Preparation</th>
-    </tr>
-  </tbody></table></center>
-</div>
-=======
-<p>
-  <strong>Description:</strong>
-  <%= @recipe.description %>
-</p>
-
-<p>
-  <strong>Origin:</strong>
-  <%= @recipe.origin %>
-</p>
 <%= link_to 'Edit', edit_recipe_path(@recipe) %>
 <%= link_to 'Back', recipes_path %>
->>>>>>> master
 <%= link_to 'Add To Cart', recipes_path %>
