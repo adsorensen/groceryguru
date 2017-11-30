@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
 * {
     margin: 0;
   }
@@ -9,7 +11,7 @@
     padding: 0;
     font-family: "Source Sans Pro", Roboto, Arial, sans-serif;
     font-size: 62.5%;
-    background: #D3D3D3;
+    background: #222629;
   }
   
   body {
@@ -17,9 +19,12 @@
     color: green;
   }
   h1 {
-    font-weight: normal;
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    /*color: #86C232;*/
+    padding-top: 70px;
   }
   h2 {
     font-weight: normal;
@@ -71,6 +76,7 @@
     width: 100%;
     padding: 2rem;
     background-color: green;
+    z-index:1;
   }
 
   .website-nav ul {
