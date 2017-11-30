@@ -1,3 +1,4 @@
+// Add Ingredient onClick event
 $('document').ready(function() {
     var count = 1;
     $("#addIngredient").unbind().click(function(event){ // unbind makes this only be called once
@@ -13,36 +14,46 @@ $('document').ready(function() {
     });
 });
 
+// Create onClick event
+$('document').ready(function() {
+     $("#create").unbind().click(tableSave());
+}); 
+
+
 function tableSave() {
     var table = [];
-    // var json = "{\"table\": [{";
+    
+    // Create an associative array for each row in the ingredients table
     $('#ingredients tr').each(function(){
-        //  var count = 1
+        var count = 1
         var row = [];
         $(this).find('td').each(function(){
-            // if(count == 1){
-            //     json += "quantity\" : \"" + $(this) + "\"},{";
-            //     count++;
-            // }
-            // if(count == 2){
-            //     json += "unit\" : \"" + $(this) + "\"},{";
-            //     count++;
-            // }
-            // if(count == 3){
-            //     json += "ingredient\" : \"" + $(this) + "\"},{";
-            //     count++;
-            // }
-            // if(count == 4){
-            //     json += "prep\" : \"" + $(this) + "\"},{";
-            //     count = 1;
-            // }
-            row.append($(this));
+            if(count == 1){
+                row["quantity"] = $(this);
+                count++;
+            }
+            else if(count == 2){
+                row["unit"] = $(this);
+                count++;
+            }
+            else if(count == 3){
+                row["ingredient"] = $(this);
+                count++;
+            }
+            else if(count == 4){
+                row["prep"] = $(this);
+                count = 1;
+            }
         });
         table.append(row);
     });
-    // json += "]}";
     
-    var request  = JSON.stringify(table)
-    
-    // $.ajax(url: "recipes/new");
+    // Post the full array to the recipes controller
+    $.ajax({
+        type: 'POST',
+        url: "/recipes/new",
+        data: JSON.stringify(table),
+        dataType: "json",
+        success: function(data){ alert(data); }
+    });
 }
