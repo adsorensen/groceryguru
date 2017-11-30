@@ -18,3 +18,8 @@ function printpage()
 {
    window.print()
 }
+
+function openPopup()
+{
+    alert("Recipe Has Been Saved");
+}

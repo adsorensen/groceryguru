@@ -26,6 +26,7 @@
 .active {
     background-color: #4CAF50; /* Add an active/current color */
 }
+<<<<<<< HEAD
 table {
     border: 5px solid black;
     padding: 10px;
@@ -66,6 +67,12 @@ table {
     left: 10px;
     top: 10px;
   }
+=======
+.recipe-image {
+  margin-left: 5em;
+}
+
+>>>>>>> master
   </style>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -73,18 +80,22 @@ table {
 <div class="icon-bar">
   <a class="active" href="/recipes"><i class="fa fa-search"></i></a> 
   <a href="#print"><i class="fa fa-print" onclick=printpage()></i></a> 
-  <a href="#save"><i class="fa fa-save"></i></i></a> 
+  <a href="#save"><i class="fa fa-save" onclick=openPopup()></i></i></i></a> 
   <a href="#share"><i class="fa fa-facebook"></i></a> 
   <a href="/cart"><i class="fa fa-cart-plus"></i></i></a> 
   <a href="/calendar"><i class="fa fa-calendar"></i></a> 
 </div>
+<br>
 <h1><%= @recipe.name %></h1>
-
+<div class="recipe-image"><%= image_tag @recipe.picture.url if @recipe.picture? %></div>
+<strong>Description:</strong>
+  <%= @recipe.description %>
 <p>
   <strong>Directions:</strong>
   <%= @recipe.directions %>
 </p>
 
+<<<<<<< HEAD
 <p id="notice"><%= notice %></p>
 <br><br><br><br>
   <img id="picture" src="/assets/pic-generic.png" alt="Smiley face" height="200" width="200">
@@ -115,4 +126,17 @@ table {
     </tr>
   </tbody></table></center>
 </div>
+=======
+<p>
+  <strong>Description:</strong>
+  <%= @recipe.description %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @recipe.origin %>
+</p>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %>
+<%= link_to 'Back', recipes_path %>
+>>>>>>> master
 <%= link_to 'Add To Cart', recipes_path %>
