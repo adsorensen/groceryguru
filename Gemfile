@@ -56,3 +56,7 @@ group :development do
   gem 'spring'
 end
 
+gem 'carrierwave',             '1.1.0'
+gem 'mini_magick',             '4.7.0'
+gem 'fog',                     '1.40.0'
+
