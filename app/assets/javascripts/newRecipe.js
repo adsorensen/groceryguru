@@ -44,5 +44,5 @@ function tableSave() {
     
     var request  = JSON.stringify(table)
     
-    $.ajax(url: "recipes/new");
+    // $.ajax(url: "recipes/new");
 }
