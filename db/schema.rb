@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171127194813) do
+=======
+ActiveRecord::Schema.define(version: 20171130185113) do
+>>>>>>> master
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4

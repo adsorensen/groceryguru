@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+function printpage()
+{
+   window.print()
+}
+
+function openPopup()
+{
+    alert("Recipe Has Been Saved");
+}

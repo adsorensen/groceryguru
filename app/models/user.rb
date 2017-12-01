@@ -12,9 +12,10 @@
 #  gluten_free     :boolean
 #  lactose_intol   :boolean
 #  organic         :boolean
-#  address         :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  bio             :string(255)
+#  picture         :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -29,10 +30,13 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
     validates :password, presence: true, length: { minimum: 6 }, if: proc { |user| user.new_record? }
+    validate  :picture_size
 
     before_save { email.downcase! }
 
     has_secure_password
+    
+    mount_uploader :picture, PictureUploader
     
     def full_name
     "#{first_name} #{last_name}".strip
@@ -42,4 +46,11 @@ class User < ActiveRecord::Base
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+  
+  private# Validates the size of an uploaded picture.
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB")
+      end
+    end
 end

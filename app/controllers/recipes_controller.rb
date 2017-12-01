@@ -28,6 +28,34 @@ class RecipesController < ApplicationController
   # original
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.save
+    
+    # loop over ingredients from table
+    count = 1
+    while params.has_key?('ingredient' + count.to_s)
+      quantity = params['quantity'+count.to_s]
+      unit = params['unit'+count.to_s]
+      ingredient = params['ingredient'+count.to_s]
+      prep = params['prep'+count.to_s]
+    
+      # Add new ingredient if it doesn't exist
+      @ingredient = Ingredient.where(name: ingredient).first
+      
+      if @ingredient.nil? 
+        @ingredient = Ingredient.new name: ingredient
+        @ingredient.save
+      end
+      
+      # Create corresponding instruction
+      Instruction.create amount: quantity, unit: unit, recipe_id: @recipe.id, ingredient_id: @ingredient.id, prep_note: prep
+      
+      count += 1
+    end
+    
+    # Loop here to get all ingredients, save them in this way
+    # @ingredients =
+    # @recipe.ingredients << @ingredient
+    # @recipe.save
 
     respond_to do |format|
       if @recipe.save

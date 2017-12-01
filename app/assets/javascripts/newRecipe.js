@@ -1,3 +1,4 @@
+// Add Ingredient onClick event
 $('document').ready(function() {
     var count = 1;
     $("#addIngredient").unbind().click(function(event){ // unbind makes this only be called once
@@ -13,15 +14,46 @@ $('document').ready(function() {
     });
 });
 
+// Create onClick event
+$('document').ready(function() {
+     $("#create").unbind().click(tableSave());
+}); 
+
+
 function tableSave() {
     var table = [];
     
+    // Create an associative array for each row in the ingredients table
     $('#ingredients tr').each(function(){
-         var row = [];
+        var count = 1
+        var row = [];
         $(this).find('td').each(function(){
-            //do your stuff, you can use $(this) to get current cell
-            row.push($(this));
-        })
-        table.push(row);
-    })
+            if(count == 1){
+                row["quantity"] = $(this);
+                count++;
+            }
+            else if(count == 2){
+                row["unit"] = $(this);
+                count++;
+            }
+            else if(count == 3){
+                row["ingredient"] = $(this);
+                count++;
+            }
+            else if(count == 4){
+                row["prep"] = $(this);
+                count = 1;
+            }
+        });
+        table.append(row);
+    });
+    
+    // Post the full array to the recipes controller
+    $.ajax({
+        type: 'POST',
+        url: "/recipes/new",
+        data: JSON.stringify(table),
+        dataType: "json",
+        success: function(data){ alert(data); }
+    });
 }
