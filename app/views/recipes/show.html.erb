@@ -26,7 +26,6 @@
 .active {
     background-color: #4CAF50; /* Add an active/current color */
 }
-<<<<<<< HEAD
 table {
     border: 5px solid black;
     padding: 10px;
@@ -67,12 +66,9 @@ table {
     left: 10px;
     top: 10px;
   }
-=======
 .recipe-image {
   margin-left: 5em;
 }
-
->>>>>>> master
   </style>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -126,7 +122,6 @@ table {
     </tr>
   </tbody></table></center>
 </div>
-=======
 <p>
   <strong>Description:</strong>
   <%= @recipe.description %>
@@ -138,5 +133,4 @@ table {
 </p>
 <%= link_to 'Edit', edit_recipe_path(@recipe) %>
 <%= link_to 'Back', recipes_path %>
->>>>>>> master
 <%= link_to 'Add To Cart', recipes_path %>

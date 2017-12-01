@@ -25,7 +25,7 @@ function tableSave() {
     
     // Create an associative array for each row in the ingredients table
     $('#ingredients tr').each(function(){
-        var count = 1
+        var count = 1;
         var row = [];
         $(this).find('td').each(function(){
             if(count == 1){
