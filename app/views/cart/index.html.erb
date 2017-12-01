@@ -1,7 +1,23 @@
+<head>
+  <style>
+    button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+  </style>
+</head>
 <h1>View Your Cart</h1>
+<center>
 <table>
   <thead>
     <tr>
+      <th>Select</th>
       <th>Name</th>
       <th>Directions</th>
       <th>Description</th>
@@ -14,14 +30,17 @@
     <% @recipes_list.each do |recipeCart| %>
         <tr>
           <% recipeCart.recipe.each do |recipe| %>
+            <td><input type="checkbox" value="selectedRecipe" checked></td>
             <td><%= recipe.name %></td>
             <td><%= recipe.directions %></td>
             <td><%= recipe.description %></td>
             <td><%= recipe.origin %></td>
           <% end %>
-          <!-- Change to cart --!>
           <td><%= link_to 'Remove from cart', recipeCart.cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
   </tbody>
 </table>
+<br>
+<br>
+<button>Create Grocery List</button></center>
