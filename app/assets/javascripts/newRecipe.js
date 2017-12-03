@@ -15,9 +15,9 @@ $('document').ready(function() {
 });
 
 // Create onClick event
-$('document').ready(function() {
-     $("#create").unbind().click(tableSave());
-}); 
+// $('document').ready(function() {
+//      $("#create").unbind().click(tableSave());
+// }); 
 
 
 function tableSave() {

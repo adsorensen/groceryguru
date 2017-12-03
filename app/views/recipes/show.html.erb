@@ -26,23 +26,6 @@
 .active {
     background-color: #4CAF50; /* Add an active/current color */
 }
-table {
-    border: 5px solid black;
-    padding: 10px;
-    align :center
-  }
-  td{
-   
-  }
-  tr{
-    padding: 10px 20;     /* 10px top & bottom padding, 0px left & right */
-    border-width: 1px 1px; /*  1px top & bottom border,  0px left & right */
-    border-color: black;
-    border-style: solid;
-  }
-  th{
-     
-  }
   #title{
     position: realtive;
     margin-left: auto; 
@@ -68,12 +51,115 @@ table {
   }
 .recipe-image {
   margin-left: 5em;
+  height: 25%;
+  width: 25%;
 }
-<<<<<<< HEAD
+.container{
+  position: relative;
+}
+.table-direction{
+  position: absolute;
+  left: 500px;
+}
+#description{
+  position: absolute;
+  left: 500px;
+  top: 200px;
+}
+#origin{
+  position: absolute;
+  left: 500px;
+  top: 300px;
+}
+#bottom-links{
+  position: realtive;
+  bottom: 0;
+}
+strong{
+  color: white;
+}
+
+/*  Crisp Table taken from https://codepen.io/anon/pen/Ebrodq */
+@import "compass/css3";
+@import url(https://fonts.googleapis.com/css?family=Patua+One|Open+Sans);
+
+* { 
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+	box-sizing: border-box; 
+}
+
+table {
+  border-collapse: separate;
+  background:#fff;
+  @include border-radius(5px);
+  margin:50px auto;
+  @include box-shadow(0px 0px 5px rgba(0,0,0,0.3));
+}
+
+thead {
+  @include border-radius(5px);
+}
+
+thead th {
+  font-family: 'Patua One', cursive;
+  font-size:16px;
+  font-weight:400;
+  color: black;
+  @include text-shadow(1px 1px 0px rgba(0,0,0,0.5));
+  text-align:left;
+  padding:20px;
+  @include background-image(linear-gradient(#646f7f, #4a5564));
+  border-top:1px solid #858d99;
+  
+  &:first-child {
+   @include border-top-left-radius(5px); 
+  }
+
+  &:last-child {
+    @include border-top-right-radius(5px); 
+  }
+}
+
+tbody tr td {
+  font-family: 'Open Sans', sans-serif;
+  font-weight:400;
+  color:#5f6062;
+  font-size:13px;
+  padding:20px 20px 20px 20px;
+  border-bottom:1px solid #e0e0e0;
+  
+}
+
+tbody tr:nth-child(2n) {
+  background:#f0f3f5;
+}
+
+tbody tr:last-child td {
+  border-bottom:none;
+  &:first-child {
+    @include border-bottom-left-radius(5px);
+  }
+  &:last-child {
+    @include border-bottom-right-radius(5px);
+  }
+}
+
+tbody:hover > tr td {
+  @include opacity(0.5);
+  
+  /* uncomment for blur effect */
+  /* color:transparent;
+  @include text-shadow(0px 0px 2px rgba(0,0,0,0.8));*/
+}
+
+tbody:hover > tr:hover td {
+  @include text-shadow(none);
+  color:#2d2d2d;
+  @include opacity(1.0);
+}
+
   </style>
-=======
-</style>
->>>>>>> master
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -87,57 +173,53 @@ table {
 </div>
 <br>
 <h1><%= @recipe.name %></h1>
-<div class="recipe-image"><%= image_tag @recipe.picture.url if @recipe.picture? %></div>
-<strong>Description:</strong>
+<% if @recipe.picture? %>
+<div class="recipe-image"><%= image_tag @recipe.picture, size: "350x350" %></div>
+<% else %>
+<div class="recipe-image"><%= image_tag 'pic-generic.png', size: "350x350" %></div>
+<% end %>
+<div>
+<p id="description">  
+<strong>Description:</strong><br>
   <%= @recipe.description %>
-<p>
-  <strong>Directions:</strong>
-  <%= @recipe.directions %>
 </p>
-<<<<<<< HEAD
-
-<<<<<<< HEAD
 <p id="notice"><%= notice %></p>
-<br><br><br><br>
-  <img id="picture" src="/assets/pic-generic.png" alt="Smiley face" height="200" width="200">
-  <div class="field" id="title">
-    <%= label :name, "Recipe Title" %><br>
-    <%= text_field @recipe.name, :size=>"100"%>
-  </div>
-  <div class="field" id="desc">
-    <%= label :description, "Description"%><br>
-    <%= text_area @recipe.description, size: "91x5"%>
-  </div>
-  <div class="field" id="direct">
-    <%= label :directions, "Directions"%><br>
-    <%= text_area @recipe.directions, size: "91x10" %>
-  </div>
-  <div class="field" id="origin">
-    <%= label :origin, "Origin"%><br>
-    <%= text_field @recipe.origin, :size=>"20" %>
-  </div>
-<div class= "table-holder"><center>
-  <h3>Ingredients</h3><button id='addIngredient' type="button">Add Ingredient</button>
-  <table id="ingredients"><tbody>
+<p id="origin">
+  <strong>Origin:</strong><br>
+  <%= @recipe.origin %>
+</p>
+<div class= "table-direction">
+  <table id="ingredients">
+  <thead>
     <tr>
       <th>Quantity</th>
       <th>Unit</th>
       <th>Ingredient</th>
       <th>Preparation</th>
     </tr>
-  </tbody></table></center>
+  </thead>
+  <tbody>
+    <% #Loop over ingredients here
+      ingredients = @recipe.instructions
+      for i in ingredients do
+        ingredient_string = Ingredient.find(i.ingredient_id).name
+    %>
+        <tr>
+          <td><%= i.amount %></td>
+          <td><%= i.unit %></td>
+          <td><%= ingredient_string %></td>
+          <td><%= i.prep_note %></td>
+        </tr>
+    <% end %>
+  </tbody>
+  </table>  
+  <p id="directions">
+    <strong>Directions:</strong><br>
+    <%= @recipe.directions %>
+  </p>
 </div>
-<p>
-  <strong>Description:</strong>
-  <%= @recipe.description %>
-</p>
-
-<p>
-  <strong>Origin:</strong>
-  <%= @recipe.origin %>
-</p>
-=======
->>>>>>> master
-<%= link_to 'Edit', edit_recipe_path(@recipe) %>
-<%= link_to 'Back', recipes_path %>
-<%= link_to 'Add To Cart', recipes_path %>
+<div id="bottom-links">
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Back', recipes_path %> |
+<%= link_to 'Add To Cart', recipes_path %> 
+</div>
