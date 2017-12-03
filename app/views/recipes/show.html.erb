@@ -57,7 +57,7 @@
 .container{
   position: relative;
 }
-.table-direction{
+.table-direction-review{
   position: absolute;
   left: 500px;
 }
@@ -77,6 +77,16 @@
 }
 strong{
   color: white;
+}
+.review-container{
+  position: absolute;
+  left: 500px;
+}
+.reviews{
+  
+}
+.new-review{
+
 }
 
 /*  Crisp Table taken from https://codepen.io/anon/pen/Ebrodq */
@@ -188,7 +198,7 @@ tbody:hover > tr:hover td {
   <strong>Origin:</strong><br>
   <%= @recipe.origin %>
 </p>
-<div class= "table-direction">
+<div class= "table-direction-review">
   <table id="ingredients">
   <thead>
     <tr>
@@ -199,7 +209,7 @@ tbody:hover > tr:hover td {
     </tr>
   </thead>
   <tbody>
-    <% #Loop over ingredients here
+    <% #Loop over ingredients
       ingredients = @recipe.instructions
       for i in ingredients do
         ingredient_string = Ingredient.find(i.ingredient_id).name
@@ -217,6 +227,38 @@ tbody:hover > tr:hover td {
     <strong>Directions:</strong><br>
     <%= @recipe.directions %>
   </p>
+  <div class="reviews">
+    <h2>Reviews</h2>
+    <% # Loop over reviews
+      unless @recipe.reviews.empty?
+    %>
+    <table>
+      <thead>
+        <tr>
+          <th> User </th>
+          <th> Review </th>
+          <th> Rating </th>
+        </tr>
+      </thead>
+    <%
+      reviews = @recipe.reviews
+      for r in reviews do
+        user_name = User.find(r.user_id).username
+    %>
+      <tbody>
+        <tr>
+          <td><%= user_name %></td>
+          <td><%= r.text %></td>
+          <td><%= r.rating %></td>
+        </tr>
+      </tbody>
+    </table>
+    <% end end %>
+  </div>
+  <br>
+  <div class="new-review">
+    <h3>Add Review</h3>
+  </div>
 </div>
 <div id="bottom-links">
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
