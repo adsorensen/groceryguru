@@ -227,6 +227,11 @@ tbody:hover > tr:hover td {
     <strong>Directions:</strong><br>
     <%= @recipe.directions %>
   </p>
+  
+  <div class="new-review">
+    <h2>Add Review</h2>
+  </div>
+  <br><br>
   <div class="reviews">
     <h2>Reviews</h2>
     <% # Loop over reviews
@@ -254,10 +259,6 @@ tbody:hover > tr:hover td {
       </tbody>
     </table>
     <% end end %>
-  </div>
-  <br>
-  <div class="new-review">
-    <h3>Add Review</h3>
   </div>
 </div>
 <div id="bottom-links">
