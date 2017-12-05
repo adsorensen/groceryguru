@@ -1,3 +1,5 @@
+delete from ingredients;
+ALTER TABLE ingredients AUTO_INCREMENT = 1;
 insert into ingredients (name) VALUES('red cabbage');
 insert into ingredients (name) VALUES('dijon mustard');
 insert into ingredients (name) VALUES('duck breasts');
