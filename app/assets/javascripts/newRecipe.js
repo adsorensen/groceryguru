@@ -15,9 +15,9 @@ $('document').ready(function() {
 });
 
 // Create onClick event
-$('document').ready(function() {
-     $("#create").unbind().click(tableSave());
-}); 
+// $('document').ready(function() {
+//      $("#create").unbind().click(tableSave());
+// }); 
 
 
 function tableSave() {
@@ -25,7 +25,7 @@ function tableSave() {
     
     // Create an associative array for each row in the ingredients table
     $('#ingredients tr').each(function(){
-        var count = 1
+        var count = 1;
         var row = [];
         $(this).find('td').each(function(){
             if(count == 1){

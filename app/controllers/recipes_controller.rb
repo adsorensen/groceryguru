@@ -51,11 +51,6 @@ class RecipesController < ApplicationController
       
       count += 1
     end
-    
-    # Loop here to get all ingredients, save them in this way
-    # @ingredients =
-    # @recipe.ingredients << @ingredient
-    # @recipe.save
 
     respond_to do |format|
       if @recipe.save
