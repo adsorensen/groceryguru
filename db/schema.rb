@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20171127194813) do
-=======
-ActiveRecord::Schema.define(version: 20171130185113) do
->>>>>>> master
+ActiveRecord::Schema.define(version: 20171206014930) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -33,7 +29,7 @@ ActiveRecord::Schema.define(version: 20171130185113) do
   create_table "instructions", force: :cascade do |t|
     t.integer  "recipe_id",     limit: 4,   null: false
     t.integer  "ingredient_id", limit: 4,   null: false
-    t.integer  "amount",        limit: 4,   null: false
+    t.float    "amount",        limit: 24,  null: false
     t.integer  "unit",          limit: 4
     t.string   "prep_note",     limit: 255, null: false
     t.datetime "created_at"

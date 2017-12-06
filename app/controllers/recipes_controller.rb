@@ -86,6 +86,12 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
+    i = @recipe.id
+    @instruction = Instruction.where(recipe_id: i).first
+    while @instruction
+      @instruction.destroy
+      @instruction = Instruction.where(recipe_id: i).first
+    end
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
