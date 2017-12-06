@@ -12,27 +12,20 @@
 }
   </style>
 </head>
-<!--<h1>Grocery List</h1>-->
-<h1>My local variable text: <%= resource %></h1>
+<h1>Grocery List</h1>
 <center>
 <table>
   <thead>
     <tr>
-      <th>Ingredient</th>
+      <th>Ingredients</th>
       <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
-    <% @resource.each do |recipeCart| %>
+    <% @ingredients.each do |name| %>
         <tr>
-          <% recipeCart.recipe.each do |recipe| %>
-            <td><input type="checkbox" value="selectedRecipe" checked></td>
-            <td><%= recipe.name %></td>
-            <td><%= recipe.directions %></td>
-            <td><%= recipe.description %></td>
-            <td><%= recipe.origin %></td>
-          <% end %>
-          <td><%= link_to 'Remove from cart', recipeCart.cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><input type="checkbox" value="selectedRecipe" checked></td>
+            <td><%= name %></td>
         </tr>
     <% end %>
   </tbody>
@@ -41,5 +34,6 @@
 </table>
 <br>
 <br>
-<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>
+<!--<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>-->
+<button class="button">Send to Store</button>
 
