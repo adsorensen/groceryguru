@@ -9,13 +9,14 @@
 #  origin      :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  picture     :string(255)
 #
 
 class Recipe < ActiveRecord::Base
     has_many :instructions
     has_many :saved_recipes
+    has_many :reviews
     has_many :ingredients, :through => :instructions
     has_many :users, :through => :saved_recipes
     accepts_nested_attributes_for :instructions
-    mount_uploader :picture, PictureUploaderRecipes
 end
