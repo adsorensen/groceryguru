@@ -230,6 +230,13 @@ tbody:hover > tr:hover td {
   
   <div class="new-review">
     <h2>Add Review</h2>
+    <%= form_tag("/addReview", method: "post") do %>
+    <%= label_tag :review %> 
+    <%= text_field_tag(:review) %>
+    <%= label_tag :rating %>
+    <%= number_field_tag('rating', nil, min: 1, max: 5, step: 1) %>
+    <%= submit_tag("Add") %>
+    <% end %>
   </div>
   <br><br>
   <div class="reviews">

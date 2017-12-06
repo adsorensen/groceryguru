@@ -94,6 +94,22 @@ class RecipesController < ApplicationController
     end
   end
   
+  def review
+    uid = session["user_id"]
+    @review = Review.create recipe_id: params[:id], user_id: uid, text: params['review'], rating: params["rating"]
+    
+    
+    respond_to do |format|
+      if @review.save
+        format.html { redirect_to @recipe, notice: 'Review was successfully created.' }
+        format.json { render :show, status: :created, location: @recipe }
+      else
+        format.html { render :new }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
+    end
+  end  
+  
   def url
   end
 

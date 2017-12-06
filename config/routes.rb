@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post   'login',   to: 'sessions#create'
   post '/recipes/new', to: 'recipes#create'
   delete 'logout',  to: 'sessions#destroy'
-  
+  post '/addReview', to: 'recipes#review'
   get "/recipes/url" => "recipes#url"
 
   # The priority is based upon order of creation: first created -> highest priority.
