@@ -1,2 +1,45 @@
-<h1>List#create</h1>
-<p>Find me in app/views/list/create.html.erb</p>
+<head>
+  <style>
+    button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+  </style>
+</head>
+<!--<h1>Grocery List</h1>-->
+<h1>My local variable text: <%= resource %></h1>
+<center>
+<table>
+  <thead>
+    <tr>
+      <th>Ingredient</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resource.each do |recipeCart| %>
+        <tr>
+          <% recipeCart.recipe.each do |recipe| %>
+            <td><input type="checkbox" value="selectedRecipe" checked></td>
+            <td><%= recipe.name %></td>
+            <td><%= recipe.directions %></td>
+            <td><%= recipe.description %></td>
+            <td><%= recipe.origin %></td>
+          <% end %>
+          <td><%= link_to 'Remove from cart', recipeCart.cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </tbody>
+
+  
+</table>
+<br>
+<br>
+<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>
+

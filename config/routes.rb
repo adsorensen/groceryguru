@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   resources :recipes
   resources :users
   resources :carts
+  resources :list
   get 'cart', to: 'cart#index'
+  #post 'list', to: 'list#create'
 
   get 'cart/loadcart'
   root 'welcome#index'

@@ -27,10 +27,6 @@ class CartController < ApplicationController
   def edit
   end
   
-  def create_list
-    
-  end
-  
   def create
     @cart = Cart.new(cart_params)
   
