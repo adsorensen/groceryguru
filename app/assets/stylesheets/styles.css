@@ -40,7 +40,7 @@
   }
   #inner {
   width: 50%;
-  margin-left: 53.5rem;
+  margin: 0 auto;
   }
   .wrapper {
     min-height: 100%;
