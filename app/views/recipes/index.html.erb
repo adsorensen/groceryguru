@@ -28,12 +28,16 @@ input[type=submit] {
 }
 #manualentry {
  display: inline-block;
+ margin-left: 25em;
+ float: left;
 }
 #copypaste {
  display: inline-block;
 }
 #url {
  display: inline-block;
+ margin-right: 25em;
+  float: right;
 }
 </style>
 </head>
@@ -46,16 +50,16 @@ input[type=submit] {
    <%= submit_tag "Search", :name => nil %>
 <% end %>
 </center>
-
+<br><br>
 <br>
 <hr>
 <br>
 
 <h3>Upload a recipe via:</h3>
 <div class="container1">
- <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "100x100", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
- <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "100x100", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Copy/Paste', new_recipe_path %></div>
- <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "100x100", :style => "background-color: white;"), recipes_url_path ) %><br><%= link_to 'URL', recipes_url_path %></div>
+ <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "200x200", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
+ <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "200x200", :style => "background-color: white;"), "/recipes") %><br><%= link_to 'Copy/Paste', "/recipes" %></div>
+ <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "200x200", :style => "background-color: white;"), "/recipes" ) %><br><%= link_to 'URL', "/recipes" %></div>
 </div>
 
 <br>
