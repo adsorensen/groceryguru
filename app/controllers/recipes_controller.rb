@@ -28,7 +28,6 @@ class RecipesController < ApplicationController
   # original
   def create
     @recipe = Recipe.new(recipe_params)
-    @recipe.save
     
     # loop over ingredients from table
     count = 1
@@ -40,17 +39,27 @@ class RecipesController < ApplicationController
     
       # Add new ingredient if it doesn't exist
       @ingredient = Ingredient.where(name: ingredient).first
-      
       if @ingredient.nil? 
-        @ingredient = Ingredient.new name: ingredient
-        @ingredient.save
+        @ingredient = Ingredient.create name: ingredient
       end
       
       # Create corresponding instruction
-      Instruction.create amount: quantity, unit: unit, recipe_id: @recipe.id, ingredient_id: @ingredient.id, prep_note: prep
+      @instruction = Instruction.new ingredient_id: @ingredient.id, amount: quantity, unit: unit, prep_note: prep
+      # Add assotiations
+      @recipe.instructions << @instruction
       
       count += 1
     end
+    
+    if params['private'] 
+      pri = true;
+    else
+      pri = false;
+    end
+    
+    # Make saved recipe entry
+    @saved_recipe = SavedRecipe.new user_id: session['user_id'], personal: true, private: pri
+    @recipe.saved_recipes << @saved_recipe
 
     respond_to do |format|
       if @recipe.save
@@ -87,6 +96,11 @@ class RecipesController < ApplicationController
       @instruction.destroy
       @instruction = Instruction.where(recipe_id: i).first
     end
+    @saved_recipe = SavedRecipe.where(recipe_id: i).first
+    while @saved_recipe
+      @saved_recipe.destroy
+      @saved_recipe = SavedRecipe.where(recipe_id: i).first
+    end
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
@@ -96,9 +110,9 @@ class RecipesController < ApplicationController
   
   def review
     uid = session["user_id"]
-    @review = Review.create recipe_id: params[:id], user_id: uid, text: params['review'], rating: params["rating"]
+    @review = Review.create recipe_id: params['recipe_id'], user_id: uid, text: params['review'], rating: params['rating']
     
-    
+    @recipe = Recipe.find( params['recipe_id'])
     respond_to do |format|
       if @review.save
         format.html { redirect_to @recipe, notice: 'Review was successfully created.' }

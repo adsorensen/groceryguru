@@ -49,6 +49,10 @@
     margin-left: auto; 
     width: 70%;
   }
+  #private{
+    margin-left: auto; 
+    width: 70%;
+  }
   #picture{
     position: static;
     left: 10px;
@@ -71,15 +75,17 @@
     <%= f.label :directions %><br>
     <%= f.text_area :directions, size: "91x10" %>
   </div>
+  <div class="field" id="private">
+    <%= f.label "Make this recipe private" %><br>
+    <%= check_box_tag  'private', 'true', false %>
+  </div>
   <div class="field" id="origin">
     <%= f.label :origin %><br>
-    <%= f.text_field :origin %>
+    <%= f.text_field :origin, :value => User.find(session['user_id']).username, disabled: true%>
   </div>
   <div class="actions" id="create">
     <%= f.submit %>
   </div>
-
-
 <div class= "table-holder"><center>
   <h3>Ingredients</h3><button id='addIngredient' type="button">Add Ingredient</button>
   <table id="ingredients"><tbody>
