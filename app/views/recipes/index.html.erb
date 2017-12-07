@@ -56,6 +56,7 @@ table {
    <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
    <%= submit_tag "Search", :name => nil %>
 <% end %>
+
 <br>
 </center>
 <% if @recipes.blank?%>
@@ -93,7 +94,7 @@ table {
 
 <h3>Upload a recipe via:</h3>
 <div class="container1">
- <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "200x200", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
- <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "200x200", :style => "background-color: white;"), "/recipes") %><br><%= link_to 'Copy/Paste', "/recipes" %></div>
- <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "200x200", :style => "background-color: white;"), "/recipes" ) %><br><%= link_to 'URL', "/recipes" %></div>
+ <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "170x170", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
+ <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "170x170", :style => "background-color: white;"), "/recipes") %><br><%= link_to 'Copy/Paste', "/recipes" %></div>
+ <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "170x170", :style => "background-color: white;"), "/recipes" ) %><br><%= link_to 'URL', "/recipes" %></div>
 </div>

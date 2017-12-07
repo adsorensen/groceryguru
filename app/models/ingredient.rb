@@ -11,4 +11,8 @@
 class Ingredient < ActiveRecord::Base
     has_many :instructions
     has_many :recipes, :through => :instructions
+    
+    def self.search(search)
+        where("name LIKE ?", "%#{search}%") 
+    end
 end
