@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   post '/recipes/new', to: 'recipes#create'
   delete 'logout',  to: 'sessions#destroy'
   get 'create_list', to: 'list#create_list'
-  
+  post '/addReview', to: 'recipes#review'
   get "/recipes/url" => "recipes#url"
 
   # The priority is based upon order of creation: first created -> highest priority.
