@@ -288,6 +288,29 @@ a:active {text-decoration:underline;}
 	 </div>
 	 </div>
 	 <ul class="media">
+	   		<%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, method: :delete, data: { confirm: 'Are you sure?' } %>
+		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
+		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+  		</ul>
+	</div>
+	   <% end %>
+  <% end %>
+</div>
+
+<p>
+  <div class="title-pen"><span>Personal Recipes</span></div>
+</p>
+<div id="content">
+   <% @personal_recipes.each do |recipeList| %>
+     <% recipeList.each do |recipe| %>
+  <div class="recipe"> 
+		<div class="image">
+		  <%= image_tag recipe.picture, size:"200x325" %>
+	<div class="name">
+	 			<h3><%= recipe.name %></h3>
+	 </div>
+	 </div>
+	 <ul class="media">
 	   		<%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
 		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
 		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
