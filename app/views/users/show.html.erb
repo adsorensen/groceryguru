@@ -288,7 +288,7 @@ a:active {text-decoration:underline;}
 	 </div>
 	 </div>
 	 <ul class="media">
-	   		<%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, method: :delete, data: { confirm: 'Are you sure?' } %>
+	   		<%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
 		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
 		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
   		</ul>
