@@ -138,8 +138,38 @@ footer > h1 a {
 <p>
   <div class="title-pen"><span>Saved Recipes</span></div>
 </p>
-
+ <tbody>
+   <% @saved_recipes.each do |recipe| %>
+     <% recipeCart.recipe.each do |recipe| %>
+       <tr>
+        <td><%= recipe.name %></td>
+        <td><%= recipe.directions %></td>
+        <td><%= recipe.description %></td>
+        <td><%= recipe.origin %></td>
+        <td><%= link_to 'Show', recipe %></td>
+        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Add to cart", carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %></td>
+       </tr>
+    <% end %>
+   <% end %>
+ </tbody>
 <p>
   <div class="title-pen"><span>Personal Recipes</span></div>
 </p>
-
+ <tbody>
+   <% @personal_recipes.each do |recipeList| %>
+     <% recipeCart.recipe.each do |recipe| %>
+       <tr>
+        <td><%= recipe.name %></td>
+        <td><%= recipe.directions %></td>
+        <td><%= recipe.description %></td>
+        <td><%= recipe.origin %></td>
+        <td><%= link_to 'Show', recipe %></td>
+        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Add to cart", carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %></td>
+       </tr>
+      <% end %>
+    <% end %>
+ </tbody>
