@@ -19,4 +19,9 @@ class Recipe < ActiveRecord::Base
     has_many :ingredients, :through => :instructions
     has_many :users, :through => :saved_recipes
     accepts_nested_attributes_for :instructions
+    
+    def self.search(search)
+        where("name LIKE ?", "%#{search}%") 
+    end
+    
 end
