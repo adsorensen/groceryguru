@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'list/new'
+
+  get 'list/create'
+
   resources :saved_recipes
   resources :recipes
   resources :instructions
@@ -8,7 +12,9 @@ Rails.application.routes.draw do
   resources :recipes
   resources :users
   resources :carts
+  resources :list
   get 'cart', to: 'cart#index'
+  #post 'list', to: 'list#create'
 
   get 'cart/loadcart'
   root 'welcome#index'
@@ -22,7 +28,8 @@ Rails.application.routes.draw do
   post   'login',   to: 'sessions#create'
   post '/recipes/new', to: 'recipes#create'
   delete 'logout',  to: 'sessions#destroy'
-  
+  get 'create_list', to: 'list#create_list'
+  post '/addReview', to: 'recipes#review'
   get "/recipes/url" => "recipes#url"
 
   # The priority is based upon order of creation: first created -> highest priority.

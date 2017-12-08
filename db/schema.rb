@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203030159) do
+ActiveRecord::Schema.define(version: 20171206190406) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -26,11 +26,13 @@ ActiveRecord::Schema.define(version: 20171203030159) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "ingredients", ["name"], name: "index_ingredients_on_name", unique: true, using: :btree
+
   create_table "instructions", force: :cascade do |t|
     t.integer  "recipe_id",     limit: 4,   null: false
     t.integer  "ingredient_id", limit: 4,   null: false
     t.float    "amount",        limit: 24,  null: false
-    t.integer  "unit",          limit: 4
+    t.string   "unit",          limit: 255
     t.string   "prep_note",     limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"

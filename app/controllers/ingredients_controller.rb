@@ -50,6 +50,15 @@ class IngredientsController < ApplicationController
       end
     end
   end
+  
+  def index
+    @ingredient = Ingredient.all
+    if params[:search]
+      @ingredient = Ingredient.search(params[:search]).order("created_at DESC")
+    else
+      @ingredient = Ingredient.all.order("created_at DESC")
+    end
+  end
 
   # DELETE /ingredients/1
   # DELETE /ingredients/1.json
