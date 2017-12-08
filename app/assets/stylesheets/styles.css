@@ -11,7 +11,7 @@
     padding: 0;
     font-family: "Source Sans Pro", Roboto, Arial, sans-serif;
     font-size: 62.5%;
-    background: #222629;
+    background: #353a40;
   }
   
   body {
@@ -40,7 +40,7 @@
   }
   #inner {
   width: 50%;
-  margin-left: 53.5rem;
+  margin: 0 auto;
   }
   .wrapper {
     min-height: 100%;

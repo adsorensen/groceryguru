@@ -231,6 +231,14 @@ tbody:hover > tr:hover td {
   
   <div class="new-review">
     <h2>Add Review</h2>
+    <%= form_tag("/addReview", method: "post") do %>
+    <%= label_tag :review %> 
+    <%= text_area_tag :review, nil, size: "30x5" %>
+    <%= label_tag :rating %>
+    <%= number_field_tag('rating', nil, min: 1, max: 5, step: 1) %>
+    <%= hidden_field_tag 'recipe_id', @recipe.id %>
+    <%= submit_tag("Add") %>
+    <% end %>
   </div>
   <br><br>
   <div class="reviews">
@@ -246,20 +254,21 @@ tbody:hover > tr:hover td {
           <th> Rating </th>
         </tr>
       </thead>
+      <tbody>
     <%
       reviews = @recipe.reviews
       for r in reviews do
         user_name = User.find(r.user_id).username
     %>
-      <tbody>
         <tr>
           <td><%= user_name %></td>
           <td><%= r.text %></td>
           <td><%= r.rating %></td>
         </tr>
+    <% end # end of loop %> 
       </tbody>
     </table>
-    <% end end %>
+    <% end # end of unless %>
   </div>
 </div>
 <div id="bottom-links">
