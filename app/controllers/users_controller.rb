@@ -10,6 +10,19 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    recipe_ids = SavedRecipe.where(user_id: session['user_id']).order(created_at: :desc)
+    saved_recipes = Array.new
+    personal_recipes = Array.new
+    for recipe_id in recipe_ids do
+      recipe = Recipe.where(id: recipe_id.recipe_id)
+      if(recipe_id.personal) 
+        personal_recipes << recipe
+      else
+        saved_recipes << recipe
+      end
+    end
+    @saved_recipes = saved_recipes
+    @personal_recipes = personal_recipes
   end
 
   # GET /users/new

@@ -177,6 +177,7 @@ tbody:hover > tr:hover td {
   <a class="active" href="/recipes"><i class="fa fa-search"></i></a> 
   <a href="#print"><i class="fa fa-print" onclick=printpage()></i></a> 
   <a href="#save"><i class="fa fa-save" onclick=openPopup()></i></i></i></a> 
+  <td><%= link_to "Save recipe", saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %></td>
   <a href="#share"><i class="fa fa-facebook"></i></a> 
   <a href="/cart"><i class="fa fa-cart-plus"></i></i></a> 
   <a href="/calendar"><i class="fa fa-calendar"></i></a> 

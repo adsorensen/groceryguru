@@ -138,8 +138,30 @@ footer > h1 a {
 <p>
   <div class="title-pen"><span>Saved Recipes</span></div>
 </p>
-
+ <tbody>
+   <% @saved_recipes.each do |recipeList| %>
+     <% recipeList.each do |recipe| %>
+       <tr>
+        <td><%= recipe.name %></td>
+        <div class="recipe-image"><%= image_tag recipe.picture, size: "350x350" %></div>
+        <td><%= link_to 'Show', recipe %></td>
+        <td><%= link_to "Add to cart", carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %></td>
+       </tr>
+    <% end %>
+   <% end %>
+ </tbody>
 <p>
   <div class="title-pen"><span>Personal Recipes</span></div>
 </p>
-
+ <tbody>
+   <% @personal_recipes.each do |recipeList| %>
+     <% recipeList.each do |recipe| %>
+       <tr>
+        <td><%= recipe.name %></td>
+        <div class="recipe-image"><%= image_tag recipe.picture, size: "350x350" %></div>
+        <td><%= link_to 'Show', recipe %></td>
+        <td><%= link_to "Add to cart", carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %></td>
+       </tr>
+      <% end %>
+    <% end %>
+ </tbody>
