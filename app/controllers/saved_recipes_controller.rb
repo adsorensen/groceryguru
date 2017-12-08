@@ -24,11 +24,17 @@ class SavedRecipesController < ApplicationController
   # POST /saved_recipes
   # POST /saved_recipes.json
   def create
-    @saved_recipe = SavedRecipe.new(:user_id => params[:user_id], :recipe_id => params[:recipe_id], :personal => params[:personal])
+    query = SavedRecipe.where(user_id: params[:user_id], recipe_id: params[:recipe_id])
+    if query.first
+      redirect_to '/users/' + session['user_id'].to_s
+      return
+    else
+      @saved_recipe = SavedRecipe.new(:user_id => params[:user_id], :recipe_id => params[:recipe_id], :personal => params[:personal])
+    end
 
     respond_to do |format|
       if @saved_recipe.save
-        format.html { redirect_to @saved_recipe, notice: 'Saved recipe was successfully created.' }
+        format.html { redirect_to '/users/' + session['user_id'].to_s, notice: 'Saved recipe was successfully created.' }
         format.json { render :show, status: :created, location: @saved_recipe }
       else
         format.html { render :new }
