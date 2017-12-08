@@ -18,7 +18,7 @@ class ListController < ApplicationController
       end
        
     end
-    @ingredients.uniq
+    @ingredients = @ingredients.uniq
     render 'list/create', :locals => {:resource => @ingredients}
     #render :text => st
   end
