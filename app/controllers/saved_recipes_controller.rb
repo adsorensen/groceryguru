@@ -24,7 +24,7 @@ class SavedRecipesController < ApplicationController
   # POST /saved_recipes
   # POST /saved_recipes.json
   def create
-    @saved_recipe = SavedRecipe.new(saved_recipe_params)
+    @saved_recipe = SavedRecipe.new(:user_id => params[:user_id], :recipe_id => params[:recipe_id], :personal => params[:personal])
 
     respond_to do |format|
       if @saved_recipe.save
