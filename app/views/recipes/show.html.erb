@@ -550,6 +550,9 @@ box-shadow: 25px 10px 70px -5px rgba(0,0,0,0.3);
     <br><br>
 
     <% # Loop over reviews
+    if @recipe.reviews.empty? then %>
+      <p>This recipe currently has no reviews. Be the first to add one!</p>
+    <% end
       unless @recipe.reviews.empty?
     %>
     <table>
