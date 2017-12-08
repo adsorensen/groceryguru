@@ -225,7 +225,15 @@ tbody:hover > tr:hover td {
   </table>  
   <p id="directions">
     <strong>Directions:</strong><br>
-    <%= @recipe.directions %>
+    <%
+      direct = @recipe.directions
+      direct_split = direct.split('.')
+      directions = ""
+      for line in direct_split do
+        directions += line + ".\n"
+      end
+    %>
+    <%= simple_format(directions) %>
   </p>
   
   <div class="new-review">
