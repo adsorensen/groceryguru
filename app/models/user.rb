@@ -19,7 +19,7 @@
 #
 
 class User < ActiveRecord::Base
-  
+    has_many :saved_recipes
     has_many :recipes, :through => :saved_recipes
     has_many :reviews
     

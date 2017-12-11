@@ -101,6 +101,11 @@ class RecipesController < ApplicationController
       @saved_recipe.destroy
       @saved_recipe = SavedRecipe.where(recipe_id: i).first
     end
+    @cart = Cart.where(recipe: i).first
+    while @cart
+      @cart.destroy
+      @cart = Cart.where(recipe: i).first
+    end
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
