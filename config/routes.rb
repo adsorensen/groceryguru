@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'create_list', to: 'list#create_list'
   post '/addReview', to: 'recipes#review'
   get "/recipes/url" => "recipes#url"
+  post '/saved_recipes/:id', to: "saved_recipes#destroy"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -62,7 +62,7 @@ class SavedRecipesController < ApplicationController
   def destroy
     @saved_recipe.destroy
     respond_to do |format|
-      format.html { redirect_to saved_recipes_url, notice: 'Saved recipe was successfully destroyed.' }
+      format.html { redirect_to '/users/' + session[:user_id].to_s, notice: 'Saved recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
