@@ -10,6 +10,226 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+ @import url('https://fonts.googleapis.com/css?family=Lobster');
+
+* {
+    margin: 0;
+  }
+  html, body {
+    height: 100%;
+  }
+  html {
+    margin: 0;
+    padding: 0;
+    font-family: "Source Sans Pro", Roboto, Arial, sans-serif;
+    font-size: 62.5%;
+    background: #353a40;
+  }
+  
+  body {
+    font-size: 1.8rem;
+    color: green;
+  }
+  h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    /*color: #86C232;*/
+    padding-top: 70px;
+  }
+  h2 {
+    font-weight: normal;
+    text-align: center;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  #inner {
+  width: 50%;
+  margin: 0 auto;
+  }
+  .wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -7rem;
+    position: relative;
+  }
+  footer, .push {
+    height: 7rem;
+  }
+
+  footer .footer-contents {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 3rem;
+    font-size: 1.5rem;
+  }
+ .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+ }
+  .website-nav {
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%;
+    padding: 2rem;
+    background-color: green;
+    z-index:1;
+  }
+
+  .website-nav ul {
+    list-style: none;
+    margin-right: 20px;
+    padding: 0;
+    float: right;
+    
+  }
+
+  .website-nav title {
+    position: absolute;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    color: white;
+    padding-left: 20px;
+    font-size: x-large;
+    display: inline-block;
+  }
+
+  .website-nav ul li {
+    float: left;
+    padding: 0.5rem 2rem 0.5rem 0;
+    line-height: 21px;
+    color: white;
+  }
+
+  .website-nav ul li a {
+    color: white;
+    text-decoration: none;
+    float: right;
+  }
+  
+  .website-nav ul li a:hover {
+    color: yellow;
+    text-decoration: none;
+    float: right;
+  }
+
+  .home-link {
+    font-weight: bold;
+  }
+
+  .message {
+    margin: auto;
+    width: 80%;
+  }
+  .message .twitter-link {
+    float: left;
+    margin-right: 20px;
+  }
+
+  .message .twitter-link img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .message:after, .website-nav:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+  .graphics {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+  }
+  .graphics .tower svg {
+    width: calc(100vw);
+    height: calc(90vh);
+  }
+
+  .graphics .cloud {
+    top: 30rem;
+    position: relative;
+
+  }
+  .page-content {
+    padding: 1rem 5rem;
+  }
+
+  .page-content p {
+    margin-bottom: 1rem;
+  }
+
+  .path {
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: dash 5s linear forwards;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (min-height: 500px) and (min-width: 700px) {
+    .message {
+      padding: 0;
+      width: 50%;
+      left: calc(50vw - 5rem);
+      top: calc(15vh - 5rem);
+    }
+    .message .text {
+      padding-right: 0rem;
+    }
+    .graphics {
+      margin-bottom: 3rem;
+    }
+    .message .twitter-link img {
+      width: 70%;
+      height: 70%;
+    }
+    .page-content {
+      padding: 3rem 5rem;
+    }
+  }
+
+  @media (min-height: 500px) and (min-width: 1240px) {
+    .message {
+      left: calc(50vw - 10rem);
+      top: calc(25vh - 5rem);
+    }
+    h1 {
+      font-size: 5rem;
+    }
+  }
+
+  @media (min-aspect-ratio: 11/5)  {
+    .graphics {
+      display: none;
+    }
+  }
+  
+  @font-face {
+  font-family: "Primetime";
+  src: url("/assets/PrimeTime.ttf");
+  }
+  
+  @font-face {
+  font-family: "Source Sans Pro";
+  src: url("/assets/SourceSansPro.ttf");
+  }
