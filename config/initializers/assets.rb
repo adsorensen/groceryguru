@@ -4,7 +4,7 @@
 Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( styles.css )
 Rails.application.config.assets.precompile += %w( welcome.css )
-Rails.application.config.assets.precompile += %w( newRecipe.js )
+Rails.application.config.assets.precompile += %w( recipe.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

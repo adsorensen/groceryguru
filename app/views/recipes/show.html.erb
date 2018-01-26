@@ -571,6 +571,10 @@ box-shadow: 25px 10px 70px -5px rgba(0,0,0,0.3);
           <td><%= user_name %></td>
           <td><%= r.text %></td>
           <td><%= r.rating %></td>
+          <% if r.user_id == session["user_id"]%> 
+          <td><button type="button" onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)", class="editReviewButton">Edit</button></td>
+          <td><%=button_to 'Delete', {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, :class => "deleteReviewButton", data: { confirm: 'Are you sure?' }%></td>
+          <%end%>
         </tr>
     <% end # end of loop %> 
       </tbody>
@@ -578,5 +582,5 @@ box-shadow: 25px 10px 70px -5px rgba(0,0,0,0.3);
     <% end # end of unless %>
 
   </div>
-   </div>
+  </div>
 </div>
