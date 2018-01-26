@@ -27,7 +27,10 @@ function reviewEdit(id, oldReview, recipeId){
             recipe_id: recipeId
         },
         dataType: "json",
-        success: function(){ alert("Review updated successfully"); }
+        success: function(){ 
+            window.location.href=window.location.href;
+            alert("Review updated successfully"); 
+        }
     });
 }
 
