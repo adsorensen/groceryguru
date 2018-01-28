@@ -11,7 +11,8 @@ gem 'rails', '4.2.5'
 gem 'mysql2', '~> 0.4.9'
 
 # added these for Heroku
-gem 'compass-rails', '~> 1.1.7'
+#gem 'compass-rails', '~> 1.1.7'
+gem "compass-rails", "~> 1.1.2"
 gem 'pg'
 #gem 'sass-rails'
 

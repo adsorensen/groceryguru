@@ -336,7 +336,7 @@ DEPENDENCIES
   byebug
   carrierwave (= 1.1.0)
   coffee-rails (~> 4.1.0)
-  compass-rails (~> 1.1.7)
+  compass-rails (~> 1.1.2)
   fog (= 1.40.0)
   jbuilder (~> 2.0)
   jquery-rails
