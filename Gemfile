@@ -13,7 +13,7 @@ gem 'mysql2', '~> 0.4.9'
 # added these for Heroku
 #gem 'compass-rails', '~> 1.1.7'
 gem "compass-rails", "~> 1.1.2"
-gem 'pg'
+gem 'pg', '~> 0.15'
 #gem 'sass-rails'
 
 # to add table definitions to the top of models
