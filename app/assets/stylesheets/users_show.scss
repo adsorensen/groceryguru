@@ -1,12 +1,104 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  list-style-type: none;
+@import url(https://fonts.googleapis.com/css?family=Abel|Indie+Flower|Lobster);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
 }
+
+.title-pen {
+  color: white;
+  font-family: "Lobster", cursive;
+  text-align: center;
+}
+.title-pen span {
+  text-align: center;
+  color: green;
+  font-family: "Indie Flower", sans-serif;
+  font-size: 60px;
+}
+
+.user-profile {
+  margin: auto;
+	width: 40%; 
+  height: 11em;
+  background: #f2f2f2;
+  border-radius: .3em;
+}
+
+.user-profile  .username {
+  margin: auto;
+  padding-top: .5em;
+  margin-top: 0px;
+  margin-left: 6em;
+  color: #1d9f1d;
+  font-size: 1.53em;
+  font-family: "Coda", sans-serif;
+  font-weight: bold;
+}
+.user-profile  .bio {
+  margin: auto;
+  display: inline-block;
+  margin-left: 1em;
+  color: #e76043; 
+  font-size: .87em;
+  font-family: "varela round", sans-serif;
+}
+.user-profile > .description {
+  margin: auto;
+  padding-left: 1.3em;
+  margin-bottom: .07em;
+  width: 14em;
+  color: black; 
+  font-size: .87em;
+  font-family: "varela round", sans-serif;
+}
+.user-profile .avatar {
+  margin-left: .5em;
+  padding-top: 1.5em;
+  float: left;
+}
+.user-profile ul.data {
+	height: 3.70em;
+	margin-top: 30px;
+  background: #DCDCDC;
+  text-align: center;
+}
+.user-profile li {
+	margin: 0 auto;
+  padding: 1.2em; 
+  width: 33.33334%;
+  display: table-cell;
+  text-align: center;
+}
+
+.user-profile span {
+	font-family: "varela round", sans-serif;
+	color: #e3eeee;
+  white-space: nowrap;
+  font-size: 1.27em;
+  font-weight: bold;
+}
+.user-profile span:hover {
+  color: #daebea;
+}
+
+footer > h1 {
+  display: block;
+  text-align: center;
+  clear: both;
+  font-family: "Coda", sans-serif;
+  color: #343f3d;
+  line-height: 6;
+  font-size: 1.6em;
+}
+footer > h1 a {
+  text-decoration: none;
+  color: #ea4c89;
+}
+#image_id {
+  margin: 20px;
+}
+
 h3 {
   font-size:0.9em;
   font-weight:900;
@@ -15,10 +107,11 @@ h3 {
 
 #content {
   width: 100%;
-  max-width:750px;
   padding:15px;
   margin: 0 auto;
   text-align: center;
+  overflow: scroll;
+  white-space: nowrap;
 }
 .recipe {
   background:#f1f1f1;
@@ -110,14 +203,6 @@ h3 {
   display:inline-block;
   padding:0 7px;
 }
-footer {
-  font-size:0.7em;
-  color: #339187;
-  margin:15px 0 0 0;
-}
-a:link, a:visited {color: #339187; text-decoration:none;font-weight:700;}
-a:hover {color: #D61650;text-decoration:none;}
-a:active {text-decoration:underline;}
 
 /* Pulse Animation for Firefox, Opera and Internet Explorer 10 */
 @keyframes pulse {
@@ -149,3 +234,6 @@ a:active {text-decoration:underline;}
     opacity: 1.0;
   }
 }
+a:link, a:visited {color: #339187; text-decoration:none;font-weight:700;}
+a:hover {color: #D61650;text-decoration:none;}
+a:active {text-decoration:underline;}

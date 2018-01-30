@@ -1,0 +1,86 @@
+html {
+      background-image: url(/assets/background.jpg);
+}
+#content {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  width: 45%;
+  transform: translate(-50%, -50%) 
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 50%;
+  height: 300px;
+  text-align: center;
+}
+.container h1 {
+  color: white;
+  font-size: 40px;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  -webkit-transition-timing-function: ease-in-put;
+          transition-timing-function: ease-in-put;
+  font-weight: 300;
+}
+form {
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+form input[type=text], input[type=submit], input[type=password]{
+      width: 70%;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      outline: 0;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      padding: 10px 15px;
+      margin: 0 auto 10px auto;
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      color: white;
+      -webkit-transition-duration: 0.25s;
+      transition-duration: 0.25s;
+      font-weight: 300;
+    }
+    form input:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+      
+    }
+    form input:focus {
+      background-color: white;
+      color: #53e3a6;
+    }
+    input[type=check_box] {
+      border-radius: 4px;
+      font-size: 16px;
+      padding: 12px 20px 12px 20px;
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;
+    }
+    form button {
+      -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+          outline: 0;
+  background-color: #53e3a6;
+  border: 0;
+  padding: 10px 15px;
+  background-color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+}
+form button:hover {
+  background-color: #f5f7f9;
+}

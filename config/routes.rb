@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   post '/addReview', to: 'recipes#review'
   get "/recipes/url" => "recipes#url"
   post '/saved_recipes/:id', to: "saved_recipes#destroy"
+  post "/recipes/edit_review" => "recipes#edit_review"
+  post "/recipes/delete_review" => "recipes#delete_review"
   get "/cart/checkout_to_store", to: "store_display#index"
 
 

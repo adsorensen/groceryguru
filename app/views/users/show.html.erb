@@ -1,246 +1,6 @@
 <head>
-  <style>
-    /* CSS design by @jofpin */
-@import url(https://fonts.googleapis.com/css?family=Abel|Indie+Flower|Lobster);
-@import url(http://weloveiconfonts.com/api/?family=entypo);
-
-[class*="entypo-"]:before {
-  font-family: 'entypo', sans-serif;
-}
-
-.title-pen {
-  color: white;
-  font-family: "Lobster", cursive;
-  text-align: center;
-}
-.title-pen span {
-  text-align: center;
-  color: green;
-  font-family: "Indie Flower", sans-serif;
-  font-size: 60px;
-}
-
-.user-profile {
-  margin: auto;
-	width: 40%; 
-  height: 11em;
-  background: #f2f2f2;
-  border-radius: .3em;
-}
-
-.user-profile  .username {
-  margin: auto;
-  padding-top: .5em;
-  margin-top: 0px;
-  margin-left: 6em;
-  color: #1d9f1d;
-  font-size: 1.53em;
-  font-family: "Coda", sans-serif;
-  font-weight: bold;
-}
-.user-profile  .bio {
-  margin: auto;
-  display: inline-block;
-  margin-left: 1em;
-  color: #e76043; 
-  font-size: .87em;
-  font-family: "varela round", sans-serif;
-}
-.user-profile > .description {
-  margin: auto;
-  padding-left: 1.3em;
-  margin-bottom: .07em;
-  width: 14em;
-  color: black; 
-  font-size: .87em;
-  font-family: "varela round", sans-serif;
-}
-.user-profile .avatar {
-  margin-left: .5em;
-  padding-top: 1.5em;
-  float: left;
-}
-.user-profile ul.data {
-	height: 3.70em;
-	margin-top: 30px;
-  background: #DCDCDC;
-  text-align: center;
-}
-.user-profile li {
-	margin: 0 auto;
-  padding: 1.2em; 
-  width: 33.33334%;
-  display: table-cell;
-  text-align: center;
-}
-
-.user-profile span {
-	font-family: "varela round", sans-serif;
-	color: #e3eeee;
-  white-space: nowrap;
-  font-size: 1.27em;
-  font-weight: bold;
-}
-.user-profile span:hover {
-  color: #daebea;
-}
-
-footer > h1 {
-  display: block;
-  text-align: center;
-  clear: both;
-  font-family: "Coda", sans-serif;
-  color: #343f3d;
-  line-height: 6;
-  font-size: 1.6em;
-}
-footer > h1 a {
-  text-decoration: none;
-  color: #ea4c89;
-}
-#image_id {
-  margin: 20px;
-}
-
-h3 {
-  font-size:0.9em;
-  font-weight:900;
-  color:#FFF;
-}
-
-#content {
-  width: 100%;
-  padding:15px;
-  margin: 0 auto;
-  text-align: center;
-  overflow: scroll;
-  white-space: nowrap;
-}
-.recipe {
-  background:#f1f1f1;
-  max-width:300px;
-  height:300px;
-  position:relative;
-  display:inline-block;
-  overflow:hidden;
-  cursor: pointer;
-  margin:0 10px 10px 0;
-  -webkit-border-radius:0 0 7px 7px;
-  border-radius:0 0 7px 7px;
-  -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-  -moz-box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-}
-.image {
-  height:250px;
-  overflow:hidden;
-  position:relative;
-}
-.image img{
-  width:100%;
-  transition: all 1s ease;
-  margin-top:-70px;
-}
-.image:hover img{
-  transform: scale(1.2) rotate(-3deg);
-  -ms-transform: scale(1.2) rotate(-3deg); /* IE 9 */
-  -webkit-transform: scale(1.2) rotate(-3deg); /* Safari and Chrome */
-}
-.fa-heart-o:hover {
-  animation-name: pulse; 
-  animation-duration: 0.5s; 
-  animation-iteration-count: infinite; 
-  -webkit-animation-name: pulse; 
-  -webkit-animation-duration: 0.5s; 
-  -webkit-animation-iteration-count: infinite; 
-}
-.likes {
-  width:45px;
-  height:35px;
-  background:#EC4678;
-  opacity: 0.85;
-  filter: alpha(opacity=85); /* IE8 and lower */
-  zoom: 1; /* set "zoom", "width" or "height" to trigger "hasLayout" in IE 7 and lower */
-  font-size:1em;
-  color:white;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 35px; 
-  position:absolute;
-  left:0;
-  top:20px;
-  -webkit-border-radius:0 5px 5px 0px;
-  border-radius:0 5px 5px 0px;
-  -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-  -moz-box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-  text-shadow: 1px 1px 2px rgba(214, 22, 80, 1);
-  border-left:5px dotted #D61650;
-}
-.name {
-  width:100%;
-  height:50px;
-  background:#4ABFB4;
-  opacity: 0.85;
-  filter: alpha(opacity=85); /* IE8 and Lower */
-  zoom: 1; /* set "zoom", "width" or "height" to trigger "hasLayout" in IE 7 and lower */
-  overflow:hidden;
-  position:absolute;
-  bottom:0;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 50px; 
-  text-shadow: 1px 1px 2px rgba(51, 145, 135, 1);
-  border-bottom:1px dotted #339187;
-}
-.media {
-  width:100%;
-  font-size:0.7em;
-  color:#777;
-  padding:15px;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 20px;
-}
-.media li {
-  display:inline-block;
-  padding:0 7px;
-}
-
-/* Pulse Animation for Firefox, Opera and Internet Explorer 10 */
-@keyframes pulse {
-  from {
-    transform: scale(1.0);
-    opacity: 1.0;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 1.0;
-  }
-  to { 
-    transform: scale(1.0);
-    opacity: 1.0;
-  }
-}
-/* Pulse Animation for Google Chrome and Safari */
-@-webkit-keyframes pulse {
-  from {
-    -webkit-transform: scale(1.0);
-    opacity: 1.0;
-  }
-  50% {
-    -webkit-transform: scale(1.2);
-    opacity: 1.0;
-  }
-  to { 
-    -webkit-transform: scale(1.0);
-    opacity: 1.0;
-  }
-}
-a:link, a:visited {color: #339187; text-decoration:none;font-weight:700;}
-a:hover {color: #D61650;text-decoration:none;}
-a:active {text-decoration:underline;}
-  </style>
+  <%= stylesheet_link_tag "recipe" %>
+  <%= stylesheet_link_tag "users_show" %>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -282,7 +42,15 @@ a:active {text-decoration:underline;}
      <% recipeList.each do |recipe| %>
   <div class="recipe"> 
 		<div class="image">
-		  <%= image_tag recipe.picture, size:"200x325" %>
+		  <%= if recipe.picture?  
+        link_to image_tag(recipe.picture, size:"200x325"), recipe
+      else
+        pic_url_length = recipe.picture.to_s.length
+        beginning_index = recipe.picture.to_s.index('http')
+        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+        new_url = cut_url.gsub!('%3A', ":/")
+        link_to image_tag(new_url, size: "200x325"), recipe
+      end %>
 	<div class="name">
 	 			<h3><%= recipe.name %></h3>
 	 </div>
@@ -305,7 +73,15 @@ a:active {text-decoration:underline;}
      <% recipeList.each do |recipe| %>
   <div class="recipe"> 
 		<div class="image">
-		  <%= image_tag recipe.picture, size:"200x325" %>
+		  <%= if recipe.picture?  
+        link_to image_tag(recipe.picture, size:"200x325"), recipe
+      else
+        pic_url_length = recipe.picture.to_s.length
+        beginning_index = recipe.picture.to_s.index('http')
+        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+        new_url = cut_url.gsub!('%3A', ":/")
+        link_to image_tag(new_url, size: "200x325"), recipe
+      end %>
 	<div class="name">
 	 			<h3><%= recipe.name %></h3>
 	 </div>

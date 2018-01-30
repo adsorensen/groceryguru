@@ -14,6 +14,33 @@ $('document').ready(function() {
     });
 });
 
+function reviewEdit(id, oldReview, recipeId){
+    var x;
+    var newReview = prompt("Edit your review", oldReview);
+    
+    $.ajax({
+        type: 'POST',
+        url: "/recipes/edit_review",
+        data: {
+            id: id,
+            text: newReview,
+            recipe_id: recipeId
+        },
+        dataType: "json",
+        success: function(){ 
+            window.location.href=window.location.href;
+            alert("Review updated successfully"); 
+        }
+    });
+}
+
+
+
+//***********************
+// Pretty sure these functions aren't being used. -T
+//***********************
+
+
 // Create onClick event
 // $('document').ready(function() {
 //      $("#create").unbind().click(tableSave());
