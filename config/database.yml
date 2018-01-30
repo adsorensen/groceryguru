@@ -26,6 +26,11 @@ development:
 #   <<: *default
 #   database: db/test.sqlite3
 
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
+production:
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  database: c9
+  pool: 5
+  username: root
+  password: 
