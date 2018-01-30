@@ -22,4 +22,16 @@ class ListController < ApplicationController
     render 'list/create', :locals => {:resource => @ingredients}
     #render :text => st
   end
+  
+  def checkout
+    @chosen_ingredients = params[:names]
+    index = 0
+    @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
+  end
+  
+  def checkout_get
+    @chosen_ingredients = params[:names]
+    index = 0
+    @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
+  end
 end

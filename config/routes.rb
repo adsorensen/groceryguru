@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'store_display/index'
+
+  get 'store_display/new'
+
+  get 'store_display/create'
+
   get 'list/new'
 
   get 'list/create'
@@ -12,9 +18,10 @@ Rails.application.routes.draw do
   resources :recipes
   resources :users
   resources :carts
-  resources :list
+  resources :list, :collection => { :checkout => :post }
   get 'cart', to: 'cart#index'
-  #post 'list', to: 'list#create'
+  post 'checkout', to: 'list#checkout'
+  get 'checkout', to: 'list#checkout_get'
 
   get 'cart/loadcart'
   root 'welcome#index'
@@ -32,6 +39,8 @@ Rails.application.routes.draw do
   post '/addReview', to: 'recipes#review'
   get "/recipes/url" => "recipes#url"
   post '/saved_recipes/:id', to: "saved_recipes#destroy"
+  get "/cart/checkout_to_store", to: "store_display#index"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

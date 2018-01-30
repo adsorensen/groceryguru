@@ -61,36 +61,34 @@ tbody tr td {
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="icon-bar">
-  <a href="/recipes"><i class="fa fa-search"></i></a> 
-  <a href=""><i class="fa fa-print" onclick=printpage()></i></a> 
-  <a href=""><i class="fa fa-sign-in" onclick="window.open('https://grocery.walmart.com','_blank')"></i></a> 
-</div>
-<h1>Grocery List</h1>
-<br>
-<center>
-<%= form_tag checkout_path, :method => :post do %>
-<div class="container1">
-    <table>
+<table>
       <thead>
         <tr>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <% @ingredients.each do |name| %>
+        <% @chosen_ingredients.each do |name| %>
         <tr>
-          <td><%= check_box_tag "names[]", name, true %></td>
           <td><%= name %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
+    
+<button class="button" onclick="/checkout?index=0"> Previous</button>
+<button class="button" onclick="/checkout?index=1"> Next</button>
+<iframe src=<%= @walmart_url %> onload="this.width=screen.width;this.height=screen.height;"></iframe>
+
+
+<div class="icon-bar">
+  <a href="/recipes"><i class="fa fa-search"></i></a> 
+  <a href=""><i class="fa fa-print" onclick=printpage()></i></a> 
+  <a href=""><i class="fa fa-sign-in" onclick="window.open('https://grocery.walmart.com','_blank')"></i></a> 
 </div>
-<%= submit_tag "Checkout" %>
-<% end %>
+<br>
+<center>
+
 <br>
 <br>
 <!--<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>-->
-<button class="button" onclick=printpage()> Print</button>
-<button class="button" onclick="window.open('https://grocery.walmart.com','_blank')"> Export to Store</button>
