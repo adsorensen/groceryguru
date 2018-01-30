@@ -15,6 +15,7 @@ Rails.application.config.assets.precompile += %w( users_edit.css )
 Rails.application.config.assets.precompile += %w( list.css )
 Rails.application.config.assets.precompile += %w( calendar.css )
 Rails.application.config.assets.precompile += %w( newRecipe.js )
+Rails.application.config.assets.precompile += %w( recipe_search_results.css )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

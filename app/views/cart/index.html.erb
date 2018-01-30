@@ -1,5 +1,5 @@
 <head>
-  <%= stylesheet_link_tag "cart" %>
+<%= stylesheet_link_tag "cart" %>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -9,7 +9,15 @@
    <% recipeCart.recipe.each do |recipe| %>
   <div class="recipe"> 
 		<div class="image">
-		  <%= image_tag recipe.picture, size:"200x325" %>
+		  <%= if recipe.picture?  
+        link_to image_tag(recipe.picture, size:"200x325"), recipe
+      else
+        pic_url_length = recipe.picture.to_s.length
+        beginning_index = recipe.picture.to_s.index('http')
+        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+        new_url = cut_url.gsub!('%3A', ":/")
+        link_to image_tag(new_url, size: "200x325"), recipe
+      end %>
 	<div class="name">
 	 			<h3><%= recipe.name %></h3>
 	 </div>
