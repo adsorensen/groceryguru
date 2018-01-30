@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 <head>
-      <%= stylesheet_link_tag "recipes_tab" %>
+    <%= stylesheet_link_tag "recipes_tab" %>
+    <%= stylesheet_link_tag "recipe_search_results" %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <h1>Recipes</h1>
 <h3>Search for a recipe:</h3>
@@ -16,29 +18,35 @@
 <% if @recipes.blank?%>
   <h4>There are no recipes containing the term: "<%= params[:search] %>"</h4>
 <% else unless params[:search].nil? %>
-<center>
-<table>
- <thead>
-   <tr>
-    <th>Picture</th>
-     <th>Name</th>
-     <th colspan="2">Actions</th>
-   </tr>
- </thead>
+<div id="content">
+    <% @recipes.each do |recipe| %>
+    <div class="recipe">
+        <div class="image">
+            <%= if recipe.picture?
+                    link_to image_tag(recipe.picture_url, size: "100x325"), recipe 
+                else
+                    pic_url_length = recipe.picture_url.to_s.length
+                    beginning_index = recipe.picture_url.to_s.index('http')
+                    cut_url = recipe.picture_url.to_s[beginning_index, pic_url_length]
+                    new_url = cut_url.gsub!('%3A', ":/")
+                    link_to image_tag(new_url, size: "100x325"), recipe
+                end
+            %>
+            <div class="name">
+	 			<h4><%= recipe.name %></h4>
+	        </div>
+        </div>
+        <ul class="media">
+	   		<li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+		    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+  		</ul>
+    </div>
+     <% end %>
+  <% end %>
+  <% end %>
+</div>
 
- <tbody>
-   <% @recipes.each do |recipe| %>
-     <tr>
-      <td><%= image_tag recipe.picture, size: "220x150" %></td>
-      <td><%= recipe.name %></td>
-      <td><%= link_to 'Show', recipe %></td>
-      <td><%= link_to "Add to cart", carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %></td>
-     </tr>
-   <% end %>
- </tbody>
-</table>
-</center>
-<% end end %>
+
 <br><br>
 <br>
 <hr>

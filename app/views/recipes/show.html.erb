@@ -19,7 +19,15 @@
   <div class="cont_modal cont_modal_active">
   <div class="cont_photo">
 <div class="cont_img_back">
-    <%= image_tag @recipe.picture, size:"800x500" %>
+  <%= if @recipe.picture?  
+        image_tag(@recipe.picture.url, size:"500x440") 
+      else
+        pic_url_length = @recipe.picture.to_s.length
+        beginning_index = @recipe.picture.to_s.index('http')
+        cut_url = @recipe.picture.to_s[beginning_index, pic_url_length]
+        new_url = cut_url.gsub!('%3A', ":/")
+        image_tag(new_url, size:"500x440")
+      end %>
     </div>
 <div class="cont_mins">
     <div class="sub_mins">

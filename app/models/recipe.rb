@@ -20,6 +20,8 @@ class Recipe < ActiveRecord::Base
     has_many :users, :through => :saved_recipes
     accepts_nested_attributes_for :instructions
     
+    mount_uploader :picture, PictureUploaderRecipes
+
 
     def self.search(search)
         where("name LIKE ?", "%#{search}%") 
