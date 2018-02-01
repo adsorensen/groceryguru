@@ -106,6 +106,9 @@ class RecipesController < ApplicationController
       @cart.destroy
       @cart = Cart.where(recipe: i).first
     end
+    @recipe.reviews.all.each do |review|
+      review.destroy
+    end
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully deleted.' }
