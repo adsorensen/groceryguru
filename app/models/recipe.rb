@@ -11,7 +11,6 @@
 #  updated_at  :datetime         not null
 #  picture     :string(255)
 #
-#testing
 
 class Recipe < ActiveRecord::Base
     has_many :instructions
