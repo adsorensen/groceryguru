@@ -11,26 +11,28 @@
 <h1>Grocery List</h1>
 <br>
 <center>
-  <div class="container1">
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">Ingredients</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @ingredients.each do |name| %>
+<%= form_tag checkout_path, :method => :post do %>
+<div class="container1">
+    <table>
+      <thead>
         <tr>
-          <td><input type="checkbox" value="selectedRecipe" checked></td>
-            <td><%= name %></td>
+          <th></th>
         </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+        <% @ingredients.each do |name| %>
+        <tr>
+          <td><%= check_box_tag "names[]", name, true %></td>
+          <td><%= name %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 </div>
+<%= submit_tag "Checkout" %>
+<% end %>
 <br>
 <br>
 <!--<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>-->
 <button class="button" onclick=printpage()> Print</button>
-<button class="button" onclick=" window.open('https://grocery.walmart.com','_blank')"> Export to Store</button>
-
+<button class="button" onclick="window.open('https://grocery.walmart.com','_blank')"> Export to Store</button>
