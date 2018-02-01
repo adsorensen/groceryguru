@@ -18,6 +18,7 @@ class Recipe < ActiveRecord::Base
     has_many :reviews
     has_many :ingredients, :through => :instructions
     has_many :users, :through => :saved_recipes
+    has_many :meal_plans, through: :Plans
     accepts_nested_attributes_for :instructions
     
     mount_uploader :picture, PictureUploaderRecipes
