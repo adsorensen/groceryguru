@@ -56,8 +56,18 @@ class ListController < ApplicationController
       ingredients.append(name)
     end
     index = params[:index].to_i
-    @relative_url_next = "/checkout?index=" + (index + 1).to_s
-    @relative_url_prev = "/checkout?index=" + (index - 1).to_s
-    @walmart_url = "https://grocery.walmart.com/products?query=" + ingredients[index].gsub(' ','+')
+    @displayNext = (index + 1) < ingredients.length
+    @displayPrev = index > 0
+    nextIndex = index + 1
+    prevIndex = index - 1
+    
+    @relative_url_next = "/checkout?index=" + (nextIndex).to_s
+    @relative_url_prev = "/checkout?index=" + (prevIndex).to_s
+    
+    if @displayNext 
+      @walmart_url = "https://grocery.walmart.com/products?query=" + ingredients[index].gsub(' ','+')
+    else
+      @walmart_url = "https://grocery.walmart.com/checkout"
+    end
   end
 end
