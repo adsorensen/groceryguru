@@ -6,32 +6,58 @@ class ListController < ApplicationController
   end
   
   def create_list
+    # clear out checkout list to generate again
+    current_list = CheckoutList.where(user_id: session['user_id'])
+    for row in current_list do
+      row.destroy
+    end
+    
+    # create list based on cart
     recipe_ids = Cart.where(user: session['user_id']).order(created_at: :desc)
-    #render 'list/create', :locals => {:resource => recipe_ids}
     @ingredients = []
-    st = ""
+    ingredientIds = []
     for id_val in recipe_ids do
       recipe = Recipe.where(id: id_val.recipe).first
       instr = recipe.instructions
       for i in instr do
         @ingredients.append(Ingredient.find(i.ingredient_id).name.to_s)
+        if CheckoutList.where(ingredient_id: i.ingredient_id).blank?
+          newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1)
+          ingredientIds.append(i.ingredient_id)
+          newValue.save
+        else
+          valueToUpdate = CheckoutList.where(ingredient_id: i.ingredient_id)
+          valueToUpdate.quantity = valueToUpdate.quantity + 1
+          valueToUpdate.save
+        end
+        
       end
        
     end
     @ingredients = @ingredients.uniq
     render 'list/create', :locals => {:resource => @ingredients}
-    #render :text => st
   end
   
   def checkout
-    @chosen_ingredients = params[:names]
-    index = 0
-    @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
+    @chosen_ingredients = CheckoutList.where(:user_id => session['user_id'])
+    ingredients = []
+    for ingredient in @chosen_ingredients do
+      ingredients.append(Ingredient.where(id: ingredient.ingredient_id).first.name)
+    end
+    index = params[:index]
+    @walmart_url = "https://grocery.walmart.com/products?query=" + ingredients[index].gsub(' ','+')
   end
   
   def checkout_get
-    @chosen_ingredients = params[:names]
-    index = 0
-    @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
+    @chosen_ingredients = CheckoutList.where(:user_id => session['user_id'])
+    ingredients = []
+    for ingredient in @chosen_ingredients do
+      name = Ingredient.where(id: ingredient.ingredient_id).first.name
+      ingredients.append(name)
+    end
+    index = params[:index].to_i
+    @relative_url_next = "/checkout?index=" + (index + 1).to_s
+    @relative_url_prev = "/checkout?index=" + (index - 1).to_s
+    @walmart_url = "https://grocery.walmart.com/products?query=" + ingredients[index].gsub(' ','+')
   end
 end
