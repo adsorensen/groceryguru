@@ -16,13 +16,16 @@ Rails.application.routes.draw do
   get 'cart', to: 'cart#index'
   #post 'list', to: 'list#create'
 
+  root 'new_age#index'
+  get 'new_age/index'
+
   get 'cart/loadcart'
-  root 'welcome#index'
+  #root 'welcome#index'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
   delete 'cart', to: 'cart#destroy'
   get 'calendar', to: 'calendar#index'
-  get 'welcome/index'
+  #get 'welcome/index'
   get  'signup',  to: 'users#new'
   get    'login',   to: 'sessions#new'
   post   'login',   to: 'sessions#create'
