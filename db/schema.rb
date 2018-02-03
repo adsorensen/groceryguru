@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180201052307) do
+=======
+ActiveRecord::Schema.define(version: 20180202200851) do
+>>>>>>> master
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -19,6 +23,17 @@ ActiveRecord::Schema.define(version: 20180201052307) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  create_table "checkout_lists", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4, null: false
+    t.integer  "ingredient_id", limit: 4, null: false
+    t.integer  "quantity",      limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "checkout_lists", ["ingredient_id"], name: "fk_rails_3db664d8bb", using: :btree
+  add_index "checkout_lists", ["user_id"], name: "index_checkout_lists_on_user_id", using: :btree
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -106,6 +121,8 @@ ActiveRecord::Schema.define(version: 20180201052307) do
     t.string   "picture",         limit: 255
   end
 
+  add_foreign_key "checkout_lists", "ingredients"
+  add_foreign_key "checkout_lists", "users"
   add_foreign_key "instructions", "ingredients"
   add_foreign_key "instructions", "recipes"
   add_foreign_key "reviews", "recipes"

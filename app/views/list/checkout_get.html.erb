@@ -62,8 +62,15 @@ tbody tr td {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <br><br><br><br>
 
-<button class="button" onclick="window.location='/checkout?index=1'"> Next</button>
+<% if @displayPrev %>
+ <button class="button" onclick="window.location='<%= @relative_url_prev %>';"> Previous</button>
+<% end %>
+<% if @displayNext %>
+  <button class="button" onclick="window.location='<%= @relative_url_next %>';"> Next</button>
+<% end %>
+
 <iframe src=<%= @walmart_url %> onload="this.width=screen.width;this.height=screen.height;"></iframe>
+
 
 <div class="icon-bar">
   <a href="/recipes"><i class="fa fa-search"></i></a> 
