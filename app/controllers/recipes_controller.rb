@@ -106,9 +106,12 @@ class RecipesController < ApplicationController
       @cart.destroy
       @cart = Cart.where(recipe: i).first
     end
+    @recipe.reviews.all.each do |review|
+      review.destroy
+    end
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
+      format.html { redirect_to recipes_url, notice: 'Recipe was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -117,7 +120,7 @@ class RecipesController < ApplicationController
     uid = session["user_id"]
     @review = Review.create recipe_id: params['recipe_id'], user_id: uid, text: params['review'], rating: params['rating']
     
-    @recipe = Recipe.find( params['recipe_id'])
+    @recipe = Recipe.find(params['recipe_id'])
     respond_to do |format|
       if @review.save
         format.html { redirect_to @recipe, notice: 'Review was successfully created.' }
@@ -128,6 +131,37 @@ class RecipesController < ApplicationController
       end
     end
   end  
+  
+  def edit_review
+    @review = Review.find(params['id'])
+    newText = params['text']
+    @recipe = Recipe.find(params['recipe_id'])
+     
+    respond_to do |format|
+      if @review.update(text: newText)
+        format.html { redirect_to @recipe, notice: 'Review updated' }
+        format.json { render :show, location: @recipe  }
+        else
+        format.html { render :new }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def delete_review
+    @review = Review.find(params['id'])
+    @recipe = Recipe.find(params['recipe_id'])
+     
+    respond_to do |format|
+      if @review.destroy
+        format.html { redirect_to @recipe, notice: 'Review was deleted successfully' }
+        format.json { render :show, location: @recipe  }
+        else
+        format.html { render :new }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   
   def index
     @recipes = Recipe.all

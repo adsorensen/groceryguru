@@ -14,7 +14,7 @@ Rails.application.config.assets.precompile += %w( users_show.css )
 Rails.application.config.assets.precompile += %w( users_edit.css )
 Rails.application.config.assets.precompile += %w( list.css )
 Rails.application.config.assets.precompile += %w( calendar.css )
-Rails.application.config.assets.precompile += %w( newRecipe.js )
+Rails.application.config.assets.precompile += %w( recipe.js )
 Rails.application.config.assets.precompile += %w( recipe_search_results.css )
 Rails.application.config.assets.precompile += %w( new_age/manifest.js new_age/manifest.css )
 
