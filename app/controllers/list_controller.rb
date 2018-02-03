@@ -27,8 +27,8 @@ class ListController < ApplicationController
           newValue.save
         else
           valueToUpdate = CheckoutList.where(ingredient_id: i.ingredient_id)
-          valueToUpdate.quantity = valueToUpdate.quantity + 1
-          valueToUpdate.save
+          valueToUpdate.first.quantity = valueToUpdate.first.quantity + 1
+          valueToUpdate.first.save
         end
         
       end
@@ -44,7 +44,7 @@ class ListController < ApplicationController
     for ingredient in @chosen_ingredients do
       ingredients.append(Ingredient.where(id: ingredient.ingredient_id).first.name)
     end
-    index = params[:index]
+    index = params[:index].to_i
     @walmart_url = "https://grocery.walmart.com/products?query=" + ingredients[index].gsub(' ','+')
   end
   
