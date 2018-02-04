@@ -1,74 +1,70 @@
+<!DOCTYPE html>
+<html>
 <head>
-  <%= stylesheet_link_tag "recipe" %>
+  <%= stylesheet_link_tag "user_2" %>
   <%= stylesheet_link_tag "users_show" %>
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<p id="notice"><%= notice %></p>
-<h1 class="title-pen"> User Profile</h1>
-<div class="user-profile">
-    <div class="avatar">
-	  <%= image_tag @user.picture.url if @user.picture? %>
-	  </div>
-    <div class="username"><%= @user.first_name %> <%= @user.last_name %></div>
-    <div class="bio">
-  	Biography:
-  </div>
-    <div class="description">
-      <%= @user.bio%> <br>
-  </div>
-  <div class="bio">
-  	Dietary Preferences:
-  </div>
-    <div class="description">
-      Gluten free: <%= @user.gluten_free %>
-      <br>Lactose intolerant: <%= @user.lactose_intol %>
-      <br>Organic: <%= @user.organic %>
-  </div>
-  <ul class="data">
-    <li>
-      <span class="entypo-edit"><%= link_to 'Edit My Profile', edit_user_path(@user) %></span>
-    </li>
- </ul>
-</div>
-  <footer>
-  </footer>
-  
-<p>
-  <div class="title-pen"><span>Saved Recipes</span></div>
-</p>
-<div id="content">
-   <% @saved_recipes.each do |recipeList| %>
-     <% recipeList.each do |recipe| %>
-  <div class="recipe"> 
-		<div class="image">
-		  <%= if recipe.picture?  
-        link_to image_tag(recipe.picture, size:"200x325"), recipe
-      else
-        pic_url_length = recipe.picture.to_s.length
-        beginning_index = recipe.picture.to_s.index('http')
-        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-        new_url = cut_url.gsub!('%3A', ":/")
-        link_to image_tag(new_url, size: "200x325"), recipe
-      end %>
-	<div class="name">
-	 			<h3><%= recipe.name %></h3>
-	 </div>
-	 </div>
-	 <ul class="media">
-	   		<%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, SavedRecipe.find_by(recipe_id: recipe.id), method: :destroy, data: { confirm: 'Are you sure?' } %>
-		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
-		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
-  		</ul>
-	</div>
+<div class="content-profile-page">
+   <div class="profile-user-page card">
+      <div class="img-user-profile">
+        <img class="profile-bgHome" src="/assets/new_age/food-background.jpg" />
+        <img class="avatar" src=<%= @user.picture_url %> alt="jofpin"/>
+           </div>
+          <%= link_to '<button>Edit</button>'.html_safe, edit_user_path(@user) %>
+          <div class="user-profile-data">
+            <h1><%= @user.first_name%> <%=@user.last_name%></h1>
+          </div> 
+          <div class="description-profile" style='padding: 25px;'><%= @user.bio %></div>
+       <ul class="data-user" id="data-user">
+        <li><a class='active'><strong><%= @personal_recipes.length + @saved_recipes.length %></strong><span>Total Recipes</span></a></li>
+        <li><a><strong><%= @saved_recipes.length %></strong><span>Saved Recipes</span></a></li>
+        <li><a><strong><%= @personal_recipes.length %></strong><span>Uploaded Recipes</span></a></li>
+       </ul>
+      </div>
+    </div>
+    <div class="content-profile-page">
+      
+      <div id='saved-recipes'>
+        <h2>Saved Recipes</h2>
+        <div class=content>
+          <% if @saved_recipes.length == 0 %>
+     <p>You currently have 0 saved recipes.</p>
+   <% end %>
+        <%  
+        @saved_recipes.each do |recipeList| %>
+         <% recipeList.each do |recipe| %>
+        <div class="recipe"> 
+		      <div class="image">
+		      <%= if recipe.picture?  
+              link_to image_tag(recipe.picture, size:"200x325"), recipe
+            else
+              pic_url_length = recipe.picture.to_s.length
+              beginning_index = recipe.picture.to_s.index('http')
+              cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+              new_url = cut_url.gsub!('%3A', ":/")
+              link_to image_tag(new_url, size: "200x325"), recipe
+            end %>
+	        <div class="name">
+	 			    <h3><%= recipe.name %></h3>
+	        </div>
+	     </div>
+	     <ul class="media">
+	   		  <%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, SavedRecipe.find_by(recipe_id: recipe.id), method: :destroy, data: { confirm: 'Are you sure?' } %>
+		      <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
+		      <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+  		 </ul>
+	   </div>
 	   <% end %>
   <% end %>
-</div>
-
-<p>
-  <div class="title-pen"><span>Personal Recipes</span></div>
-</p>
+        </div>
+      </div>
+      
+      <div id='personal-recipes'>
+        <h2>Personal Recipes</h2>
 <div id="content">
+   <% if @personal_recipes.length == 0 %>
+     <p>You currently have 0 uploaded recipes.</p>
+   <% end %>
    <% @personal_recipes.each do |recipeList| %>
      <% recipeList.each do |recipe| %>
   <div class="recipe"> 
@@ -95,3 +91,33 @@
 	   <% end %>
   <% end %>
 </div>
+      </div>
+</div>
+  <script>
+  // Add active class to the current button (highlight it)
+  var header = document.getElementById("data-user");
+  var btns = header.getElementsByTagName("A");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+      
+      if (this.textContent.includes("Total Recipes")) {
+        document.getElementById('saved-recipes').style.display = "block";
+        document.getElementById('personal-recipes').style.display = "block";
+      }
+      
+      if (this.textContent.includes("Uploaded Recipes")) {
+        document.getElementById('saved-recipes').style.display = "none";
+        document.getElementById('personal-recipes').style.display = "block";
+      }
+      
+      if (this.textContent.includes("Saved Recipes")) {
+        document.getElementById('saved-recipes').style.display = "block";
+        document.getElementById('personal-recipes').style.display = "none";
+      }
+      
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace("active", "");
+    this.className = "active";});
+  }
+  </script>
+</html>
