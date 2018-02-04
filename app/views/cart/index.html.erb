@@ -4,6 +4,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <h2>View Your Cart</h2>
+<br>
+<center>
+<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>
+</center>
+<br>
 <div id="content">
   <% @recipes_list.each do |recipeCart| %>
    <% recipeCart.recipe.each do |recipe| %>
@@ -33,4 +38,6 @@
 </div>
 <br>
 <center>
-<button class="button" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button></center>
+<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>
+</center>
+<br>
