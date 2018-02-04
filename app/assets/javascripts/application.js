@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require sweetalert2
+//= require sweet-alert2-rails
 //= require_tree .
 function printpage()
 {
@@ -52,3 +54,31 @@ function showReviews()
    document.getElementById('ingredients').style.display = "none"
    document.getElementById('reviews').style.display = "block"
 }
+
+function mealPlan() 
+{
+   swal({
+      title: 'Meal Plan Menu',
+      showCancelButton: true,
+      showCloseButton: true,
+      showConfirmButton: false,
+      html:
+            '<button id="new">New Meal Plan</button>'+
+            '<p>&nbsp;</p>'+
+            '<button id="add">Add to Existing</button>',
+
+   })
+   
+}
+
+$("#new").on("click", function() {
+   swal({
+      
+   })
+}); 
+    
+$("#add").on("click", function() {
+   swal({
+      
+   })
+}); 

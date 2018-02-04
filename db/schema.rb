@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20180201052307) do
-=======
-ActiveRecord::Schema.define(version: 20180202200851) do
->>>>>>> master
+ActiveRecord::Schema.define(version: 20180204030912) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -60,7 +56,10 @@ ActiveRecord::Schema.define(version: 20180202200851) do
     t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "meal_plans", ["user_id"], name: "fk_rails_9a2cda78eb", using: :btree
 
   create_table "plans", force: :cascade do |t|
     t.integer  "recipe_id",    limit: 4
@@ -125,6 +124,7 @@ ActiveRecord::Schema.define(version: 20180202200851) do
   add_foreign_key "checkout_lists", "users"
   add_foreign_key "instructions", "ingredients"
   add_foreign_key "instructions", "recipes"
+  add_foreign_key "meal_plans", "users"
   add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users"
   add_foreign_key "saved_recipes", "recipes"

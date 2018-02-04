@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
     has_many :saved_recipes
     has_many :recipes, :through => :saved_recipes
     has_many :reviews
+    has_many :meal_plans
     
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
