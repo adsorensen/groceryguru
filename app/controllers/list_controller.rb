@@ -20,7 +20,7 @@ class ListController < ApplicationController
       recipe = Recipe.where(id: id_val.recipe).first
       instr = recipe.instructions
       for i in instr do
-        @ingredients.append(Ingredient.find(i.ingredient_id).name.to_s)
+        @ingredients.append(Ingredient.find(i.ingredient_id))
         if CheckoutList.where(ingredient_id: i.ingredient_id).blank?
           newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1)
           ingredientIds.append(i.ingredient_id)
@@ -39,7 +39,11 @@ class ListController < ApplicationController
   end
   
   def checkout
-    @chosen_ingredients = params[:names]
+    ingredient_ids = params[:ingredient_ids]
+    @chosen_ingredients = []
+    for id in ingredient_ids do
+      @chosen_ingredients.append(Ingredient.find(i.ingredient_id).first.name)
+    end
     index = params[:index].to_i
     @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
   end

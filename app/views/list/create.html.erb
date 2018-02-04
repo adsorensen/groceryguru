@@ -20,10 +20,10 @@
         </tr>
       </thead>
       <tbody>
-        <% @ingredients.each do |name| %>
+        <% @ingredients.each do |ingredient| %>
         <tr>
-          <td><%= check_box_tag "names[]", name, true %></td>
-          <td><%= name %></td>
+          <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
+          <td><%= ingredient.name %></td>
         </tr>
         <% end %>
       </tbody>
