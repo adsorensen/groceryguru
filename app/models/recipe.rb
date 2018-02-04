@@ -23,6 +23,7 @@ class Recipe < ActiveRecord::Base
     has_many :users, :through => :saved_recipes
     has_many :meal_plans, through: :plans
     accepts_nested_attributes_for :instructions
+    accepts_nested_attributes_for :plans
     
     mount_uploader :picture, PictureUploaderRecipes
 
