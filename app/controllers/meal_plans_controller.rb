@@ -1,9 +1,13 @@
 class MealPlansController < ApplicationController
     before_action :set_plan, only: [:show, :edit, :update, :destroy]
     
-    # POST /meal_plans
+    # POST /mealplans
     def create
-        @plan= MealPlan.new(:name => params['name'])
+        @plan= MealPlan.new(:name => params['name'], :user_id => session['user_id'])
+        
+        @plan.save
+        
+        render :nothing => true
     end
     
     def add_recipe

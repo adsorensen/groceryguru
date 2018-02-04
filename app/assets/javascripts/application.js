@@ -69,16 +69,41 @@ function mealPlan()
 
    })
    
+   $("#new").on("click", function() {
+         swal({
+         title: 'Enter a name for your Meal Plan',
+         input: 'text',
+         inputValue: 'New Meal Plan',
+         showCancelButton: true,
+         showCloseButton: true,
+         confirmButtonText: 'Create',
+         showLoaderOnConfirm: true,
+         allowOutsideClick: () => !swal.isLoading(),
+      }).then(function(value) {
+         $.ajax(
+            {
+               type: "POST",
+               url: "/meal_plans",
+               data: "name="+value,
+               success: function(data){
+                  swal({
+                     type: 'success',
+                     title: 'Meal Plan Created!',
+                     showConfirmButton: false,
+                     timer: 1500
+                  })
+               }
+            }
+         )
+      }) 
+      
+   });
+   
+   $("#add").on("click", function() {
+      swal({
+         title: 'Select a Meal Plan',
+         showCancelButton: true,
+         showCloseButton: true,
+      })
+   }); 
 }
-
-$("#new").on("click", function() {
-   swal({
-      
-   })
-}); 
-    
-$("#add").on("click", function() {
-   swal({
-      
-   })
-}); 
