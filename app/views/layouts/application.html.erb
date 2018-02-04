@@ -4,26 +4,42 @@
   <title>Grocery Guru</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag 'new_age/manifest.js' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <% if logged_in? %>
-  <header>
-      <nav class="website-nav">
-        <a href="/recipes" style="position: absolute;left: 0;text-align: center;margin: auto;color: white;padding-left: 20px;font-size: x-large;display: inline-block;">Grocery Guru</a>
-        <ul>
-          <li><%= link_to 'Recipes', recipes_path %></li>
-          <li>|</li>
-          <li><%= link_to 'Calendar', '/calendar' %></li>
-          <li>|</li>
-          <li><%= link_to 'Cart', '/cart' %></li>
-          <li>|</li>
-          <li><%= link_to 'My Profile', '/users/' + session[:user_id].to_s  %></li>
-          <li>|</li>
-          <li><%= link_to 'Logout', logout_path, method: :delete %></li>
-        </ul>
-      </nav>
-  </header>
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand page-scroll" href="#page-top"><i class="fa fa-utensils"></i>Grocery Guru</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <%= link_to 'Recipes', recipes_path %>
+        </li>
+        <li class="">
+            <%= link_to 'Calendar', '/calendar' %>
+        </li>
+        <li class="">
+            <%= link_to 'Cart', '/cart' %>
+        </li>
+        <li class="">
+           <%= link_to 'My Profile', '/users/' + session[:user_id].to_s  %>
+        </li>
+        <li class="">
+           <%= link_to 'Logout', logout_path, method: :delete %>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
   <% end %>
   <div class="container">
     <% flash.each do |message_type, message| %>
@@ -33,3 +49,15 @@
   </div>
 </body>
 </html>
+<% if logged_in? %>
+<footer>
+  <div class="container">
+    <p>© 2018 Grocery Guru. All Rights Reserved.</p>
+    <ul class="list-inline">
+      <li>
+        <a href="#">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+<% end %>
