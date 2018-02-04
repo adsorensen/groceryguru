@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require_self
+ *= require sweetalert2
+ *= require_tree .
  */
  @import url('https://fonts.googleapis.com/css?family=Lobster');
 

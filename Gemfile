@@ -18,6 +18,10 @@ gem 'pg', '~> 0.15'
 # to add table definitions to the top of models
 gem 'annotate', '~> 2.7', '>= 2.7.1'
 
+# Sweet alert JavaScript for alerts and AJAX calls
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+gem 'sweet-alert2-rails'
+
 # required by has_secure_password
 gem 'bcrypt'
 

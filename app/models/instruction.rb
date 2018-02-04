@@ -5,8 +5,8 @@
 #  id            :integer          not null, primary key
 #  recipe_id     :integer          not null
 #  ingredient_id :integer          not null
-#  amount        :integer          not null
-#  unit          :integer
+#  amount        :float(24)        not null
+#  unit          :string(255)
 #  prep_note     :string(255)      not null
 #  created_at    :datetime
 #  updated_at    :datetime

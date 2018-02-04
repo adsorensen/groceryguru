@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :meal_plans
   get 'store_display/index'
 
   get 'store_display/new'
