@@ -1,7 +1,3 @@
-<head>
-  <%= stylesheet_link_tag "users_new" %>
-</head>
-
 <div id='content'>
   <br>
 <h1>Sign Up for a New Account</h1>
@@ -52,7 +48,7 @@
   </div>
   <div class="field">
     <%= f.label :bio %><br>
-    <%= f.text_field :bio, :maxlength => 40 %>
+    <%= f.text_field :bio, :maxlength => 140 %>
   </div>
   <div class="actions">
     <%= f.submit %>

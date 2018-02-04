@@ -20,7 +20,7 @@
   <div class="cont_modal cont_modal_active">
   <div class="cont_photo">
 <div class="cont_img_back">
-  <%= if !@recipe.picture.nil?
+  <%= if @recipe.picture?
         image_tag(@recipe.picture.url, size:"500x440") 
       else
         pic_url_length = @recipe.picture.to_s.length
