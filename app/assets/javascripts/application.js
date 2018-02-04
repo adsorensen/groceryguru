@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require sweetalert2
+//= require sweet-alert2-rails
 //= require_tree .
 //= require bootstrap
 
@@ -54,4 +56,57 @@ function showReviews()
    document.getElementById('instructions').style.display = "none"
    document.getElementById('ingredients').style.display = "none"
    document.getElementById('reviews').style.display = "block"
+}
+
+function mealPlan() 
+{
+   swal({
+      title: 'Meal Plan Menu',
+      showCancelButton: true,
+      showCloseButton: true,
+      showConfirmButton: false,
+      html:
+            '<button id="new">New Meal Plan</button>'+
+            '<p>&nbsp;</p>'+
+            '<button id="add">Add to Existing</button>',
+
+   })
+   
+   $("#new").on("click", function() {
+         swal({
+         title: 'Enter a name for your Meal Plan',
+         input: 'text',
+         inputValue: 'New Meal Plan',
+         showCancelButton: true,
+         showCloseButton: true,
+         confirmButtonText: 'Create',
+         showLoaderOnConfirm: true,
+         allowOutsideClick: () => !swal.isLoading(),
+      }).then(function(value) {
+         $.ajax(
+            {
+               type: "POST",
+               url: "/meal_plans",
+               data: "name="+value,
+               success: function(data){
+                  swal({
+                     type: 'success',
+                     title: 'Meal Plan Created!',
+                     showConfirmButton: false,
+                     timer: 1500
+                  })
+               }
+            }
+         )
+      }) 
+      
+   });
+   
+   $("#add").on("click", function() {
+      swal({
+         title: 'Select a Meal Plan',
+         showCancelButton: true,
+         showCloseButton: true,
+      })
+   }); 
 }

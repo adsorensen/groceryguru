@@ -10,6 +10,7 @@
   <%= link_to '<i class="fa fa-save" onclick=openPopup()></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
   <a href="#share"><i class="fa fa-facebook"></i></a> 
   <%= link_to '<i class="fa fa-cart-plus"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
+  <a onclick="mealPlan()"><i class="fa fa-book"></i></a> 
   <a href="/calendar"><i class="fa fa-calendar"></i></a> 
 </div>
 <br>
