@@ -67,7 +67,7 @@ function mealPlan()
             '<p>&nbsp;</p>'+
             '<button id="add">Add to Existing</button>',
 
-   })
+   });
    
    $("#new").on("click", function() {
          swal({
@@ -91,19 +91,62 @@ function mealPlan()
                      title: 'Meal Plan Created!',
                      showConfirmButton: false,
                      timer: 1500
-                  })
+                  });
                }
             }
-         )
-      }) 
+         );
+      });
       
    });
    
    $("#add").on("click", function() {
+      var inputOptionsPromise = new Promise(function(resolve) {
+         var plans = null;
+         $.ajax({
+            type: "POST",
+            url: "/userplans",
+            success: function(data){
+               plans = data;
+            }
+         });
+         
+         setTimeout(function() {
+            var names = [];  
+            var i;
+            for (i = 0; i < plans.length; i++)
+            {
+                 names.push(plans[i].name);
+            }
+            resolve(names);
+         }, 1000);
+      });
+      
       swal({
-         title: 'Select a Meal Plan',
+         input: 'select',
+         inputOptions: inputOptionsPromise,
          showCancelButton: true,
          showCloseButton: true,
-      })
+      }).then(function(value){
+         var url = $(location).attr('href');
+         url = url.split('/');
+         var recipeID = url[url.length-1];
+         $.ajax({
+            type: "POST",
+            url: "/addtoplan",
+            data: 
+            {
+               name: value,
+               recipe: recipeID
+            },
+             success: function(data){
+                swal({
+                  type: 'success',
+                  title: 'Recipe added to '+value,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+             }
+         });
+      });
    }); 
 }

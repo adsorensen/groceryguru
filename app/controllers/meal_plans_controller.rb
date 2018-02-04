@@ -11,6 +11,13 @@ class MealPlansController < ApplicationController
     end
     
     def add_recipe
+        recipe  = Recipe.find(params['recipe'])
+        mealPlan = MealPlan.where(:name => params['name'])
+        
+        mealPlan << recipe
+        mealPlan.save
+        
+        render :nothing => true
     end
     
     def remove_recipe
@@ -23,8 +30,23 @@ class MealPlansController < ApplicationController
     
     # GET /mealplans/1
     def show
-        @recipes = Recipe.all
-        @cart = Cart.all
+        @recipes = @plan.recipes
+    end
+    
+    def user_plans
+        user = User.find(session['user_id'])
+        
+        mealPlans = MealPlan.select("id, name").where(user_id: user.id)
+    
+        # json = '{'
+        # mealPlans.each do |plan|
+        #     json += '"#{plan.id}": "#{plan.name}"\n'
+        # end
+        # json += '}'
+        
+        respond_to do |format|
+          format.json { render json: mealPlans.to_json }
+        end
     end
     
     private

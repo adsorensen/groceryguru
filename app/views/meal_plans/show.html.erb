@@ -3,5 +3,10 @@
 </head>
 <body>
     <br/><br/><br/><br>
-    Meal Plan
+    <%= @plan.name %><br>
+    <% 
+        @recipes.each do |recipe|
+    %> 
+    <p><%= recipe.name %></p>
+    <% end %>
 </body>
