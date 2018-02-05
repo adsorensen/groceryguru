@@ -62,6 +62,19 @@ tbody tr td {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <br>
 
+<script>swal({
+  title: '<b>Walmart</b>',
+  type: 'info',
+  html:
+    'Sign into Walmart to Complete Checkout<br>' +
+    '<a href="https://www.walmart.com/account/login" target="_blank">Sign In</a> ',
+  showCloseButton: true,
+  focusConfirm: false,
+  confirmButtonText:
+    '<i class="fa fa-thumbs-up"></i> I Signed In!',
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+})</script>
+
 <button class="button" onclick="window.location='/checkout?index=1'"> Next</button>
 <iframe src=<%= @walmart_url %> onload="this.width=screen.width;this.height=screen.height;"></iframe>
 
