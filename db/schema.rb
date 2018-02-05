@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202200851) do
+ActiveRecord::Schema.define(version: 20180205160525) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -56,17 +56,20 @@ ActiveRecord::Schema.define(version: 20180202200851) do
     t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "user_id",    limit: 4
   end
 
+  add_index "meal_plans", ["user_id"], name: "fk_rails_9a2cda78eb", using: :btree
+
   create_table "plans", force: :cascade do |t|
-    t.integer  "recipe_id",    limit: 4
-    t.integer  "meal_plan_id", limit: 4
+    t.integer  "recipe_id",    limit: 4, null: false
+    t.integer  "meal_plan_id", limit: 4, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "plans", ["meal_plan_id"], name: "fk_rails_c28f60c70c", using: :btree
-  add_index "plans", ["recipe_id"], name: "fk_rails_6e64944a17", using: :btree
+  add_index "plans", ["meal_plan_id"], name: "index_plans_on_meal_plan_id", using: :btree
+  add_index "plans", ["recipe_id"], name: "index_plans_on_recipe_id", using: :btree
 
   create_table "recipes", force: :cascade do |t|
     t.string   "name",        limit: 255,   null: false
@@ -124,6 +127,9 @@ ActiveRecord::Schema.define(version: 20180202200851) do
   add_foreign_key "checkout_lists", "users"
   add_foreign_key "instructions", "ingredients"
   add_foreign_key "instructions", "recipes"
+  add_foreign_key "meal_plans", "users"
+  add_foreign_key "plans", "meal_plans"
+  add_foreign_key "plans", "recipes"
   add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users"
   add_foreign_key "saved_recipes", "recipes"

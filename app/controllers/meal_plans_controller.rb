@@ -30,9 +30,14 @@ class MealPlansController < ApplicationController
     
     # GET /mealplans/1
     def show
-        if !@plan.recipes.nil?
-            @recipes = @plan.recipes
+        @recipes = []
+        query = "select * from recipes as r, plans as p  where r.id=p.recipe_id and p.meal_plan_id="+@plan.id.to_s+";"
+        results = ActiveRecord::Base.connection.exec_query(query)
+        results.each do |entry|
+           recipe = Recipe.find(entry['recipe_id'])
+           @recipes.push(recipe)
         end
+        
     end
     
     def user_plans

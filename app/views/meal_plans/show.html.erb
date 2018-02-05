@@ -1,12 +1,44 @@
+<!DOCTYPE html>
+<html>
 <head>
-    
+    <%= stylesheet_link_tag "user_2" %>
+    <%= stylesheet_link_tag "users_show" %>
 </head>
 <body>
-    <br/><br/><br/><br>
-    <%= @plan.name %><br>
-    <% 
-        @recipes.each do |recipe|
-    %> 
-    <p><%= recipe.name %></p>
-    <% end %>
+    <br><br><br><br>
+    
+    <div class="content-profile-page">
+      
+      <div id='saved-recipes'>
+        <h2>Recipes</h2>
+        <div class=content>
+          <% if @recipes.length == 0 %>
+     <p>This meal plan has no recipes</p>
+   <% end %>
+        <% @recipes.each do |recipe| %>
+        <div class="recipe"> 
+		      <div class="image">
+		      <%= if recipe.picture?  
+              link_to image_tag(recipe.picture, size:"200x325"), recipe
+            else
+              pic_url_length = recipe.picture.to_s.length
+              beginning_index = recipe.picture.to_s.index('http')
+              cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+              new_url = cut_url.gsub!('%3A', ":/")
+              link_to image_tag(new_url, size: "200x325"), recipe
+            end %>
+	        <div class="name">
+	 			    <h3><%= recipe.name %></h3>
+	        </div>
+	     </div>
+	     <ul class="media">
+	   		  <%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, Plan.find_by(recipe_id: recipe.id, meal_plan_id: @plan.id), method: :destroy, data: { confirm: 'Are you sure?' } %>
+		      <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
+		      <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+  		 </ul>
+	   </div>
+      <% end %>
+        </div>
+      </div>
 </body>
+</html>

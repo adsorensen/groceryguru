@@ -11,6 +11,6 @@
 
 class MealPlan < ActiveRecord::Base
     has_many :plans
-    has_many :recipes, through: :plans
+    has_many :recipes, :through => :plans
     belongs_to :users
 end
