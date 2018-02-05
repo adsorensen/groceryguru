@@ -8,31 +8,45 @@
   <a href=""><i class="fa fa-print" onclick=printpage()></i></a> 
   <a href=""><i class="fa fa-sign-in" onclick="window.open('https://grocery.walmart.com','_blank')"></i></a> 
 </div>
-<h1>Grocery List</h1>
-<br>
+<h2>Grocery List</h2>
 <center>
+<br>
+<script>
+$(document).ready(function() {
+  $('.ingredient_table tr').click(function(event) {
+    if (event.target.type !== 'checkbox') {
+      $(':checkbox', this).trigger('click');
+    }
+  });
+});
+</script>
+</head>
+<body>
+
 <%= form_tag checkout_path, :method => :post do %>
 <div class="container1">
-    <table>
+    <table class="ingredient_table">
       <thead>
         <tr>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <% @ingredients.each do |name| %>
+        <% @ingredients.each do |ingredient| %>
         <tr>
-          <td><%= check_box_tag "names[]", name, true %></td>
-          <td><%= name %></td>
+          <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
+          <td><h4><%= ingredient.name %></h4></td>
         </tr>
         <% end %>
       </tbody>
     </table>
 </div>
-<%= submit_tag "Checkout" %>
+<br>
+<div class="btn btn-outline btn-xl page-scroll" onclick=printpage()> Print</div>
+<%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll'%> 
+<br>
 <% end %>
 <br>
 <br>
 <!--<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>-->
-<button class="button" onclick=printpage()> Print</button>
-<button class="button" onclick="window.open('https://grocery.walmart.com','_blank')"> Export to Store</button>
+

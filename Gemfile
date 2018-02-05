@@ -12,7 +12,7 @@ gem 'mysql2', '~> 0.4.9'
 
 # added these for Heroku
 #gem 'compass-rails', '~> 1.1.7'
-gem "compass-rails", "~> 1.1.2"
+#gem "compass-rails", "~> 1.1.2"
 gem 'pg', '~> 0.15'
 
 # to add table definitions to the top of models
@@ -69,3 +69,4 @@ gem 'carrierwave',             '1.1.0'
 gem 'mini_magick',             '4.7.0'
 gem 'fog',                     '1.40.0'
 
+gem 'frontend-generators'

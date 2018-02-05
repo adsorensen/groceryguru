@@ -23,13 +23,16 @@ Rails.application.routes.draw do
   post 'checkout', to: 'list#checkout'
   get 'checkout', to: 'list#checkout_get'
 
+  root 'new_age#index'
+  get 'new_age/index'
+
   get 'cart/loadcart'
-  root 'welcome#index'
+  #root 'welcome#index'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
   delete 'cart', to: 'cart#destroy'
   get 'calendar', to: 'calendar#index'
-  get 'welcome/index'
+  #get 'welcome/index'
   get  'signup',  to: 'users#new'
   get    'login',   to: 'sessions#new'
   post   'login',   to: 'sessions#create'
