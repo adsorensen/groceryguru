@@ -70,11 +70,11 @@ function mealPlan()
             '<p>&nbsp;</p>'+
             '<button id="add">Add to Existing</button>',
 
-   })
+   });
    
    $("#new").on("click", function() {
          swal({
-         title: 'Enter a name for your Meal Plan',
+         title: 'Enter a Meal Plan name',
          input: 'text',
          inputValue: 'New Meal Plan',
          showCancelButton: true,
@@ -86,7 +86,7 @@ function mealPlan()
          $.ajax(
             {
                type: "POST",
-               url: "/meal_plans",
+               url: "/mealplans",
                data: "name="+value,
                success: function(data){
                   swal({
@@ -94,19 +94,62 @@ function mealPlan()
                      title: 'Meal Plan Created!',
                      showConfirmButton: false,
                      timer: 1500
-                  })
+                  });
                }
             }
-         )
-      }) 
-      
+         );
+      });
    });
    
    $("#add").on("click", function() {
+      var selections = null;
+      var inputOptionsPromise = new Promise(function(resolve) {
+         $.ajax({
+            type: "POST",
+            url: "/userplans",
+            success: function(data){
+               selections = data;
+            }
+         });
+         
+         setTimeout(function() {
+            var options = {};
+           $.map(selections,
+               function(o) {
+                   options[o.id] = o.name;
+               });
+            resolve(options);
+         }, 1000);
+      });
+      
       swal({
-         title: 'Select a Meal Plan',
+         title: 'Which Plan do you want to add to?',
+         input: 'select',
+         inputOptions: inputOptionsPromise,
          showCancelButton: true,
          showCloseButton: true,
-      })
+         confirmButtonText: 'Add Recipe',
+      }).then(function(result){
+         var url = $(location).attr('href');
+         url = url.split('/');
+         var recipeID = url[url.length-1];
+         $.ajax({
+            type: "POST",
+            url: "/addtoplan",
+            data: 
+            {
+               id: result,
+               recipe: recipeID
+            },
+             success: function(data){
+                swal({
+                  type: 'success',
+                  title: 'Recipe added',
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+             }
+         });
+      });
    }); 
 }

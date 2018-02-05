@@ -10,6 +10,7 @@
 #
 
 class MealPlan < ActiveRecord::Base
-    has_many :recipes, through: :Plans
+    has_many :plans
+    has_many :recipes, :through => :plans
     belongs_to :users
 end

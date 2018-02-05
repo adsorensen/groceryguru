@@ -1,0 +1,11 @@
+<head>
+    
+</head>
+<body>
+    <br/><br/><br/><br>
+    <% 
+        @plans.each do |plan|
+    %> 
+    <a href="/mealplans/<%= plan.id %>"><%= plan.name %></a><br>
+    <% end %>
+</body>
