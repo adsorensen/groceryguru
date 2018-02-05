@@ -123,10 +123,12 @@ function mealPlan()
       });
       
       swal({
+         title: 'Which Plan do you want to add to?',
          input: 'select',
          inputOptions: inputOptionsPromise,
          showCancelButton: true,
          showCloseButton: true,
+         confirmButtonText: 'Add Recipe',
       }).then(function(result){
          var url = $(location).attr('href');
          url = url.split('/');
