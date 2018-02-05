@@ -41,8 +41,16 @@ class ListController < ApplicationController
   def checkout
     ingredient_ids = params[:ingredient_ids]
     @chosen_ingredients = []
+    
+    @ingredient_in_list = CheckoutList.where(:user_id => session['user_id'])
+    for ingredient in @ingredient_in_list do
+      if !(ingredient_ids.include? ingredient.ingredient_id.to_s)
+        CheckoutList.where(user_id: session['user_id']).where(ingredient_id: ingredient.ingredient_id).first.destroy
+      end
+    end
+    
     for id in ingredient_ids do
-      @chosen_ingredients.append(Ingredient.find(i.ingredient_id).first.name)
+      @chosen_ingredients.append(Ingredient.find(id).name)
     end
     index = params[:index].to_i
     @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
