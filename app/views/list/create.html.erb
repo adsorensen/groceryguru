@@ -11,9 +11,21 @@
 <h2>Grocery List</h2>
 <center>
 <br>
+<script>
+$(document).ready(function() {
+  $('.ingredient_table tr').click(function(event) {
+    if (event.target.type !== 'checkbox') {
+      $(':checkbox', this).trigger('click');
+    }
+  });
+});
+</script>
+</head>
+<body>
+
 <%= form_tag checkout_path, :method => :post do %>
 <div class="container1">
-    <table>
+    <table class="ingredient_table">
       <thead>
         <tr>
           <th></th>
@@ -23,7 +35,7 @@
         <% @ingredients.each do |ingredient| %>
         <tr>
           <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
-          <td><h5><%= ingredient.name %></h5></td>
+          <td><h4><%= ingredient.name %></h4></td>
         </tr>
         <% end %>
       </tbody>
