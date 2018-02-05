@@ -14,24 +14,45 @@ $('document').ready(function() {
     });
 });
 
-function reviewEdit(id, oldReview, recipeId){
-    var x;
-    var newReview = prompt("Edit your review", oldReview);
-    
-    $.ajax({
-        type: 'POST',
-        url: "/recipes/edit_review",
-        data: {
-            id: id,
-            text: newReview,
-            recipe_id: recipeId
-        },
-        dataType: "json",
-        success: function(){ 
-            window.location.href=window.location.href;
-            alert("Review updated successfully"); 
-        }
-    });
+function reviewEdit(id, oldReview, recipeId)
+{
+    swal(
+    {
+        title: 'Edit your review',
+        input: 'text',
+        inputValue: oldReview,
+        showCancelButton: true,
+        showCloseButton: true,
+        confirmButtonText: 'Update',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: () => !swal.isLoading(),
+    }).then(function(value) {
+         $.ajax(
+            {
+               type: 'POST',
+                url: "/recipes/edit_review",
+                data: {
+                    id: id,
+                    text: value,
+                    recipe_id: recipeId
+                },
+                dataType: "json",
+               success: function(data){
+                  swal({
+                     type: 'success',
+                     title: 'Review updated successfully',
+                     showConfirmButton: false,
+                     timer: 1500
+                  });
+                  window.setTimeout(refresh, 2000);
+               }
+            }
+         );
+      });
+}
+function refresh()
+{
+    window.location.href=window.location.href;
 }
 
 

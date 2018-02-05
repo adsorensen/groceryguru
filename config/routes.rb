@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :meal_plans
   get 'store_display/index'
 
   get 'store_display/new'
@@ -46,7 +45,13 @@ Rails.application.routes.draw do
   post "/recipes/edit_review" => "recipes#edit_review"
   post "/recipes/delete_review" => "recipes#delete_review"
   get "/cart/checkout_to_store", to: "store_display#index"
-
+  post '/userplans', to: 'meal_plans#user_plans' 
+  post '/mealplans', to: 'meal_plans#create'
+  post '/addtoplan', to: 'meal_plans#add_recipe'
+  post '/removefromplan', to: 'meal_plans#remove_recipe'
+  get '/mealplans/:id', to: "meal_plans#show"
+  get '/mealplans', to: "meal_plans#index"
+  delete '/plan', to: 'plans#delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
