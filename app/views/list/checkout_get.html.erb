@@ -1,76 +1,19 @@
 <head>
-  <style>
-    button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-.container1 {
-  overflow: scroll;
-  background-color: #f2f2f2;
-  width: 25%;
-  height: 100%;
-}
-thead th {
-  margin: 2px 0px;
-  border-bottom: 2px solid #E3E3E3; 
-  font-size: 20px;
-  padding: 5px 0px;
-  padding-left: 20px;
-  text-align: center;
-  padding-right: 15px;
-  color: #565656;
-  overflow: hidden;
-}
-
-tbody tr td {
-    border-bottom: 2px solid #E3E3E3; 
-    color: #004000;
-}
-.icon-bar {
-    position: fixed;
-    z-index: 2;
-    width: 40px; /* Set a specific width */
-    background-color: #555; /* Dark-grey background */
-    top: 50%;
-    right: 0;
-}
-
-.icon-bar a {
-    display: block; /* Make the links appear below each other instead of side-by-side */
-    text-align: center; /* Center-align text */
-    padding: 4px; /* Add some padding */
-    transition: all 0.3s ease; /* Add transition for hover effects */
-    color: white; /* White text color */
-    font-size: 20px; /* Increased font-size */
-}
-
-.icon-bar a:hover {
-    background-color: #000; /* Add a hover color */
-}
-
-.active {
-    background-color: #4CAF50; /* Add an active/current color */
-}
-  </style>
+  <%= stylesheet_link_tag "list" %>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<br><br><br><br>
+<br>
 
 <% if @displayPrev %>
- <button class="button" onclick="window.location='<%= @relative_url_prev %>';"> Previous</button>
+ <div class="btn btn-outline btn-xl" onclick="window.location='<%= @relative_url_prev %>'"> Previous</div>
 <% end %>
 <% if @displayNext %>
-  <button class="button" onclick="window.location='<%= @relative_url_next %>';"> Next</button>
+  <div class="btn btn-outline btn-xl" onclick="window.location='<%= @relative_url_next %>'"> Next</div>
 <% end %>
 
-<iframe src=<%= @walmart_url %> onload="this.width=screen.width;this.height=screen.height;"></iframe>
-
+<div style="padding:15px;">
+  <iframe src=<%= @walmart_url %> width=1280 height=720 onload="this.width=screen.width;this.height=screen.height;"></iframe>
+</div>
 
 <div class="icon-bar">
   <a href="/recipes"><i class="fa fa-search"></i></a> 

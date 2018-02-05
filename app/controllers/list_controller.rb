@@ -20,7 +20,7 @@ class ListController < ApplicationController
       recipe = Recipe.where(id: id_val.recipe).first
       instr = recipe.instructions
       for i in instr do
-        @ingredients.append(Ingredient.find(i.ingredient_id).name.to_s)
+        @ingredients.append(Ingredient.find(i.ingredient_id))
         if CheckoutList.where(ingredient_id: i.ingredient_id).blank?
           newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1)
           ingredientIds.append(i.ingredient_id)
@@ -39,13 +39,21 @@ class ListController < ApplicationController
   end
   
   def checkout
-    @chosen_ingredients = CheckoutList.where(:user_id => session['user_id'])
-    ingredients = []
-    for ingredient in @chosen_ingredients do
-      ingredients.append(Ingredient.where(id: ingredient.ingredient_id).first.name)
+    ingredient_ids = params[:ingredient_ids]
+    @chosen_ingredients = []
+    
+    @ingredient_in_list = CheckoutList.where(:user_id => session['user_id'])
+    for ingredient in @ingredient_in_list do
+      if !(ingredient_ids.include? ingredient.ingredient_id.to_s)
+        CheckoutList.where(user_id: session['user_id']).where(ingredient_id: ingredient.ingredient_id).first.destroy
+      end
+    end
+    
+    for id in ingredient_ids do
+      @chosen_ingredients.append(Ingredient.find(id).name)
     end
     index = params[:index].to_i
-    @walmart_url = "https://grocery.walmart.com/products?query=" + ingredients[index].gsub(' ','+')
+    @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
   end
   
   def checkout_get
@@ -56,7 +64,7 @@ class ListController < ApplicationController
       ingredients.append(name)
     end
     index = params[:index].to_i
-    @displayNext = (index + 1) < ingredients.length
+    @displayNext = index < ingredients.length
     @displayPrev = index > 0
     nextIndex = index + 1
     prevIndex = index - 1
