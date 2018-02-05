@@ -63,14 +63,15 @@ tbody tr td {
 <br>
 
 <% if @displayPrev %>
- <button class="button" onclick="window.location='<%= @relative_url_prev %>';"> Previous</button>
+ <button class="btn btn-outline btn-xl" onclick="window.location='<%= @relative_url_prev %>'"> Previous</button>
 <% end %>
 <% if @displayNext %>
-  <button class="button" onclick="window.location='<%= @relative_url_next %>';"> Next</button>
+  <button class="btn btn-outline btn-xl" onclick="window.location='<%= @relative_url_next %>'"> Next</button>
 <% end %>
 
-<iframe src=<%= @walmart_url %> onload="this.width=screen.width;this.height=screen.height;"></iframe>
-
+<div style="padding:15px;">
+  <iframe src=<%= @walmart_url %> onload="this.width=screen.width;this.height=screen.height;"></iframe>
+</div>
 
 <div class="icon-bar">
   <a href="/recipes"><i class="fa fa-search"></i></a> 
