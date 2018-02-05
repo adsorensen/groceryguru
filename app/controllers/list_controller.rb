@@ -64,7 +64,7 @@ class ListController < ApplicationController
       ingredients.append(name)
     end
     index = params[:index].to_i
-    @displayNext = (index + 1) < ingredients.length
+    @displayNext = index < ingredients.length
     @displayPrev = index > 0
     nextIndex = index + 1
     prevIndex = index - 1
