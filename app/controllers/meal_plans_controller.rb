@@ -12,10 +12,10 @@ class MealPlansController < ApplicationController
     
     def add_recipe
         recipe  = Recipe.find(params['recipe'])
-        mealPlan = MealPlan.where(:name => params['name'])
+        mealPlan = MealPlan.find(params['id'])
         
-        mealPlan << recipe
-        mealPlan.save
+        planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => mealPlan.id)
+        planAsc.save
         
         render :nothing => true
     end
@@ -30,7 +30,9 @@ class MealPlansController < ApplicationController
     
     # GET /mealplans/1
     def show
-        @recipes = @plan.recipes
+        if !@plan.recipes.nil?
+            @recipes = @plan.recipes
+        end
     end
     
     def user_plans

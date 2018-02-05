@@ -74,7 +74,7 @@ function mealPlan()
    
    $("#new").on("click", function() {
          swal({
-         title: 'Enter a name for your Meal Plan',
+         title: 'Enter a Meal Plan name',
          input: 'text',
          inputValue: 'New Meal Plan',
          showCancelButton: true,
@@ -86,7 +86,7 @@ function mealPlan()
          $.ajax(
             {
                type: "POST",
-               url: "/meal_plans",
+               url: "/mealplans",
                data: "name="+value,
                success: function(data){
                   swal({
@@ -99,28 +99,26 @@ function mealPlan()
             }
          );
       });
-      
    });
    
    $("#add").on("click", function() {
+      var selections = null;
       var inputOptionsPromise = new Promise(function(resolve) {
-         var plans = null;
          $.ajax({
             type: "POST",
             url: "/userplans",
             success: function(data){
-               plans = data;
+               selections = data;
             }
          });
          
          setTimeout(function() {
-            var names = [];  
-            var i;
-            for (i = 0; i < plans.length; i++)
-            {
-                 names.push(plans[i].name);
-            }
-            resolve(names);
+            var options = {};
+           $.map(selections,
+               function(o) {
+                   options[o.id] = o.name;
+               });
+            resolve(options);
          }, 1000);
       });
       
@@ -129,7 +127,7 @@ function mealPlan()
          inputOptions: inputOptionsPromise,
          showCancelButton: true,
          showCloseButton: true,
-      }).then(function(value){
+      }).then(function(result){
          var url = $(location).attr('href');
          url = url.split('/');
          var recipeID = url[url.length-1];
@@ -138,13 +136,13 @@ function mealPlan()
             url: "/addtoplan",
             data: 
             {
-               name: value,
+               id: result,
                recipe: recipeID
             },
              success: function(data){
                 swal({
                   type: 'success',
-                  title: 'Recipe added to '+value,
+                  title: 'Recipe added',
                   showConfirmButton: false,
                   timer: 1500
                 });
