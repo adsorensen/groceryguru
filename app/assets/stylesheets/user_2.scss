@@ -144,36 +144,4 @@ a {
   padding:15px;
   margin: 0 auto;
   text-align: center;
-  overflow: none;
-  white-space: nowrap;
-}
-.recipe {
-  background:#f1f1f1;
-  max-width:300px;
-  height:300px;
-  position:relative;
-  display:inline-block;
-  overflow:hidden;
-  cursor: pointer;
-  margin:0 10px 10px 0;
-  -webkit-border-radius:0 0 7px 7px;
-  border-radius:0 0 7px 7px;
-  -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-  -moz-box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-}
-.image {
-  height:250px;
-  overflow:hidden;
-  position:relative;
-}
-.image img{
-  width:100%;
-  transition: all 1s ease;
-  margin-top:-70px;
-}
-.image:hover img{
-  transform: scale(1.2) rotate(-3deg);
-  -ms-transform: scale(1.2) rotate(-3deg); /* IE 9 */
-  -webkit-transform: scale(1.2) rotate(-3deg); /* Safari and Chrome */
 }
