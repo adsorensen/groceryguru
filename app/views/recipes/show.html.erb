@@ -1,20 +1,17 @@
-<p id="notice"><%= notice %></p>
 <head>
   <%= stylesheet_link_tag "recipes" %>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <div class="icon-bar">
   <a class="active" href="/recipes"><i class="fa fa-search"></i></a> 
   <a href="#print"><i class="fa fa-print" onclick=printpage()></i></a> 
-  <%= link_to '<i class="fa fa-save" onclick=openPopup()></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
+  <%= link_to '<i class="fa fa-heart" onclick=openPopup()></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
   <a href="#share"><i class="fa fa-facebook"></i></a> 
   <%= link_to '<i class="fa fa-cart-plus"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
   <a onclick="mealPlan()"><i class="fa fa-book"></i></a> 
   <a href="/calendar"><i class="fa fa-calendar"></i></a> 
 </div>
 <br>
-
 <div class="cont_principal">
 <div class="cont_central">
   <div class="cont_modal cont_modal_active">
@@ -47,15 +44,16 @@
 <div class="cont_text_ingredients">
 <div class="cont_over_hidden">
  
+ <div id="tabs">
   <div class="cont_tabs">
   <ul>
-    <li><a href="", onclick="showIngredients(); return false"><h4>INGREDIENTS</h4></a></li>
-    <li><a href="#instructions", onclick="showInstructions(); return false"><h4>INSTRUCTIONS</h4></a></li>
-    <li><a href="#reviews", onclick="showReviews(); return false"><h4>REVIEWS</h4></a></li>
+    <li id='tab_ing'><a href="", onclick="showIngredients(); return false"><h4>INGREDIENTS</h4></a></li>
+    <li id='tab_inst' class="active"><a href="#instructions", onclick="showInstructions(); return false"><h4>INSTRUCTIONS</h4></a></li>
+    <li id='tab_rev'><a href="#reviews", onclick="showReviews(); return false"><h4>REVIEWS</h4></a></li>
   </ul>  
   </div>
+  </div>
   
-  <div id='title'>Instructions</div>
    <div class="cont_text_det_preparation", id='instructions'>
    <%
       counter = 1
@@ -68,13 +66,13 @@
       <p id='instructions'>STEP <%= counter %></p>
        </div>
           <div class="cont_info_preparation">
-      <p id = 'instructions'><%= simple_format(line + ".\n") %></p>
+      <p id = 'instructions'><%= simple_format(line + ".") %></p>
       </div>
       <% counter += 1
       end
     %>
 </div>
-<div class="cont_text_det_preparation", id='ingredients', hidden><div class="cont_info_preparation"><table>
+<div class="cont_text_det_preparation", id='ingredients', hidden><div class="cont_info_preparation"><table style="width: 100%; margin-left: 25px; padding-left: 20px; margin-bottom: 20px">
   <thead>
     <tr>
       <th>Quantity</th>
@@ -103,12 +101,12 @@
   <div class="cont_text_det_preparation", id='reviews', hidden><div class="cont_info_preparation">
     <div class='newReview'>
     <%= form_tag("/addReview", method: "post") do %>
-    <%= text_area_tag :review, nil, size: "40x5", style: "overflow-y: scroll; resize: none; text-align: left; margin-left: 10px", placeholder: "Enter your own review here." %>
+    <%= text_area_tag :review, nil, size: "80x5", style: "overflow-y: scroll; resize: none; text-align: left; margin-left: 10px", placeholder: "Enter your own review here." %>
     <br>
-    <%= label_tag :rating %>
-    <%= number_field_tag('rating', nil, min: 1, max: 5, step: 1) %>
+    <%= label_tag :rating, "Your Rating:", class: 'large_label' %>
+    <%= number_field_tag('rating', nil, min: 1, max: 5, step: 1, class:'number_input') %>
     <%= hidden_field_tag 'recipe_id', @recipe.id %>
-    <%= submit_tag("Add") %>
+    <%= submit_tag("Add", :class=>"btn btn-outline btn-xl page-scroll") %>
     <% end %>
     </div>
     <br><br>
@@ -119,12 +117,13 @@
     <% end
       unless @recipe.reviews.empty?
     %>
-    <table>
+    <table style="width: 100%">
       <thead>
         <tr>
           <th> User </th>
           <th> Review </th>
           <th> Rating </th>
+          <th> Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -138,8 +137,8 @@
           <td><%= r.text %></td>
           <td><%= r.rating %></td>
           <% if r.user_id == session["user_id"]%> 
-          <td><button type="button" onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)", class="editReviewButton">Edit</button></td>
-          <td><%=button_to 'Delete', {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, :class => "deleteReviewButton", data: { confirm: 'Are you sure?' }%></td>
+          <td><button type="button" onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)", class="btn btn-outline btn-xl page-scroll">Edit</button></td>
+          <td><%=button_to 'Delete', {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, :class => "btn btn-outline btn-xl page-scroll", data: { confirm: 'Are you sure?' }%></td>
           <%end%>
         </tr>
     <% end # end of loop %> 

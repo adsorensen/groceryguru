@@ -133,8 +133,8 @@ $('.multi-item-carousel .item').each(function(){
                 end
             %>
             <div class="name">
-	 			<h4><%= recipe.name %></h4>
-	        </div>
+                <a href="/recipes/<%=recipe.id%>" style="color:white; padding-top: 5px; padding-bottom: 5px"><%= recipe.name %></a>
+            </div>
         </div>
         <ul class="media">
 	   		<li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>

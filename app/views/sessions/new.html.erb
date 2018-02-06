@@ -1,19 +1,75 @@
-<% provide(:title, "Log in") %>
-<div id="content">
-  <h1>Log in to Grocery Guru</h1>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
+<br><% provide(:title, "Log in") %>
+<head>
+  <%= stylesheet_link_tag 'user_login' %>
+</head>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<div class="login">
+  <h2 id='sign-in-tab' class="active">Sign In</h2>
+  <h2 id='sign-up-tab' class="nonactive">Sign Up</h2>
+  <div id='login'>
+  <%= form_for(:session, url: login_path) do |f| %>
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.submit "Log In", class: "btn btn-primary" %>
+      <br>
+      <%= f.submit "Log In", class: "btn btn-outline btn-xl page-scroll" %>
     <% end %>
-    <a href="/signup">New to Grocery Guru? Create an account.</a>
   </div>
-</div>
-</div>
+  
+  <div id='signup' style='display:none;'>
+    <%= form_for(:session, url: login_path) do |f| %>
+
+    <%= f.label :username %>
+    <%= f.text_field :username, class: 'form-control'%>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
+
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'form-control' %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+    <%= f.label :gluten_free %>
+    <%= f.check_box :gluten_free %>
+    <br>
+    <%= f.label :lactose_intol %>
+    <%= f.check_box :lactose_intol %>
+    <br>
+    <%= f.label :organic %>
+    <%= f.check_box :organic %>
+    <br>
+    <%= f.label :bio %>
+    <%= f.text_field :bio, :maxlength => 140, class: 'form-control' %>
+    <br>
+    <%= f.submit "Sign Up", class: "btn btn-outline btn-xl page-scroll" %>
+<% end %>
+</div><br><br><br><br>
+
+<script>
+  // Add active class to the current button (highlight it)
+  var btns = document.getElementsByTagName("h2");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+      
+      if (this.textContent.includes("Sign Up")) {
+        document.getElementById('login').style.display = "none";
+        document.getElementById('signup').style.display = "block";
+      }
+      
+      if (this.textContent.includes("Sign In")) {
+        document.getElementById('login').style.display = "block";
+        document.getElementById('signup').style.display = "none";
+      }
+      
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace("active", "nonactive");
+    this.className = "active";});
+  }
+  </script>
