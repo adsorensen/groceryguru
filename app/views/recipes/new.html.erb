@@ -1,5 +1,9 @@
-<h1>Add New Recipe</h1>
-
+<head>
+  <%= stylesheet_link_tag "new_recipes" %>
+  <%= javascript_include_tag('recipe.js') %>
+</head>
+<h2>Add New Recipe</h2>
+<center>
 <%= form_for(@recipe) do |f| %>
   <% if @recipe.errors.any? %>
     <div id="error_explanation">
@@ -12,39 +16,38 @@
       </ul>
     </div>
   <% end %>
-<head>
-  <%= stylesheet_link_tag "new_recipes" %>
-</head>
-<%= javascript_include_tag('recipe.js') %>
-<div id="form-main">
+
   <div id="form-div">
     <form class="form" id="form1">
       <center><img id="picture" src="/assets/pic-generic.png"height="150" width="150"></center>
-      <%= f.file_field :picture %>
+      <%= f.label "Upload an image for your recipe:"%>
+      <%= f.file_field :picture,  :class => "uploadfield"%><br>
       <%= f.text_field :name, placeholder: "Recipe Title"%>
       <%= f.text_area :description, placeholder: "Enter a detailed description of your recipe here"%>
       <%= f.text_area :directions, placeholder: "List the directions for your recipe with each step separated by a period"%>
       <br>
       <%= f.label "Make this recipe private:" %>
-      <%= check_box_tag  'private', 'true', false %><br>
+      <%= check_box_tag  'private', 'true', false, :class => "checkbox" %><br>
       <%= f.text_field :prep_time, placeholder: "How many minutes does it take to cook this recipe?"%>
       <%= f.text_field :servings, placeholder: "Serving size"%>
       <%= f.text_field :origin, placeholder: "Where did you get this recipe?"%>
-      <h2>Ingredients</h2><button id='addIngredient' type="button">Add Ingredient</button>
+      <h3>Ingredients</h3><div id='addIngredient' type="button" class="btn btn-outline btn-xl page-scroll">Add Ingredient</div>
 
+        <div id='header' style="display:none;">
       <center>
       <table id="ingredients"><tbody>
-    <tr>
-      <th>Quantity</th>
-      <th>Unit</th>
-      <th>Ingredient</th>
-      <th>Preparation</th>
-    </tr>
-  </tbody></table></center>
+          <tr>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Ingredient</th>
+            <th>Preparation</th>
+          </tr>
+  </tbody></table></center></div>
+  <br><br>
       <div class="submit">
-        <input type="submit" value="Add Recipe" id="button-blue"/>
-        <div class="ease"></div>
+        <input type="submit" value="Add Recipe" id="button-blue" class="btn btn-outline btn-xl page-scroll"/>
       </div>
     </form>
   </div>
-  <% end %>
+<% end %>
+</center>

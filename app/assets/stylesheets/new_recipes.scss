@@ -1,46 +1,21 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-h2 {
-	color: white;
+.uploadfield {
+	background-color: #f1f1f1;
 }
+
 label {
-	color: white;
-	text-align: center;
+	font-size: large;
+	padding: 5px;
 }
-html{    
-  background-size: cover;
-  height:100%;
-}
-
-#feedback-page{
-	text-align:center;
-}
-
-#form-main{
-	width:100%;
-	float:left;
-	padding-top:0px;
-	overflow: scroll;
-}
-
 #form-div {
-	background-color:rgba(72,72,72,0.4);
-	padding-left:35px;
-	padding-right:35px;
-	padding-top:35px;
-	padding-bottom:50px;
-	width: 450px;
-	float: left;
-	left: 50%;
-	position: absolute;
-  margin-top:30px;
-	margin-left: -260px;
+	width: 80%;
+	 margin: 1em auto;
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
+  padding-bottom: 10px;
 }
 
-input, textarea {
+input[type="text"],input[type="number"], textarea {
 	color:#3c3c3c;
-	font-family: Helvetica, Arial, sans-serif;
   font-weight:500;
 	font-size: 18px;
 	border-radius: 0;
@@ -53,7 +28,11 @@ input, textarea {
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
-  border: 3px solid rgba(0,0,0,0);
+  border: 1px solid gray;
+}
+
+input[type="checkbox"] {
+	display:inline;
 }
 
 input:focus, textarea:focus{
@@ -80,47 +59,6 @@ textarea {
 input:hover, textarea:hover,
 input:focus, textarea:focus {
 	background-color:white;
-}
-
-#button-blue{
-	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-	float:left;
-	width: 100%;
-	border: #fbfbfb solid 4px;
-	cursor:pointer;
-	background-color: green;
-	color:white;
-	font-size:24px;
-	padding-top:22px;
-	padding-bottom:22px;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-  margin-top:-4px;
-  font-weight:700;
-}
-
-#button-blue:hover{
-	background-color: rgba(0,0,0,0);
-	color: green;
-}
-
-#addIngredient {
-	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-	float:left;
-	width: 100%;
-	border: #fbfbfb solid 2px;
-	cursor:pointer;
-	background-color: green;
-	color:white;
-	font-size:12px;
-	padding-top:12px;
-	padding-bottom:12px;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-  margin-top:-4px;
-  font-weight:700;
 }
 	
 .submit:hover {
@@ -152,4 +90,37 @@ input:focus, textarea:focus {
 		padding-left: 3%;
 		padding-right: 3%;
 	}
+}
+.btn-outline {
+  color: #5cdb95;
+  border-color: #5cdb95;
+  border: 1px solid;
+}
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active,
+.btn-outline.active {
+  color: white;
+  background-color: #5cdb95;
+  border-color: #5cdb95;
+}
+.btn {
+  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 300px;
+}
+.btn-xl {
+  padding: 15px 45px;
+  font-size: 11px;
+}
+::-moz-selection {
+  color: white;
+  text-shadow: none;
+  background: #222222;
+}
+::selection {
+  color: white;
+  text-shadow: none;
+  background: #222222;
 }

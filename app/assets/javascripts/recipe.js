@@ -2,6 +2,7 @@
 $('document').ready(function() {
     var count = 1;
     $("#addIngredient").unbind().click(function(event){ // unbind makes this only be called once
+        document.getElementById("header").style.display = 'block';
         var newRow =
             '<tr>'+
                 '<td><input type="number" name="quantity'+count+'"/></td>' +

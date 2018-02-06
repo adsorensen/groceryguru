@@ -4,6 +4,7 @@
   <%= stylesheet_link_tag "user_2" %>
   <%= stylesheet_link_tag "users_show" %>
 </head>
+<div class='container'>
 <div class="content-profile-page">
    <div class="profile-user-page card">
       <div class="img-user-profile">
@@ -26,7 +27,7 @@
       
       <div id='saved-recipes'>
         <h2>Saved Recipes</h2>
-        <div class=content>
+        <div id='content'>
           <% if @saved_recipes.length == 0 %>
      <p>You currently have 0 saved recipes.</p>
    <% end %>
@@ -60,7 +61,7 @@
       </div>
       
       <div id='personal-recipes'>
-        <h2>Personal Recipes</h2>
+        <h2>Uploaded Recipes</h2>
 <div id="content">
    <% if @personal_recipes.length == 0 %>
      <p>You currently have 0 uploaded recipes.</p>
@@ -121,3 +122,4 @@
   }
   </script>
 </html>
+</div>
