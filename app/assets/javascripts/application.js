@@ -36,26 +36,32 @@ function addReview()
 
 function showIngredients()
 {
-   document.getElementById('title').textContent = "Ingredients"
    document.getElementById('instructions').style.display = "none"
    document.getElementById('ingredients').style.display = "block"
    document.getElementById('reviews').style.display = "none"
+   document.getElementById("tab_ing").className = "active"
+   document.getElementById("tab_inst").className = ""
+   document.getElementById("tab_rev").className = ""
 }
 
 function showInstructions()
 {
-   document.getElementById('title').textContent = "Instructions"
    document.getElementById('instructions').style.display = "block"
    document.getElementById('ingredients').style.display = "none"
    document.getElementById('reviews').style.display = "none"
+   document.getElementById("tab_ing").className = ""
+   document.getElementById("tab_inst").className = "active"
+   document.getElementById("tab_rev").className = ""
 }
 
 function showReviews()
 {
-   document.getElementById('title').textContent = "Reviews"
    document.getElementById('instructions').style.display = "none"
    document.getElementById('ingredients').style.display = "none"
    document.getElementById('reviews').style.display = "block"
+   document.getElementById("tab_ing").className = ""
+   document.getElementById("tab_inst").className = ""
+   document.getElementById("tab_rev").className = "active"
 }
 
 function mealPlan() 
