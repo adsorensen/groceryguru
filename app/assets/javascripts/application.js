@@ -89,15 +89,22 @@ function mealPlan()
          showLoaderOnConfirm: true,
          allowOutsideClick: () => !swal.isLoading(),
       }).then(function(value) {
+         var url = $(location).attr('href');
+         url = url.split('/');
+         var recipeID = url[url.length-1];
          $.ajax(
             {
                type: "POST",
                url: "/mealplans",
-               data: "name="+value,
+               data: 
+               {
+                  name: value,
+                  recipe: recipeID
+               },
                success: function(data){
                   swal({
                      type: 'success',
-                     title: 'Meal Plan Created!',
+                     title: 'Recipe added to new Meal Plan!',
                      showConfirmButton: false,
                      timer: 1500
                   });

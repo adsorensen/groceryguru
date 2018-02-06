@@ -2,10 +2,21 @@
     
 </head>
 <body>
-    <br/><br/><br/><br>
-    <% 
-        @plans.each do |plan|
-    %> 
-    <a href="/mealplans/<%= plan.id %>"><%= plan.name %></a><br>
-    <% end %>
+<h2><center>Meal Plans</center></h2>
+    <table align=center>
+        <thead>
+            <tr>
+                <td>Meal Plan Name</td>
+            </tr>
+        </thead>
+        <tbody>
+        <% 
+            @plans.each do |plan|
+        %> 
+        <tr>
+            <td><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></td>
+        </tr>
+        <% end %>
+        </tbody>
+    </table>
 </body>

@@ -4,6 +4,15 @@ class MealPlansController < ApplicationController
     # POST /mealplans
     def create
         @plan= MealPlan.new(:name => params['name'], :user_id => session['user_id'])
+        @plan.save
+        
+        # Add associated recipe to new plan
+        recipe  = Recipe.find(params['recipe'])
+        
+        if !recipe.nil?
+            planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @plan.id)
+            planAsc.save
+        end
         
         @plan.save
         
