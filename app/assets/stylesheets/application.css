@@ -465,10 +465,10 @@ footer ul li a.active {
 }
 .bg-primary {
   width: 100%;
-  /*background: #db5ca2;
+  background: #db5ca2;
   background: -webkit-linear-gradient(#db5ca2, #52c586);
-  background: linear-gradient(#db5ca2, #52c586);*/
-  background-image:url(new_age/white-wood-background-vector.jpg);
+  background: linear-gradient(#db5ca2, #52c586);
+  /*background-image:url(new_age/white-wood-background-vector.jpg);*/
   color: black;
 }
 .text-primary {
