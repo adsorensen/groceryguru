@@ -18,7 +18,7 @@
           <div class="description-profile" style='padding: 25px;'><%= @user.bio %></div>
        <ul class="data-user" id="data-user">
         <li><a class='active'><strong><%= @personal_recipes.length + @saved_recipes.length %></strong><span>Total Recipes</span></a></li>
-        <li><a><strong><%= @saved_recipes.length %></strong><span>Saved Recipes</span></a></li>
+        <li><a><strong><%= @saved_recipes.length %></strong><span>Favorite Recipes</span></a></li>
         <li><a><strong><%= @personal_recipes.length %></strong><span>Uploaded Recipes</span></a></li>
        </ul>
       </div>
@@ -26,10 +26,10 @@
     <div class="content-profile-page">
       
       <div id='saved-recipes'>
-        <h2>Saved Recipes</h2>
+        <h2>Favorite Recipes</h2>
         <div id='content'>
           <% if @saved_recipes.length == 0 %>
-     <p>You currently have 0 saved recipes.</p>
+     <p>You currently have 0 favorite recipes.</p>
    <% end %>
         <%  
         @saved_recipes.each do |recipeList| %>
@@ -111,7 +111,7 @@
         document.getElementById('personal-recipes').style.display = "block";
       }
       
-      if (this.textContent.includes("Saved Recipes")) {
+      if (this.textContent.includes("Favorite Recipes")) {
         document.getElementById('saved-recipes').style.display = "block";
         document.getElementById('personal-recipes').style.display = "none";
       }
