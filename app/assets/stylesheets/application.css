@@ -465,14 +465,14 @@ footer ul li a.active {
 }
 .bg-primary {
   width: 100%;
-  background: #db5ca2;
-  background: -webkit-linear-gradient(#db5ca2, #52c586);
-  background: linear-gradient(#db5ca2, #52c586);
+  background: #74d09e;
+  background: -webkit-linear-gradient(#74d09e, #52c586);
+  background: linear-gradient(#74d09e, #52c586);
   /*background-image:url(new_age/white-wood-background-vector.jpg);*/
-  color: black;
+  color: white;
 }
 .text-primary {
-  color: #db5ca2;
+  color: #74d09e;
 }
 .no-gutter > [class*='col-'] {
   padding-right: 0;
