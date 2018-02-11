@@ -3,8 +3,8 @@
 # Table name: plans
 #
 #  id           :integer          not null, primary key
-#  recipe_id    :integer
-#  meal_plan_id :integer
+#  recipe_id    :integer          not null
+#  meal_plan_id :integer          not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

@@ -31,7 +31,9 @@ class MealPlansController < ApplicationController
     
     # GET /mealplans
     def index
-        @plans = MealPlan.all
+        @sponsored = MealPlan.where(user_id: 1)
+        
+        @userPlans = MealPlan.where(user_id: session['user_id'])
     end
     
     # GET /mealplans/1
