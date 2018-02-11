@@ -1,20 +1,20 @@
 class MealPlansController < ApplicationController
-    before_action :set_plan, only: [:show, :edit, :update, :destroy]
+    before_action :set_plan, only: [:show, :destroy]
     
     # POST /mealplans
     def create
-        @plan= MealPlan.new(:name => params['name'], :user_id => session['user_id'])
-        @plan.save
+        @mealplan = MealPlan.new(:name => params['name'], :user_id => session['user_id'])
+        
         
         # Add associated recipe to new plan
         recipe  = Recipe.find(params['recipe'])
         
         if !recipe.nil?
-            planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @plan.id)
+            planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @mealplan.id)
             planAsc.save
         end
         
-        @plan.save
+        @mealplan.save
         
         render :nothing => true
     end
@@ -29,9 +29,6 @@ class MealPlansController < ApplicationController
         render :nothing => true
     end
     
-    def remove_recipe
-    end
-    
     # GET /mealplans
     def index
         @plans = MealPlan.all
@@ -40,13 +37,21 @@ class MealPlansController < ApplicationController
     # GET /mealplans/1
     def show
         @recipes = []
-        query = "select * from recipes as r, plans as p  where r.id=p.recipe_id and p.meal_plan_id="+@plan.id.to_s+";"
+        query = "select * from recipes as r, plans as p  where r.id=p.recipe_id and p.meal_plan_id="+@mealplan.id.to_s+";"
         results = ActiveRecord::Base.connection.exec_query(query)
         results.each do |entry|
            recipe = Recipe.find(entry['recipe_id'])
            @recipes.push(recipe)
         end
         
+    end
+    
+    def destroy
+        @mealplan.destroy
+        respond_to do |format|
+            format.html { redirect_to @mealplan, notice: 'Meal plan was successfully deleted.' }
+            format.json { head :no_content }
+        end
     end
     
     def user_plans
@@ -67,7 +72,7 @@ class MealPlansController < ApplicationController
     
     private
         def set_plan
-            @plan = MealPlan.find(params[:id])
+            @mealplan = MealPlan.find(params[:id])
         end
     
 end
