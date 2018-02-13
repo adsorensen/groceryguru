@@ -1,15 +1,131 @@
 <head>
     <%= stylesheet_link_tag "users_edit" %>
+    <%= javascript_include_tag "edit_users" %>
 </head>
-<h2>User Profile</h2>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-<div class="left">
-   Your Information
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="profile-holder">
+        <div class="profile-people-holder">
+          <div class="profile-name">
+            <h2>Profile Settings</h2>
+            <p>Update your profile information and dietary restrictions</p>
+          </div>
+        </div>
+        <div class="profile-settings-holder">
+          <form class="form-horizontal profile-update">
+            <div class="form-group clearfix">
+              <div class="col-sm-12 control-label">
+                <label for="profile_email" style="padding-top: 10px;">Username</label>
+              </div>
+              <div class="col-sm-12 profile-email clearfix" style="width: auto;">
+                <p id='username' style= 'display: inline;'><%= @user.username %></p>
+              </div>
+              <div class="col-sm-12 control-label">
+                <label for="profile_email">Profile picture</label>
+              </div>
+              <div class="col-sm-12 profile-email clearfix">
+                <%= image_tag @user.picture.url if @user.picture?%><br>
+                <%= f.file_field :picture %>
+              </div>
+              <div class="col-sm-12 control-label">
+                <label for="profile_email">Full name</label>
+              </div>
+              <div class="col-sm-12 profile-email clearfix" id="fullname">
+                <%= f.text_field :first_name, class: 'form-control', style: "width: auto; display:inline;"%>
+                <%= f.text_field :last_name, class: 'form-control', style:"width: auto; display:inline;"%>
+              </div>
+              <div class="col-sm-12 control-label">
+                <label for="profile_email" style="padding-top: 10px;">Biography</label>
+              </div>
+              <div class="col-sm-12 profile-email clearfix">
+                <%= f.text_field :bio, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group clearfix">
+              <div class="col-sm-12 control-label">
+                <label for="profile_password">Change password</label>
+                <span class="text-helper">Enter a new password if you would like to update your current one</span>
+              </div>
+              <div class="col-sm-12">
+                <%= f.password_field :password, class: 'form-control', placeholder: 'Enter new password' %>
+              </div>
+            </div>
+          </form>
+
+          <div class="notification-settings">
+            <div class="notification-legend">
+              <p>Edit Dietary Restrictions</p>
+              <span class="text-helper">These are used to create suggested ingredients and to filter recipes/meal plans</span>
+              <div class="notification-toggle">
+                <input id="notification_toggle" type="checkbox" class="tgl tgl-ios" />
+                <label for="notification_toggle" class="tgl-btn"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="judgments-settings disabled">
+            <div class="settings-legend">
+              <p>Select the restrictions that apply to you</p>
+            </div>
+
+            <div class="list">
+              <ul>
+                <li>
+                  <div class="list-desc">
+                    <p class="list-title">Gluten-Free</p>
+                  </div>
+                  <div class="notification-toggle">
+                    <%= f.check_box :gluten_free, class: 'tgl tgl-ios', id: 'jg1'%>
+                    <label for="jg1" class="tgl-btn"></label>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-desc">
+                    <p class="list-title">Lactose Intolerant</p>
+                  </div>
+                  <div class="notification-toggle">
+                    <%= f.check_box :lactose_intol, class: 'tgl tgl-ios', id: 'jg2'%>
+                    <label for="jg2" class="tgl-btn"></label>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-desc">
+                    <p class="list-title">Organic</p>
+                  </div>
+                  <div class="notification-toggle">
+                    <%= f.check_box :organic, class: 'tgl tgl-ios', id: 'jg3'%>
+                    <label for="jg3" class="tgl-btn"></label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="form-btns clearfix">
+            <div class="actions">
+              <%= f.submit class: "btn btn-primary" %>
+            </div>
+            <%= link_to 'Cancel', @user %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
-<div class="right">
-<%= render 'form' %>
-</div>
-<br>
-<div class='bottom'>
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', @user %></div>
+<% end %>
+
