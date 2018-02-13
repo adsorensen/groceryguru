@@ -136,7 +136,7 @@ function mealPlan()
       });
       
       swal({
-         title: 'Which Plan do you want to add to?',
+         title: 'Pick a plan to add to',
          input: 'select',
          inputOptions: inputOptionsPromise,
          showCancelButton: true,

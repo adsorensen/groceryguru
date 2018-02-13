@@ -2,8 +2,9 @@
     
 </head>
 <body>
-<h2><center>Meal Plans</center></h2>
-    <table align=center>
+<h1><center>Meal Plans</center></h1>
+    <h2>Grocery Guru Meal Plans</h2>
+    <table>
         <thead>
             <tr>
                 <td>Meal Plan Name</td>
@@ -11,7 +12,25 @@
         </thead>
         <tbody>
         <% 
-            @plans.each do |plan|
+            @sponsored.each do |plan|
+        %> 
+        <tr>
+            <td><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></td>
+        </tr>
+        <% end %>
+        </tbody>
+    </table>
+    <br>
+    <h2>Your Meal Plans</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Meal Plan Name</td>
+            </tr>
+        </thead>
+        <tbody>
+        <% 
+            @userPlans.each do |plan|
         %> 
         <tr>
             <td><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></td>
