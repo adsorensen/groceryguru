@@ -22,9 +22,13 @@
       else
         pic_url_length = @recipe.picture.to_s.length
         beginning_index = @recipe.picture.to_s.index('http')
-        cut_url = @recipe.picture.to_s[beginning_index, pic_url_length]
-        new_url = cut_url.gsub!('%3A', ":/")
-        image_tag(new_url, size:"500x440")
+        if (beginning_index.nil?)
+          image_tag('fallback/recipe-default.png', size: "400x350")
+        else
+          cut_url = @recipe.picture.to_s[beginning_index, pic_url_length]
+          new_url = cut_url.gsub!('%3A', ":/")
+          image_tag(new_url, size:"500x440")
+        end
       end %>
     </div>
 <div class="cont_mins">
