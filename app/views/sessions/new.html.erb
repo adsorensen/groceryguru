@@ -21,35 +21,64 @@
   </div>
   
   <div id='signup' style='display:none;'>
-    <%= form_for(:session, url: login_path) do |f| %>
-
+  <% @user = User.new() %>
+  <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="field">
     <%= f.label :username %>
     <%= f.text_field :username, class: 'form-control'%>
+    </div>
 
+    <div class="field">
     <%= f.label :password %>
     <%= f.password_field :password, class: 'form-control' %>
-
+    </div>
+    
+    <div class="field">
     <%= f.label :first_name %>
     <%= f.text_field :first_name, class: 'form-control' %>
+    </div>
 
+    <div class="field">
     <%= f.label :last_name %>
     <%= f.text_field :last_name, class: 'form-control' %>
+    </div>
 
+    <div class="field">
     <%= f.label :email %>
     <%= f.text_field :email, class: 'form-control' %>
     <%= f.label :gluten_free %>
     <%= f.check_box :gluten_free %>
+    </div>
     <br>
+    <div class="field">
     <%= f.label :lactose_intol %>
     <%= f.check_box :lactose_intol %>
+    </div>
     <br>
+    <div class="field">
     <%= f.label :organic %>
     <%= f.check_box :organic %>
+    </div>
     <br>
+    <div class="field">
     <%= f.label :bio %>
     <%= f.text_field :bio, :maxlength => 140, class: 'form-control' %>
+    </div>
     <br>
+    <div class="actions">
     <%= f.submit "Sign Up", class: "btn btn-outline btn-xl page-scroll" %>
+    </div>
     <a href="/" class="btn btn-outline btn-xl page-scroll" style="background: #FFF;">Back</a>
 <% end %>
 </div>
