@@ -37,7 +37,7 @@
                 <label for="profile_email">Profile picture</label>
               </div>
               <div class="col-sm-12 profile-email clearfix">
-                <%= image_tag @user.picture.url if @user.picture?%><br>
+                <div class='avatar'><%= image_tag @user.picture_url %></div>
                 <%= f.file_field :picture %>
               </div>
               <div class="col-sm-12 control-label">
@@ -119,7 +119,7 @@
             <div class="actions">
               <%= f.submit class: "btn btn-primary" %>
             </div>
-            <%= link_to 'Cancel', @user %>
+            <div style="margin-top: 3px;"><%= link_to 'Cancel', @user %></div>
           </div>
         </div>
       </div>

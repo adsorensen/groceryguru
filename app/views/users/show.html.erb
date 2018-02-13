@@ -7,7 +7,7 @@
    <div class="profile-user-page card">
       <div class="img-user-profile">
         <img class="profile-bgHome" src="/assets/new_age/food-background.jpg" />
-        <img class="avatar" src=<%= @user.picture_url %> alt="jofpin"/>
+        <img class="avatar" src= <%= @user.picture_url %> alt="prof_pic"/>
            </div>
           <%= link_to '<button>Edit</button>'.html_safe, edit_user_path(@user) %>
           <div class="user-profile-data">
