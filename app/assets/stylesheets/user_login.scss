@@ -1,7 +1,7 @@
 body,
 .signin {
   font-family: 'Montserrat', sans-serif;
-  color: #fff;
+  color: #FFF;
   font-size: 14px;
   letter-spacing: 1px;
 }
@@ -70,6 +70,7 @@ span {
   overflow: hidden;
   margin-top: 15px;
   transition: all 0.5s ease-in-out;
+  color: #FFF;
 }
 
 .text:focus {
@@ -86,7 +87,7 @@ span {
 input[type="text"],
 input[type="password"] {
   font-family: 'Montserrat', sans-serif;
-  color: #fff;
+  color: black;
 }
 
 
