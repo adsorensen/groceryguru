@@ -4,7 +4,7 @@ class MealPlansController < ApplicationController
     # POST /mealplans
     def create
         @mealplan = MealPlan.new(:name => params['name'], :user_id => session['user_id'])
-        
+        @mealplan.save
         
         # Add associated recipe to new plan
         recipe  = Recipe.find(params['recipe'])
@@ -13,8 +13,6 @@ class MealPlansController < ApplicationController
             planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @mealplan.id)
             planAsc.save
         end
-        
-        @mealplan.save
         
         render :nothing => true
     end
