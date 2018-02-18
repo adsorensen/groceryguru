@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218000842) do
+ActiveRecord::Schema.define(version: 20180218225537) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20180218000842) do
     t.string   "picture",     limit: 255
     t.integer  "servings",    limit: 4
     t.integer  "prep_time",   limit: 4
+    t.boolean  "private",                   null: false
   end
 
   create_table "reviews", force: :cascade do |t|
