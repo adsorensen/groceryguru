@@ -2,7 +2,8 @@
     <%= stylesheet_link_tag "users_show" %>
 </head>
 <body>
-<h1><center>Meal Plans</center></h1>
+    <h1><center>Meal Plans</center></h1>
+    <button onClick="newPlan()">New Meal Plan</button>
     <h2>Grocery Guru Meal Plans</h2>
     <table>
         <thead>
@@ -34,9 +35,9 @@
         %> 
         <tr>
             <td><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></td>
+            <td><%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, '/deleteplan/'+plan.id.to_s, method: :destroy, data: { confirm: 'Are you sure?' } %></td>
         </tr>
         <% end %>
         </tbody>
     </table>
-    <button onclick="newPlan()">New Meal Plan</button>
 </body>

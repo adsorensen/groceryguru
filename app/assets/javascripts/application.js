@@ -98,6 +98,7 @@ function newPlan()
                      showConfirmButton: false,
                      timer: 1500
                   });
+                  window.setTimeout(refresh, 1500);
                }
             }
          );
