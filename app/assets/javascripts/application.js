@@ -104,9 +104,22 @@ function newPlan()
       });
 }
 
-function addToNewPlan()
+function mealPlan() 
 {
    swal({
+      title: 'Meal Plan Menu',
+      showCancelButton: true,
+      showCloseButton: true,
+      showConfirmButton: false,
+      html:
+            '<button id="new">New Meal Plan</button>'+
+            '<p>&nbsp;</p>'+
+            '<button id="add">Add to Existing</button>',
+
+   });
+   
+   $("#new").on("click", function() {
+         swal({
          title: 'Enter a Meal Plan name',
          input: 'text',
          inputValue: 'New Meal Plan',
@@ -146,11 +159,10 @@ function addToNewPlan()
             }
          );
       });
-}
-
-function addToPlan()
-{
-    var selections = null;
+   });
+   
+   $("#add").on("click", function() {
+      var selections = null;
       var inputOptionsPromise = new Promise(function(resolve) {
          $.ajax({
             type: "POST",
@@ -199,23 +211,5 @@ function addToPlan()
              }
          });
       });
-}
-
-function mealPlan() 
-{
-   swal({
-      title: 'Meal Plan Menu',
-      showCancelButton: true,
-      showCloseButton: true,
-      showConfirmButton: false,
-      html:
-            '<button id="new">New Meal Plan</button>'+
-            '<p>&nbsp;</p>'+
-            '<button id="add">Add to Existing</button>',
-
-   });
-   
-   $("#new").on("click", addToNewPlan());
-   
-   $("#add").on("click", addToPlan());
+   }); 
 }
