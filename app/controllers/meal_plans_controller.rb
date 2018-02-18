@@ -3,15 +3,17 @@ class MealPlansController < ApplicationController
     
     # POST /mealplans
     def create
-        @mealplan = MealPlan.new(:name => params['name'], :user_id => session['user_id'])
+        @mealplan = MealPlan.new(:name => params['name'], :user_id => session['user_id'], :private => params['priv'])
         @mealplan.save
         
-        # Add associated recipe to new plan
-        recipe  = Recipe.find(params['recipe'])
-        
-        if !recipe.nil?
-            planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @mealplan.id)
-            planAsc.save
+        if params.has_key?('recipe')
+            # Add associated recipe to new plan
+            recipe  = Recipe.find(params['recipe'])
+            
+            if !recipe.nil?
+                planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @mealplan.id)
+                planAsc.save
+            end
         end
         
         render :nothing => true

@@ -64,25 +64,55 @@ function showReviews()
    document.getElementById("tab_rev").className = "active"
 }
 
-function mealPlan() 
+function newPlan()
 {
    swal({
-      title: 'Meal Plan Menu',
-      showCancelButton: true,
-      showCloseButton: true,
-      showConfirmButton: false,
-      html:
-            '<button id="new">New Meal Plan</button>'+
-            '<p>&nbsp;</p>'+
-            '<button id="add">Add to Existing</button>',
-
-   });
-   
-   $("#new").on("click", function() {
-         swal({
          title: 'Enter a Meal Plan name',
          input: 'text',
          inputValue: 'New Meal Plan',
+         html:
+            '<input type="radio" name="private" id="priv">Private<br>' +
+            '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
+         showCancelButton: true,
+         showCloseButton: true,
+         confirmButtonText: 'Create',
+         showLoaderOnConfirm: true,
+         allowOutsideClick: () => !swal.isLoading(),
+      }).then(function(value) {
+         var pri = false;
+         if($('#priv').is(':checked'))
+            pri = true;
+         $.ajax(
+            {
+               type: "POST",
+               url: "/mealplans",
+               data: 
+               {
+                  name: value,
+                  priv: pri 
+               },
+               success: function(data){
+                  swal({
+                     type: 'success',
+                     title: 'Recipe added to new Meal Plan!',
+                     showConfirmButton: false,
+                     timer: 1500
+                  });
+               }
+            }
+         );
+      });
+}
+
+function addToNewPlan()
+{
+   swal({
+         title: 'Enter a Meal Plan name',
+         input: 'text',
+         inputValue: 'New Meal Plan',
+         html:
+            '<input type="radio" name="private" id="priv">Private<br>' +
+            '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
          showCancelButton: true,
          showCloseButton: true,
          confirmButtonText: 'Create',
@@ -92,6 +122,9 @@ function mealPlan()
          var url = $(location).attr('href');
          url = url.split('/');
          var recipeID = url[url.length-1];
+         var pri = false;
+         if($('#priv').is(':checked'))
+            pri = true;
          $.ajax(
             {
                type: "POST",
@@ -99,6 +132,7 @@ function mealPlan()
                data: 
                {
                   name: value,
+                  priv: pri,
                   recipe: recipeID
                },
                success: function(data){
@@ -112,10 +146,11 @@ function mealPlan()
             }
          );
       });
-   });
-   
-   $("#add").on("click", function() {
-      var selections = null;
+}
+
+function addToPlan()
+{
+    var selections = null;
       var inputOptionsPromise = new Promise(function(resolve) {
          $.ajax({
             type: "POST",
@@ -164,5 +199,23 @@ function mealPlan()
              }
          });
       });
-   }); 
+}
+
+function mealPlan() 
+{
+   swal({
+      title: 'Meal Plan Menu',
+      showCancelButton: true,
+      showCloseButton: true,
+      showConfirmButton: false,
+      html:
+            '<button id="new">New Meal Plan</button>'+
+            '<p>&nbsp;</p>'+
+            '<button id="add">Add to Existing</button>',
+
+   });
+   
+   $("#new").on("click", addToNewPlan());
+   
+   $("#add").on("click", addToPlan());
 }
