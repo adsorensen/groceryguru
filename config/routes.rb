@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   post '/userplans', to: 'meal_plans#user_plans' 
   post '/mealplans', to: 'meal_plans#create'
   post '/addtoplan', to: 'meal_plans#add_recipe'
+  post '/deleteplan/:id', to: 'meal_plans#destroy'
   get '/mealplans/:id', to: "meal_plans#show"
   get '/mealplans', to: "meal_plans#index"
   post '/plans/:id', to: 'plans#destroy'
