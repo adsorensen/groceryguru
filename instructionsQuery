@@ -1,3 +1,5 @@
+delete from instructions;
+ALTER TABLE instructions AUTO_INCREMENT = 1;
 insert into instructions (recipe_id, ingredient_id, amount, unit, prep_note) VALUES(1,1,10.0,'oz','1 tub (10 oz.) PHILADELPHIA Italian Cheese and Herb Cooking Creme');
 insert into instructions (recipe_id, ingredient_id, amount, unit, prep_note) VALUES(1,2,2.0,'cups','2 cups frozen mixed vegetables (carrots, corn, green beans, peas), thawed, drained');
 insert into instructions (recipe_id, ingredient_id, amount, unit, prep_note) VALUES(1,3,1.0,'','1 ready-to-use refrigerated pie crust(1/2 of 14.1-oz. pkg.)');
