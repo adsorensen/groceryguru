@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180211210655) do
+ActiveRecord::Schema.define(version: 20180218225537) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20180211210655) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id",    limit: 4,   null: false
+    t.boolean  "private",                null: false
   end
 
   add_index "meal_plans", ["user_id"], name: "fk_rails_9a2cda78eb", using: :btree
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 20180211210655) do
     t.string   "picture",     limit: 255
     t.integer  "servings",    limit: 4
     t.integer  "prep_time",   limit: 4
+    t.boolean  "private",                   null: false
   end
 
   create_table "reviews", force: :cascade do |t|

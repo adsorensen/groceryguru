@@ -3,18 +3,18 @@ class MealPlansController < ApplicationController
     
     # POST /mealplans
     def create
-        @mealplan = MealPlan.new(:name => params['name'], :user_id => session['user_id'])
-        
-        
-        # Add associated recipe to new plan
-        recipe  = Recipe.find(params['recipe'])
-        
-        if !recipe.nil?
-            planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @mealplan.id)
-            planAsc.save
-        end
-        
+        @mealplan = MealPlan.new(:name => params['name'], :user_id => session['user_id'], :private => params['priv'])
         @mealplan.save
+        
+        if params.has_key?('recipe')
+            # Add associated recipe to new plan
+            recipe  = Recipe.find(params['recipe'])
+            
+            if !recipe.nil?
+                planAsc = Plan.new(:recipe_id => recipe.id, :meal_plan_id => @mealplan.id)
+                planAsc.save
+            end
+        end
         
         render :nothing => true
     end
@@ -48,10 +48,17 @@ class MealPlansController < ApplicationController
         
     end
     
+    # POST /deleteplan/:id
     def destroy
+        ascPlans = Plan.where(meal_plan_id: @mealplan.id)
+        
+        ascPlans.each do |plan|
+           Plan.delete(plan.id)
+        end
+        
         @mealplan.destroy
         respond_to do |format|
-            format.html { redirect_to @mealplan, notice: 'Meal plan was successfully deleted.' }
+            format.html { redirect_to '/mealplans', notice: 'Meal plan was successfully deleted.' }
             format.json { head :no_content }
         end
     end
