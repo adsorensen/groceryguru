@@ -14,11 +14,28 @@
 <script>
 $(document).ready(function() {
   $('.ingredient_table tr').click(function(event) {
-    if (event.target.type !== 'checkbox') {
+    if (event.target.type !== 'checkbox' && event.target.id != 'addButton' && event.target.id != 'subButton') {
       $(':checkbox', this).trigger('click');
     }
   });
 });
+function increment(ingre) {
+    var ingredientInfo = document.getElementById(ingre);
+    var number = ingredientInfo.innerHTML;
+    number++;
+    ingredientInfo.innerHTML = number;
+};
+function decrement(ingre) {
+    var ingredientInfo = document.getElementById(ingre);
+    var number = ingredientInfo.innerHTML;
+    if (number < 1 || number == 0) {
+      number = 0;
+    }
+    else {
+      number--;
+    }
+    ingredientInfo.innerHTML = number;
+};
 </script>
 </head>
 <body>
@@ -32,10 +49,21 @@ $(document).ready(function() {
         </tr>
       </thead>
       <tbody>
-        <% @ingredients.each do |ingredient| %>
+        <% @ingredients2.each do |ingredient, value| %>
         <tr>
           <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
           <td><h4><%= ingredient.name %></h4></td>
+          <td><input type="button" id="addButton" value=" + " onclick="increment('<%=ingredient.name%>');" style="font-size:14px;" ></td>
+          <td><input type="button" id="subButton" value=" - " onclick="decrement('<%=ingredient.name%>');" style="font-size:14px;" ></td>
+          <% if @blacklist.include? ingredient.name %>
+            <td><h4 id='<%=ingredient.name  %>'><%= value.round %></h4></td>
+          <% else %>
+            <td><h4 id='<%=ingredient.name %>'><%= value %>  </h4></td>
+            <td><h4>  oz</h4></td>
+          <% end %>
+          
+          
+          
         </tr>
         <% end %>
       </tbody>
