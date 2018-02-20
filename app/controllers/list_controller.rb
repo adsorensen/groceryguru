@@ -5,6 +5,7 @@ class ListController < ApplicationController
   def create
   end
   
+  # function converts differnent units to ounces
   def convert_to_oz(amount, unit)
     u = unit.upcase
     noUnit = false
