@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    recipe_ids = SavedRecipe.where(user_id: session['user_id']).order(created_at: :desc)
+    recipe_ids = SavedRecipe.where(user_id: @user.id).order(created_at: :desc)
     saved_recipes = Array.new
     personal_recipes = Array.new
     for recipe_id in recipe_ids do
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     end
     @saved_recipes = saved_recipes
     @personal_recipes = personal_recipes
+    @meal_plans =  MealPlan.where(user_id: @user.id)
   end
 
   # GET /users/new

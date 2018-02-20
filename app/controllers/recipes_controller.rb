@@ -28,6 +28,7 @@ class RecipesController < ApplicationController
   # original
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.private = params['private']
     
     # loop over ingredients from table
     count = 1

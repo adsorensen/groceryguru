@@ -64,6 +64,47 @@ function showReviews()
    document.getElementById("tab_rev").className = "active"
 }
 
+function newPlan()
+{
+   swal({
+         title: 'Enter a Meal Plan name',
+         input: 'text',
+         inputValue: 'New Meal Plan',
+         html:
+            '<input type="radio" name="private" id="priv">Private<br>' +
+            '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
+         showCancelButton: true,
+         showCloseButton: true,
+         confirmButtonText: 'Create',
+         showLoaderOnConfirm: true,
+         allowOutsideClick: () => !swal.isLoading(),
+      }).then(function(value) {
+         var pri = false;
+         if($('#priv').is(':checked'))
+            pri = true;
+         $.ajax(
+            {
+               type: "POST",
+               url: "/mealplans",
+               data: 
+               {
+                  name: value,
+                  priv: pri 
+               },
+               success: function(data){
+                  swal({
+                     type: 'success',
+                     title: 'Recipe added to new Meal Plan!',
+                     showConfirmButton: false,
+                     timer: 1500
+                  });
+                  window.setTimeout(refresh, 1500);
+               }
+            }
+         );
+      });
+}
+
 function mealPlan() 
 {
    swal({
@@ -83,6 +124,9 @@ function mealPlan()
          title: 'Enter a Meal Plan name',
          input: 'text',
          inputValue: 'New Meal Plan',
+         html:
+            '<input type="radio" name="private" id="priv">Private<br>' +
+            '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
          showCancelButton: true,
          showCloseButton: true,
          confirmButtonText: 'Create',
@@ -92,6 +136,9 @@ function mealPlan()
          var url = $(location).attr('href');
          url = url.split('/');
          var recipeID = url[url.length-1];
+         var pri = false;
+         if($('#priv').is(':checked'))
+            pri = true;
          $.ajax(
             {
                type: "POST",
@@ -99,6 +146,7 @@ function mealPlan()
                data: 
                {
                   name: value,
+                  priv: pri,
                   recipe: recipeID
                },
                success: function(data){
