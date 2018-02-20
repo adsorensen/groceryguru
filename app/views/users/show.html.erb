@@ -27,8 +27,8 @@
         <h2>Favorite Recipes</h2>
         <div id='content'>
           <% if @saved_recipes.length == 0 %>
-     <p>You currently have 0 favorite recipes.</p>
-   <% end %>
+          <p>You currently have 0 favorite recipes.</p>
+          <% end %>
         <%  
         @saved_recipes.each do |recipeList| %>
          <% recipeList.each do |recipe| %>
@@ -65,41 +65,94 @@
       
       <div id='personal-recipes'>
         <h2>Uploaded Recipes</h2>
-<div id="content">
-   <% if @personal_recipes.length == 0 %>
-     <p>You currently have 0 uploaded recipes.</p>
-   <% end %>
-   <% @personal_recipes.each do |recipeList| %>
-     <% recipeList.each do |recipe| %>
-  <div class="recipe"> 
-		<div class="image">
-		  <%= if recipe.picture?
-        link_to image_tag(recipe.picture, size:"200x325"), recipe
-      else
-        pic_url_length = recipe.picture.to_s.length
-        beginning_index = recipe.picture.to_s.index('http')
-        if (beginning_index.nil?)
-          link_to image_tag('fallback/recipe-default.png', size:"200x325"), recipe
-        else
-          cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-          new_url = cut_url.gsub!('%3A', ":/")
-          link_to image_tag(new_url, size:"200x325"), recipe
-        end
-      end %>
-	<div class="name">
-	 			<h3><%= recipe.name %></h3>
-	 </div>
-	 </div>
-	 <ul class="media">
-	   		<%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
-		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
-		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
-  		</ul>
-	</div>
-	   <% end %>
-  <% end %>
-</div>
+          <div id="content">
+             <% if @personal_recipes.length == 0 %>
+               <p>You currently have 0 uploaded recipes.</p>
+             <% end %>
+             <% @personal_recipes.each do |recipeList| %>
+               <% recipeList.each do |recipe| 
+                     if !recipe.private || @user.id == session['user_id']%>
+            <div class="recipe"> 
+          		<div class="image">
+          		  <%= if !recipe.picture.nil?  
+                  link_to image_tag(recipe.picture, size:"200x325"), recipe
+                else
+                  pic_url_length = recipe.picture.to_s.length
+                  beginning_index = recipe.picture.to_s.index('http')
+                  cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                  new_url = cut_url.gsub!('%3A', ":/")
+                  link_to image_tag(new_url, size: "200x325"), recipe
+                end %>
+          	<div class="name">
+          	 			<h3><%= recipe.name %></h3>
+          	 </div>
+          	 </div>
+          	 <ul class="media">
+          	   		<%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
+          		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
+          		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+            		</ul>
+          	</div>
+          	   <% end end %>
+            <% end %>
+          </div>
       </div>
+      
+    <h1>Meal Plans</h1>
+    <% 
+        @meal_plans.each do |plan|
+          if !plan.private || plan.user_id == session['user_id'] # Ensure only public plans are shown
+    %> 
+          <a href="/mealplans/<%= plan.id %>"><%= plan.name %></a>
+          <%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, '/deleteplan/'+plan.id.to_s, method: :destroy, data: { confirm: 'Are you sure?' } %>
+          <div class="bg-secondary text-center">
+            <div class="container">
+                    <div class="row">
+                      <div class="col-md-12">
+                          <h2 class="section-heading"><%= plan.name %></h2>
+                          <div class="carousel slide multi-item-carousel" id="theCarousel">
+                              <div class="carousel-inner">
+                                <% @recipes_array = Plan.where(meal_plan_id: plan.id).pluck(:id)
+                                      @recipes_array.each do |index|
+                                      recipe = Recipe.find(index)
+                                      if recipe.picture?
+                                          pic_url = recipe.picture_url
+                                      else
+                                          pic_url_length = recipe.picture.to_s.length
+                                          beginning_index = recipe.picture.to_s.index('http')
+                                          cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                                          pic_url = cut_url.gsub!('%3A', ":/")
+                                      end %>
+                          
+                                      <div class="item active">
+                                          <div class="col-xs-4">
+                                              <div class="recipe">
+                                                  <div class="image">
+                                                      <a href="/recipes/<%=recipe.id%>"><%= image_tag(pic_url, size:"300x300")%></a>
+                                                      <div class="name">
+                                                          <a href="/recipes/<%=recipe.id%>" style="color:white;"><%= recipe.name %></a>
+                                                      </div>
+                                                  </div>
+                                                  <ul class="media">
+                              	   		            <li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+                              		                <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+                        		                    </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  <% end %>
+                              </div>
+                              <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></a>
+                              <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right" style="color:white;"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div> 
+          </div>
+      <br><br>
+        
+    <% end end %>
+      
 </div>
   <script>
   // Add active class to the current button (highlight it)
@@ -127,5 +180,26 @@
     current[0].className = current[0].className.replace("active", "");
     this.className = "active";});
   }
+  
+  // Instantiate the Bootstrap carousel
+  $('.multi-item-carousel').carousel({
+    interval: false
+  });
+  
+  // for every slide in carousel, copy the next slide's item in the slide.
+  // Do the same for the next, next item.
+  $('.multi-item-carousel .item').each(function(){
+    var next = $(this).next();
+    if (!next.length) {
+      next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    
+    if (next.next().length>0) {
+      next.next().children(':first-child').clone().appendTo($(this));
+    } else {
+    	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+    }
+  });
   </script>
 </html>
