@@ -7,7 +7,7 @@
    <div class="profile-user-page card">
       <div class="img-user-profile">
         <img class="profile-bgHome" src="/assets/new_age/food-background.jpg" />
-        <img class="avatar" src=<%= @user.picture_url %> alt="jofpin"/>
+        <img class="avatar" src= <%= @user.picture_url %> alt="prof_pic"/>
            </div>
           <%= link_to '<button>Edit</button>'.html_safe, edit_user_path(@user) %>
           <div class="user-profile-data">
@@ -36,12 +36,16 @@
 		      <div class="image">
 		      <%= if recipe.picture?  
               link_to image_tag(recipe.picture, size:"200x325"), recipe
-            else
-              pic_url_length = recipe.picture.to_s.length
-              beginning_index = recipe.picture.to_s.index('http')
-              cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-              new_url = cut_url.gsub!('%3A', ":/")
-              link_to image_tag(new_url, size: "200x325"), recipe
+              else
+                pic_url_length = recipe.picture.to_s.length
+                beginning_index = recipe.picture.to_s.index('http')
+                if (beginning_index.nil?)
+                  link_to image_tag('fallback/recipe-default.png', size:"200x325"), recipe
+                else
+                  cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                  new_url = cut_url.gsub!('%3A', ":/")
+                  link_to image_tag(new_url, size:"200x325"), recipe
+                end
             end %>
 	        <div class="name">
 	 			    <h3><%= recipe.name %></h3>
@@ -61,37 +65,41 @@
       
       <div id='personal-recipes'>
         <h2>Uploaded Recipes</h2>
-          <div id="content">
-             <% if @personal_recipes.length == 0 %>
-               <p>You currently have 0 uploaded recipes.</p>
-             <% end %>
-             <% @personal_recipes.each do |recipeList| %>
-               <% recipeList.each do |recipe| 
-                     if !recipe.private || @user.id == session['user_id']%>
-            <div class="recipe"> 
-          		<div class="image">
-          		  <%= if !recipe.picture.nil?  
-                  link_to image_tag(recipe.picture, size:"200x325"), recipe
-                else
-                  pic_url_length = recipe.picture.to_s.length
-                  beginning_index = recipe.picture.to_s.index('http')
-                  cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-                  new_url = cut_url.gsub!('%3A', ":/")
-                  link_to image_tag(new_url, size: "200x325"), recipe
-                end %>
-          	<div class="name">
-          	 			<h3><%= recipe.name %></h3>
-          	 </div>
-          	 </div>
-          	 <ul class="media">
-          	   		<%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
-          		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
-          		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
-            		</ul>
-          	</div>
-          	   <% end end %>
-            <% end %>
-          </div>
+<div id="content">
+   <% if @personal_recipes.length == 0 %>
+     <p>You currently have 0 uploaded recipes.</p>
+   <% end %>
+   <% @personal_recipes.each do |recipeList| %>
+     <% recipeList.each do |recipe| 
+         if !recipe.private || @user.id == session['user_id']%>
+  <div class="recipe"> 
+		<div class="image">
+		  <%= if recipe.picture?
+        link_to image_tag(recipe.picture, size:"200x325"), recipe
+      else
+        pic_url_length = recipe.picture.to_s.length
+        beginning_index = recipe.picture.to_s.index('http')
+        if (beginning_index.nil?)
+          link_to image_tag('fallback/recipe-default.png', size:"200x325"), recipe
+        else
+          cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+          new_url = cut_url.gsub!('%3A', ":/")
+          link_to image_tag(new_url, size:"200x325"), recipe
+        end
+      end %>
+	<div class="name">
+	 			<h3><%= recipe.name %></h3>
+	 </div>
+	 </div>
+	 <ul class="media">
+	   		<%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
+		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
+		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+  		</ul>
+	</div>
+	   <% end end %>
+  <% end %>
+</div>
       </div>
       
     <h1>Meal Plans</h1>

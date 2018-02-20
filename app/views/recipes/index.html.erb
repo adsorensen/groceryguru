@@ -28,8 +28,12 @@
                 else
                     pic_url_length = recipe.picture.to_s.length
                     beginning_index = recipe.picture.to_s.index('http')
-                    cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-                    pic_url = cut_url.gsub!('%3A', ":/")
+                    if (beginning_index.nil?)
+                        pic_url = 'fallback/recipe-default.png'
+                    else
+                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                        pic_url = cut_url.gsub!('%3A', ":/")
+                    end
                 end %>
                 <div class="recipe">
                     <div class="image">
@@ -38,14 +42,14 @@
                 <a href="/recipes/<%=recipe.id%>" style="color:white; padding-top: 5px; padding-bottom: 5px"><%= recipe.name %></a>
                 </div></div>
                 <ul class="media">
-        	   		        <li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
-        		            <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
-  		                    </ul>
+                    <li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+                    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+                </ul>
                 </div>
             </div>
           </div>
           
-          <% @recipes_array = [104, 113, 107, 95, 62]
+          <% @recipes_array = [104, 113, 107, 95, 62, 151]
                 @recipes_array.each do |index|
                 recipe = Recipe.find(index)
                 if recipe.picture?
@@ -53,8 +57,12 @@
                 else
                     pic_url_length = recipe.picture.to_s.length
                     beginning_index = recipe.picture.to_s.index('http')
-                    cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-                    pic_url = cut_url.gsub!('%3A', ":/")
+                    if (beginning_index.nil?)
+                        pic_url = 'fallback/recipe-default.png'
+                    else
+                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                        pic_url = cut_url.gsub!('%3A', ":/")
+                    end
                 end%>
     
                 <div class="item">
@@ -66,35 +74,35 @@
                 <a href="/recipes/<%=recipe.id%>" style="color:white;"><%= recipe.name %></a>
                 </div></div>
                 <ul class="media">
-        	   		        <li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
-        		            <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
-  		                    </ul>
+                    <li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+                    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+  		        </ul>
                 </div>
                     </div>
                 </div>
             <% end %>
-                <script>
-        // Instantiate the Bootstrap carousel
-$('.multi-item-carousel').carousel({
-  interval: false
-});
-
-// for every slide in carousel, copy the next slide's item in the slide.
-// Do the same for the next, next item.
-$('.multi-item-carousel .item').each(function(){
-  var next = $(this).next();
-  if (!next.length) {
-    next = $(this).siblings(':first');
-  }
-  next.children(':first-child').clone().appendTo($(this));
-  
-  if (next.next().length>0) {
-    next.next().children(':first-child').clone().appendTo($(this));
-  } else {
-  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-  }
-});
-    </script>
+            <script>
+                // Instantiate the Bootstrap carousel
+                $('.multi-item-carousel').carousel({
+                  interval: false
+                });
+                
+                // for every slide in carousel, copy the next slide's item in the slide.
+                // Do the same for the next, next item.
+                $('.multi-item-carousel .item').each(function(){
+                  var next = $(this).next();
+                  if (!next.length) {
+                    next = $(this).siblings(':first');
+                  }
+                  next.children(':first-child').clone().appendTo($(this));
+                  
+                  if (next.next().length>0) {
+                    next.next().children(':first-child').clone().appendTo($(this));
+                  } else {
+                  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+                  }
+                });
+            </script>
           <!--  Example item end -->
         </div>
         <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></a>
@@ -125,11 +133,15 @@ $('.multi-item-carousel .item').each(function(){
             <%= if recipe.picture?
                     link_to image_tag(recipe.picture_url, size: "100x325"), recipe 
                 else
-                    pic_url_length = recipe.picture_url.to_s.length
-                    beginning_index = recipe.picture_url.to_s.index('http')
-                    cut_url = recipe.picture_url.to_s[beginning_index, pic_url_length]
-                    new_url = cut_url.gsub!('%3A', ":/")
-                    link_to image_tag(new_url, size: "100x325"), recipe
+                    pic_url_length = recipe.picture.to_s.length
+                    beginning_index = recipe.picture.to_s.index('http')
+                    if (beginning_index.nil?)
+                        link_to image_tag('fallback/recipe-default.png', size: "100x350"), recipe
+                    else
+                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                        new_url = cut_url.gsub!('%3A', ":/")
+                        link_to image_tag(new_url, size:"100x325"), recipe
+                    end
                 end
             %>
             <div class="name">
