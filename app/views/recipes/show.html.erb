@@ -43,9 +43,9 @@
 <div class="nav_new">
   <ul>
     <li style="padding-top: 15px;"><a onclick=printpage()>PRINT</a></li>
-    <li style="padding-top: 15px;"><a href="#">FAVORITE</a></li>
+    <li style="padding-top: 15px;">  <%= link_to 'FAVORITE', saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %></li>
     <li style="padding-top: 15px;"><a href="#">SHARE</i></a></li>
-    <li style="padding-top: 15px;"><a href="#">ADD TO CART</i></a></li>
+    <li style="padding-top: 15px;">  <%= link_to 'ADD TO CART', carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %></i></li>
     <li><a onclick="mealPlan()">ADD TO MEAL PLAN</i></a></li>
     <li style="padding-top: 15px;"><a href="#reviews">REVIEW</i></a></li>
   </ul>
