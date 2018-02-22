@@ -1,9 +1,153 @@
 <head>
-    <%#= stylesheet_link_tag "recipes" %>
+    <%= stylesheet_link_tag "recipes_2" %>
+    <%= javascript_include_tag('recipe.js') %>
 </head>
-<div class='banner'>
-    <%= if @recipe.picture? 
-        image_tag(@recipe.picture.url, size:"1000x1000") 
-    end
-    %>
+<div class="icon-bar">
+  <a class="active" href="/recipes" title="Search for another recipe"><i class="fa fa-search"></i></a> 
+  <a title="Print"><i class="fa fa-print" onclick=printpage()></i></a> 
+  <%= link_to '<i class="fa fa-heart" onclick=openPopup() title="Favorite this recipe"></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
+  <a href="#share"><i class="fa fa-facebook" title="Share this recipe to Facebook"></i></a> 
+  <%= link_to '<i class="fa fa-cart-plus" title="Add recipe to cart"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
+  <a onclick="mealPlan()" title="Add recipe to a meal plan"><i class="fa fa-book"></i></a> 
 </div>
+<div style="display:none;">    <%= if @recipe.picture?
+        pic_url = @recipe.picture.url
+      else
+        pic_url_length = @recipe.picture.to_s.length
+        beginning_index = @recipe.picture.to_s.index('http')
+        if (beginning_index.nil?)
+          pic_url = 'fallback/recipe-default.png'
+        else
+          cut_url = @recipe.picture.to_s[beginning_index, pic_url_length]
+          pic_url = cut_url.gsub!('%3A', ":/")
+        end
+      end %></div>
+<body>
+<div class="bgimg" style="background-image: url(<%= asset_path pic_url %>)"><div class="caption"><%= @recipe.name %></div>
+</div>
+
+
+<div class="container">
+  <span class="source">Recipe by: <a href="#">Michelle</a></span>
+  
+  <div class="recipe-text">
+    <div class="recipe-image" style="background-image: url(<%= asset_path pic_url %>)"></div>
+      <br>
+      <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
+      <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
+      <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.prep_time %></p>
+       <p><%= link_to "View Nutritional Information" %></p>
+    <div class="cf"></div>
+  </div>
+
+<div class="nav_new">
+  <ul>
+    <li style="padding-top: 15px;"><a onclick=printpage()>PRINT</a></li>
+    <li style="padding-top: 15px;"><a href="#">FAVORITE</a></li>
+    <li style="padding-top: 15px;"><a href="#">SHARE</i></a></li>
+    <li style="padding-top: 15px;"><a href="#">ADD TO CART</i></a></li>
+    <li><a onclick="mealPlan()">ADD TO MEAL PLAN</i></a></li>
+    <li style="padding-top: 15px;"><a href="#reviews">REVIEW</i></a></li>
+  </ul>
+</div>
+
+
+<div class="recipe" id="recipe">
+  <div class="recipe-ingredients">
+    <h2>Ingredients</h2>
+      <ul>
+        <% #Loop over ingredients
+        ingredients = @recipe.instructions
+        for i in ingredients do
+            ingredient_string = Ingredient.find(i.ingredient_id).name %>
+            <li><span><span class="amount"><%= i.amount %> <%= i.unit %></span> <span class="in"><%= ingredient_string %></span></span></li>
+        <% end %>  
+      </ul>
+  </div>
+
+  <div class="recipe-directions">
+    <h2>Directions</h2>
+    <%
+    direct = @recipe.directions
+    direct_split = direct.split('.')
+    directions = ""
+    counter = direct_split.count
+    for line in direct_split 
+    if counter > 1 %>
+    <div class="step"><p><%= simple_format(line + ".") %></p><div class="arrow"></div></div>
+    <% counter = counter -= 1
+    else %>
+    <div class="step"><p><%= simple_format(line + ".") %></p></div>
+    <% end
+    end %>
+  </div>
+</div>
+
+    
+<div class="note" id="reviews">
+  <h2>Reviews</h2><a class='btn btn-outline btn-xl page-scroll' style="display:inline-block; text-align: right; float: right; margin-top: 20px;" onclick=showReviewForm()>Add your own!</a>
+  <div class="new-review" id="new-review" style="padding-top: 15px; display: none"><%= form_tag("/addReview", method: "post") do %>
+    <h3>Add a Review</h3>
+    <label for="review" style="text-align: left;">Review:</label><br>
+    <%= text_area_tag :review, nil, size: "75x10", style: "overflow-y: scroll; resize: none; text-align: left; margin-left: 10px; padding: 5px;", placeholder: "Enter your review of the recipe here." %>
+    <br>
+    <%= label_tag :rating, "Rating:*"%><br>
+    <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Really bad - 1 star"></label>
+    </fieldset>
+    <%= hidden_field_tag 'recipe_id', @recipe.id %><br>
+    <%= submit_tag("Add Review", :class=>"btn btn-outline") %>
+    <% end %></div>
+  <% # Loop over reviews
+    if @recipe.reviews.empty? then %>
+      <p style="padding: 10px 0; text-align: center;">This recipe currently has no reviews. Be the first to add one!</p>
+    <% end
+      unless @recipe.reviews.empty?
+    %>
+    <center>
+      
+      <div class="reviews-container">
+            <div id="google-reviews">
+    <%
+      reviews = @recipe.reviews
+      for r in reviews do
+        first_name = User.find(r.user_id).first_name
+        last_name = User.find(r.user_id).last_name
+        user = User.find(r.user_id)
+        
+        case r.rating
+        when 1
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i>" 
+        when 2
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        when 3
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        when 4
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        else
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        end %>
+        
+    
+      <div class='review-wrap'>
+        <div class='author'>
+          <a href='/users/<%=r.user_id %>'><img class='author-img' src=<%= user.picture_url %> alt='<%= first_name %> <%= last_name %>'/></a>
+          <a href='/users/<%=r.user_id %>'><div class='author-name'><%= first_name %> <%= last_name %></div></a><br>
+          <div class='rating-review'><%= user_rating.html_safe %></div>
+          <% if r.user_id == session["user_id"]%> 
+          <div class='delete-icon'><%= link_to "<i class='fa fa-trash'></i>".html_safe, {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, data: { confirm: 'Are you sure?' } %></div>
+          <div class='edit-icon' onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)"><i class='fa fa-pencil' aria-hidden='true'></i></div>
+          <%end%>
+        </div>
+        <div class='review'><%= r.text %></div>
+      </div>
+          <% end # end of loop %> 
+    <% end # end of unless %>  
+    </div>
+  </div>
+</div>
+</body>

@@ -1,0 +1,856 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900|Catamaran|Montserrat);
+
+/* Safari >=1.1, Opera >=9.5, IE9 */
+::selection {
+  background: #8dc63f;
+  color: #fff;
+}
+/* Firefox >=1 */
+::-moz-selection {
+  background: #8dc63f;
+  color: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-top: 40px;
+  font-family: 'Source Sans Pro', Helvetica, arial, sans-serif;
+  padding-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+h2 {
+  border-bottom: 1px solid #8dc63f;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+h3 {
+  border-bottom: 4px double #8dc63f;
+  /*display: inline-block;*/
+}
+
+.cf {
+  clear: both;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+label {
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.bgimg {
+  background-size: cover;
+  background-position: center 30%;
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  filter: opacity(50%);
+  word-wrap: break-word;
+}
+
+.bgimg .caption {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 250px;  
+  background: #000;
+  background: rgba(0, 0, 0, .5);
+  padding: 10px;
+  color: #fff;
+  font-size: 50px;
+  width: 100%;
+}
+
+.bgimg .caption span {
+  display: block;
+  font-size: 10px;
+}
+
+.bgimg ul {
+  background: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 200px;
+  height: 50px;
+  margin: auto;
+}
+
+.bgimg ul li {
+  width: 50%;
+  height: 100%;
+  float: left;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 50px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bgimg ul li span {
+  min-width: 100px;
+  height: 50px;
+  background: #8dc63f;
+  background: rgba(235, 29, 71,.8);
+  position: absolute;
+  opacity: 0;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+  color: #fff;
+}
+
+.bgimg ul li.left span {
+  left: -80px;
+}
+
+.bgimg ul li.right span {
+  right: -80px;
+}
+
+.bgimg ul li:hover {
+  color: #8dc63f;
+}
+
+.bgimg ul li.left:hover {
+  padding-right: 10px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bgimg ul li.right:hover {
+  padding-left: 10px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bgimg ul li.left:hover span {
+  opacity: 1;
+  left: -100px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bgimg ul li.right:hover span {
+  opacity: 1;
+  right: -100px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bannerc {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  margin-bottom: -100px;
+}
+
+.banner {
+  height: 100px;
+  width: 80px;
+  padding: 40px 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  background: #8dc63f;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.banner a {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+span.source {
+  color: #bababa;
+  font-size: 14px;
+}
+
+span.source a {
+  color: #bababa;
+  font-size: 14px;
+  border-bottom: 1px solid #bababa;
+}
+
+span.source a:hover {
+  color: #8dc63f;
+  font-size: 14px;
+  border-bottom: 1px solid #8dc63f;
+}
+
+
+/***********************
+Recipe Desc
+***********************/
+.recipe-text {
+  border-bottom: 1px solid #9f9f9f;
+  margin: 10px 0;
+  padding-bottom: 10px;
+}
+
+.recipe-image {
+  width: 40%;
+  height: 300px;
+  size: cover;
+  background-position: center;
+  float: left;
+  transition: all 1s ease;
+  overflow: hidden;
+}
+
+.recipe-text p {
+  width: 48%;
+  padding-left: 20px;
+  float: left;
+  font-size: 25px;
+  color: #888888;
+}
+.recipe-text .servings-box {
+    width: 100%;
+  }
+
+/***********************
+Nav
+***********************/
+.nav_new {
+  border-bottom: 4px double #9f9f9f;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.nav_new ul {
+  list-style: none;
+  display:-webkit-flex;
+  display:flex;
+}
+
+.nav_new li { 
+  text-align: center;
+  width: 40%;
+  padding: 0 20px;
+  font-size: 18px;
+  font-family: 'Montserrat', 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+  font-weight: 200;
+  letter-spacing: .5px;
+}
+
+.nav_new li a { 
+  color: #8dc63f;
+}
+
+.nav_new ul li a:hover {
+  color: black;
+}
+
+/***********************
+Recipe
+***********************/
+.recipe {
+  padding: 0;
+  border-bottom: 1px solid #9f9f9f;
+  margin-bottom: 20px;
+}
+
+.recipe .recipe-ingredients {
+  margin-bottom: 20px;
+  padding-right: 30px;
+}
+
+.recipe .recipe-ingredients ul {
+  list-style: none;
+  width: auto;
+}
+
+.recipe .recipe-ingredients ul li {
+  border-bottom: 1px solid #9f9f9f;
+  margin-bottom: 5px;
+}
+
+.recipe .recipe-ingredients ul li span {
+  position: relative;
+}
+
+.recipe .recipe-ingredients ul li span.amount {
+  font-weight: bold;
+  position: absolute;
+}
+
+.recipe .recipe-ingredients ul li span.in {
+  padding-left: 115px;
+}
+
+.recipe .recipe-directions .print {
+  float: right;
+  width: 30px;
+  height: 30px;
+  background: #8dc63f;
+  color: #fff;
+  line-height: 30px;
+  text-align: center;
+}
+
+.recipe .recipe-directions .print a {
+  color: #fff;
+}
+
+.recipe .recipe-directions .step {
+  width: 100%;
+  position: relative;
+  background: #8dc63f;
+  padding: .5px;
+  text-align: center;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.recipe .recipe-directions .step .arrow {
+  position: absolute;
+  margin: auto;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 20px 20px 0 20px;
+  border-color: #8dc63f transparent transparent transparent;
+}
+
+.note {
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+.note .new-review {
+  width: auto;
+  position: relative;
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+@media screen and (min-width:800px) {
+    .recipe {
+        display:-webkit-flex;
+        display:flex;
+    }
+     
+    .recipe .recipe-directions {
+        -webkit-flex:2;
+        flex:2;
+        -webkit-order:2;
+        order:2;
+    }
+     
+    .recipe .recipe-ingredients {
+        -webkit-flex:1;
+        flex:1;
+        -webkit-order:1;
+        order:1;
+    }
+}
+
+@media screen and (min-width:800px) {
+  .recipe .recipe-directions {
+        -webkit-flex:3;
+        flex:3;
+    }
+}
+
+@media screen and (min-width:1240px) {
+  .container {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width:640px) {
+  .recipe-image {
+    display: none;
+  }
+  .bannerc {
+    display: none;
+  }
+  .bgimg .caption {
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .recipe-text p {
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width:481px) {
+  .bgimg {
+    height: 200px;
+  }
+}
+
+/***********************
+Right icon bar
+***********************/
+.icon-bar {
+    position: fixed;
+    z-index: 2;
+    width: 40px; /* Set a specific width */
+    background-color: #555; /* Dark-grey background */
+    top: 50%;
+    right: 0;
+}
+
+.icon-bar a {
+    display: block; /* Make the links appear below each other instead of side-by-side */
+    text-align: center; /* Center-align text */
+    padding: 4px; /* Add some padding */
+    transition: all 0.3s ease; /* Add transition for hover effects */
+    color: white; /* White text color */
+    font-size: 20px; /* Increased font-size */
+}
+
+.icon-bar a:hover {
+    background-color: #000; /* Add a hover color */
+}
+/***********************
+Star rating system
+***********************/
+.rating { 
+  border: none;
+  display: inline;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+/***********************
+Buttons
+***********************/
+.btn-outline {
+  color: #8dc63f;
+  border-color: #8dc63f;
+  border: 1px solid;
+}
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active,
+.btn-outline.active {
+  color: white;
+  background-color: #8dc63f;
+  border-color: #8dc63f;
+}
+.btn {
+  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 300px;
+}
+.btn-xl {
+  padding: 15px 45px;
+  font-size: 11px;
+}
+.btn-outline {
+  color: #8dc63f;
+  border-color: #8dc63f;
+  border: 1px solid;
+}
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active,
+.btn-outline.active {
+  color: white;
+  background-color: #8dc63f;
+  border-color: #8dc63f;
+}
+.btn {
+  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 300px;
+}
+.btn-xl {
+  padding: 15px 45px;
+  font-size: 11px;
+}
+/***********************
+Reviews
+***********************/
+.reviews-container {
+  background: rgb(251,250,246); /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  rgba(251,250,246,1) 9%, rgba(212,206,191,1) 74%, rgba(212,206,191,1) 74%, rgba(212,206,191,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  rgba(251,250,246,1) 9%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  rgba(251,250,246,1) 9%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 100%);
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0 ,0.5);
+  margin: 40px auto;
+  max-width: 700px;
+  max-height: 500px;
+  padding: 30px;
+}
+#google-reviews {
+  max-height: 450px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 15px;
+}
+.review-wrap {
+  margin-bottom: 20px;
+}
+.review-wrap:last-of-type {
+  margin-bottom: 0;
+}
+.author {
+  margin-bottom: 15px;
+}
+.author-img {
+  object-fit: cover;
+  float: left;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: filter ease-in-out .3s;
+}
+.author-img:hover {
+  filter: brightness(2);
+}
+.author-name {
+  float: left;
+  font-weight: 700;
+}
+.delete-icon {
+  padding-left: 5px;
+  float: right;
+}
+.delete-icon i:hover {
+  color: red;
+}
+.edit-icon {
+  padding-right: 5px;
+  float: right;
+}
+.edit-icon i:hover {
+  color: #fff;
+}
+.rating-review i {
+  float: left;
+  color: gold;
+  padding-right: 2px;
+}
+.review {
+  padding-top: 5px;
+  text-align: left;
+  clear: both;
+}
+/***********************
+Nutrition Facts
+***********************/
+//colors
+$black: #000;
+$color_mine_shaft_approx: #333;
+$color_tapa_approx: #777;
+$gray: gray;
+$color_cream_approx: #ffc;
+
+//fonts
+$font_0: Arial;
+$font_1: Helvetica;
+$font_2: sans-serif;
+$font_3: Archivo Black;
+
+.nutritionLabel {
+	border: 2px solid $black;
+	color: $color_mine_shaft_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 90%;
+	line-height: normal;
+	margin: 1.1em auto 1.1em auto;
+	padding: .68em;
+  width: 260px;
+	.title {
+		font-size: 2.7em;
+		letter-spacing: -2px;
+		line-height: .83em;
+		padding-bottom: 4px;
+		white-space: nowrap;
+	}
+	.m {
+		font-size: .9em;
+	}
+	.serving {
+		font-size: 1.1em;
+		line-height: 1.28em;
+		padding-bottom: 2px;
+	}
+	.name {
+		font-size: 1.1em;
+		line-height: 1.3em;
+		&.inline {
+			padding-top: .25em \9;
+			padding-top: .2em;
+		}
+	}
+	.dvCalorieDiet {
+		font-size: .9em;
+		color: $color_tapa_approx;
+	}
+	#calcDisclaimer {
+		font-size: .9em;
+		color: $color_tapa_approx;
+	}
+	.line {
+		border-top: 1px solid $color_mine_shaft_approx;
+		padding: 1px 0;
+		&.last {
+			border-bottom: 1px solid $color_mine_shaft_approx;
+		}
+		&.indent {
+			margin-left: 15px;
+		}
+	}
+	.dv {
+		float: right;
+		&:before {
+			content: '\0000a0';
+		}
+	}
+	.bar1 {
+		background: $color_mine_shaft_approx;
+		font-size: 1px;
+		height: 10px;
+		line-height: 0;
+	}
+	.bar2 {
+		background: $color_mine_shaft_approx;
+		font-size: 1px;
+		height: 5px;
+		line-height: 0;
+	}
+	.calorieNote {
+		padding: .60em 0 0 .70em;
+	}
+	.star {
+		margin-left: -7px;
+	}
+	.tblCalorieDiet {
+		width: 100%;
+		th {
+			border-bottom: 1px solid $color_mine_shaft_approx;
+			color: $color_tapa_approx;
+			font-size: .7em;
+			text-align: left;
+		}
+		td {
+			color: $color_tapa_approx;
+			font-size: .7em;
+			line-height: normal;
+			padding: 0;
+		}
+	}
+	.ar {
+		text-align: right;
+	}
+	.fr {
+		float: right;
+	}
+	.fl {
+		float: left;
+	}
+	.spaceAbove {
+		height: 10px;
+	}
+	.setter {
+		left: 0;
+		padding: 3px 0 0;
+		position: absolute;
+		top: 0;
+		width: 12px;
+		z-index: 100;
+		a {
+			display: block;
+			font-size: 1px;
+			height: 7px;
+			line-height: 0;
+			width: 9px;
+		}
+	}
+	a {
+		&.unitQuantityUp {
+			background: transparent url("images/up.png") left top no-repeat;
+			padding-bottom: 1px;
+			z-index: 9999;
+		}
+		&.unitQuantityDown {
+			background: transparent url("images/down.png") left bottom no-repeat;
+			padding-top: 1px;
+			z-index: 9999;
+		}
+	}
+	.rel {
+		position: relative;
+	}
+	.servingSizeField {
+		float: left;
+		margin-bottom: .2em;
+		margin-right: .4em;
+		margin-top: .2em;
+	}
+	.servingUnit {
+		float: left;
+		margin-bottom: .2em;
+		margin-top: .3em;
+		padding: 0;
+	}
+	.servingWeightGrams {
+		margin-bottom: .2em;
+		margin-top: .3em;
+		padding: 0 0 0 .3em;
+	}
+	.servingSizeText {
+		margin-top: .3em;
+		padding-right: .3em;
+		display: inline-block;
+	}
+	.servingUnitQuantity {
+		margin-top: .3em;
+		padding-right: .3em;
+	}
+	.ingredientListDiv {
+		padding-top: 10px;
+	}
+	input.unitQuantityBox {
+		font-size: .9em!important;
+		height: 15px;
+		line-height: 15px \9;
+		margin-bottom: 0;
+		margin-left: 15px;
+		padding: 2px;
+		width: 25px;
+		&.ui-input-text {
+			//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+			border-radius: 0;
+			//Instead of the line below you could use @includebox-sizing($bs)
+			box-sizing: content-box;
+			height: auto;
+			margin-top: 0;
+			moz-box-sizing: content-box;
+			webkit-box-sizing: content-box;
+		}
+		&.ui-shadow-inset {
+			//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: none;
+		}
+		&.arrowsAreHidden {
+			margin-left: 0;
+		}
+	}
+}
+.notApplicable {
+	color: $gray;
+	cursor: default;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-top: .2em;
+}
+.naTooltip {
+	background-color: $color_cream_approx;
+	border: 1px solid $black;
+	display: none;
+	height: 18px;
+	padding: 2px;
+	position: absolute;
+	text-align: center;
+	width: 120px;
+	z-index: 10000;
+}
+.cf {
+	zoom: 1;
+	&:before {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+}
+.ingredientListDiv.scroll {
+	overflow-y: scroll!important;
+}
+#calcDisclaimer.scroll {
+	overflow-y: scroll!important;
+}

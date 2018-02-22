@@ -106,3 +106,8 @@ function tableSave() {
         success: function(data){ alert(data); }
     });
 }
+
+function showReviewForm()
+{
+   document.getElementById('new-review').style.display = "block"
+}
