@@ -5,6 +5,41 @@ class ListController < ApplicationController
   def create
   end
   
+  # function converts differnent units to ounces
+  def convert_to_oz(amount, unit)
+    u = unit.upcase
+    noUnit = false
+    case u
+    when "TABLESPOON", "TABLESPOONS", "TBSP"
+      newA = amount / 2
+    when "TEASPOON", "TEASPOONS", "TSP"
+      newA = amount * (1/6)
+    when "CUP", "CUPS", "C"
+      newA = amount * 8
+    when "HANDFUL", "HANDFULS"
+      newA = amount * 4
+    when "OZ", "OUNCE", "OUNCES"
+      newA = amount
+    when "LBS", "POUND", "POUNDS"
+      newA = amount * 16
+    when "PINCH", "PINCHES"
+      newA = amount * 0.013
+    when "SERVINGS", "SERVING"
+      newA = amount * 4
+    when ""
+      newA = amount
+      noUnit = true
+    when "CLOVE", "CLOVES"
+      newA = amount * (1/6)
+    when "HEAD", "HEADS"
+      newA = amount * 32
+    else
+      newA = -100
+    end
+    
+    return newA, noUnit
+  end
+  
   def create_list
     # clear out checkout list to generate again
     current_list = CheckoutList.where(user_id: session['user_id'])
@@ -15,12 +50,34 @@ class ListController < ApplicationController
     # create list based on cart
     recipe_ids = Cart.where(user: session['user_id']).order(created_at: :desc)
     @ingredients = []
+    @ingredients2 = {}
+    @blacklist = []
+    
     ingredientIds = []
     for id_val in recipe_ids do
       recipe = Recipe.where(id: id_val.recipe).first
       instr = recipe.instructions
       for i in instr do
+        food = Ingredient.find(i.ingredient_id)
+        # get the amount from the instructions
+        a = i.amount
+        # get the unit
+        u = i.unit
+        # return the ounce amount and flag if there is no unit
+        oa, noUnit = convert_to_oz(a, u)
+        # if there is no unit for the item, add it to the blacklist
+        if noUnit
+          @blacklist.append(food.name)
+        end
+        
+        
+        
         @ingredients.append(Ingredient.find(i.ingredient_id))
+        if @ingredients2[food] != nil
+          @ingredients2[food] += oa
+        else
+          @ingredients2[food] = oa
+        end
         if CheckoutList.where(ingredient_id: i.ingredient_id).blank?
           newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1)
           ingredientIds.append(i.ingredient_id)
@@ -35,7 +92,9 @@ class ListController < ApplicationController
        
     end
     @ingredients = @ingredients.uniq
-    render 'list/create', :locals => {:resource => @ingredients}
+    #render :text => st
+    #render 'list/create', :locals => {:resource => @ingredients2}
+    render 'list/create'
   end
   
   def checkout
