@@ -10,10 +10,10 @@ class ListController < ApplicationController
     conversions = {"TABLESPOON" => 0.5, "TBSP" => 0.5, "TEASPOON" => 0.16667, 
       "TSP" => 0.16667, "CUP" => 8, "HANDFUL" => 4, "OUNCE" => 1, "PINCH" =>
       0.013, "SERVING" => 4, "POUND" => 16, "LBS" => 16, "CLOVE" => 0.16667,
-      "HEAD" => 32, "OZ" => 1, "C" => 8, "BUNCH" => 0, "PIECE" => 0, "G" =>
-      0, "TBS" => 0.5, "SLICES" => 0, "CAN" => 0, "DASHES" => 0,
-      "SPRIGS" => 0, "PINCHES" => 0, "DASH" => 0, "PINT" => 0, "TB" => 0.5,
-      "KG" => 0, "SPRIG" => 0, "ML" => 0, "" => 1
+      "HEAD" => 32, "OZ" => 1, "C" => 8, "BUNCH" => 8, "PIECE" => 4, "G" =>
+      0.03527, "TBS" => 0.5, "SLICES" => 6, "CAN" => 1, "DASHES" => 0.03125,
+      "SPRIG" => 0.03125, "PINCHES" => 0.013, "DASH" => 0.03125, "PINT" => 16,
+      "TB" => 0.5, "KG" => 35.274, "ML" => 0.03381, "" => 1
     }
     noUnit = false
     if conversions.include? unit.upcase
