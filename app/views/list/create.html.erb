@@ -14,33 +14,43 @@
 <script>
 $(document).ready(function() {
   $('.ingredient_table tr').click(function(event) {
-    if (event.target.type !== 'checkbox' && event.target.id != 'addButton' && event.target.id != 'subButton') {
+    if (event.target.type !== 'checkbox' && event.target.id != 'addButton' && 
+      event.target.id != 'subButton' && event.target.name != 'amount_input') {
       $(':checkbox', this).trigger('click');
     }
   });
 });
 function increment(ingre) {
-    var ingredientInfo = document.getElementById(ingre);
-    var number = ingredientInfo.innerHTML;
-    number++;
-    ingredientInfo.innerHTML = number;
+  //var ingredientInfo = document.getElementById(ingre);
+  //var number = ingredientInfo.innerHTML;
+  var number = document.getElementById(ingre).value
+  number++;
+  document.getElementById(ingre).value = number
+  //ingredientInfo.innerHTML = number;
 };
 function decrement(ingre) {
-    var ingredientInfo = document.getElementById(ingre);
-    var number = ingredientInfo.innerHTML;
-    if (number < 1 || number == 0) {
-      number = 0;
-    }
-    else {
-      number--;
-    }
-    ingredientInfo.innerHTML = number;
+  // var ingredientInfo = document.getElementById(ingre);
+  // var number = ingredientInfo.innerHTML;
+  var number = document.getElementById(ingre).value;
+  if (number < 1 || number == 0) {
+    number = 0;
+  }
+  else {
+    number--;
+  }
+  document.getElementById(ingre).value = number;
+  // ingredientInfo.innerHTML = number;
+};
+function add_item() {
+  
 };
 </script>
 </head>
 <body>
 
 <%= form_tag checkout_path, :method => :post do %>
+<input type="text" id="add_item_field" />
+<input type="button" value="Add Item" onclick="add_item()" />
 <div class="container1">
     <table class="ingredient_table">
       <thead>
@@ -56,9 +66,11 @@ function decrement(ingre) {
           <td><input type="button" id="addButton" value=" + " onclick="increment('<%=ingredient.name%>');" style="font-size:14px;" ></td>
           <td><input type="button" id="subButton" value=" - " onclick="decrement('<%=ingredient.name%>');" style="font-size:14px;" ></td>
           <% if @blacklist.include? ingredient.name %>
-            <td><h4 id='<%=ingredient.name  %>'><%= value.round %></h4></td>
+            <!--<td><h4 id='<%=ingredient.name  %>'><%= value.round %></h4></td>-->
+            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
           <% else %>
-            <td><h4 id='<%=ingredient.name %>'><%= value %>  </h4></td>
+            <!--<td><h4 id='<%=ingredient.name %>'><%= value %>  </h4></td>-->
+            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value %> /> </td>
             <td><h4>  oz</h4></td>
           <% end %>
           
