@@ -1,155 +1,153 @@
 <head>
-  <%= stylesheet_link_tag "recipes" %>
+    <%= stylesheet_link_tag "recipes" %>
+    <%= javascript_include_tag('recipe.js') %>
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="icon-bar">
-  <a class="active" href="/recipes"><i class="fa fa-search"></i></a> 
-  <a href="#print"><i class="fa fa-print" onclick=printpage()></i></a> 
-  <%= link_to '<i class="fa fa-heart" onclick=openPopup()></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
-  <a href="#share"><i class="fa fa-facebook"></i></a> 
-  <%= link_to '<i class="fa fa-cart-plus"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
-  <a onclick="mealPlan()"><i class="fa fa-book"></i></a> 
-  <a href="/calendar"><i class="fa fa-calendar"></i></a> 
+  <a class="active" href="/recipes" title="Search for another recipe"><i class="fa fa-search"></i></a> 
+  <a title="Print"><i class="fa fa-print" onclick=printpage()></i></a> 
+  <%= link_to '<i class="fa fa-heart" onclick=openPopup() title="Favorite this recipe"></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
+  <a href="#share"><i class="fa fa-facebook" title="Share this recipe to Facebook"></i></a> 
+  <%= link_to '<i class="fa fa-cart-plus" title="Add recipe to cart"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
+  <a onclick="mealPlan()" title="Add recipe to a meal plan"><i class="fa fa-book"></i></a> 
 </div>
-<br>
-<div class="cont_principal">
-<div class="cont_central">
-  <div class="cont_modal cont_modal_active">
-  <div class="cont_photo">
-<div class="cont_img_back">
-  <%= if !@recipe.picture.nil?
-        image_tag(@recipe.picture.url, size:"500x440") 
+<div style="display:none;">    <%= if @recipe.picture?
+        pic_url = @recipe.picture.url
       else
         pic_url_length = @recipe.picture.to_s.length
         beginning_index = @recipe.picture.to_s.index('http')
         if (beginning_index.nil?)
-          image_tag('fallback/recipe-default.png', size: "400x350")
+          pic_url = 'fallback/recipe-default.png'
         else
           cut_url = @recipe.picture.to_s[beginning_index, pic_url_length]
-          new_url = cut_url.gsub!('%3A', ":/")
-          image_tag(new_url, size:"500x440")
+          pic_url = cut_url.gsub!('%3A', ":/")
         end
-      end %>
-    </div>
-<div class="cont_mins">
-    <div class="sub_mins">
-  <h3><%= @recipe.prep_time %></h3>
-<span>MINS</span>
-  </div>
-    </div>
-<div class="cont_servings">
-      <h3><%= @recipe.servings %></h3>
-<span>SERVINGS</span>
-    </div>
-<div class="cont_detalles">
-    <h3><%= @recipe.name %></h3>
-    </div>
-    </div>
-<div class="cont_text_ingredients">
-<div class="cont_over_hidden">
- 
- <div id="tabs">
-  <div class="cont_tabs">
-  <ul>
-    <li id='tab_ing'><a href="", onclick="showIngredients(); return false"><h4>INGREDIENTS</h4></a></li>
-    <li id='tab_inst' class="active"><a href="#instructions", onclick="showInstructions(); return false"><h4>INSTRUCTIONS</h4></a></li>
-    <li id='tab_rev'><a href="#reviews", onclick="showReviews(); return false"><h4>REVIEWS</h4></a></li>
-  </ul>  
-  </div>
-  </div>
-  
-   <div class="cont_text_det_preparation", id='instructions'>
-   <%
-      counter = 1
-      direct = @recipe.directions
-      direct_split = direct.split('.')
-      directions = ""
-      for line in direct_split do  %>
-      
-      <div class="cont_title_preparation">
-      <p id='instructions'>STEP <%= counter %></p>
-       </div>
-          <div class="cont_info_preparation">
-      <p id = 'instructions'><%= simple_format(line + ".") %></p>
-      </div>
-      <% counter += 1
-      end
-    %>
+      end %></div>
+<body>
+<div class="bgimg" style="background-image: url(<%= asset_path pic_url %>)"><div class="caption"><%= @recipe.name %></div>
 </div>
-<div class="cont_text_det_preparation", id='ingredients', hidden><div class="cont_info_preparation"><table style="width: 100%; margin-left: 25px; padding-left: 20px; margin-bottom: 20px">
-  <thead>
-    <tr>
-      <th>Quantity</th>
-      <th>Unit</th>
-      <th>Ingredient</th>
-      <th>Preparation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% #Loop over ingredients
-      ingredients = @recipe.instructions
-      for i in ingredients do
-        ingredient_string = Ingredient.find(i.ingredient_id).name
-    %>
-        <tr>
-          <td><%= i.amount %></td>
-          <td><%= i.unit %></td>
-          <td><%= ingredient_string %></td>
-          <td><%= i.prep_note %></td>
-        </tr>
-    <% end %>
-  </tbody>
-  </table>  
-  </div>
-  </div>
-  <div class="cont_text_det_preparation", id='reviews', hidden><div class="cont_info_preparation">
-    <div class='newReview'>
-    <%= form_tag("/addReview", method: "post") do %>
-    <%= text_area_tag :review, nil, size: "80x5", style: "overflow-y: scroll; resize: none; text-align: left; margin-left: 10px", placeholder: "Enter your own review here." %>
-    <br>
-    <%= label_tag :rating, "Your Rating:", class: 'large_label' %>
-    <%= number_field_tag('rating', nil, min: 1, max: 5, step: 1, class:'number_input') %>
-    <%= hidden_field_tag 'recipe_id', @recipe.id %>
-    <%= submit_tag("Add", :class=>"btn btn-outline btn-xl page-scroll") %>
-    <% end %>
-    </div>
-    <br><br>
 
-    <% # Loop over reviews
+
+<div class="container">
+  <span class="source">Recipe by: <a href="#">Michelle</a></span>
+  
+  <div class="recipe-text">
+    <div class="recipe-image" style="background-image: url(<%= asset_path pic_url %>)"></div>
+      <br>
+      <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
+      <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
+      <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.prep_time %></p>
+       <p><%= link_to "View Nutritional Information" %></p>
+    <div class="cf"></div>
+  </div>
+
+<div class="nav_new">
+  <ul>
+    <li style="padding-top: 15px;"><a onclick=printpage()>PRINT</a></li>
+    <li style="padding-top: 15px;">  <%= link_to 'FAVORITE', saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %></li>
+    <li style="padding-top: 15px;"><a href="#">SHARE</i></a></li>
+    <li style="padding-top: 15px;">  <%= link_to 'ADD TO CART', carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %></i></li>
+    <li><a onclick="mealPlan()">ADD TO MEAL PLAN</i></a></li>
+    <li style="padding-top: 15px;"><a href="#reviews">REVIEW</i></a></li>
+  </ul>
+</div>
+
+
+<div class="recipe" id="recipe">
+  <div class="recipe-ingredients">
+    <h2>Ingredients</h2>
+      <ul>
+        <% #Loop over ingredients
+        ingredients = @recipe.instructions
+        for i in ingredients do
+            ingredient_string = Ingredient.find(i.ingredient_id).name %>
+            <li><span><span class="amount"><%= i.amount %> <%= i.unit %></span> <span class="in"><%= ingredient_string %></span></span></li>
+        <% end %>  
+      </ul>
+  </div>
+
+  <div class="recipe-directions">
+    <h2>Directions</h2>
+    <%
+    direct = @recipe.directions
+    direct_split = direct.split('.')
+    directions = ""
+    counter = direct_split.count
+    for line in direct_split 
+    if counter > 1 %>
+    <div class="step"><p><%= simple_format(line + ".") %></p><div class="arrow"></div></div>
+    <% counter = counter -= 1
+    else %>
+    <div class="step"><p><%= simple_format(line + ".") %></p></div>
+    <% end
+    end %>
+  </div>
+</div>
+
+    
+<div class="note" id="reviews">
+  <h2>Reviews</h2><a class='btn btn-outline btn-xl page-scroll' style="display:inline-block; text-align: right; float: right; margin-top: 20px;" onclick=showReviewForm()>Add your own!</a>
+  <div class="new-review" id="new-review" style="padding-top: 15px; display: none"><%= form_tag("/addReview", method: "post") do %>
+    <h3>Add a Review</h3>
+    <label for="review" style="text-align: left;">Review:</label><br>
+    <%= text_area_tag :review, nil, size: "75x10", style: "overflow-y: scroll; resize: none; text-align: left; margin-left: 10px; padding: 5px;", placeholder: "Enter your review of the recipe here." %>
+    <br>
+    <%= label_tag :rating, "Rating:*"%><br>
+    <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Really bad - 1 star"></label>
+    </fieldset>
+    <%= hidden_field_tag 'recipe_id', @recipe.id %><br>
+    <%= submit_tag("Add Review", :class=>"btn btn-outline") %>
+    <% end %></div>
+  <% # Loop over reviews
     if @recipe.reviews.empty? then %>
-      <p>This recipe currently has no reviews. Be the first to add one!</p>
+      <p style="padding: 10px 0; text-align: center;">This recipe currently has no reviews. Be the first to add one!</p>
     <% end
       unless @recipe.reviews.empty?
     %>
-    <table style="width: 100%">
-      <thead>
-        <tr>
-          <th> User </th>
-          <th> Review </th>
-          <th> Rating </th>
-          <th> Actions</th>
-        </tr>
-      </thead>
-      <tbody>
+    <center>
+      
+      <div class="reviews-container">
+            <div id="google-reviews">
     <%
       reviews = @recipe.reviews
       for r in reviews do
-        user_name = User.find(r.user_id).username
-    %>
-        <tr>
-          <td><%= user_name %></td>
-          <td><%= r.text %></td>
-          <td><%= r.rating %></td>
+        first_name = User.find(r.user_id).first_name
+        last_name = User.find(r.user_id).last_name
+        user = User.find(r.user_id)
+        
+        case r.rating
+        when 1
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i>" 
+        when 2
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        when 3
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        when 4
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        else
+          user_rating = "<i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i><i class='fa fa-star' aria-hidden='true'></i>"
+        end %>
+        
+    
+      <div class='review-wrap'>
+        <div class='author'>
+          <a href='/users/<%=r.user_id %>'><img class='author-img' src=<%= user.picture_url %> alt='<%= first_name %> <%= last_name %>'/></a>
+          <a href='/users/<%=r.user_id %>'><div class='author-name'><%= first_name %> <%= last_name %></div></a><br>
+          <div class='rating-review'><%= user_rating.html_safe %></div>
           <% if r.user_id == session["user_id"]%> 
-          <td><button type="button" onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)", class="btn btn-outline btn-xl page-scroll">Edit</button></td>
-          <td><%=button_to 'Delete', {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, :class => "btn btn-outline btn-xl page-scroll", data: { confirm: 'Are you sure?' }%></td>
+          <div class='delete-icon'><%= link_to "<i class='fa fa-trash'></i>".html_safe, {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, data: { confirm: 'Are you sure?' } %></div>
+          <div class='edit-icon' onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)"><i class='fa fa-pencil' aria-hidden='true'></i></div>
           <%end%>
-        </tr>
-    <% end # end of loop %> 
-      </tbody>
-    </table>
-    <% end # end of unless %>
-
-  </div>
+        </div>
+        <div class='review'><%= r.text %></div>
+      </div>
+          <% end # end of loop %> 
+    <% end # end of unless %>  
+    </div>
   </div>
 </div>
+</body>

@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
         redirect_to root_path
         end
     end
+    
+    def convertUnit(unit)
+      if unit == 'tablespoon'
+        'tbs'
+      else
+        unit
+      end
+    end
 end
