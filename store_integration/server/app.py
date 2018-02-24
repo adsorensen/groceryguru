@@ -9,7 +9,7 @@ app = Flask(__name__)
 jobs = {}
 
 @app.route('/', methods=['POST'])
-def index():
+def create_job():
     if not request.json or not 'userId' in request.json:
         abort(400)
 
