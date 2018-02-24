@@ -8,8 +8,9 @@ app = Flask(__name__)
 
 jobs = {}
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST', 'GET'])
 def create_job():
+    print("Got Request")
     if not request.json or not 'userId' in request.json:
         abort(400)
 
@@ -22,4 +23,4 @@ def create_job():
     return jsonify({'message': "Job received."}), 201
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8081)
