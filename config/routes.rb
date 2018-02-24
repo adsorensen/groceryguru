@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post 'products/done'
+  get 'products/done'
 
   get 'store_display/index'
 
