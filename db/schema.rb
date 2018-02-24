@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220225537) do
+ActiveRecord::Schema.define(version: 20180224192902) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 20180220225537) do
     t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "product_id", limit: 4
   end
 
   add_index "ingredients", ["name"], name: "index_ingredients_on_name", unique: true, using: :btree
+  add_index "ingredients", ["product_id"], name: "fk_rails_db974bf3ef", using: :btree
 
   create_table "instructions", force: :cascade do |t|
     t.integer  "recipe_id",     limit: 4,   null: false
@@ -71,6 +73,17 @@ ActiveRecord::Schema.define(version: 20180220225537) do
 
   add_index "plans", ["meal_plan_id"], name: "index_plans_on_meal_plan_id", using: :btree
   add_index "plans", ["recipe_id"], name: "index_plans_on_recipe_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name",        limit: 255, null: false
+    t.float    "price",       limit: 24,  null: false
+    t.string   "walmart_url", limit: 255
+    t.string   "kroger_url",  limit: 255
+    t.string   "brand",       limit: 255, null: false
+    t.integer  "ttl",         limit: 4,   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "recipes", force: :cascade do |t|
     t.string   "name",          limit: 255,                  null: false
@@ -135,6 +148,7 @@ ActiveRecord::Schema.define(version: 20180220225537) do
 
   add_foreign_key "checkout_lists", "ingredients"
   add_foreign_key "checkout_lists", "users"
+  add_foreign_key "ingredients", "products"
   add_foreign_key "instructions", "ingredients"
   add_foreign_key "instructions", "recipes"
   add_foreign_key "meal_plans", "users"

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'products/done'
+
   get 'store_display/index'
 
   get 'store_display/new'
