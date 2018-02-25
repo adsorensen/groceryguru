@@ -1,4 +1,5 @@
 from store import Store
+import time
 
 class Walmart(Store):
     def __init__(self):
@@ -12,3 +13,25 @@ class Walmart(Store):
 
     def get_price(self, url):
         self.browser.visit(url)
+
+        # Keep trying to find the price until the page is loaded. Try both old and new versions of the product page.
+        cont = True
+        while (cont):
+            try:
+                dollarSpan = self.browser.find_by_css('span[data-automation-id="wholeUnitsOG"]')
+                centsSup = self.browser.find_by_css('sup[data-automation-id="partialUnitsOG"]')
+                cont = False
+            except:
+                try:
+                    dollarSpan = self.browser.find_by_css('span[data-automation-id="wholeUnits"]')
+                    centsSup = self.browser.find_by_css('sup[data-automation-id="partialUnits"]')
+                    cont = False
+                except:
+                    time.sleep(1)
+
+        # combine values to create actual price
+        priceS = dollarSpan.text + "." + centsSup.text
+        price = float(priceS)
+        print(price)
+
+        return price
