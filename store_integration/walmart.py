@@ -36,3 +36,15 @@ class Walmart(Store):
         print(price)
 
         return price
+        
+    def search(self, query):
+        self.browser.visit('https://www.walmart.com/search/?query=' + query)
+        
+        # Loop over results and store in map
+        
+        
+    def get_cheapest(self):
+        price = min(results.values())
+        return list(mydict.keys())[list(mydict.values()).index(price)]
+        
+    def add_to_cart(self, url):
