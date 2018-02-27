@@ -45,6 +45,6 @@ class Walmart(Store):
         
     def get_cheapest(self):
         price = min(results.values())
-        return list(mydict.keys())[list(mydict.values()).index(price)]
+        return list(results.keys())[list(results.values()).index(price)]
         
     def add_to_cart(self, url):
