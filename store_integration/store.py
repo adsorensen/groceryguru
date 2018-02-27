@@ -2,7 +2,7 @@ from splinter import Browser
 
 class Store(object):
     def __init__(self):
-        self.browser = Browser("chrome")
+        self.browser = Browser("chrome", headless=True)
         pass
 
     def search(self, query):
