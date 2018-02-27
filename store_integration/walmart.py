@@ -20,18 +20,19 @@ class Walmart(Store):
             try:
                 dollarSpan = self.browser.find_by_css('span[data-automation-id="wholeUnitsOG"]')
                 centsSup = self.browser.find_by_css('sup[data-automation-id="partialUnitsOG"]')
+                priceS = dollarSpan.text + "." + centsSup.text
+                price = float(priceS)
                 cont = False
             except:
                 try:
                     dollarSpan = self.browser.find_by_css('span[data-automation-id="wholeUnits"]')
                     centsSup = self.browser.find_by_css('sup[data-automation-id="partialUnits"]')
+                    priceS = dollarSpan.text + "." + centsSup.text
+                    price = float(priceS)
                     cont = False
                 except:
                     time.sleep(1)
 
-        # combine values to create actual price
-        priceS = dollarSpan.text + "." + centsSup.text
-        price = float(priceS)
         print(price)
 
         return price
