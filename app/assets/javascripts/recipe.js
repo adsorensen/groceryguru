@@ -111,3 +111,33 @@ function showReviewForm()
 {
    document.getElementById('new-review').style.display = "block"
 }
+
+function showNutritionalFacts()
+{
+    
+}
+
+function importField(value)
+{
+    if (value === 'title') {
+        document.getElementById('title').value = window.getSelection().toString();
+    }
+     if (value === 'desc') {
+        document.getElementById('description').value = window.getSelection().toString();
+    }
+     if (value === 'directions') {
+        document.getElementById('directions').value = window.getSelection().toString();
+    }
+     if (value === 'ingr') {
+        document.getElementById('title').value = window.getSelection().toString();
+    }
+     if (value === 'time-to-cook') {
+        document.getElementById('time-to-cook').value = window.getSelection().toString();
+    }
+    if (value === 'servings') {
+        document.getElementById('servings').value = window.getSelection().toString();
+    }
+    if (value === 'source') {
+        document.getElementById('source').value = window.getSelection().toString();
+    }
+}
