@@ -6,6 +6,9 @@ class Store(object):
         self.results = {}
         pass
 
+    def visit(self, url):
+        self.broswer.visit(url) 
+
     def search(self, query):
         raise NotImplementedError("Should have implemented this")
 
