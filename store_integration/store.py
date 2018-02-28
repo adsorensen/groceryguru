@@ -36,7 +36,7 @@ class Store(object):
     def empty_cart(self):
         pass
 
-    def get_price(self, url):
+    def get_price(self):
         raise NotImplementedError("Should have implemented this")
 
     def get_brand(self):
