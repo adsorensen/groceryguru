@@ -41,10 +41,23 @@ class Walmart(Store):
         self.browser.visit('https://www.walmart.com/search/?query=' + query)
         
         # Loop over results and store in map
-        
+        items = self.browser.find_by_css('.search-result-gridview-item-wrapper')
+
+        for item in items:
+            try:  # Grab Name and Price
+                name = item.find_by_css('.product-title-link')['aria-label']
+                price = item.find_by_css('.Price-group')['aria-label']
+                price = float(price.replace("$", ""))
+                self.results[name] = price
+            except:  # Skip if can't buy item online
+                continue
+            
         
     def get_cheapest(self):
-        price = min(results.values())
-        return list(results.keys())[list(results.values()).index(price)]
+        price = min(self.results.values())
+        return list(self.results.keys())[list(self.results.values()).index(price)]
         
-    def add_to_cart(self, url):
+    def add_to_cart(self):
+        cartDiv = self.browser.find_by_css('.prod-ProductCTAAddToCart')
+        button = cartDiv.first.find_by_tag("button").first
+        button.click()

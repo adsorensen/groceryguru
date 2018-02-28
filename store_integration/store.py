@@ -18,7 +18,7 @@ class Store(object):
     def login(self, user, password):
         raise NotImplementedError("Should have implemented this")
 
-    def add_to_cart(self, url):
+    def add_to_cart(self):
         raise NotImplementedError("Should have implemented this")
     
     def add_to_cart_price(self):
