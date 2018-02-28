@@ -38,7 +38,7 @@ class Walmart(Store):
         return price
         
     def search(self, query):
-        self.browser.visit('https://www.walmart.com/search/?query=' + query)
+        self.visit('https://www.walmart.com/search/?query=' + query)
         
         # Loop over results and store in map
         items = self.browser.find_by_css('.search-result-gridview-item-wrapper')
