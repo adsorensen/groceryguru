@@ -6,18 +6,11 @@ class ApplicationController < ActionController::Base
   
     include SessionsHelper
    
-    def ensure_logged_in
-        unless logged_in?
-        #flash[:notice] = 'Please log in.'
-        redirect_to root_path
-        end
-    end
-    
-    def convertUnit(unit)
-      if unit == 'tablespoon'
-        'tbs'
+    def index
+      if logged_in?
+          redirect_to '/users/' + session[:user_id].to_s
       else
-        unit
+        redirect_to root_path
       end
     end
 end

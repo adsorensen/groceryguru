@@ -25,11 +25,10 @@ Rails.application.routes.draw do
   post 'checkout', to: 'list#checkout'
   get 'checkout', to: 'list#checkout_get'
 
-  root 'new_age#index'
-  get 'new_age/index'
+  root 'users#home'
+  get 'new_age/index', :path => "/get-started"
 
   get 'cart/loadcart'
-  #root 'welcome#index'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
   delete 'cart', to: 'cart#destroy'
