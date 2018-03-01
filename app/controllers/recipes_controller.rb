@@ -146,10 +146,11 @@ class RecipesController < ApplicationController
   def edit_review
     @review = Review.find(params['id'])
     newText = params['text']
+    newRate = params['newRate']
     @recipe = Recipe.find(params['recipe_id'])
      
     respond_to do |format|
-      if @review.update(text: newText)
+      if @review.update(text: newText, rating: newRate)
         format.html { redirect_to @recipe, notice: 'Review updated' }
         format.json { render :show, location: @recipe  }
         else
@@ -161,7 +162,7 @@ class RecipesController < ApplicationController
   
   def delete_review
     @review = Review.find(params['id'])
-    @recipe = Recipe.find(params['recipe_id'])
+    @recipe = Recipe.find(@review.recipe_id)
      
     respond_to do |format|
       if @review.destroy
