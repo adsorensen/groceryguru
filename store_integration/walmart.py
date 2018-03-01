@@ -53,7 +53,7 @@ class Walmart(Store):
                     time.sleep(1)
 
         print(name)
-        
+
         return name
         
     def search(self, query):

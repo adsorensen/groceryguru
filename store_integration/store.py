@@ -1,4 +1,6 @@
 from splinter import Browser
+from time import sleep
+from exceptions import PageNotLoadedException
 
 class Store(object):
     def __init__(self):
@@ -6,17 +8,16 @@ class Store(object):
         self.results = {}
         pass
 
-    def visit(self, url):
-        self.browser.visit(url) 
+    def visit(self, url, wait=True):
+        self.browser.visit(url)
+        if wait:
+            self.wait_pageload()
 
     def search(self, query):
         raise NotImplementedError("Should have implemented this")
 
     def get_cheapest(self, id):
         raise NotImplementedError("Should have implemented this")
-
-    def go_to_product(self):
-        pass
 
     def login(self, user, password):
         raise NotImplementedError("Should have implemented this")
@@ -44,7 +45,21 @@ class Store(object):
 
     def get_name(self):
         raise NotImplementedError("Should have implemented this")
-    
+
+    def execute_javascript(self, script):
+        return self.browser.evaluate_script(script)
+
+    def wait_pageload(self, timeout=30):
+        wait_interval = 0.05
+        elapsed = 0
+
+        while self.execute_javascript('document.readyState') != 'complete':
+            sleep(wait_interval)
+            elapsed += wait_interval
+
+            if elapsed > timeout:
+                raise PageNotLoadedException
+
     #*****************************************************************
     # Main store function. Attempts to add all products in a user's
     # checklist to their Walmart Cart. First attempting to navigate to 
