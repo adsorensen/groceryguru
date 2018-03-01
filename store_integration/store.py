@@ -41,3 +41,11 @@ class Store(object):
 
     def get_brand(self):
         pass
+    
+    #*****************************************************************
+    # Main store function. Attempts to add all products in a user's
+    # checklist to their Walmart Cart. First attempting to navigate to 
+    # the saved url, then manually searching by name should that fail.
+    #*****************************************************************
+    def run_job(self, user_id):
+        raise NotImplementedError("Should have implemented this")

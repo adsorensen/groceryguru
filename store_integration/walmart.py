@@ -1,5 +1,7 @@
 from store import Store
 import time
+import requests
+import json
 
 class Walmart(Store):
     def __init__(self):
@@ -59,3 +61,15 @@ class Walmart(Store):
         cartDiv = self.browser.find_by_css('.prod-ProductCTAAddToCart')
         button = cartDiv.first.find_by_tag("button").first
         button.click()
+        
+    #*****************************************************************
+    # Main store function. Attempts to add all products in a user's
+    # checklist to their Walmart Cart. First attempting to navigate to 
+    # the saved url, then manually searching by name should that fail.
+    #*****************************************************************
+    def run_job(self, user_id):
+        # Connect to DB, grab checklist, search for and add all products to cart
+        
+        # Report whether success or not
+        requests.get(url="http://groceryguru-docrosco.c9users.io:8081/done?user=" + str(user_id) + "&status=1")
+        print("In run_job")

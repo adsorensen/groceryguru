@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
-  # before_action :set_user, only: [:done]
+  # before_action :auth, only: [:done]
   def done
-    puts("Received Done")
-    puts(params.to_s)
+    puts("*********** Received Done ******************")
+    puts("User" + params['userId'] + "'s job is done. Status:" + params['status'])
   end
   
   private 
