@@ -45,10 +45,12 @@ def job_done():
     )
     
     
-    print('Response HTTP Response Body: {content}'.format(
-        content=response.content))
+    # print('Response HTTP Response Body: {content}'.format(
+    #     content=response.content))
     print('Response HTTP Status Code: {status_code}'.format(
         status_code=response.status_code))
+        
+    return response.content
 
 
 if __name__ == '__main__':

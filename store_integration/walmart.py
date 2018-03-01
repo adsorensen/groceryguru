@@ -71,5 +71,5 @@ class Walmart(Store):
         # Connect to DB, grab checklist, search for and add all products to cart
         
         # Report whether success or not
-        requests.get(url="http://groceryguru-docrosco.c9users.io:8081/done?user=" + str(user_id) + "&status=1")
-        print("In run_job")
+        r = requests.get(url="https://groceryguru-docrosco.c9users.io:8081/done?user=" + str(user_id) + "&status=1")
+        print("Sent /done "+ str(r.status_code))
