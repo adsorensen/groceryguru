@@ -36,6 +36,25 @@ class Walmart(Store):
         print(price)
 
         return price
+
+    def get_name(self):
+        cont = True
+        while (cont):
+            try:
+                nameDiv = self.browser.find_by_css('div[data-automation-id="name"]')
+                name = nameDiv.text
+                cont = False
+            except:
+                try:
+                    nameDiv = self.browser.find_by_css('span[data-automation-id="nameOG"]')
+                    name = nameDiv.text
+                    cont = False
+                except:
+                    time.sleep(1)
+
+        print(name)
+        
+        return name
         
     def search(self, query):
         self.visit('https://www.walmart.com/search/?query=' + query)
@@ -61,6 +80,7 @@ class Walmart(Store):
         cartDiv = self.browser.find_by_css('.prod-ProductCTAAddToCart')
         button = cartDiv.first.find_by_tag("button").first
         button.click()
+
         
     #*****************************************************************
     # Main store function. Attempts to add all products in a user's

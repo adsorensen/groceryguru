@@ -41,6 +41,9 @@ class Store(object):
 
     def get_brand(self):
         pass
+
+    def get_name(self):
+        raise NotImplementedError("Should have implemented this")
     
     #*****************************************************************
     # Main store function. Attempts to add all products in a user's
