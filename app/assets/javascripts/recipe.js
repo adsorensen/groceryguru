@@ -22,12 +22,32 @@ function reviewEdit(id, oldReview, recipeId)
         title: 'Edit your review',
         input: 'text',
         inputValue: oldReview,
+        html:
+        '<p>Rating:</p>'+
+        '<fieldset class="rating">'+
+        '<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>'+
+        '<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>'+
+        '<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>'+
+        '<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>'+
+        '<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Really bad - 1 star"></label>'+
+        '</fieldset>',
         showCancelButton: true,
         showCloseButton: true,
         confirmButtonText: 'Update',
         showLoaderOnConfirm: true,
         allowOutsideClick: () => !swal.isLoading(),
     }).then(function(value) {
+        var rate = 1;
+        if($('#star1').is(':checked'))
+            rate = 1;
+        if($('#star2').is(':checked'))
+            rate = 2;
+        if($('#star3').is(':checked'))
+            rate = 3;
+        if($('#star4').is(':checked'))
+            rate = 4;
+        if($('#star5').is(':checked'))
+            rate = 5;
          $.ajax(
             {
                type: 'POST',
@@ -35,7 +55,8 @@ function reviewEdit(id, oldReview, recipeId)
                 data: {
                     id: id,
                     text: value,
-                    recipe_id: recipeId
+                    recipe_id: recipeId,
+                    newRate: rate
                 },
                 dataType: "json",
                success: function(data){

@@ -139,7 +139,7 @@
           <a href='/users/<%=r.user_id %>'><div class='author-name'><%= first_name %> <%= last_name %></div></a><br>
           <div class='rating-review'><%= user_rating.html_safe %></div>
           <% if r.user_id == session["user_id"]%> 
-          <div class='delete-icon'><%= link_to "<i class='fa fa-trash'></i>".html_safe, {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, data: { confirm: 'Are you sure?' } %></div>
+          <div class='delete-icon'><%= link_to "<i class='fa fa-trash'></i>".html_safe, '/review/'+r.id.to_s, method: :delete, data: { confirm: 'Are you sure?' } %></div>
           <div class='edit-icon' onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)"><i class='fa fa-pencil' aria-hidden='true'></i></div>
           <%end%>
         </div>
