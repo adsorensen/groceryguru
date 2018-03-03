@@ -5,7 +5,7 @@ class Database(object):
         self.db = PyMySQL.connect("localhost","root","","groceryguru" )
         
     def get_checklist_ingredients(self, user_id):
-        sql = "SELECT * FROM checkout_lists WHERE user_id=" + user_id
+        sql = "SELECT * FROM checkout_lists WHERE user_id="+user_id+";"
         
         cursor = self.db.cursor()
         
@@ -19,7 +19,7 @@ class Database(object):
            
         ingredients = []   
         for ingredient in checklist:
-            sql = "SELECT * FROM ingredients WHERE id=" + ingredient[2]
+            sql = "SELECT * FROM ingredients WHERE id="+ingredient[2]+";"
             
             try:
                cursor.execute(sql)
@@ -35,7 +35,7 @@ class Database(object):
     def get_products(self, ingredients):
         products = []
         for ingredient in ingredients:
-            sql = "SELECT * FROM products WHERE id=" + ingredient[4]
+            sql = "SELECT * FROM products WHERE id="+ingredient[4]+";"
             cursor = self.db.cursor()
             
             try:
