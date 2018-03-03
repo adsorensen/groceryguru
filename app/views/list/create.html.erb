@@ -21,10 +21,14 @@ $(document).ready(function() {
   });
   $('.add_item').click(function(){
     var item = $("#add_item_field").val();
-    var markup = "<tr><td><input type='checkbox' id=\"ingredient_ids[]\" value=0 checked>\
-    </td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\" min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /> </td></tr>";
-    $("table tbody").append(markup);
-    
+    if (item == "") {
+      alert("Please type an item to add.");
+    }
+    else {
+      var markup = "<tr><td><input type='checkbox' id=\"ingredient_ids[]\" value=0 checked>\
+      </td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\" min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /> </td></tr>";
+      $("table tbody").append(markup);
+    }
   })
 });
 
@@ -44,8 +48,11 @@ function decrement(ingre) {
   document.getElementById(ingre).value = number;
 };
 function remove(r) {
-  var i = r.parentNode.parentNode.rowIndex;
-  document.getElementById("mytable").deleteRow(i);
+  // swal("hello");
+  if (confirm("Are you sure you want to remove this item?")) {
+    var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("mytable").deleteRow(i);  
+  }
 };
 </script>
 </head>
@@ -67,15 +74,13 @@ function remove(r) {
         <tr>
           <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
           <td><h4><%= ingredient.name %></h4></td>
-          <!--<td><input type="button" id="addButton" value=" + " onclick="increment('<%=ingredient.name%>');" style="font-size:14px;" ></td>-->
-          <!--<td><input type="button" id="subButton" value=" - " onclick="decrement('<%=ingredient.name%>');" style="font-size:14px;" ></td>-->
           <% if @blacklist.include? ingredient.name %>
-            <!--<td><h4 id='<%=ingredient.name  %>'><%= value.round %></h4></td>-->
             <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
+            <td><h4></h4></td>
+            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% else %>
-            <!--<td><h4 id='<%=ingredient.name %>'><%= value %>  </h4></td>-->
             <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value %> /> </td>
-            <td><h4>  oz</h4></td>
+            <td style="padding:0 10px 0 10px;"><h4>  oz</h4></td>
             <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% end %>
           
