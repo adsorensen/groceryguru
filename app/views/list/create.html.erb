@@ -15,22 +15,25 @@
 $(document).ready(function() {
   $('.ingredient_table tr').click(function(event) {
     if (event.target.type !== 'checkbox' && event.target.id != 'addButton' && 
-      event.target.id != 'subButton' && event.target.name != 'amount_input') {
+      event.target.id != 'remove_item' && event.target.name != 'amount_input') {
       $(':checkbox', this).trigger('click');
     }
   });
+  $('.add_item').click(function(){
+    var item = $("#add_item_field").val();
+    var markup = "<tr><td><input type='checkbox' id=\"ingredient_ids[]\" value=0 checked>\
+    </td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\" min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /> </td></tr>";
+    $("table tbody").append(markup);
+    
+  })
 });
+
 function increment(ingre) {
-  //var ingredientInfo = document.getElementById(ingre);
-  //var number = ingredientInfo.innerHTML;
   var number = document.getElementById(ingre).value
   number++;
   document.getElementById(ingre).value = number
-  //ingredientInfo.innerHTML = number;
 };
 function decrement(ingre) {
-  // var ingredientInfo = document.getElementById(ingre);
-  // var number = ingredientInfo.innerHTML;
   var number = document.getElementById(ingre).value;
   if (number < 1 || number == 0) {
     number = 0;
@@ -39,10 +42,10 @@ function decrement(ingre) {
     number--;
   }
   document.getElementById(ingre).value = number;
-  // ingredientInfo.innerHTML = number;
 };
-function add_item() {
-  
+function remove(r) {
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("mytable").deleteRow(i);
 };
 </script>
 </head>
@@ -51,9 +54,9 @@ function add_item() {
 <%= form_tag checkout_path, :method => :post do %>
 <h4>Need something else?</h4>
 <input type="text" id="add_item_field" />
-<input type="button" value="Add Item" onclick="add_item()" />
+<input type="button" value="Add Item" class="add_item" onclick="add_item()" />
 <div class="container1">
-    <table class="ingredient_table">
+    <table class="ingredient_table" id="mytable">
       <thead>
         <tr>
           <th></th>
@@ -64,8 +67,8 @@ function add_item() {
         <tr>
           <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
           <td><h4><%= ingredient.name %></h4></td>
-          <td><input type="button" id="addButton" value=" + " onclick="increment('<%=ingredient.name%>');" style="font-size:14px;" ></td>
-          <td><input type="button" id="subButton" value=" - " onclick="decrement('<%=ingredient.name%>');" style="font-size:14px;" ></td>
+          <!--<td><input type="button" id="addButton" value=" + " onclick="increment('<%=ingredient.name%>');" style="font-size:14px;" ></td>-->
+          <!--<td><input type="button" id="subButton" value=" - " onclick="decrement('<%=ingredient.name%>');" style="font-size:14px;" ></td>-->
           <% if @blacklist.include? ingredient.name %>
             <!--<td><h4 id='<%=ingredient.name  %>'><%= value.round %></h4></td>-->
             <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
@@ -73,6 +76,7 @@ function add_item() {
             <!--<td><h4 id='<%=ingredient.name %>'><%= value %>  </h4></td>-->
             <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value %> /> </td>
             <td><h4>  oz</h4></td>
+            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% end %>
           
           
