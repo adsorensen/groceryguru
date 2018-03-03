@@ -1,4 +1,5 @@
 from store import Store
+from database import Database
 import time
 import requests
 import json
@@ -88,7 +89,15 @@ class Walmart(Store):
     # the saved url, then manually searching by name should that fail.
     #*****************************************************************
     def run_job(self, user_id):
-        # Connect to DB, grab checklist, search for and add all products to cart
+        # Connect to DB, grab checklist products 
+        db = Database()
+        ingredients = db.get_checklist_ingredients(user_id)
+        products = db.get_products(ingredients)
+        
+        # Search for and add all products to cart
+        for product in products:
+            self.visit(product[3])
+            self.add_to_cart(self)
         
         # Report whether success or not
         self.job_done(user_id, 1)
