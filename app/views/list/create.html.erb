@@ -19,15 +19,36 @@ $(document).ready(function() {
       $(':checkbox', this).trigger('click');
     }
   });
+  // var arr = [];
+  // $(".ingredient_table tr").each(function() {
+  //   // alert("here");
+  //   arr.push(this.id);
+  // });
+  // console.log(arr);
   $('.add_item').click(function(){
     var item = $("#add_item_field").val();
     if (item == "") {
+      // sweet alert?
       alert("Please type an item to add.");
     }
     else {
-      var markup = "<tr><td><input type='checkbox' id=\"ingredient_ids[]\" value=0 checked>\
-      </td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\" min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /> </td></tr>";
-      $("table tbody").append(markup);
+      var arr = [];
+      $(".ingredient_table tr").each(function() {
+        arr.push(this.id.toUpperCase());
+      });
+      console.log(arr);
+      if (arr.includes(item.toUpperCase())) {
+        // sweet alert?
+        alert("Item is already in cart.");
+      }
+      else {
+        var markup = "<tr id=\"" + item + "\"><td><input type='checkbox' id=\"ingredient_ids[]\"\
+        value=0 checked></td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\"\
+        min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /></td><td><h4></h4></td><td><input \
+        type=\"button\" id=\"remove_item\" value=\"Remove Item\" onclick=\"remove(this);\" style=\"font-size:14px;\" ></td></tr>";
+        $("table tbody").append(markup);
+      }
+      $("#add_item_field").val("");
     }
   })
 });
@@ -49,9 +70,10 @@ function decrement(ingre) {
 };
 function remove(r) {
   // swal("hello");
+  // sweet alert?
   if (confirm("Are you sure you want to remove this item?")) {
     var i = r.parentNode.parentNode.rowIndex;
-    document.getElementById("mytable").deleteRow(i);  
+    document.getElementById("ingre_table").deleteRow(i);  
   }
 };
 </script>
@@ -61,9 +83,9 @@ function remove(r) {
 <%= form_tag checkout_path, :method => :post do %>
 <h4>Need something else?</h4>
 <input type="text" id="add_item_field" />
-<input type="button" value="Add Item" class="add_item" onclick="add_item()" />
+<input type="button" value="Add Item" class="add_item" />
 <div class="container1">
-    <table class="ingredient_table" id="mytable">
+    <table class="ingredient_table" id="ingre_table">
       <thead>
         <tr>
           <th></th>
@@ -71,7 +93,7 @@ function remove(r) {
       </thead>
       <tbody>
         <% @ingredients2.each do |ingredient, value| %>
-        <tr>
+        <tr id="<%= ingredient.name %>">
           <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
           <td><h4><%= ingredient.name %></h4></td>
           <% if @blacklist.include? ingredient.name %>
