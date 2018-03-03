@@ -51,7 +51,7 @@ class Database(object):
         # Disconnect from server
         self.db.close()
         
-db = Database()
-check = db.get_checklist_ingredients(1)
-print(check)
-db.close_connection()
+# db = Database()
+# check = db.get_checklist_ingredients(1)
+# print(check)
+# db.close_connection()
