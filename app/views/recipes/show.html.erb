@@ -3,12 +3,12 @@
     <%= javascript_include_tag('recipe.js') %>
 </head>
 <div class="icon-bar">
-  <a class="active" href="/recipes" title="Search for another recipe"><i class="fa fa-search"></i></a> 
-  <a title="Print"><i class="fa fa-print" onclick=printpage()></i></a> 
-  <%= link_to '<i class="fa fa-heart" onclick=openPopup() title="Favorite this recipe"></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
-  <a href="#share"><i class="fa fa-facebook" title="Share this recipe to Facebook"></i></a> 
-  <%= link_to '<i class="fa fa-cart-plus" title="Add recipe to cart"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
-  <a onclick="mealPlan()" title="Add recipe to a meal plan"><i class="fa fa-book"></i></a> 
+  <a class="active" href="/recipes" data-toggle="tooltip" title="Search for another recipe"><i class="fa fa-search"></i></a>
+  <a data-toggle="tooltip" title="Print"><i class="fa fa-print" onclick=printpage()></i></a>
+  <%= link_to '<i class="fa fa-heart" onclick=openPopup() data-toggle="tooltip" title="Favorite this recipe"></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
+  <a href="#share"><i class="fa fa-facebook" data-toggle="tooltip" title="Share to Facebook"></i></a>
+  <%= link_to '<i class="fa fa-cart-plus" data-toggle="tooltip" title="Add recipe to cart"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
+  <a onclick="mealPlan()" data-toggle="tooltip" title="Add to a meal plan"><i class="fa fa-book"></i></a>
 </div>
 <div style="display:none;">    <%= if @recipe.picture?
         pic_url = @recipe.picture.url
@@ -35,7 +35,7 @@
       <br>
       <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
       <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
-      <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.prep_time %></p>
+      <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.calories %></p>
        <p><%= link_to "View Nutritional Information" %></p>
     <div class="cf"></div>
   </div>

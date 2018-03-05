@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get '/recipes/url', to: 'recipes#url'
   get '/recipes/text', to: 'recipes#text'
+  post '/recipes/text', to: 'recipes#create'
 
   resources :saved_recipes
   resources :recipes

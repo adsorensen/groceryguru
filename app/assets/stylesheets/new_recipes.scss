@@ -6,6 +6,9 @@ label {
 	font-size: large;
 	padding: 5px;
 }
+p {
+	margin-bottom: 7px;
+}
 #form-div {
 	width: 80%;
 	 margin: 1em auto;
@@ -16,7 +19,7 @@ label {
 
 input[type="text"],input[type="number"], textarea {
 	color:#3c3c3c;
-  font-weight:500;
+	font-weight:500;
 	font-size: 18px;
 	border-radius: 0;
 	line-height: 22px;
@@ -28,7 +31,7 @@ input[type="text"],input[type="number"], textarea {
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
-  border: 1px solid gray;
+	border: 1px solid gray;
 }
 
 input[type="checkbox"] {
@@ -41,7 +44,7 @@ input:focus, textarea:focus{
 	border: 3px solid #3498db;
 	color: #3498db;
 	outline: none;
-  padding: 13px 13px 13px 13px;
+	padding: 13px 13px 13px 13px;
 }
 
 .focused{
@@ -149,10 +152,13 @@ Url
 	width: 25%;
 	float: left;
 	padding: 10px;
+	height: 1150px;
+  overflow-y: hidden;
+  z-index: 1;
 }
 
 .btn btn-outline {
-	
+	position: fixed;
 }
  
 .column-right {
@@ -162,6 +168,29 @@ Url
 }
 .footer {
 	clear: both;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 40px;
+	margin-bottom: 10px;
+	z-index: 2;
+	position: relative;
+	background-color: white;
+}
+#popup {
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    vertical-align:middle;
+    background-color: cornflowerblue;
+    color: white;
+    display: none;
+    padding-top: 8px;
+    position: absolute;
+}
+label.error {
+	color: red;
+}
+input.error {
+	border: solid 1px red;
+}
+textarea.error {
+	border: solid 1px red;
 }
