@@ -79,7 +79,33 @@ function remove(r) {
   // swal('', 'Are you sure you want to remove this item?', 'confirm');
   if (confirm("Are you sure you want to remove this item?")) {
     var i = r.parentNode.parentNode.rowIndex;
-    document.getElementById("ingre_table").deleteRow(i);  
+    var t = document.getElementById("ingre_table").deleteRow(i);
+    var name = t.rows[i].id;
+    t.deleteRow(i);
+    $.ajax(
+        {
+           type: 'post',
+            url: '/list/remove_item',
+            data: {
+                ingr: name
+            },
+            success: function(data){
+              t.deleteRow(i);
+              swal({
+                 type: 'success',
+                 title: name + ' was removed',
+                 showConfirmButton: false,
+                 timer: 1500
+              });
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+            // alert("something went wrong");
+             console.log(errorThrown);
+             console.log(jqXHR);
+             console.log(textStatus);
+           }
+        }
+     );
   }
 };
 </script>

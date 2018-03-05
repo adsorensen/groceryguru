@@ -8,24 +8,32 @@ class ListController < ApplicationController
   def add_item
     
     ingr = params['ingr']
-    id = Ingredient.find_by_name(ingr)
-    newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => 1111, :quantity => 1)
-    newValue.save
-    # if id != nil
-    #   newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => id.id, :quantity => 1, :ingr_name => @ingr)
-    #   @ingredientIds.append(id.id)
-    #   newValue.save
-    # else
-    #   newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => 0, :quantity => 1, :ingr_name => @ingr)
-    #   @ingredientIds.append(0)
-    #   newValue.save
-    # end
+    item = Ingredient.find_by_name(ingr)
+    if item.nil?
+      sp = Ingredient.find_by_name("special")
+      newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => sp.id, :quantity => 1, :ingr_name => ingr)
+      # @ingredientIds.append(sp.id)
+      newValue.save
+    else
+      newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => item.id, :quantity => 1)
+      # @ingredientIds.append(item.id)
+      newValue.save
+    end
     
     
     respond_to do |format|
-      # format.html { render :new }
-      format.html { render :text => ingr }
-      # format.json { render json: @ingr }
+      format.html { render :new }
+      # format.html { render :text => ingr }
+    end
+  end
+  
+  def remove_item
+    ingr = params['ingr']
+    
+    row = CheckoutList.where(user_id: session['user_id'])
+    respond_to do |format|
+      format.html { render :new }
+      # format.html { render :text => ingr }
     end
   end
   
@@ -50,7 +58,7 @@ class ListController < ApplicationController
       v = conversions[unit.upcase[0..-2]]
       newA = amount * v
     else
-      newA = -100
+      newA = amount
     end
     
     return newA, noUnit
