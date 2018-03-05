@@ -1,11 +1,15 @@
-import PyMySQL
+#!/python-mysqldb_1.2.3-2ubuntu1_amd64.deb
+import pymysql.cursors
 
 class Database(object):
     def __init__(self):
-        self.db = PyMySQL.connect("localhost","root","","groceryguru" )
+        self.db = pymysql.connect(host="localhost",
+                                  user="root", 
+                                  passwd="",
+                                  db="groceryguru")
         
     def get_checklist_ingredients(self, user_id):
-        sql = "SELECT * FROM checkout_lists WHERE user_id="+user_id+";"
+        sql = "SELECT * FROM checkout_lists WHERE user_id="+str(user_id)+";"
         
         cursor = self.db.cursor()
         
@@ -19,7 +23,7 @@ class Database(object):
            
         ingredients = []   
         for ingredient in checklist:
-            sql = "SELECT * FROM ingredients WHERE id="+ingredient[2]+";"
+            sql = "SELECT * FROM ingredients WHERE id="+str(ingredient[2])+";"
             
             try:
                cursor.execute(sql)
@@ -35,7 +39,7 @@ class Database(object):
     def get_products(self, ingredients):
         products = []
         for ingredient in ingredients:
-            sql = "SELECT * FROM products WHERE id="+ingredient[4]+";"
+            sql = "SELECT * FROM products WHERE id="+str(ingredient[4])+";"
             cursor = self.db.cursor()
             
             try:
