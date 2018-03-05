@@ -19,13 +19,8 @@ $(document).ready(function() {
       $(':checkbox', this).trigger('click');
     }
   });
-  // var arr = [];
-  // $(".ingredient_table tr").each(function() {
-  //   // alert("here");
-  //   arr.push(this.id);
-  // });
-  // console.log(arr);
-  $('.add_item').click(function(){
+  $('.add_item').click(function(e){
+    e.preventDefault();
     var item = $("#add_item_field").val();
     if (item == "") {
       // sweet alert?
@@ -36,7 +31,6 @@ $(document).ready(function() {
       $(".ingredient_table tr").each(function() {
         arr.push(this.id.toUpperCase());
       });
-      console.log(arr);
       if (arr.includes(item.toUpperCase())) {
         // sweet alert?
         alert("Item is already in cart.");
@@ -46,31 +40,43 @@ $(document).ready(function() {
         value=0 checked></td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\"\
         min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /></td><td><h4></h4></td><td><input \
         type=\"button\" id=\"remove_item\" value=\"Remove Item\" onclick=\"remove(this);\" style=\"font-size:14px;\" ></td></tr>";
-        $("table tbody").append(markup);
+        $.ajax(
+            {
+               type: 'post',
+                url: '/list/add_item',
+                data: {
+                    ingr: item
+                },
+                // dataType: "json",
+                success: function(data){
+                  $("table tbody").append(markup);
+                  swal({
+                     type: 'success',
+                     title: item + ' was added',
+                     showConfirmButton: false,
+                     timer: 1500
+                  });
+                  // window.setTimeout(refresh, 2000);
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                 alert("something went wrong");
+                 console.log(errorThrown);
+                 console.log(jqXHR);
+                 console.log(textStatus);
+               }
+            }
+         );
       }
       $("#add_item_field").val("");
     }
   })
 });
 
-function increment(ingre) {
-  var number = document.getElementById(ingre).value
-  number++;
-  document.getElementById(ingre).value = number
-};
-function decrement(ingre) {
-  var number = document.getElementById(ingre).value;
-  if (number < 1 || number == 0) {
-    number = 0;
-  }
-  else {
-    number--;
-  }
-  document.getElementById(ingre).value = number;
-};
+
 function remove(r) {
   // swal("hello");
   // sweet alert?
+  // swal('', 'Are you sure you want to remove this item?', 'confirm');
   if (confirm("Are you sure you want to remove this item?")) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("ingre_table").deleteRow(i);  

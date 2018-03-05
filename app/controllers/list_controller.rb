@@ -5,6 +5,30 @@ class ListController < ApplicationController
   def create
   end
   
+  def add_item
+    
+    ingr = params['ingr']
+    id = Ingredient.find_by_name(ingr)
+    newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => 1111, :quantity => 1)
+    newValue.save
+    # if id != nil
+    #   newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => id.id, :quantity => 1, :ingr_name => @ingr)
+    #   @ingredientIds.append(id.id)
+    #   newValue.save
+    # else
+    #   newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => 0, :quantity => 1, :ingr_name => @ingr)
+    #   @ingredientIds.append(0)
+    #   newValue.save
+    # end
+    
+    
+    respond_to do |format|
+      # format.html { render :new }
+      format.html { render :text => ingr }
+      # format.json { render json: @ingr }
+    end
+  end
+  
   # function converts differnent units to ounces
   def convert_to_oz(amount, unit)
     conversions = {"TABLESPOON" => 0.5, "TBSP" => 0.5, "TEASPOON" => 0.16667, 
@@ -29,35 +53,6 @@ class ListController < ApplicationController
       newA = -100
     end
     
-    # u = unit.upcase
-    # case u
-    # when "TABLESPOON", "TABLESPOONS", "TBSP"
-    #   newA = amount / 2
-    # when "TEASPOON", "TEASPOONS", "TSP"
-    #   newA = amount * 0.16667
-    # when "CUP", "CUPS", "C"
-    #   newA = amount * 8
-    # when "HANDFUL", "HANDFULS"
-    #   newA = amount * 4
-    # when "OZ", "OUNCE", "OUNCES"
-    #   newA = amount
-    # when "LBS", "POUND", "POUNDS"
-    #   newA = amount * 16
-    # when "PINCH", "PINCHES"
-    #   newA = amount * 0.013
-    # when "SERVINGS", "SERVING"
-    #   newA = amount * 4
-    # when ""
-    #   newA = amount
-    #   noUnit = true
-    # when "CLOVE", "CLOVES"
-    #   newA = amount * 0.16667
-    # when "HEAD", "HEADS"
-    #   newA = amount * 32
-    # else
-    #   newA = -100
-    # end
-    
     return newA, noUnit
   end
   
@@ -74,7 +69,7 @@ class ListController < ApplicationController
     @ingredients2 = {}
     @blacklist = []
     
-    ingredientIds = []
+    @ingredientIds = []
     for id_val in recipe_ids do
       recipe = Recipe.where(id: id_val.recipe).first
       instr = recipe.instructions
@@ -101,7 +96,7 @@ class ListController < ApplicationController
         end
         if CheckoutList.where(ingredient_id: i.ingredient_id).blank?
           newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1)
-          ingredientIds.append(i.ingredient_id)
+          @ingredientIds.append(i.ingredient_id)
           newValue.save
         else
           valueToUpdate = CheckoutList.where(ingredient_id: i.ingredient_id)

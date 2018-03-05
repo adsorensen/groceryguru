@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   #root 'welcome#index'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
+  post '/list/add_item' => 'list#add_item'
+  get '/list/add_item', to: 'list#add_item'
   delete 'cart', to: 'cart#destroy'
   get 'calendar', to: 'calendar#index'
   #get 'welcome/index'
