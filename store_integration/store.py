@@ -1,6 +1,8 @@
 from splinter import Browser
 from time import sleep
 from exceptions import PageNotLoadedException
+import requests
+import json
 
 class Store(object):
     def __init__(self):
@@ -59,6 +61,24 @@ class Store(object):
 
             if elapsed > timeout:
                 raise PageNotLoadedException
+    
+    def job_done(self, user_id, status):
+        print("Job Finished")
+        response = requests.post(
+            url="http://localhost:8080/products/done",
+            headers={
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            data=json.dumps({
+                "userId": user_id,
+                "status": status
+            })
+        )
+
+        print('Response HTTP Status Code: {status_code}'.format(
+            status_code=response.status_code))
+            
+        return response.content
 
     #*****************************************************************
     # Main store function. Attempts to add all products in a user's

@@ -24,34 +24,25 @@ def create_job():
     controler.receive_job(userId, store)
 
     return jsonify({'message': "Job received."}), 201
-
-@app.route('/done', methods=['POST', 'GET'])
-def job_done():
-    # randombits = random.getrandbits(256)
-    # key = "test"
-    # hash = ""
-    print("Job Finished")
-    user_id = request.args.get('user')
-    status = request.args.get('status')
-    response = requests.post(
-        url="http://localhost:8080/products/done",
-        headers={
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        data=json.dumps({
-            "userId": user_id,
-            "status": status
-        })
-    )
     
+# def job_done(user_id, status):
+#     print("Job Finished")
+#     response = requests.post(
+#         url="http://localhost:8080/products/done",
+#         headers={
+#             "Content-Type": "application/json; charset=utf-8",
+#         },
+#         data=json.dumps({
+#             "userId": user_id,
+#             "status": status
+#         })
+#     )
     
-    # print('Response HTTP Response Body: {content}'.format(
-    #     content=response.content))
-    print('Response HTTP Status Code: {status_code}'.format(
-        status_code=response.status_code))
+#     print('Response HTTP Status Code: {status_code}'.format(
+#         status_code=response.status_code))
         
-    return response.content
+#     return response.content
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8081)
+    app.run(debug=True, host='0.0.0.0', port=8081, threaded=True)

@@ -20,13 +20,13 @@ $(document).ready(function() {
   });
 });
 function increment(ingre) {
-    var ingredientInfo = document.getElementById(ingre);
+    var ingredientInfo = $("#ingre");
     var number = ingredientInfo.innerHTML;
     number++;
     ingredientInfo.innerHTML = number;
 };
 function decrement(ingre) {
-    var ingredientInfo = document.getElementById(ingre);
+    var ingredientInfo = $("#ingre");
     var number = ingredientInfo.innerHTML;
     if (number < 1 || number == 0) {
       number = 0;
@@ -61,9 +61,6 @@ function decrement(ingre) {
             <td><h4 id='<%=ingredient.name %>'><%= value %>  </h4></td>
             <td><h4>  oz</h4></td>
           <% end %>
-          
-          
-          
         </tr>
         <% end %>
       </tbody>
@@ -72,10 +69,10 @@ function decrement(ingre) {
 <br>
 <div class="btn btn-outline btn-xl page-scroll" onclick=printpage()> Print</div>
 <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll'%> 
-<a href='https://groceryguru-docrosco.c9users.io:8081/?userId=1&store=walmart' >Link to Python Server</a>
 <br>
 <% end %>
+<button id="jobBtn" data-session="<%=session['user_id']%>" onclick="startJob()">Fill Cart</button>
 <br>
-<br>
+<a href="https://groceryguru-docrosco.c9users.io:8081/?userId=1&store=walmart"> Fill Cart</a>
 <!--<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>-->
 

@@ -12,3 +12,4 @@ class Controller(object):
         # Add job to tracked list and run
         self.jobs[user_id] = job
         job.run_job(user_id) 
+        
