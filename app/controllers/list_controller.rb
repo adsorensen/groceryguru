@@ -6,7 +6,6 @@ class ListController < ApplicationController
   end
   
   def add_item
-    
     ingr = params['ingr']
     item = Ingredient.find_by_name(ingr)
     if item.nil?
@@ -20,20 +19,19 @@ class ListController < ApplicationController
       newValue.save
     end
     
-    
     respond_to do |format|
       format.html { render :new }
-      # format.html { render :text => ingr }
     end
   end
   
   def remove_item
     ingr = params['ingr']
-    
-    row = CheckoutList.where(user_id: session['user_id'])
+    row = CheckoutList.where(user_id: session['user_id'], ingr_name: ingr)
+    for r in row do
+      r.destroy
+    end
     respond_to do |format|
       format.html { render :new }
-      # format.html { render :text => ingr }
     end
   end
   
@@ -103,7 +101,7 @@ class ListController < ApplicationController
           @ingredients2[food] = oa
         end
         if CheckoutList.where(ingredient_id: i.ingredient_id).blank?
-          newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1)
+          newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1, :ingr_name => food.name)
           @ingredientIds.append(i.ingredient_id)
           newValue.save
         else
@@ -116,7 +114,6 @@ class ListController < ApplicationController
        
     end
     @ingredients = @ingredients.uniq
-    #render :text => st
     #render 'list/create', :locals => {:resource => @ingredients2}
     render 'list/create'
   end

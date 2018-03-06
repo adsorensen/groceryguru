@@ -47,7 +47,6 @@ $(document).ready(function() {
                 data: {
                     ingr: item
                 },
-                // dataType: "json",
                 success: function(data){
                   $("table tbody").append(markup);
                   swal({
@@ -56,7 +55,6 @@ $(document).ready(function() {
                      showConfirmButton: false,
                      timer: 1500
                   });
-                  // window.setTimeout(refresh, 2000);
                },
                error: function(jqXHR, textStatus, errorThrown) {
                  alert("something went wrong");
@@ -74,14 +72,13 @@ $(document).ready(function() {
 
 
 function remove(r) {
-  // swal("hello");
   // sweet alert?
   // swal('', 'Are you sure you want to remove this item?', 'confirm');
   if (confirm("Are you sure you want to remove this item?")) {
     var i = r.parentNode.parentNode.rowIndex;
-    var t = document.getElementById("ingre_table").deleteRow(i);
-    var name = t.rows[i].id;
-    t.deleteRow(i);
+    var t = document.getElementById("ingre_table");
+    var row = t.rows[i];
+    var name = row.id;
     $.ajax(
         {
            type: 'post',
@@ -99,7 +96,6 @@ function remove(r) {
               });
            },
            error: function(jqXHR, textStatus, errorThrown) {
-            // alert("something went wrong");
              console.log(errorThrown);
              console.log(jqXHR);
              console.log(textStatus);
