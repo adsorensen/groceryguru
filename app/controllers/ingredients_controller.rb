@@ -5,6 +5,7 @@ class IngredientsController < ApplicationController
   # GET /ingredients.json
   def index
     @ingredients = Ingredient.all
+    @ingredients_unit = @ingredients.unit + 'test'
   end
 
   # GET /ingredients/1
@@ -79,5 +80,14 @@ class IngredientsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
       params.require(:ingredient).permit(:name)
+    end
+    
+    def convertUnit()
+      @ingredient.unit
+      if :unit == 'tablespoon'
+        'tbs'
+      else
+        :unit
+      end
     end
 end

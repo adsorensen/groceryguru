@@ -75,6 +75,14 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def home
+    if logged_in?
+      redirect_to '/users/' + session[:user_id].to_s
+    else
+      redirect_to new_age_index_path
+    end   
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

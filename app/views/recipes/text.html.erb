@@ -1,0 +1,79 @@
+<head>
+     <%= stylesheet_link_tag "new_recipes" %>
+    <%= javascript_include_tag('recipe.js') %>
+ </head>
+<body>
+<div class="wrapper">
+<div class="header"><h2>Save a recipe to Grocery Guru using our import tools!</h2></div>
+ <br>
+	<div class="column-left"><center><p>1. Paste your entire recipe here.</p></center><textarea rows="20" cols="50" style="height: 1150px;">
+</textarea></div>
+ 
+	<div class="column-center"><center><p>2. Highlight the title from the recipe on the left then click on "Import Title", repeat for the rest of the fields where applicable.</p>
+  	<div style="position: fixed" id="scrollbox">
+  	  <button id='title-button' onclick="importField('title')" class='btn btn-outline' style="margin-top: 2px; margin-bottom: 10px;">Import Title <i class='fa fa-angle-double-right'></i></button><br>
+  	  <button onclick="importField('desc')" class='btn btn-outline' style="margin: 10px 0;">Import Description <i class='fa fa-angle-double-right'></i></button><br>
+  	  <button onclick="importField('time-to-cook')" class='btn btn-outline' style="margin: 10px 0;">Import Prep & Cook Time <i class='fa fa-angle-double-right'></i></button><br>
+    	<button onclick="importField('servings')" class='btn btn-outline' style="margin: 10px 0;">Import Serving Size <i class='fa fa-angle-double-right'></i></button><br>
+  		<button onclick="importField('ingr')" class='btn btn-outline' style="margin: 10px 0;">Import Ingredients <i class='fa fa-angle-double-right'></i></button><br>
+    	<button onclick="importField('directions')" class='btn btn-outline' style="margin: 10px 0;">Import Directions <i class='fa fa-angle-double-right'></i></button><br>
+    	<button onclick="importField('source')" class='btn btn-outline' style="margin: 10px 0;">Import Source <i class='fa fa-angle-double-right'></i></button></center><br>
+  	</div>
+	</div>
+ 
+ <%= form_for(@recipe) do |f| %>
+	<div class="column-right"><center><p>3. Fill out any remaining fields and fix any errors.</p></center>
+  <% if @recipe.errors.any? %>
+    <div class="error_explanation">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+      <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-div" style= "padding: 10px;">
+    <form class="form" class="form1">
+      <%= f.label "Upload an image for your recipe:"%>
+      <center>
+      <%= f.file_field :picture,  :class => "uploadfield", :style => "width: 100%;" %><br></center>
+      <%= f.label "Title*:", id: 'title-label' %>
+      <%= f.text_field :name, placeholder: "Recipe Title", id: "title"%>
+      <%= f.label "Description:"%>
+      <%= f.text_area :description, placeholder: "Enter a detailed description of your recipe here", id: "description" %>
+      <%= f.label "Total preparation and cook time:", id: "time-label"%>
+      <%= f.text_field :prep_time, placeholder: "Prep and cook time (in minutes)", id: "time-to-cook"%>
+      <%= f.label "Serving size:", id: "servings-label" %>
+      <%= f.text_field :servings, placeholder: "Serving size", id: "servings" %>
+      <%= f.label "Ingredients*:", id: 'ingr-label' %><i class="fa fa-info-circle" data-toggle="tooltip" data-html="true" title="Format each line of ingredients using the format below:<br><br>quantity unit ingr, prep note<br><br>ex: 2 tsp butter, melted<br>2 lbs shrimp, deshelled<br>2 tomatoes<br>2 chicken breasts, diced<br><br>*Please note that the unit and prep note are not required. <br>*For single ingredients such as butter, please include a 1 before the ingredient as the quantity."></i>
+      <textarea id="ingr" placeholder="Ingredients, each separated by a new line e.g. &#10;&#10;1 cup milk&#10;2 ozs peanuts, chopped&#10;3 tomatoes, diced"></textarea>
+      <%= f.label "Directions*:", id: 'directions-label' %>
+      <%= f.text_area :directions, placeholder: "List the directions for your recipe with each step separated by a period", id: "directions" %>
+      <br>
+      <%= f.label "Make this recipe private:" %>
+      <%= hidden_field_tag 'private', false %>
+      <%= check_box_tag  'private', 1, true, :class => "checkbox" %><br>
+      <%= f.label "Source:"%>
+      <%= f.text_field :origin, placeholder: "Where did you get this recipe?", id: "source" %>
+  <br><br>
+</div>
+</div>
+<table id="ingredients" style="display: none;"><tbody>
+          <tr>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Ingredient</th>
+            <th>Preparation</th>
+          </tr>
+  </tbody></table>
+<div class="footer">
+  <center>
+    <p>4. Save the recipe to Grocery Guru!</p>
+      <input type="submit" value="Import Recipe To Grocery Guru!" class="btn btn-outline btn-xl page-scroll"/></form>
+      </center>
+</div>
+</div>
+    <% end %>
+</body>
+

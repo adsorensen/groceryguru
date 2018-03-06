@@ -9,13 +9,16 @@ Rails.application.routes.draw do
 
   get 'list/create'
 
+  get '/recipes/url', to: 'recipes#url'
+  get '/recipes/text', to: 'recipes#text'
+  post '/recipes/text', to: 'recipes#create'
+
   resources :saved_recipes
   resources :recipes
   resources :instructions
   resources :ingredients
   resources :prep_notes
   resources :ingredients
-  resources :recipes
   resources :users
   resources :carts
   resources :list, :collection => { :checkout => :post }
@@ -23,11 +26,10 @@ Rails.application.routes.draw do
   post 'checkout', to: 'list#checkout'
   get 'checkout', to: 'list#checkout_get'
 
-  root 'new_age#index'
-  get 'new_age/index'
+  root 'users#home'
+  get 'new_age/index', :path => "/get-started"
 
   get 'cart/loadcart'
-  #root 'welcome#index'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
   post '/list/add_item' => 'list#add_item'
@@ -42,10 +44,9 @@ Rails.application.routes.draw do
   delete 'logout',  to: 'sessions#destroy'
   get 'create_list', to: 'list#create_list'
   post '/addReview', to: 'recipes#review'
-  get "/recipes/url" => "recipes#url"
   post '/saved_recipes/:id', to: "saved_recipes#destroy"
   post "/recipes/edit_review" => "recipes#edit_review"
-  post "/recipes/delete_review" => "recipes#delete_review"
+  delete "/review/:id" => "recipes#delete_review"
   get "/cart/checkout_to_store", to: "store_display#index"
   post '/userplans', to: 'meal_plans#user_plans' 
   post '/mealplans', to: 'meal_plans#create'
@@ -54,7 +55,7 @@ Rails.application.routes.draw do
   get '/mealplans/:id', to: "meal_plans#show"
   get '/mealplans', to: "meal_plans#index"
   post '/plans/:id', to: 'plans#destroy'
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

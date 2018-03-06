@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218225537) do
+ActiveRecord::Schema.define(version: 20180220225537) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -73,16 +73,24 @@ ActiveRecord::Schema.define(version: 20180218225537) do
   add_index "plans", ["recipe_id"], name: "index_plans_on_recipe_id", using: :btree
 
   create_table "recipes", force: :cascade do |t|
-    t.string   "name",        limit: 255,   null: false
-    t.text     "directions",  limit: 65535, null: false
-    t.string   "description", limit: 255
-    t.string   "origin",      limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "picture",     limit: 255
-    t.integer  "servings",    limit: 4
-    t.integer  "prep_time",   limit: 4
-    t.boolean  "private",                   null: false
+    t.string   "name",          limit: 255,                  null: false
+    t.text     "directions",    limit: 65535,                null: false
+    t.string   "description",   limit: 255
+    t.string   "origin",        limit: 255
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "picture",       limit: 255
+    t.integer  "servings",      limit: 4
+    t.integer  "prep_time",     limit: 4
+    t.boolean  "private",                                    null: false
+    t.decimal  "calories",                    precision: 10
+    t.decimal  "fat",                         precision: 10
+    t.decimal  "saturated_fat",               precision: 10
+    t.decimal  "carbs",                       precision: 10
+    t.decimal  "cholestrol",                  precision: 10
+    t.decimal  "sugar",                       precision: 10
+    t.decimal  "sodium",                      precision: 10
+    t.decimal  "protein",                     precision: 10
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -22,6 +22,16 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit
   end
+  
+  # GET /recipes/url
+  def url
+    @recipe = Recipe.new
+  end
+  
+  # GET /recipes/text
+  def text
+    @recipe = Recipe.new
+  end
 
   # POST /recipes
   # POST /recipes.json
@@ -136,10 +146,11 @@ class RecipesController < ApplicationController
   def edit_review
     @review = Review.find(params['id'])
     newText = params['text']
+    newRate = params['newRate']
     @recipe = Recipe.find(params['recipe_id'])
      
     respond_to do |format|
-      if @review.update(text: newText)
+      if @review.update(text: newText, rating: newRate)
         format.html { redirect_to @recipe, notice: 'Review updated' }
         format.json { render :show, location: @recipe  }
         else
@@ -151,7 +162,7 @@ class RecipesController < ApplicationController
   
   def delete_review
     @review = Review.find(params['id'])
-    @recipe = Recipe.find(params['recipe_id'])
+    @recipe = Recipe.find(@review.recipe_id)
      
     respond_to do |format|
       if @review.destroy
@@ -171,9 +182,6 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all.order("created_at DESC")
     end
-  end
-  
-  def url
   end
 
   private

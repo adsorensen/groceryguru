@@ -1,425 +1,444 @@
-// Place all the styles related to the recipes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900|Catamaran|Montserrat);
+
+/* Safari >=1.1, Opera >=9.5, IE9 */
+::selection {
+  background: #8dc63f;
+  color: #fff;
+}
+/* Firefox >=1 */
+::-moz-selection {
+  background: #8dc63f;
+  color: #fff;
+}
+
 * {
-  margin: 0px auto;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-top: 40px;
+  font-family: 'Source Sans Pro', Helvetica, arial, sans-serif;
+  padding-bottom: 20px;
+}
+
+h1 {
   text-align: center;
-}
-/* -------- ----------- */
-.cont_principal {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  margin: 0px auto;
-  width: 600px;
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fbfaf6+9,d4cebf+74,d4cebf+74,d4cebf+100 
-background: rgb(251,250,246); 
-background: -moz-linear-gradient(-45deg,  rgba(251,250,246,1) 9%, rgba(212,206,191,1) 74%, rgba(212,206,191,1) 74%, rgba(212,206,191,1) 100%); /* FF3.6-15 *
-background: -webkit-linear-gradient(-45deg,  rgba(251,250,246,1) 9%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 100%); /* Chrome10-25,Safari5.1-6 
-background: linear-gradient(135deg,  rgba(251,250,246,1) 9%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-}
-.cont_central {  
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  margin-top: -200px;
+  margin: 20px 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 300;
 }
 
-.cont_modal {
-  position: relative;
-  width: 500px;
-  height: 400px;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s; 
-  transition-delay: 0.7s;
-  -webkit-transition-delay: 0.7s;
-  -o-transition-delay: 0.7s;
-  transition-delay: 0.7s;
+h2 {
+  border-bottom: 1px solid #8dc63f;
+  display: inline-block;
+  margin-bottom: 5px;
 }
 
-.cont_photo {
+h3 {
+  border-bottom: 4px double #8dc63f;
+  /*display: inline-block;*/
+}
+
+.cf {
+  clear: both;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+label {
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.bgimg {
+  background-size: cover;
+  background-position: center 30%;
+  width: 100%;
+  height: 250px;
   position: relative;
-  width: 300px;
-  height: 350px;
   overflow: hidden;
-  background-color: #eee;
-  border-radius:5px;
-  top: -20px;
-  float: left;
-  z-index: 2;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  transition: all 0.5s; 
-  box-shadow: 1px 1px 20px -5px rgba(0,0,0,0.5);  
+  filter: opacity(50%);
+  word-wrap: break-word;
 }
 
-.cont_img_back {
-  position: absolute;
+.bgimg .caption {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 250px;  
+  background: #000;
+  background: rgba(0, 0, 0, .5);
+  padding: 10px;
+  color: #fff;
+  font-size: 50px;
   width: 100%;
+}
+
+.bgimg .caption span {
+  display: block;
+  font-size: 10px;
+}
+
+.bgimg ul {
+  background: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 200px;
+  height: 50px;
+  margin: auto;
+}
+
+.bgimg ul li {
+  width: 50%;
   height: 100%;
-  overflow: hidden;
-  border-radius:5px;
-}
-.cont_img_back > img {
-  width: 100%;
-  opacity: 0.7;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  transition: all 1s;
-}
-
-.cont_img_back:hover > img {
-  transform: scale(1.5);
+  float: left;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 50px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
 }
 
-.cont_text_ingredients {
+.bgimg ul li span {
+  min-width: 100px;
+  height: 50px;
+  background: #8dc63f;
+  background: rgba(235, 29, 71,.8);
   position: absolute;
-  width: 2000px;
-  top: 0px;
-  left: 290px;
-  margin-left: 10px;
-  height: 400px;
-  float: left; 
-  border-radius:5px ;
-  z-index: 3;
-  box-shadow: 1px 1px  20px  -5px  rgba(0,0,0,0.2);
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fbf9f9+28,e8eaed+100 */
-  background: rgb(251,249,249); /* Old browsers */
-  background: -moz-linear-gradient(-45deg,  rgba(251,249,249,1) 28%, rgba(232,234,237,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg,  rgba(251,249,249,1) 28%,rgba(232,234,237,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg,  rgba(251,249,249,1) 28%,rgba(232,234,237,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s; 
-  transition-delay: 0.7s;
-  -webkit-transition-delay: 0.7s;
-  -o-transition-delay: 0.7s;
-  transition-delay: 0.7s;
-}
-
-.cont_mins{
-  position: relative;
-  float: left;
-  width: 100%;
-}
-
-.sub_mins {
-  position: relative;
-  float: left;
-  width: 60px;
-  height: 60px;
-  background-color: rgba(255,253,112,0.8);
-  border-radius:50% ;
-  margin: 16px;
-  margin-bottom: 0px;
   opacity: 0;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  transition: all 0.5s;
-  transition-delay: 1s;
-  -webkit-transition-delay: 1s;
-  -o-transition-delay: 1s;
-  transition-delay: 1s;
-}
-
-.sub_mins > h3 {
-  font-size: 24px;
-  margin-top: 15px;
-  padding-bottom: 3px;
-  margin-bottom: -13px;
-  color: black;
-}
-
-.sub_mins > span {
-  padding-top: 5px;
-  font-size: 9px; 
-  font-weight: 700;
-}
-
-.cont_servings {
-  position: relative;
-  float: left;
-  width: 60px;
-  height: 60px;
-  background-color: rgba(255,253,112,0.8);
-  border-radius:50% ;
-  margin: 16px;
-  opacity: 0;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s; 
-  transition-delay: 0.7s;
-  -webkit-transition-delay: 0.7s;
-  -o-transition-delay: 0.7s;
-  transition-delay: 0.7s;
-}
-
-.cont_servings > h3 {
-  font-size: 22px;
-  margin-top: 15px;
-  padding-bottom: 3px;
-  margin-bottom: -13px;
-  color: black;
-}
-
-.cont_servings > span {
-  padding-top: 5px;
-  font-size: 9px;
-  font-weight: 700;
-}
-.cont_icon_right {
-  position: relative;
-  float: right;
-  margin-top: 16px;
-}
-.cont_icon_right  > a  {
-  margin: 16px;
-  margin-top: 16px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
   color: #fff;
 }
 
-.cont_detalles {
+.bgimg ul li.left span {
+  left: -80px;
+}
+
+.bgimg ul li.right span {
+  right: -80px;
+}
+
+.bgimg ul li:hover {
+  color: #8dc63f;
+}
+
+.bgimg ul li.left:hover {
+  padding-right: 10px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bgimg ul li.right:hover {
+  padding-left: 10px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bgimg ul li.left:hover span {
+  opacity: 1;
+  left: -100px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bgimg ul li.right:hover span {
+  opacity: 1;
+  right: -100px;
+  transition:All .5s ease;
+  -webkit-transition:All .5s ease;
+  -moz-transition:All .5s ease;
+  -o-transition:All .5s ease;
+}
+
+.bannerc {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  margin-bottom: -100px;
+}
+
+.banner {
+  height: 100px;
+  width: 80px;
+  padding: 40px 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  background: #8dc63f;
   position: absolute;
-  bottom:-185px;
-  height: 200px;
-  border-radius:5px ;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+100,000000+101&0+0,0.65+68 */
-  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 68%, rgba(0,0,0,0.65) 100%, rgba(0,0,0,0.65) 101%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 68%,rgba(0,0,0,0.65) 100%,rgba(0,0,0,0.65) 101%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 68%,rgba(0,0,0,0.65) 100%,rgba(0,0,0,0.65) 101%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  width: 100%;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s; 
-  transition: all 0.5s;
-  transition-delay: 1.2s;
-  -webkit-transition-delay: 0.7s;
-  -o-transition-delay: 0.7s;
-  transition-delay: 0.7s;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }
 
-.cont_detalles > h3 {
-  margin-top: 125px;
+.banner a {
   color: #fff;
-  font-size: 24px;
-  font-family: Lobster;
 }
 
-.cont_detalles > p {
-  color: #fff;
-  width: 80%;
-  text-align:left;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+span.source {
+  color: #bababa;
   font-size: 14px;
 }
 
-/* ---------------- Css Tabs -------- */
-
-.cont_tabs {
-  position: relative;
-  float: center;
-  width: 100%;
-  height: 60px;
-  border-bottom: 3px solid #EDEDEC;
+span.source a {
+  color: #bababa;
+  font-size: 14px;
+  border-bottom: 1px solid #bababa;
 }
 
-.cont_tabs > ul {
-  width: 100%;
-  background-color: #eee;
+span.source a:hover {
+  color: #8dc63f;
+  font-size: 14px;
+  border-bottom: 1px solid #8dc63f;
 }
 
-.cont_tabs > ul > li {
-  position: relative;
+
+/***********************
+Recipe Desc
+***********************/
+.recipe-text {
+  border-bottom: 1px solid #9f9f9f;
+  margin: 10px 0;
+  padding-bottom: 10px;
+}
+
+.recipe-image {
+  width: 40%;
+  height: 300px;
+  size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   float: left;
-  width: 33.3%;
+  transition: all 1s ease;
+  overflow: hidden;
+}
+
+.recipe-text p {
+  width: 48%;
+  padding-left: 20px;
+  float: left;
+  font-size: 25px;
+  color: #888888;
+}
+.recipe-text .servings-box {
+    width: 100%;
+  }
+
+/***********************
+Nav
+***********************/
+.nav_new {
+  border-bottom: 4px double #9f9f9f;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.nav_new ul {
   list-style: none;
-  padding-left: 10px;
+  display:-webkit-flex;
+  display:flex;
 }
 
-.cont_tabs > ul > li.active {
-  border-top: 7px solid #ED346C;
+.nav_new li { 
+  text-align: center;
+  width: 40%;
+  padding: 0 20px;
+  font-size: 18px;
+  font-family: 'Montserrat', 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+  font-weight: 200;
+  letter-spacing: .5px;
 }
 
-.cont_tabs > ul > li > a {
+.nav_new li a { 
+  color: #8dc63f;
+}
+
+.nav_new ul li a:hover {
+  color: black;
+}
+
+/***********************
+Recipe
+***********************/
+.recipe {
+  padding: 0;
+  border-bottom: 1px solid #9f9f9f;
+  margin-bottom: 20px;
+}
+
+.recipe .recipe-ingredients {
+  margin-bottom: 20px;
+  padding-right: 30px;
+}
+
+.recipe .recipe-ingredients ul {
+  list-style: none;
+  width: auto;
+}
+
+.recipe .recipe-ingredients ul li {
+  border-bottom: 1px solid #9f9f9f;
+  margin-bottom: 5px;
+}
+
+.recipe .recipe-ingredients ul li span {
   position: relative;
-  display: block;
-  float: center;
-  padding-top: 15px;
-  color: #241C3E;
-  text-decoration: none;
-  margin-left: 15px;
 }
 
-.cont_tabs > ul > li > a > .active {
-  border-top: 7px solid #ED346C;
-}
-
-.cont_tabs > ul > li > a
-{
-  border-top: 7px solid rgba(237, 52, 108, 0);
-  margin-top: 0px;
-  color: #9A96A4;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  transition: all 0.2s;
-}
-
-
-
-.cont_btn_open_dets {
+.recipe .recipe-ingredients ul li span.amount {
+  font-weight: bold;
   position: absolute;
-  right: -15px;
-  top:50%;
 }
-.cont_btn_open_dets  > a {
-  display: block;
-  padding-top: -5px;
+
+.recipe .recipe-ingredients ul li span.in {
+  padding-left: 115px;
+}
+
+.recipe .recipe-directions .print {
+  float: right;
   width: 30px;
   height: 30px;
-  background-color: #ED2460;
-  border-radius:50% ;
+  background: #8dc63f;
   color: #fff;
-  box-shadow: 0px 0px 20px -2px rgba(237, 36, 96, 1);
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  transition: all 0.5s;
-  transform: rotate(180deg);
-}
-
-
-.cont_btn_open_dets  > a > i {
-  margin-top: 4px;
-}
-
-.cont_title_preparation {
-   position: relative;
-  float: left;
-  margin-bottom: -100px;
-  margin-top: 10px;
-  width: 100%;
-}
-.cont_title_preparation > p {
-  font-weight: 600;
-  font-size: 14px;
-  margin-left: 20px;
-  text-align: left;
-  color: #36354E;
-}
-
-.cont_info_preparation {
-  position: relative;
-  float: left;
-  padding-top: 20px;
-}
-.cont_info_preparation > p {
-  margin: 5px 0px;
-  border-left: 2px solid #E3E3E3; 
-  font-size: 1.2em;
-  padding-left: 20px;
-  text-align: left;
-  padding-right: 15px;
-  color: #565656;
-  overflow: hidden;
-}
-
-.cont_info_preparation > table {
-  border-left: 2px solid #E3E3E3; 
-  border-right: 2px solid #E3E3E3; 
-  font-size: 1.2em;
-  padding-left: 600px;
-  text-align: left;
-  padding-right: 20px;
-  color: #565656;
-  overflow: scroll;
-}
-
-.cont_info_preparation > .newReview {
-  display: inline-block;
-  font-size: 15px;
-  padding: 5px 0px;
-  padding-left: 20px;
-  text-align: left;
-  padding-right: 15px;
-  color: #565656;
-}
-
-thead th {
-  margin: 2px 0px;
-  border-bottom: 2px solid #E3E3E3; 
-  border-top: 2px solid #E3E3E3; 
-  /*border-right: 2px solid #E3E3E3; */
-  font-size: 15px;
-  padding: 5px 0px;
+  line-height: 30px;
   text-align: center;
-  color: #565656;
 }
 
-tbody tr td {
-    border-bottom: 2px solid #E3E3E3; 
-    border-top: 2px solid #E3E3E3; 
-    border-left: 2px solid #E3E3E3; 
-    text-align: center;
+.recipe .recipe-directions .print a {
+  color: #fff;
 }
 
-.cont_btn_mas_dets {
+.recipe .recipe-directions .step {
+  width: 100%;
+  position: relative;
+  background: #8dc63f;
+  padding: .5px;
+  text-align: center;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.recipe .recipe-directions .step .arrow {
   position: absolute;
-  bottom:0px;
-  left: 50%;
-}
-.cont_btn_mas_dets > a {
-  color: #36354E;
+  margin: auto;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 20px 20px 0 20px;
+  border-color: #8dc63f transparent transparent transparent;
 }
 
-.cont_over_hidden {
-  position: relative;
-  float: left;
+.note {
   width: 100%;
-  height: 400px;
-  overflow: scroll;
-}
-
-.cont_text_det_preparation {
+  text-align: left;
   position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-left: 20px;
-  margin: 0 auto;
+}
+.note .new-review {
+  width: auto;
+  position: relative;
+  text-align: left;
+  padding-bottom: 20px;
 }
 
-.cont_modal_active > .cont_text_ingredients  > .cont_btn_open_dets > a {
-  transform: rotate(0deg);
-}
-.cont_modal_active > .cont_text_ingredients{
-  width: 800px;
-  height: 100%;
-  left: 285px;
-  z-index: 1;
-  box-shadow: 15px 20px  70px  -5px  rgba(0,0,0,0.2);
-}
-.cont_modal_active {
-  width: 700px;
-}
-
-.cont_modal_active > .cont_photo {
-box-shadow: 25px 10px 70px -5px rgba(0,0,0,0.3);  
-}
-
-.cont_modal_active > .cont_photo > .cont_mins > .sub_mins {
-  opacity: 1;
-}
-
-.cont_modal_active  > .cont_photo > .cont_servings {
-  opacity: 1;
+@media screen and (min-width:800px) {
+    .recipe {
+        display:-webkit-flex;
+        display:flex;
+    }
+     
+    .recipe .recipe-directions {
+        -webkit-flex:2;
+        flex:2;
+        -webkit-order:2;
+        order:2;
+    }
+     
+    .recipe .recipe-ingredients {
+        -webkit-flex:1;
+        flex:1;
+        -webkit-order:1;
+        order:1;
+    }
 }
 
-.cont_modal_active > .cont_photo  > .cont_detalles{
-  bottom: 0px;
+@media screen and (min-width:800px) {
+  .recipe .recipe-directions {
+        -webkit-flex:3;
+        flex:3;
+    }
 }
+
+@media screen and (min-width:1240px) {
+  .container {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width:640px) {
+  .recipe-image {
+    display: none;
+  }
+  .bannerc {
+    display: none;
+  }
+  .bgimg .caption {
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .recipe-text p {
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width:481px) {
+  .bgimg {
+    height: 200px;
+  }
+}
+
+/***********************
+Right icon bar
+***********************/
 .icon-bar {
     position: fixed;
     z-index: 2;
@@ -441,9 +460,49 @@ box-shadow: 25px 10px 70px -5px rgba(0,0,0,0.3);
 .icon-bar a:hover {
     background-color: #000; /* Add a hover color */
 }
+/***********************
+Star rating system
+***********************/
+.rating { 
+  border: none;
+  display: inline;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+/***********************
+Buttons
+***********************/
 .btn-outline {
-  color: #5cdb95;
-  border-color: #5cdb95;
+  color: #8dc63f;
+  border-color: #8dc63f;
   border: 1px solid;
 }
 .btn-outline:hover,
@@ -451,8 +510,8 @@ box-shadow: 25px 10px 70px -5px rgba(0,0,0,0.3);
 .btn-outline:active,
 .btn-outline.active {
   color: white;
-  background-color: #5cdb95;
-  border-color: #5cdb95;
+  background-color: #8dc63f;
+  border-color: #8dc63f;
 }
 .btn {
   font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
@@ -464,32 +523,335 @@ box-shadow: 25px 10px 70px -5px rgba(0,0,0,0.3);
   padding: 15px 45px;
   font-size: 11px;
 }
-::-moz-selection {
+.btn-outline {
+  color: #8dc63f;
+  border-color: #8dc63f;
+  border: 1px solid;
+}
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active,
+.btn-outline.active {
   color: white;
-  text-shadow: none;
-  background: #222222;
+  background-color: #8dc63f;
+  border-color: #8dc63f;
 }
-::selection {
-  color: white;
-  text-shadow: none;
-  background: #222222;
+.btn {
+  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 300px;
 }
-img::selection {
-  color: white;
-  background: transparent;
+.btn-xl {
+  padding: 15px 45px;
+  font-size: 11px;
 }
-img::-moz-selection {
-  color: white;
-  background: transparent;
+/***********************
+Reviews
+***********************/
+.reviews-container {
+  background: rgb(251,250,246); /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  rgba(251,250,246,1) 9%, rgba(212,206,191,1) 74%, rgba(212,206,191,1) 74%, rgba(212,206,191,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  rgba(251,250,246,1) 9%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  rgba(251,250,246,1) 9%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 74%,rgba(212,206,191,1) 100%);
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0 ,0.5);
+  margin: 40px auto;
+  max-width: 700px;
+  max-height: 500px;
+  padding: 30px;
 }
-body {
-  webkit-tap-highlight-color: #222222;
+#google-reviews {
+  max-height: 450px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 15px;
 }
-.large_label {
-  font-size: 1.2em;
-  font-weight: 200;
+.review-wrap {
+  margin-bottom: 20px;
 }
-.number_input {
-  height: 40px;
+.review-wrap:last-of-type {
+  margin-bottom: 0;
+}
+.author {
+  margin-bottom: 15px;
+}
+.author-img {
+  object-fit: cover;
+  float: left;
+  margin-right: 10px;
   width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: filter ease-in-out .3s;
+}
+.author-img:hover {
+  filter: brightness(2);
+}
+.author-name {
+  float: left;
+  font-weight: 700;
+}
+.delete-icon {
+  padding-left: 5px;
+  float: right;
+}
+.delete-icon i:hover {
+  color: red;
+}
+.edit-icon {
+  padding-right: 5px;
+  float: right;
+}
+.edit-icon i:hover {
+  color: #fff;
+}
+.rating-review i {
+  float: left;
+  color: gold;
+  padding-right: 2px;
+}
+.review {
+  padding-top: 5px;
+  text-align: left;
+  clear: both;
+}
+/***********************
+Nutrition Facts
+***********************/
+//colors
+$black: #000;
+$color_mine_shaft_approx: #333;
+$color_tapa_approx: #777;
+$gray: gray;
+$color_cream_approx: #ffc;
+
+//fonts
+$font_0: Arial;
+$font_1: Helvetica;
+$font_2: sans-serif;
+$font_3: Archivo Black;
+
+.nutritionLabel {
+	border: 2px solid $black;
+	color: $color_mine_shaft_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 90%;
+	line-height: normal;
+	margin: 1.1em auto 1.1em auto;
+	padding: .68em;
+  width: 260px;
+	.title {
+		font-size: 2.7em;
+		letter-spacing: -2px;
+		line-height: .83em;
+		padding-bottom: 4px;
+		white-space: nowrap;
+	}
+	.m {
+		font-size: .9em;
+	}
+	.serving {
+		font-size: 1.1em;
+		line-height: 1.28em;
+		padding-bottom: 2px;
+	}
+	.name {
+		font-size: 1.1em;
+		line-height: 1.3em;
+		&.inline {
+			padding-top: .25em \9;
+			padding-top: .2em;
+		}
+	}
+	.dvCalorieDiet {
+		font-size: .9em;
+		color: $color_tapa_approx;
+	}
+	#calcDisclaimer {
+		font-size: .9em;
+		color: $color_tapa_approx;
+	}
+	.line {
+		border-top: 1px solid $color_mine_shaft_approx;
+		padding: 1px 0;
+		&.last {
+			border-bottom: 1px solid $color_mine_shaft_approx;
+		}
+		&.indent {
+			margin-left: 15px;
+		}
+	}
+	.dv {
+		float: right;
+		&:before {
+			content: '\0000a0';
+		}
+	}
+	.bar1 {
+		background: $color_mine_shaft_approx;
+		font-size: 1px;
+		height: 10px;
+		line-height: 0;
+	}
+	.bar2 {
+		background: $color_mine_shaft_approx;
+		font-size: 1px;
+		height: 5px;
+		line-height: 0;
+	}
+	.calorieNote {
+		padding: .60em 0 0 .70em;
+	}
+	.star {
+		margin-left: -7px;
+	}
+	.tblCalorieDiet {
+		width: 100%;
+		th {
+			border-bottom: 1px solid $color_mine_shaft_approx;
+			color: $color_tapa_approx;
+			font-size: .7em;
+			text-align: left;
+		}
+		td {
+			color: $color_tapa_approx;
+			font-size: .7em;
+			line-height: normal;
+			padding: 0;
+		}
+	}
+	.ar {
+		text-align: right;
+	}
+	.fr {
+		float: right;
+	}
+	.fl {
+		float: left;
+	}
+	.spaceAbove {
+		height: 10px;
+	}
+	.setter {
+		left: 0;
+		padding: 3px 0 0;
+		position: absolute;
+		top: 0;
+		width: 12px;
+		z-index: 100;
+		a {
+			display: block;
+			font-size: 1px;
+			height: 7px;
+			line-height: 0;
+			width: 9px;
+		}
+	}
+	a {
+		&.unitQuantityUp {
+			background: transparent url("images/up.png") left top no-repeat;
+			padding-bottom: 1px;
+			z-index: 9999;
+		}
+		&.unitQuantityDown {
+			background: transparent url("images/down.png") left bottom no-repeat;
+			padding-top: 1px;
+			z-index: 9999;
+		}
+	}
+	.rel {
+		position: relative;
+	}
+	.servingSizeField {
+		float: left;
+		margin-bottom: .2em;
+		margin-right: .4em;
+		margin-top: .2em;
+	}
+	.servingUnit {
+		float: left;
+		margin-bottom: .2em;
+		margin-top: .3em;
+		padding: 0;
+	}
+	.servingWeightGrams {
+		margin-bottom: .2em;
+		margin-top: .3em;
+		padding: 0 0 0 .3em;
+	}
+	.servingSizeText {
+		margin-top: .3em;
+		padding-right: .3em;
+		display: inline-block;
+	}
+	.servingUnitQuantity {
+		margin-top: .3em;
+		padding-right: .3em;
+	}
+	.ingredientListDiv {
+		padding-top: 10px;
+	}
+	input.unitQuantityBox {
+		font-size: .9em!important;
+		height: 15px;
+		line-height: 15px \9;
+		margin-bottom: 0;
+		margin-left: 15px;
+		padding: 2px;
+		width: 25px;
+		&.ui-input-text {
+			//Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+			border-radius: 0;
+			//Instead of the line below you could use @includebox-sizing($bs)
+			box-sizing: content-box;
+			height: auto;
+			margin-top: 0;
+			moz-box-sizing: content-box;
+			webkit-box-sizing: content-box;
+		}
+		&.ui-shadow-inset {
+			//Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: none;
+		}
+		&.arrowsAreHidden {
+			margin-left: 0;
+		}
+	}
+}
+.notApplicable {
+	color: $gray;
+	cursor: default;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-top: .2em;
+}
+.naTooltip {
+	background-color: $color_cream_approx;
+	border: 1px solid $black;
+	display: none;
+	height: 18px;
+	padding: 2px;
+	position: absolute;
+	text-align: center;
+	width: 120px;
+	z-index: 10000;
+}
+.cf {
+	zoom: 1;
+	&:before {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+}
+.ingredientListDiv.scroll {
+	overflow-y: scroll!important;
+}
+#calcDisclaimer.scroll {
+	overflow-y: scroll!important;
 }
