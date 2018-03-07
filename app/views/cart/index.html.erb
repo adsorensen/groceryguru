@@ -3,45 +3,190 @@
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<h2>View Your Cart</h2>
+
+<script>
+$(document).ready(function() {
+  $('.ingredient_table tr').click(function(event) {
+    if (event.target.type !== 'checkbox' && event.target.id != 'addButton' && 
+      event.target.id != 'remove_item' && event.target.name != 'amount_input') {
+      $(':checkbox', this).trigger('click');
+    }
+  });
+  $('.add_item').click(function(e){
+    e.preventDefault();
+    var item = $("#add_item_field").val();
+    if (item == "") {
+      swal({
+         type: 'warning',
+         title: 'Please type an item to add to your grocery list',
+         showConfirmButton: false,
+         timer: 1500
+      });
+    }
+    else {
+      var arr = [];
+      $(".ingredient_table tr").each(function() {
+        arr.push(this.id.toUpperCase());
+      });
+      if (arr.includes(item.toUpperCase())) {
+        swal({
+           type: 'warning',
+           title: item + ' is already in cart!',
+           showConfirmButton: false,
+           timer: 2000
+        });
+      }
+      else {
+        var markup = "<tr id=\"" + item + "\"><td><input type='checkbox' id=\"ingredient_ids[]\"\
+        value=0 checked></td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\"\
+        min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /></td><td><h4></h4></td><td><input \
+        type=\"button\" id=\"remove_item\" value=\"Remove Item\" onclick=\"remove(this);\" style=\"font-size:14px;\" ></td></tr>";
+        $.ajax(
+            {
+               type: 'post',
+                url: '/list/add_item',
+                data: {
+                    ingr: item
+                },
+                success: function(data){
+                  $("table tbody").append(markup);
+                  swal({
+                     type: 'success',
+                     title: item + ' was added',
+                     showConfirmButton: false,
+                     timer: 1500
+                  });
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                 //alert("something went wrong");
+                 console.log(errorThrown);
+                 console.log(jqXHR);
+                 console.log(textStatus);
+               }
+            }
+         );
+      }
+      $("#add_item_field").val("");
+    }
+  })
+});
+
+
+function remove(r) {
+  // swal('', 'Are you sure you want to remove this item?', 'confirm');
+  if (confirm("Are you sure you want to remove this item?")) {
+    var i = r.parentNode.parentNode.rowIndex;
+    var t = document.getElementById("ingre_table");
+    var row = t.rows[i];
+    var name = row.id;
+    $.ajax(
+        {
+           type: 'post',
+            url: '/list/remove_item',
+            data: {
+                ingr: name
+            },
+            success: function(data){
+              t.deleteRow(i);
+              swal({
+                 type: 'success',
+                 title: name + ' was removed',
+                 showConfirmButton: false,
+                 timer: 1500
+              });
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+             console.log(errorThrown);
+             console.log(jqXHR);
+             console.log(textStatus);
+           }
+        }
+     );
+  }
+};
+</script>
+
+
+
 <br>
-<center>
-<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>
-</center>
-<br>
-<div id="content">
-  <% @recipes_list.each do |recipeCart| %>
-   <% recipeCart.recipe.each do |recipe| %>
-  <div class="recipe"> 
-		<div class="image">
-		  <%= if recipe.picture?  
-		  link_to image_tag(recipe.picture, size:"200x325"), recipe
-              else
-                pic_url_length = recipe.picture.to_s.length
-                beginning_index = recipe.picture.to_s.index('http')
-                if (beginning_index.nil?)
-                  link_to image_tag('fallback/recipe-default.png', size:"200x325"), recipe
+
+<div class="column-left">
+  <h2><center>Your Recipes</center></h2>
+  <div id="content">
+    <% @recipes_list.each do |recipeCart| %>
+     <% recipeCart.recipe.each do |recipe| %>
+    <div class="recipe"> 
+  		<div class="image">
+  		  <%= if recipe.picture?  
+  		  link_to image_tag(recipe.picture, size:"200x325"), recipe
                 else
-                  cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-                  new_url = cut_url.gsub!('%3A', ":/")
-                  link_to image_tag(new_url, size:"200x325"), recipe
-                end
-            end %>
-	<div class="name">
-	 			<h3><%= recipe.name %></h3>
-	 </div>
-	 </div>
-	 <ul class="media">
-	   		<li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
-		    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
-		    <%= link_to ' <li><i class="fa fa-trash"></i> Remove</li>'.html_safe, recipeCart.cart, method: :delete, data: { confirm: 'Are you sure?' } %>
-  		</ul>
-	</div>
-	   <% end %>
-  <% end %>
+                  pic_url_length = recipe.picture.to_s.length
+                  beginning_index = recipe.picture.to_s.index('http')
+                  if (beginning_index.nil?)
+                    link_to image_tag('fallback/recipe-default.png', size:"200x325"), recipe
+                  else
+                    cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                    new_url = cut_url.gsub!('%3A', ":/")
+                    link_to image_tag(new_url, size:"200x325"), recipe
+                  end
+              end %>
+  	<div class="name">
+  	 			<h3><%= recipe.name %></h3>
+  	 </div>
+  	 </div>
+  	 <ul class="media">
+  	   		<li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+  		    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+  		    <%= link_to ' <li><i class="fa fa-trash"></i> Remove</li>'.html_safe, recipeCart.cart, method: :delete, data: { confirm: 'Are you sure?' } %>
+    		</ul>
+  	</div>
+  	   <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="column-right">
+  <h2><center>Grocery List</center></h2>
+  <center>
+    <h4>Need something else?</h4>
+    <input type="text" id="add_item_field" />
+    <input type="button" value="Add Item" class="add_item" />
+  </center>
+  <br>
+  <div class="container1">
+    <table class="ingredient_table" id="ingre_table">
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ingredients2.each do |ingredient, value| %>
+        <tr id="<%= ingredient.name %>">
+          <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
+          <td><h4><%= ingredient.name %></h4></td>
+          <% if @blacklist.include? ingredient.name %>
+            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
+            <td><h4></h4></td>
+            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
+          <% else %>
+            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
+            <td style="padding:0 10px 0 10px;"><h4>  oz</h4></td>
+            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
 </div>
 <br>
+<div class="footer">
+  <center>
+    <button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>
+  </center>
+</div>
 <center>
-<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>
+<!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
 </center>
 <br>
