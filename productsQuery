@@ -24,3 +24,17 @@ insert into products (name,price,walmart_url,brand,ttl) VALUES("Great Value: 100
 insert into products (name,price,walmart_url,brand,ttl) VALUES("Great Value Seasoned Croutons, 5 oz", 0.92, "https://grocery.walmart.com/product/159107262","Great Value",168);
 insert into products (name,price,walmart_url,brand,ttl) VALUES("Cherry Tomatoes, 10.5 oz", 2.98, "https://grocery.walmart.com/product/23569850","generic",168);
 insert into products (name,price,walmart_url,brand,ttl) VALUES("Great Value Pure Ground Black Pepper, 3 oz", 2.68, "https://grocery.walmart.com/product/44662573","Great Value",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Broccoli Crowns", 1.48, "https://grocery.walmart.com/product/51259378","generic",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Great Value Wing Sauce, Mild, 12 fl oz", 1.98, "https://grocery.walmart.com/product/943566598","Great Value",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Foster Farms Chicken Thigh , 1.6- 2.4 lbs", 4.74, "https://grocery.walmart.com/product/105052815","Foster Farms",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("President All Natural Feta Cheese, 8oz", 3.98, "https://grocery.walmart.com/product/21805040","President",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Guerrero® Flour Soft Taco Tortillas 20.83 oz. Bag", 1.98, "https://grocery.walmart.com/product/17248144","Guerrero",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Sugardale Ham Steak Bone-in, 1.35-1.65lbs", 4.77, "https://grocery.walmart.com/product/187884748","Sugardale",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Baby Kale & Spinach, 8 oz", 2.98, "https://grocery.walmart.com/product/33057976","Fresh Express",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Red Cabbage, each", 2.10, "https://grocery.walmart.com/product/152273574","generic",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Progresso Plain Bread Crumbs, 15 oz", 1.50, "https://grocery.walmart.com/product/10320643","Progresso",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Great Value Organic Black Beans, Canned 15 oz", 0.92, "https://grocery.walmart.com/product/51236573","Great Value",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("McCormick® Ground Cumin, 1.5", 2.98, "https://grocery.walmart.com/product/39340099","McCormick",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Great Value 12 Large Aa Egg", 1.58, "https://grocery.walmart.com/product/103020312","Great Value",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Green Bell Pepper, each", 0.78, "https://grocery.walmart.com/product/44390945","generic",168);
+insert into products (name,price,walmart_url,brand,ttl) VALUES("Pico Pica Hot Sauce, 7 Oz", 1.78, "https://grocery.walmart.com/product/148388599","Pico Pica",168);
