@@ -3,5 +3,18 @@
 </head>
 <h3>Paste the URL of the recipe you would like to import</h3>
 <center>
-<input type="text" placeholder="Paste URL here" style="width: 75%; height: 40px; font-size: 20px; margin-top:30px; padding: 5px;">
+<input type="text" placeholder="Paste URL here" style="width: 75%; height: 40px; font-size: 20px; margin-top:30px; padding: 5px;" id="url-text-box">
 </center>
+<body>
+<div id = 'url' style='display: none'><% 
+result = Ingreedy.parse('3 lb. potatoes') 
+html_string = open('http://www.midwestliving.com/recipe/broccoli-cheddar-mashed-potatoes/', :allow_redirections => :all)
+recipe = Hangry.parse(html_string)
+%></div>
+
+<p><%= recipe.name %></p>
+<p><%= recipe.instructions %></p>
+<p><%= recipe.ingredients %></p>
+<img src=<%= recipe.image_url %> alt="Girl in a jacket">
+
+</body>

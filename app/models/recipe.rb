@@ -13,7 +13,6 @@
 #  servings    :integer
 #  prep_time   :integer
 #  private     :boolean          not null
-#
 
 class Recipe < ActiveRecord::Base
     has_many :instructions

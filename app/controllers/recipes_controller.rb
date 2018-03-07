@@ -194,4 +194,12 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:name, :directions, :description, :origin, :picture, :servings, :prep_time)
     end
+    
+    def process_uri(uri)
+      require 'open-uri'
+      require 'open_uri_redirections'
+      open(uri, :allow_redirections => :safe) do |r|
+        r.base_uri.to_s
+      end
+    end
 end
