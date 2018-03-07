@@ -90,15 +90,20 @@ class Walmart(Store):
     #*****************************************************************
     def run_job(self, user_id):
         # Connect to DB, grab checklist products 
+        self.login('', '')
         db = Database()
         ingredients = db.get_checklist_ingredients(user_id)
         products = db.get_products(ingredients)
         
         # Search for and add all products to cart
-        for product in products:
-            self.visit(product[3])
-            self.add_to_cart(self)
-        
+        try:
+            for product in products:
+                print(product)
+                self.visit(product[3])
+                self.add_to_cart(self)
+        except:
+               print("An error occured when trying to visit a product")     
+            
         # Report whether success or not
         self.job_done(user_id, 1)
         print("Sent /done ")

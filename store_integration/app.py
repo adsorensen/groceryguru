@@ -3,6 +3,7 @@ from flask import Flask
 from flask import request
 from flask import abort
 from flask import jsonify
+from flask import redirect
 from controller import Controller
 import requests
 import random
@@ -23,7 +24,8 @@ def create_job():
     store = request.args.get('store')
     controler.receive_job(userId, store)
 
-    return jsonify({'message': "Job received."}), 201
+    # return jsonify({'message': "Job received."}), 201
+    return redirect("http://www.walmart.com")
     
 # def job_done(user_id, status):
 #     print("Job Finished")

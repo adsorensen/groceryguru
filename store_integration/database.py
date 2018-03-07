@@ -39,7 +39,7 @@ class Database(object):
     def get_products(self, ingredients):
         products = []
         for ingredient in ingredients:
-            sql = "SELECT * FROM products WHERE id="+str(ingredient[4])+";"
+            sql = "SELECT * FROM products WHERE id="+str(ingredient[0][4])+";"
             cursor = self.db.cursor()
             
             try:
