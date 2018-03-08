@@ -1,5 +1,6 @@
 from store import Store
 from walmart import Walmart
+from threading import Thread
 
 class Controller(object):
     def __init__(self):
@@ -11,5 +12,5 @@ class Controller(object):
         
         # Add job to tracked list and run
         self.jobs[user_id] = job
-        job.run_job(user_id) 
+        Thread(target=job.run_job, args=(user_id)).start()
         

@@ -9,6 +9,7 @@ class Database(object):
                                   db="groceryguru")
         
     def get_checklist_ingredients(self, user_id):
+        print("Getting ingredients")
         sql = "SELECT * FROM checkout_lists WHERE user_id="+str(user_id)+";"
         
         cursor = self.db.cursor()
@@ -37,8 +38,10 @@ class Database(object):
            
     
     def get_products(self, ingredients):
+        print("Getting products")
         products = []
         for ingredient in ingredients:
+            print(ingredient[0])
             sql = "SELECT * FROM products WHERE id="+str(ingredient[0][4])+";"
             cursor = self.db.cursor()
             

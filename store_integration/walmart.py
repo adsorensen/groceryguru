@@ -9,6 +9,7 @@ class Walmart(Store):
         super().__init__()
 
     def login(self, user, password):
+        print("Logging in...")
         self.visit("https://walmart.com/account/login")
         self.browser.fill('email', user)
         self.browser.fill('password', password)
@@ -78,9 +79,25 @@ class Walmart(Store):
         return list(self.results.keys())[list(self.results.values()).index(price)]
         
     def add_to_cart(self):
-        cartDiv = self.browser.find_by_css('.prod-ProductCTAAddToCart')
-        button = cartDiv.first.find_by_tag("button").first
-        button.click()
+        print("Starting to add to cart...")
+        cont = True
+        while (cont):
+            try:
+                button = self.browser.find_by_css('button[data-automation-id="addToCartBtn"]')
+                button.click()
+                print("Clicked button...")
+                cont = False
+            except:
+                try:
+                    button = self.browser.find_by_css('button[data-automation-id="addToCartBtnOG"]')
+                    button.click()
+                    print("Clicked old button...")
+                    cont = False
+                except:
+                    time.sleep(0.1)
+                    print("Sleeping...")
+                    cont = False
+                    
 
         
     #*****************************************************************
@@ -90,19 +107,20 @@ class Walmart(Store):
     #*****************************************************************
     def run_job(self, user_id):
         # Connect to DB, grab checklist products 
-        self.login('', '')
+        self.login('robolsen92@gmail.com', 'FurOtpKw49gR')
         db = Database()
         ingredients = db.get_checklist_ingredients(user_id)
+        print(ingredients)
         products = db.get_products(ingredients)
+        print(products)
         
         # Search for and add all products to cart
-        try:
-            for product in products:
-                print(product)
-                self.visit(product[3])
-                self.add_to_cart(self)
-        except:
-               print("An error occured when trying to visit a product")     
+        for product in products:
+            print("Product starting...")
+            print(product)
+            print(product[0][3])
+            self.visit(product[0][3])
+            self.add_to_cart()   
             
         # Report whether success or not
         self.job_done(user_id, 1)
