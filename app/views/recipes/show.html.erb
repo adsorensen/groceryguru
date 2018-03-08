@@ -3,12 +3,12 @@
     <%= javascript_include_tag('recipe.js') %>
 </head>
 <div class="icon-bar">
-  <a class="active" href="/recipes" title="Search for another recipe"><i class="fa fa-search"></i></a> 
-  <a title="Print"><i class="fa fa-print" onclick=printpage()></i></a> 
-  <%= link_to '<i class="fa fa-heart" onclick=openPopup() title="Favorite this recipe"></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
-  <a href="#share"><i class="fa fa-facebook" title="Share this recipe to Facebook"></i></a> 
-  <%= link_to '<i class="fa fa-cart-plus" title="Add recipe to cart"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
-  <a onclick="mealPlan()" title="Add recipe to a meal plan"><i class="fa fa-book"></i></a> 
+  <a class="active" href="/recipes" data-toggle="tooltip" title="Search for another recipe"><i class="fa fa-search"></i></a>
+  <a data-toggle="tooltip" title="Print"><i class="fa fa-print" onclick=printpage()></i></a>
+  <%= link_to '<i class="fa fa-heart" onclick=openPopup() data-toggle="tooltip" title="Favorite this recipe"></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
+  <a href="#share"><i class="fa fa-facebook" data-toggle="tooltip" title="Share to Facebook"></i></a>
+  <%= link_to '<i class="fa fa-cart-plus" data-toggle="tooltip" title="Add recipe to cart"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
+  <a onclick="mealPlan()" data-toggle="tooltip" title="Add to a meal plan"><i class="fa fa-book"></i></a>
 </div>
 <div style="display:none;">    <%= if @recipe.picture?
         pic_url = @recipe.picture.url
@@ -33,9 +33,10 @@
   <div class="recipe-text">
     <div class="recipe-image" style="background-image: url(<%= asset_path pic_url %>)"></div>
       <br>
+      <p><%= @recipe.description %></p>
       <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
       <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
-      <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.prep_time %></p>
+      <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.calories %></p>
        <p><%= link_to "View Nutritional Information" %></p>
     <div class="cf"></div>
   </div>
@@ -59,8 +60,15 @@
         <% #Loop over ingredients
         ingredients = @recipe.instructions
         for i in ingredients do
-            ingredient_string = Ingredient.find(i.ingredient_id).name %>
-            <li><span><span class="amount"><%= i.amount %> <%= i.unit %></span> <span class="in"><%= ingredient_string %></span></span></li>
+            ingredient_string = Ingredient.find(i.ingredient_id).name 
+            if i.amount == 0.333333
+              amount = "1/3"
+            elsif i.amount % 1 != 0 
+              amount = i.amount.to_r
+            else
+              amount = i.amount.ceil 
+            end %>
+            <li><span><span class="amount"><%= amount %> <%= i.unit %></span> <span class="in"><%= ingredient_string %></span></span></li>
         <% end %>  
       </ul>
   </div>
@@ -139,7 +147,7 @@
           <a href='/users/<%=r.user_id %>'><div class='author-name'><%= first_name %> <%= last_name %></div></a><br>
           <div class='rating-review'><%= user_rating.html_safe %></div>
           <% if r.user_id == session["user_id"]%> 
-          <div class='delete-icon'><%= link_to "<i class='fa fa-trash'></i>".html_safe, {:controller => "recipes" , :action => "delete_review", :id => r.id, :recipe_id => @recipe.id}, data: { confirm: 'Are you sure?' } %></div>
+          <div class='delete-icon'><%= link_to "<i class='fa fa-trash'></i>".html_safe, '/review/'+r.id.to_s, method: :delete, data: { confirm: 'Are you sure?' } %></div>
           <div class='edit-icon' onclick="reviewEdit(&#39;<%=r.id.to_s%>&#39;,&#39;<%=r.text%>&#39;,&#39;<%=@recipe.id%>&#39;)"><i class='fa fa-pencil' aria-hidden='true'></i></div>
           <%end%>
         </div>

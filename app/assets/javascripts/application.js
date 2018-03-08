@@ -17,6 +17,8 @@
 //= require sweet-alert2-rails
 //= require_tree .
 //= require bootstrap
+// require 'open-uri'
+// require 'hangry'
 
 
 function printpage()

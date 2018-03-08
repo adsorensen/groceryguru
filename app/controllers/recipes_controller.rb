@@ -23,11 +23,6 @@ class RecipesController < ApplicationController
   def edit
   end
   
-  # GET /recipes/url
-  def url
-    @recipe = Recipe.new
-  end
-  
   # GET /recipes/text
   def text
     @recipe = Recipe.new
@@ -56,7 +51,7 @@ class RecipesController < ApplicationController
       
       # Create corresponding instruction
       @instruction = Instruction.new ingredient_id: @ingredient.id, amount: quantity, unit: unit, prep_note: prep
-      # Add assotiations
+      # Add associations
       @recipe.instructions << @instruction
       
       count += 1
@@ -146,10 +141,11 @@ class RecipesController < ApplicationController
   def edit_review
     @review = Review.find(params['id'])
     newText = params['text']
+    newRate = params['newRate']
     @recipe = Recipe.find(params['recipe_id'])
      
     respond_to do |format|
-      if @review.update(text: newText)
+      if @review.update(text: newText, rating: newRate)
         format.html { redirect_to @recipe, notice: 'Review updated' }
         format.json { render :show, location: @recipe  }
         else
@@ -161,7 +157,7 @@ class RecipesController < ApplicationController
   
   def delete_review
     @review = Review.find(params['id'])
-    @recipe = Recipe.find(params['recipe_id'])
+    @recipe = Recipe.find(@review.recipe_id)
      
     respond_to do |format|
       if @review.destroy
@@ -171,6 +167,76 @@ class RecipesController < ApplicationController
         format.html { render :new }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
+    end
+  end
+  
+  def parse_url
+    url = params['url']
+    html_string = open(url, :allow_redirections => :all)
+    recipe = Hangry.parse(html_string)
+    nutrition = recipe.nutrition
+
+    @recipe = Recipe.new do |r|
+      r.name = recipe.name
+      r.directions = recipe.instructions
+      r.description = recipe.description
+      r.origin = recipe.canonical_url
+      r.remote_picture_url = recipe.image_url.gsub('http://','https://')
+      r.servings = recipe.yield.split('\s')[0]
+      r.prep_time = recipe.total_time
+      r.private = true
+      r.calories = nutrition[:calories].split('\s')[0] if nutrition[:calories]
+      r.fat = nutrition[:total_fat].split('\s')[0] if nutrition[:total_fat]
+      r.saturated_fat = nutrition[:saturated_fat].split('\s')[0] if nutrition[:saturated_fat]
+      r.carbs = nutrition[:total_carbohydrates].split('\s')[0] if nutrition[:total_carbohydrates]
+      r.cholestrol = nutrition[:cholesterol].split('\s')[0] if nutrition[:cholesterol]
+      r.sugar = nutrition[:sugar].split('\s')[0] if nutrition[:sugar]
+      r.sodium = nutrition[:sodium].split('\s')[0] if nutrition[:sodium]
+      r.protein = nutrition[:protein].split('\s')[0] if nutrition[:protein]
+    end
+    
+    i = 0
+    while i < recipe.ingredients.length do
+      ingredientDetails = Ingreedy.parse(recipe.ingredients[i])
+      ingredient = ingredientDetails.ingredient
+      quantity = ingredientDetails.amount
+      unit = ingredientDetails.unit
+      
+      if quantity.kind_of?(Array)
+        quantity = quantity[0]
+      end
+      
+      quantity = quantity.to_s
+      
+      if quantity.include?('-')
+        quantity = quantity.split("-")[0]
+      end
+      
+      if quantity.empty?
+      end
+      
+      f = quantity.split.map { |r| Rational(r) }.inject(:+).to_f
+      
+      @ingredient = Ingredient.where(name: ingredient).first
+      if @ingredient.nil? 
+        @ingredient = Ingredient.create name: ingredient
+      end
+      
+      # Create corresponding instruction
+      @instruction = Instruction.new ingredient_id: @ingredient.id, amount: f, unit: unit, prep_note: ""
+      # Add associations
+      @recipe.instructions << @instruction
+      i +=1
+    end
+    
+    @recipe.save
+    
+    # Make saved recipe entry
+    @saved_recipe = SavedRecipe.new user_id: session['user_id'], personal: true, private: true
+    @recipe.saved_recipes << @saved_recipe
+
+    if @recipe.save
+      redirect_to "/recipes/" + @recipe.id.to_s
     end
   end
   
@@ -191,6 +257,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :directions, :description, :origin, :picture, :servings, :prep_time)
+      params.require(:recipe).permit(:name, :directions, :description, :origin, :picture, :servings, :prep_time, :calories, :cholestrol)
     end
 end

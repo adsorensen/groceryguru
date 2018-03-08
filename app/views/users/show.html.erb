@@ -74,15 +74,19 @@
                      if !recipe.private || @user.id == session['user_id']%>
             <div class="recipe"> 
           		<div class="image">
-          		  <%= if !recipe.picture.nil?  
-                  link_to image_tag(recipe.picture, size:"200x325"), recipe
+          		   <%= if recipe.picture?  
+              link_to image_tag(recipe.picture, size:"200x325"), recipe
+              else
+                pic_url_length = recipe.picture.to_s.length
+                beginning_index = recipe.picture.to_s.index('http')
+                if (beginning_index.nil?)
+                  link_to image_tag('fallback/recipe-default.png', size:"200x325"), recipe
                 else
-                  pic_url_length = recipe.picture.to_s.length
-                  beginning_index = recipe.picture.to_s.index('http')
                   cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
                   new_url = cut_url.gsub!('%3A', ":/")
-                  link_to image_tag(new_url, size: "200x325"), recipe
-                end %>
+                  link_to image_tag(new_url, size:"200x325"), recipe
+                end
+            end %>
           	<div class="name">
           	 			<h3><%= recipe.name %></h3>
           	 </div>

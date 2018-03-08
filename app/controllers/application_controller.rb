@@ -6,18 +6,21 @@ class ApplicationController < ActionController::Base
   
     include SessionsHelper
    
-    def ensure_logged_in
-        unless logged_in?
-        #flash[:notice] = 'Please log in.'
+    def index
+      if logged_in?
+          redirect_to '/users/' + session[:user_id].to_s
+      else
         redirect_to root_path
-        end
+      end
     end
     
-    def convertUnit(unit)
-      if unit == 'tablespoon'
-        'tbs'
-      else
-        unit
+    private
+    
+    def process_uri(uri)
+      require 'open-uri'
+      require 'open_uri_redirections'
+      open(uri, :allow_redirections => :safe) do |r|
+        r.base_uri.to_s
       end
     end
 end

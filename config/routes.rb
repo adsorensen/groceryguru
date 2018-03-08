@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get '/recipes/url', to: 'recipes#url'
   get '/recipes/text', to: 'recipes#text'
+  post '/recipes/text', to: 'recipes#create'
 
   resources :saved_recipes
   resources :recipes
@@ -28,11 +29,10 @@ Rails.application.routes.draw do
   post 'checkout', to: 'list#checkout'
   get 'checkout', to: 'list#checkout_get'
 
-  root 'new_age#index'
-  get 'new_age/index'
+  root 'users#home'
+  get 'new_age/index', :path => "/get-started"
 
   get 'cart/loadcart'
-  #root 'welcome#index'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
   delete 'cart', to: 'cart#destroy'
@@ -47,7 +47,8 @@ Rails.application.routes.draw do
   post '/addReview', to: 'recipes#review'
   post '/saved_recipes/:id', to: "saved_recipes#destroy"
   post "/recipes/edit_review" => "recipes#edit_review"
-  post "/recipes/delete_review" => "recipes#delete_review"
+  post "/recipes/url_parse" => "recipes#parse_url"
+  delete "/review/:id" => "recipes#delete_review"
   get "/cart/checkout_to_store", to: "store_display#index"
   post '/userplans', to: 'meal_plans#user_plans' 
   post '/mealplans', to: 'meal_plans#create'
