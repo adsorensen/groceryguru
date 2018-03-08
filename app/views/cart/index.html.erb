@@ -80,8 +80,6 @@ $(document).ready(function() {
 
 
 function remove(r) {
-  // swal('', 'Are you sure you want to remove this item?', 'confirm');
-  if (confirm("Are you sure you want to remove this item?")) {
     var i = r.parentNode.parentNode.rowIndex;
     var t = document.getElementById("ingre_table");
     var row = t.rows[i];
@@ -109,7 +107,6 @@ function remove(r) {
            }
         }
      );
-  }
 };
 </script>
 
@@ -157,8 +154,8 @@ function remove(r) {
   <h2><center>Grocery List</center></h2>
   <center>
     <h4>Need something else?</h4>
-    <input type="text" id="add_item_field" style="border-color: gray;border: 1px solid;" />
-    <input type="button" value="Add Item" class="add_item" />
+    <input type="text" id="add_item_field"/>
+    <input type="button" value="Add Item" class="add_item add_item-outline" />
   </center>
   <br>
   <div class="container1">
@@ -174,11 +171,11 @@ function remove(r) {
           <!--<td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>-->
           <td><h4><%= ingredient.name %></h4></td>
           <% if @blacklist.include? ingredient.name %>
-            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
+            <td><input type="number" style="width:45px; border-color: gray;border: 1px solid; padding: 2px; margin-left: 5px;" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> > </td>
             <td><h4></h4></td>
             <td><input class="btn2" type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% else %>
-            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
+            <td><input type="number" style="width:45px; border-color: gray;border: 1px solid; padding: 2px; margin-left: 5px;" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
             <td style="padding:0 10px 0 10px;"><h4>  oz</h4></td>
             <td><input class="btn2" type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% end %>
@@ -192,13 +189,13 @@ function remove(r) {
 <div class="footer">
   <center>
     <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
-    <div class="btn btn-outline btn-xl page-scroll" onclick=printpage()> Print</div>
-    <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll'%> 
+    <div class="btn btn-outline btn-xl page-scroll" onclick=printpage() style="display: inline-block;"> Print</div>
+      <a href="https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=5&store=walmart" class="btn btn-outline btn-xl page-scroll" style="display: inline-block;"> Fill Cart</a>
+    <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll', style: "display: none"%> 
   </center>
 </div>
 <% end %>
 <center>
-  <a href="https://groceryguru-docrosco.c9users.io:8081/?userId=1&store=walmart"> Fill Cart</a>
 <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
 </center>
 <br>

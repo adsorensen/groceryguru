@@ -15,9 +15,9 @@
           </div> 
           <div class="description-profile" style='padding: 25px;'><%= @user.bio %></div>
        <ul class="data-user" id="data-user">
-        <li><a class='active'><strong><%= @personal_recipes.length + @saved_recipes.length %></strong><span>Total Recipes</span></a></li>
-        <li><a><strong><%= @saved_recipes.length %></strong><span>Favorite Recipes</span></a></li>
+        <li><a class='active'><strong><%= @saved_recipes.length%></strong><span>Favorite Recipes</span></a></li>
         <li><a><strong><%= @personal_recipes.length %></strong><span>Uploaded Recipes</span></a></li>
+        <li><a><strong><%= @meal_plans.length %></strong><span>Meal Plans</span></a></li>
        </ul>
       </div>
     </div>
@@ -53,9 +53,8 @@
 	     </div>
 	     <ul class="media">
 	   		  <%= link_to '<li><i class="fa fa-trash"></i>Remove</li>'.html_safe, SavedRecipe.find_by(recipe_id: recipe.id), method: :destroy, data: { confirm: 'Are you sure?' } %>
-		      <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
-		      <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
-		      <a onclick="mealPlan()"><i class="fa fa-book">Add to Meal Plan</i></a>
+		      <%= link_to '<li><i class="fa fa-list-ul"></i>Add to List</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+		      <li><a onclick="mealPlan()"><i class="fa fa-book">Add to Meal Plan</a></i></li>
   		 </ul>
 	   </div>
 	   <% end %>
@@ -63,7 +62,7 @@
         </div>
       </div>
       
-      <div id='personal-recipes'>
+      <div id='personal-recipes' style="display: none;">
         <h2>Uploaded Recipes</h2>
           <div id="content">
              <% if @personal_recipes.length == 0 %>
@@ -93,8 +92,8 @@
           	 </div>
           	 <ul class="media">
           	   		<%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
-          		    <%= link_to '<li><i class="fa fa-list-alt"></i>Show</li>'.html_safe, recipe %>
-          		    <%= link_to '<li><i class="fa fa-cart-plus"></i>Cart</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+          		    <%= link_to '<li><i class="fa fa-list-ul"></i>Add to List</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
+            		  <li><a onclick="mealPlan()"><i class="fa fa-book">Add to Meal Plan</a></i></li>
             		</ul>
           	</div>
           	   <% end end %>
@@ -102,7 +101,8 @@
           </div>
       </div>
       
-    <h1>Meal Plans</h1>
+    <div id='meal-plans' style="display: none;"> 
+    <h2>Meal Plans</h2>
     <% 
         @meal_plans.each do |plan|
           if !plan.private || plan.user_id == session['user_id'] # Ensure only public plans are shown
@@ -156,7 +156,7 @@
       <br><br>
         
     <% end end %>
-      
+    </div> 
 </div>
   <script>
   // Add active class to the current button (highlight it)
@@ -165,19 +165,23 @@
   for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function() {
       
-      if (this.textContent.includes("Total Recipes")) {
-        document.getElementById('saved-recipes').style.display = "block";
-        document.getElementById('personal-recipes').style.display = "block";
-      }
-      
+
       if (this.textContent.includes("Uploaded Recipes")) {
         document.getElementById('saved-recipes').style.display = "none";
         document.getElementById('personal-recipes').style.display = "block";
+        document.getElementById('meal-plans').style.display = "none";
       }
       
       if (this.textContent.includes("Favorite Recipes")) {
         document.getElementById('saved-recipes').style.display = "block";
         document.getElementById('personal-recipes').style.display = "none";
+        document.getElementById('meal-plans').style.display = "none";
+      }
+      
+      if (this.textContent.includes("Meal Plans")) {
+        document.getElementById('saved-recipes').style.display = "none";
+        document.getElementById('personal-recipes').style.display = "none";
+        document.getElementById('meal-plans').style.display = "block";
       }
       
     var current = document.getElementsByClassName("active");

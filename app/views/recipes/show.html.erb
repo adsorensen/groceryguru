@@ -7,7 +7,7 @@
   <a data-toggle="tooltip" title="Print"><i class="fa fa-print" onclick=printpage()></i></a>
   <%= link_to '<i class="fa fa-heart" onclick=openPopup() data-toggle="tooltip" title="Favorite this recipe"></i></a>'.html_safe, saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %>
   <a href="#share"><i class="fa fa-facebook" data-toggle="tooltip" title="Share to Facebook"></i></a>
-  <%= link_to '<i class="fa fa-cart-plus" data-toggle="tooltip" title="Add recipe to cart"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
+  <%= link_to '<i class="fa fa-list-ul" data-toggle="tooltip" title="Add to grocery list"></i></i></a>'.html_safe, carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %>
   <a onclick="mealPlan()" data-toggle="tooltip" title="Add to a meal plan"><i class="fa fa-book"></i></a>
 </div>
 <div style="display:none;">    <%= if @recipe.picture?
@@ -46,8 +46,8 @@
     <li style="padding-top: 15px;"><a onclick=printpage()>PRINT</a></li>
     <li style="padding-top: 15px;">  <%= link_to 'FAVORITE', saved_recipes_path(:user_id => session['user_id'], :recipe_id => @recipe.id, :personal => 0), :method => :post %></li>
     <li style="padding-top: 15px;"><a href="#">SHARE</i></a></li>
-    <li style="padding-top: 15px;">  <%= link_to 'ADD TO CART', carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %></i></li>
-    <li><a onclick="mealPlan()">ADD TO MEAL PLAN</i></a></li>
+    <li style="padding-top: 5px;">  <%= link_to 'ADD TO GROCERY LIST', carts_path(:user => session['user_id'], :recipe => @recipe.id), :method => :post %></i></li>
+    <li style="padding-top: 5px;"><a onclick="mealPlan()">ADD TO MEAL PLAN</i></a></li>
     <li style="padding-top: 15px;"><a href="#reviews">REVIEW</i></a></li>
   </ul>
 </div>

@@ -86,13 +86,13 @@ class Walmart(Store):
         time_slept = 0
         while (cont):
             try:
-                button = self.browser.find_by_css('button[data-automation-id="addToCartBtn"]')
+                button = self.browser.find_by_css('button[data-automation-id="addToCartBtn"]')[0]
                 button.click()
                 print("Clicked button...")
                 cont = False
             except:
                 try:
-                    button = self.browser.find_by_css('button[data-automation-id="addToCartBtnOG"]')
+                    button = self.browser.find_by_css('button[data-automation-id="addToCartBtnOG"]')[0]
                     button.click()
                     print("Clicked old button...")
                     cont = False
