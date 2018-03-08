@@ -33,6 +33,7 @@
   <div class="recipe-text">
     <div class="recipe-image" style="background-image: url(<%= asset_path pic_url %>)"></div>
       <br>
+      <p><%= @recipe.description %></p>
       <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
       <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
       <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.calories %></p>

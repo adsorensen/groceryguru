@@ -333,6 +333,7 @@ function parseIngredients(text) {
         var quantity = lines[i].match(/(\d+\s*\d*\/\d+|\d+)/g);
         var amount = "";
 
+
         // Matching mixed fractions
         if (/\d+\s\d+\/\d+/g.test(quantity)) {
             var f = String(quantity).split(" ")[0];
@@ -402,11 +403,40 @@ function isUnit(input) {
     return (units.includes(String(input).toLowerCase()));
 }
 
-$(document).ready(function parseUrl() {
+$(document).ready(function urlPressedEnter() {
     $('#url-text-box').keypress(function(e) {
         if (e.keyCode == 13) {
-            var url = document.getElementById('url').value
-            $("#ingredients").append('<% url = ' + url + '%>');
+            parseUrl()
         }
     });
 });
+
+function parseUrl() {
+    var url = $('#url-text-box').val()
+    if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g.test(url)) {
+        swal('Failed to Parse!', 'Please paste a URL in the box in the appropriate format!\n\nAll URLs must begin with HTTP:// or HTTPS://', 'error')
+    }
+    else {
+        swal({
+            title: 'Please Wait...',
+            text: 'The Gurus are hard at work importing your recipe!',
+            showConfirmButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            onOpen: () => {
+                swal.showLoading()
+            }
+        })
+        $.ajax({
+            type: 'POST',
+            url: "/recipes/url_parse",
+            data: {
+                url: url
+            },
+            success: function(result) {
+                swal.hideLoading()
+            }
+        });
+    }
+}
