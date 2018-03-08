@@ -19,27 +19,12 @@ $(document).ready(function() {
       $(':checkbox', this).trigger('click');
     }
   });
-<<<<<<< HEAD
   $('.add_item').click(function(e){
     e.preventDefault();
     var item = $("#add_item_field").val();
     if (item == "") {
       // sweet alert?
       alert("Please type an item to add.");
-=======
-});
-function increment(ingre) {
-    var ingredientInfo = $("#ingre");
-    var number = ingredientInfo.innerHTML;
-    number++;
-    ingredientInfo.innerHTML = number;
-};
-function decrement(ingre) {
-    var ingredientInfo = $("#ingre");
-    var number = ingredientInfo.innerHTML;
-    if (number < 1 || number == 0) {
-      number = 0;
->>>>>>> master
     }
     else {
       var arr = [];
@@ -160,6 +145,6 @@ function remove(r) {
 <% end %>
 <button id="jobBtn" data-session="<%=session['user_id']%>" onclick="startJob()">Fill Cart</button>
 <br>
-<a href="https://groceryguru-docrosco.c9users.io:8081/?userId=1&store=walmart"> Fill Cart</a>
+<a href="https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=1&store=walmart"> Fill Cart</a>
 <!--<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>-->
 
