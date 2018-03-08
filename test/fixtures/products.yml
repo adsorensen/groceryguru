@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)      not null
+#  price       :float(24)        not null
+#  walmart_url :string(255)
+#  kroger_url  :string(255)
+#  brand       :string(255)      not null
+#  ttl         :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  price: 1.5
+  walmart_url: MyString
+  kroger_url: MyString
+  brand: MyString
+  ttl: 1
+
+two:
+  name: MyString
+  price: 1.5
+  walmart_url: MyString
+  kroger_url: MyString
+  brand: MyString
+  ttl: 1

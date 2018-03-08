@@ -17,6 +17,8 @@
 //= require sweet-alert2-rails
 //= require_tree .
 //= require bootstrap
+// require 'open-uri'
+// require 'hangry'
 
 
 function printpage()
@@ -213,4 +215,22 @@ function mealPlan()
          });
       });
    }); 
+}
+
+function startJob()
+{
+   alert("Job starting");
+   var user = $("#jobBtn").data('session');
+   $.ajax({
+            type: "POST",
+            url: "https://groceryguru-docrosco.c9users.io:8081",
+            data: 
+            {
+               userId: user,
+               store: 'walmart'
+            },
+             success: function(data){
+                alert("Job Sent");
+             }
+         });
 }
