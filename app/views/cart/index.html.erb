@@ -80,8 +80,6 @@ $(document).ready(function() {
 
 
 function remove(r) {
-  // swal('', 'Are you sure you want to remove this item?', 'confirm');
-  if (confirm("Are you sure you want to remove this item?")) {
     var i = r.parentNode.parentNode.rowIndex;
     var t = document.getElementById("ingre_table");
     var row = t.rows[i];
@@ -109,7 +107,6 @@ function remove(r) {
            }
         }
      );
-  }
 };
 </script>
 
