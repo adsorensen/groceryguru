@@ -183,7 +183,9 @@ function remove(r) {
 <br>
 <div class="footer">
   <center>
-    <button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>
+    <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
+    <div class="btn btn-outline btn-xl page-scroll" onclick=printpage()> Print</div>
+    <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll'%> 
   </center>
 </div>
 <center>
