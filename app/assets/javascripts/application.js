@@ -21,23 +21,19 @@
 // require 'hangry'
 
 
-function printpage()
-{
+function printpage() {
    window.print()
 }
 
-function openPopup()
-{
-    alert("Recipe Has Been Saved");
+function openPopup() {
+   alert("Recipe Has Been Saved");
 }
 
-function addReview()
-{
-    
+function addReview() {
+
 }
 
-function showIngredients()
-{
+function showIngredients() {
    document.getElementById('instructions').style.display = "none"
    document.getElementById('ingredients').style.display = "block"
    document.getElementById('reviews').style.display = "none"
@@ -46,8 +42,7 @@ function showIngredients()
    document.getElementById("tab_rev").className = ""
 }
 
-function showInstructions()
-{
+function showInstructions() {
    document.getElementById('instructions').style.display = "block"
    document.getElementById('ingredients').style.display = "none"
    document.getElementById('reviews').style.display = "none"
@@ -56,8 +51,7 @@ function showInstructions()
    document.getElementById("tab_rev").className = ""
 }
 
-function showReviews()
-{
+function showReviews() {
    document.getElementById('instructions').style.display = "none"
    document.getElementById('ingredients').style.display = "none"
    document.getElementById('reviews').style.display = "block"
@@ -66,68 +60,60 @@ function showReviews()
    document.getElementById("tab_rev").className = "active"
 }
 
-function newPlan()
-{
+function newPlan() {
    swal({
-         title: 'Enter a Meal Plan name',
-         input: 'text',
-         inputValue: 'New Meal Plan',
-         html:
-            '<input type="radio" name="private" id="priv">Private<br>' +
-            '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
-         showCancelButton: true,
-         showCloseButton: true,
-         confirmButtonText: 'Create',
-         showLoaderOnConfirm: true,
-         allowOutsideClick: () => !swal.isLoading(),
-      }).then(function(value) {
-         var pri = false;
-         if($('#priv').is(':checked'))
-            pri = true;
-         $.ajax(
-            {
-               type: "POST",
-               url: "/mealplans",
-               data: 
-               {
-                  name: value,
-                  priv: pri 
-               },
-               success: function(data){
-                  swal({
-                     type: 'success',
-                     title: 'Recipe added to new Meal Plan!',
-                     showConfirmButton: false,
-                     timer: 1500
-                  });
-                  window.setTimeout(refresh, 1500);
-               }
-            }
-         );
+      title: 'Enter a Meal Plan name',
+      input: 'text',
+      inputValue: 'New Meal Plan',
+      html: '<input type="radio" name="private" id="priv">Private<br>' +
+         '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
+      showCancelButton: true,
+      showCloseButton: true,
+      confirmButtonText: 'Create',
+      showLoaderOnConfirm: true,
+      allowOutsideClick: () => !swal.isLoading(),
+   }).then(function(value) {
+      var pri = false;
+      if ($('#priv').is(':checked'))
+         pri = true;
+      $.ajax({
+         type: "POST",
+         url: "/mealplans",
+         data: {
+            name: value,
+            priv: pri
+         },
+         success: function(data) {
+            swal({
+               type: 'success',
+               title: 'Recipe added to new Meal Plan!',
+               showConfirmButton: false,
+               timer: 1500
+            });
+            window.setTimeout(refresh, 1500);
+         }
       });
+   });
 }
 
-function mealPlan() 
-{
+function mealPlan() {
    swal({
       title: 'Meal Plan Menu',
       showCancelButton: true,
       showCloseButton: true,
       showConfirmButton: false,
-      html:
-            '<button id="new">New Meal Plan</button>'+
-            '<p>&nbsp;</p>'+
-            '<button id="add">Add to Existing</button>',
+      html: '<button id="new">New Meal Plan</button>' +
+         '<p>&nbsp;</p>' +
+         '<button id="add">Add to Existing</button>',
 
    });
-   
+
    $("#new").on("click", function() {
-         swal({
+      swal({
          title: 'Enter a Meal Plan name',
          input: 'text',
          inputValue: 'New Meal Plan',
-         html:
-            '<input type="radio" name="private" id="priv">Private<br>' +
+         html: '<input type="radio" name="private" id="priv">Private<br>' +
             '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
          showCancelButton: true,
          showCloseButton: true,
@@ -137,54 +123,51 @@ function mealPlan()
       }).then(function(value) {
          var url = $(location).attr('href');
          url = url.split('/');
-         var recipeID = url[url.length-1];
+         var recipeID = url[url.length - 1];
          var pri = false;
-         if($('#priv').is(':checked'))
+         if ($('#priv').is(':checked'))
             pri = true;
-         $.ajax(
-            {
-               type: "POST",
-               url: "/mealplans",
-               data: 
-               {
-                  name: value,
-                  priv: pri,
-                  recipe: recipeID
-               },
-               success: function(data){
-                  swal({
-                     type: 'success',
-                     title: 'Recipe added to new Meal Plan!',
-                     showConfirmButton: false,
-                     timer: 1500
-                  });
-               }
+         $.ajax({
+            type: "POST",
+            url: "/mealplans",
+            data: {
+               name: value,
+               priv: pri,
+               recipe: recipeID
+            },
+            success: function(data) {
+               swal({
+                  type: 'success',
+                  title: 'Recipe added to new Meal Plan!',
+                  showConfirmButton: false,
+                  timer: 1500
+               });
             }
-         );
+         });
       });
    });
-   
+
    $("#add").on("click", function() {
       var selections = null;
       var inputOptionsPromise = new Promise(function(resolve) {
          $.ajax({
             type: "POST",
             url: "/userplans",
-            success: function(data){
+            success: function(data) {
                selections = data;
             }
          });
-         
+
          setTimeout(function() {
             var options = {};
-           $.map(selections,
+            $.map(selections,
                function(o) {
-                   options[o.id] = o.name;
+                  options[o.id] = o.name;
                });
             resolve(options);
          }, 1000);
       });
-      
+
       swal({
          title: 'Pick a plan to add to',
          input: 'select',
@@ -192,45 +175,42 @@ function mealPlan()
          showCancelButton: true,
          showCloseButton: true,
          confirmButtonText: 'Add Recipe',
-      }).then(function(result){
+      }).then(function(result) {
          var url = $(location).attr('href');
          url = url.split('/');
-         var recipeID = url[url.length-1];
+         var recipeID = url[url.length - 1];
          $.ajax({
             type: "POST",
             url: "/addtoplan",
-            data: 
-            {
+            data: {
                id: result,
                recipe: recipeID
             },
-             success: function(data){
-                swal({
+            success: function(data) {
+               swal({
                   type: 'success',
                   title: 'Recipe added',
                   showConfirmButton: false,
                   timer: 1500
-                });
-             }
+               });
+            }
          });
       });
-   }); 
+   });
 }
 
-function startJob()
-{
+function startJob() {
    alert("Job starting");
    var user = $("#jobBtn").data('session');
    $.ajax({
-            type: "POST",
-            url: "https://groceryguru-docrosco.c9users.io:8081",
-            data: 
-            {
-               userId: user,
-               store: 'walmart'
-            },
-             success: function(data){
-                alert("Job Sent");
-             }
-         });
+      type: "POST",
+      url: "https://groceryguru-docrosco.c9users.io:8081",
+      data: {
+         userId: user,
+         store: 'walmart'
+      },
+      success: function(data) {
+         alert("Job Sent");
+      }
+   });
 }

@@ -84,21 +84,19 @@ class Walmart(Store):
         cont = True
         while (cont):
             try:
-                button = self.browser.find_by_css('button[data-automation-id="addToCartBtn"]')
+                button = self.browser.find_by_css('button[data-automation-id="addToCartBtn"]')[0]
                 button.click()
                 print("Clicked button...")
                 cont = False
             except:
                 try:
-                    button = self.browser.find_by_css('button[data-automation-id="addToCartBtnOG"]')
+                    button = self.browser.find_by_css('button[data-automation-id="addToCartBtnOG"]')[0]
                     button.click()
                     print("Clicked old button...")
                     cont = False
                 except:
                     time.sleep(0.5)
                     print("Sleeping...")
-                    
-
         
     #*****************************************************************
     # Main store function. Attempts to add all products in a user's
