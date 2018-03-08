@@ -37,10 +37,17 @@ $(document).ready(function() {
         });
       }
       else {
-        var markup = "<tr id=\"" + item + "\"><td><input type='checkbox' id=\"ingredient_ids[]\"\
-        value=0 checked></td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\"\
+        // Markup for checkboxs
+        // var markup = "<tr id=\"" + item + "\"><td><input type='checkbox' id=\"ingredient_ids[]\"\
+        // value=0 checked></td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\"\
+        // min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /></td><td><h4></h4></td><td><input \
+        // type=\"button\" id=\"remove_item\" value=\"Remove Item\" onclick=\"remove(this);\" style=\"font-size:14px;\" ></td></tr>";
+        
+        var markup = "<tr id=\"" + item + "\">\
+        <td>" + item + "</td><td><input type=\"number\" style=\"width:90px\"\
         min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /></td><td><h4></h4></td><td><input \
         type=\"button\" id=\"remove_item\" value=\"Remove Item\" onclick=\"remove(this);\" style=\"font-size:14px;\" ></td></tr>";
+        
         $.ajax(
             {
                type: 'post',
@@ -164,7 +171,7 @@ function remove(r) {
       <tbody>
         <% @ingredients2.each do |ingredient, value| %>
         <tr id="<%= ingredient.name %>">
-          <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
+          <!--<td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>-->
           <td><h4><%= ingredient.name %></h4></td>
           <% if @blacklist.include? ingredient.name %>
             <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
