@@ -5,36 +5,58 @@ class ListController < ApplicationController
   def create
   end
   
+  def add_item
+    ingr = params['ingr']
+    item = Ingredient.find_by_name(ingr)
+    if item.nil?
+      sp = Ingredient.find_by_name("special")
+      newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => sp.id, :quantity => 1, :ingr_name => ingr)
+      # @ingredientIds.append(sp.id)
+      newValue.save
+    else
+      newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => item.id, :quantity => 1)
+      # @ingredientIds.append(item.id)
+      newValue.save
+    end
+    
+    respond_to do |format|
+      format.html { render :new }
+    end
+  end
+  
+  def remove_item
+    ingr = params['ingr']
+    row = CheckoutList.where(user_id: session['user_id'], ingr_name: ingr)
+    for r in row do
+      r.destroy
+    end
+    respond_to do |format|
+      format.html { render :new }
+    end
+  end
+  
   # function converts differnent units to ounces
   def convert_to_oz(amount, unit)
-    u = unit.upcase
+    conversions = {"TABLESPOON" => 0.5, "TBSP" => 0.5, "TEASPOON" => 0.16667, 
+      "TSP" => 0.16667, "CUP" => 8, "HANDFUL" => 4, "OUNCE" => 1, "PINCH" =>
+      0.013, "SERVING" => 4, "POUND" => 16, "LBS" => 16, "CLOVE" => 0.16667,
+      "HEAD" => 32, "OZ" => 1, "C" => 8, "BUNCH" => 8, "PIECE" => 4, "G" =>
+      0.03527, "TBS" => 0.5, "SLICES" => 6, "CAN" => 1, "DASHES" => 0.03125,
+      "SPRIG" => 0.03125, "PINCHES" => 0.013, "DASH" => 0.03125, "PINT" => 16,
+      "TB" => 0.5, "KG" => 35.274, "ML" => 0.03381, "" => 1
+    }
     noUnit = false
-    case u
-    when "TABLESPOON", "TABLESPOONS", "TBSP"
-      newA = amount / 2
-    when "TEASPOON", "TEASPOONS", "TSP"
-      newA = amount * (1/6)
-    when "CUP", "CUPS", "C"
-      newA = amount * 8
-    when "HANDFUL", "HANDFULS"
-      newA = amount * 4
-    when "OZ", "OUNCE", "OUNCES"
-      newA = amount
-    when "LBS", "POUND", "POUNDS"
-      newA = amount * 16
-    when "PINCH", "PINCHES"
-      newA = amount * 0.013
-    when "SERVINGS", "SERVING"
-      newA = amount * 4
-    when ""
-      newA = amount
-      noUnit = true
-    when "CLOVE", "CLOVES"
-      newA = amount * (1/6)
-    when "HEAD", "HEADS"
-      newA = amount * 32
+    if conversions.include? unit.upcase
+      if unit == ""
+        noUnit = true
+      end
+      v = conversions[unit.upcase]
+      newA = amount * v
+    elsif conversions.include? unit.upcase[0..-2]
+      v = conversions[unit.upcase[0..-2]]
+      newA = amount * v
     else
-      newA = -100
+      newA = amount
     end
     
     return newA, noUnit
@@ -53,7 +75,7 @@ class ListController < ApplicationController
     @ingredients2 = {}
     @blacklist = []
     
-    ingredientIds = []
+    @ingredientIds = []
     for id_val in recipe_ids do
       recipe = Recipe.where(id: id_val.recipe).first
       instr = recipe.instructions
@@ -79,8 +101,8 @@ class ListController < ApplicationController
           @ingredients2[food] = oa
         end
         if CheckoutList.where(ingredient_id: i.ingredient_id).blank?
-          newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1)
-          ingredientIds.append(i.ingredient_id)
+          newValue = CheckoutList.new(:user_id => session['user_id'], :ingredient_id => i.ingredient_id, :quantity => 1, :ingr_name => food.name)
+          @ingredientIds.append(i.ingredient_id)
           newValue.save
         else
           valueToUpdate = CheckoutList.where(ingredient_id: i.ingredient_id)
@@ -92,7 +114,6 @@ class ListController < ApplicationController
        
     end
     @ingredients = @ingredients.uniq
-    #render :text => st
     #render 'list/create', :locals => {:resource => @ingredients2}
     render 'list/create'
   end

@@ -14,10 +14,19 @@
 <script>
 $(document).ready(function() {
   $('.ingredient_table tr').click(function(event) {
-    if (event.target.type !== 'checkbox' && event.target.id != 'addButton' && event.target.id != 'subButton') {
+    if (event.target.type !== 'checkbox' && event.target.id != 'addButton' && 
+      event.target.id != 'remove_item' && event.target.name != 'amount_input') {
       $(':checkbox', this).trigger('click');
     }
   });
+<<<<<<< HEAD
+  $('.add_item').click(function(e){
+    e.preventDefault();
+    var item = $("#add_item_field").val();
+    if (item == "") {
+      // sweet alert?
+      alert("Please type an item to add.");
+=======
 });
 function increment(ingre) {
     var ingredientInfo = $("#ingre");
@@ -30,19 +39,96 @@ function decrement(ingre) {
     var number = ingredientInfo.innerHTML;
     if (number < 1 || number == 0) {
       number = 0;
+>>>>>>> master
     }
     else {
-      number--;
+      var arr = [];
+      $(".ingredient_table tr").each(function() {
+        arr.push(this.id.toUpperCase());
+      });
+      if (arr.includes(item.toUpperCase())) {
+        // sweet alert?
+        alert("Item is already in cart.");
+      }
+      else {
+        var markup = "<tr id=\"" + item + "\"><td><input type='checkbox' id=\"ingredient_ids[]\"\
+        value=0 checked></td><td>" + item + "</td><td><input type=\"number\" style=\"width:90px\"\
+        min=\"0\" name=" + item + " size=\"5\" id='0' value=1 /></td><td><h4></h4></td><td><input \
+        type=\"button\" id=\"remove_item\" value=\"Remove Item\" onclick=\"remove(this);\" style=\"font-size:14px;\" ></td></tr>";
+        $.ajax(
+            {
+               type: 'post',
+                url: '/list/add_item',
+                data: {
+                    ingr: item
+                },
+                success: function(data){
+                  $("table tbody").append(markup);
+                  swal({
+                     type: 'success',
+                     title: item + ' was added',
+                     showConfirmButton: false,
+                     timer: 1500
+                  });
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                 alert("something went wrong");
+                 console.log(errorThrown);
+                 console.log(jqXHR);
+                 console.log(textStatus);
+               }
+            }
+         );
+      }
+      $("#add_item_field").val("");
     }
-    ingredientInfo.innerHTML = number;
+  })
+});
+
+
+function remove(r) {
+  // sweet alert?
+  // swal('', 'Are you sure you want to remove this item?', 'confirm');
+  if (confirm("Are you sure you want to remove this item?")) {
+    var i = r.parentNode.parentNode.rowIndex;
+    var t = document.getElementById("ingre_table");
+    var row = t.rows[i];
+    var name = row.id;
+    $.ajax(
+        {
+           type: 'post',
+            url: '/list/remove_item',
+            data: {
+                ingr: name
+            },
+            success: function(data){
+              t.deleteRow(i);
+              swal({
+                 type: 'success',
+                 title: name + ' was removed',
+                 showConfirmButton: false,
+                 timer: 1500
+              });
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+             console.log(errorThrown);
+             console.log(jqXHR);
+             console.log(textStatus);
+           }
+        }
+     );
+  }
 };
 </script>
 </head>
 <body>
 
 <%= form_tag checkout_path, :method => :post do %>
+<h4>Need something else?</h4>
+<input type="text" id="add_item_field" />
+<input type="button" value="Add Item" class="add_item" />
 <div class="container1">
-    <table class="ingredient_table">
+    <table class="ingredient_table" id="ingre_table">
       <thead>
         <tr>
           <th></th>
@@ -50,16 +136,17 @@ function decrement(ingre) {
       </thead>
       <tbody>
         <% @ingredients2.each do |ingredient, value| %>
-        <tr>
+        <tr id="<%= ingredient.name %>">
           <td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
           <td><h4><%= ingredient.name %></h4></td>
-          <td><input type="button" id="addButton" value=" + " onclick="increment('<%=ingredient.name%>');" style="font-size:14px;" ></td>
-          <td><input type="button" id="subButton" value=" - " onclick="decrement('<%=ingredient.name%>');" style="font-size:14px;" ></td>
           <% if @blacklist.include? ingredient.name %>
-            <td><h4 id='<%=ingredient.name  %>'><%= value.round %></h4></td>
+            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
+            <td><h4></h4></td>
+            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% else %>
-            <td><h4 id='<%=ingredient.name %>'><%= value %>  </h4></td>
-            <td><h4>  oz</h4></td>
+            <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value %> /> </td>
+            <td style="padding:0 10px 0 10px;"><h4>  oz</h4></td>
+            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% end %>
         </tr>
         <% end %>

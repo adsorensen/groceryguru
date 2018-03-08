@@ -1,5 +1,8 @@
 delete from ingredients;
 ALTER TABLE ingredients AUTO_INCREMENT = 1;
+<<<<<<< HEAD
+insert into ingredients (name) VALUES('special');
+=======
 insert into ingredients (name) VALUES('bacon');
 insert into ingredients (name) VALUES('butter');
 insert into ingredients (name) VALUES('chives');
@@ -50,6 +53,7 @@ insert into ingredients (name) VALUES('cinnamon');
 insert into ingredients (name) VALUES('milk');
 insert into ingredients (name) VALUES('orange juice');
 insert into ingredients (name) VALUES('vanilla');
+>>>>>>> master
 insert into ingredients (name) VALUES('boursin herb cheese');
 insert into ingredients (name) VALUES('mixed vegetables');
 insert into ingredients (name) VALUES('ready-to-use pie crust');

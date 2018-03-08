@@ -24,10 +24,10 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :users
   resources :carts
-  resources :list, :collection => { :checkout => :post }
+  resources :cart, :collection => { :checkout => :post }
   get 'cart', to: 'cart#index'
-  post 'checkout', to: 'list#checkout'
-  get 'checkout', to: 'list#checkout_get'
+  post 'checkout', to: 'cart#checkout'
+  get 'checkout', to: 'cart#checkout_get'
 
   root 'users#home'
   get 'new_age/index', :path => "/get-started"
@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get 'cart/loadcart'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
+  post '/list/add_item' => 'list#add_item'
+  post '/list/remove_item' => 'list#remove_item'
   delete 'cart', to: 'cart#destroy'
   get 'calendar', to: 'calendar#index'
   #get 'welcome/index'

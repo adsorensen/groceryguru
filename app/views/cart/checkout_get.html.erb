@@ -1,0 +1,28 @@
+<head>
+  <%= stylesheet_link_tag "list" %>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br>
+
+<% if @displayPrev %>
+ <div class="btn btn-outline btn-xl" onclick="window.location='<%= @relative_url_prev %>'"> Previous</div>
+<% end %>
+<% if @displayNext %>
+  <div class="btn btn-outline btn-xl" onclick="window.location='<%= @relative_url_next %>'"> Next</div>
+<% end %>
+
+<div style="padding:15px;">
+  <iframe src=<%= @walmart_url %> width=1280 height=720 onload="this.width=screen.width;this.height=screen.height;"></iframe>
+</div>
+
+<div class="icon-bar">
+  <a href="/recipes"><i class="fa fa-search"></i></a> 
+  <a href=""><i class="fa fa-print" onclick=printpage()></i></a> 
+  <a href=""><i class="fa fa-sign-in" onclick="window.open('https://grocery.walmart.com','_blank')"></i></a> 
+</div>
+<br>
+<center>
+
+<br>
+<br>
+<!--<button class="button" onclick=" $(location).attr('href', 'create_list')">Send To Store</button></center>-->
