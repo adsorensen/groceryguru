@@ -24,75 +24,16 @@
     </script>
 </head>
 <body>
-    <h1><center>Meal Plans</center></h1>
-    <center><h2>Grocery Guru Meal Plans</h2></center>
-    <% 
-        @sponsored.each do |plan|
-    %> 
-        <a href="/mealplans/<%= plan.id %>"><%= plan.name %></a>
-        <%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, '/deleteplan/'+plan.id.to_s, method: :destroy, data: { confirm: 'Are you sure?' } %>
-        <div class="bg-secondary text-center">
-          <div class="container">
-                  <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="section-heading"><%= plan.name %></h2>
-                        <div class="carousel slide multi-item-carousel" id="theCarousel">
-                            <div class="carousel-inner">
-                              <% @recipes_array = Plan.where(meal_plan_id: plan.id).pluck(:id)
-                                    @recipes_array.each do |index|
-                                    recipe = Recipe.find(index)
-                                    if recipe.picture?
-                                        pic_url = recipe.picture_url
-                                    else
-                                        pic_url_length = recipe.picture.to_s.length
-                                        beginning_index = recipe.picture.to_s.index('http')
-                                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-                                        pic_url = cut_url.gsub!('%3A', ":/")
-                                    end %>
-                        
-                                    <div class="item active">
-                                        <div class="col-xs-4">
-                                            <div class="recipe">
-                                                <div class="image">
-                                                    <a href="/recipes/<%=recipe.id%>"><%= image_tag(pic_url, size:"300x300")%></a>
-                                                    <div class="name">
-                                                        <a href="/recipes/<%=recipe.id%>" style="color:white;"><%= recipe.name %></a>
-                                                    </div>
-                                                </div>
-                                                <ul class="media">
-                            	   		            <li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
-                            		                <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
-                      		                    </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                <% end %>
-                              <!--  Example item end -->
-                            </div>
-                            <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></a>
-                            <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right" style="color:white;"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div>
-    <br><br>
-    <%  end %>
-
-    <br><br>
-    <center><h2>Your Meal Plans</h2>
+    <center><h1>Meal Plans</h1>
     <button onClick="newPlan()">New Meal Plan</button></center>
     <% 
         @userPlans.each do |plan|
     %> 
-        <a href="/mealplans/<%= plan.id %>"><%= plan.name %></a>
-        <%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, '/deleteplan/'+plan.id.to_s, method: :destroy, data: { confirm: 'Are you sure?' } %>
         <div class="bg-secondary text-center">
           <div class="container">
                   <div class="row">
                     <div class="col-md-12">
-                        <h2 class="section-heading"><%= plan.name %></h2>
+                        <h2 class="section-heading"><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></h2>
                         <div class="carousel slide multi-item-carousel" id="theCarousel">
                             <div class="carousel-inner">
                               <% @recipes_array = Plan.where(meal_plan_id: plan.id).pluck(:id)
@@ -131,6 +72,7 @@
                             <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right" style="color:white;"></i></a>
                         </div>
                     </div>
+                    <%= link_to '<i class="fa fa-trash">Delete</i>'.html_safe, '/deleteplan/'+plan.id.to_s, method: :destroy, data: { confirm: 'Are you sure?' } %>
                 </div>
             </div> 
         </div>
