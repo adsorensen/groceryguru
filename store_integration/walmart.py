@@ -14,7 +14,7 @@ class Walmart(Store):
         self.browser.fill('email', user)
         self.browser.fill('password', password)
         self.browser.find_by_text('Sign In').click()
-        time.sleep(0.15)
+        time.sleep(2)
 
     def get_price(self):
         # Keep trying to find the price until the page is loaded. Try both old and new versions of the product page.
@@ -82,6 +82,8 @@ class Walmart(Store):
     def add_to_cart(self):
         print("Starting to add to cart...")
         cont = True
+        sleep_amount = 0.5
+        time_slept = 0
         while (cont):
             try:
                 button = self.browser.find_by_css('button[data-automation-id="addToCartBtn"]')
@@ -95,8 +97,12 @@ class Walmart(Store):
                     print("Clicked old button...")
                     cont = False
                 except:
-                    time.sleep(0.5)
+                    time.sleep(sleep_amount)
+                    time_slept += sleep_amount
                     print("Sleeping...")
+                    if time_slept > 3:
+                        print("Skipping item...")
+                        return
                     
 
         
@@ -107,7 +113,7 @@ class Walmart(Store):
     #*****************************************************************
     def run_job(self, user_id):
         # Connect to DB, grab checklist products 
-        self.login('', '')
+        self.login('robolsen92@gmail.com', 'FurOtpKw49gR')
         db = Database()
         ingredients = db.get_checklist_ingredients(user_id)
         print(ingredients)
