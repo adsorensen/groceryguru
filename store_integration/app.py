@@ -23,8 +23,8 @@ def create_job():
     userId = request.args.get('userId')
     store = request.args.get('store')
     controler.receive_job(userId, store)
-    
-    return redirect("https://grocery.walmart.com/")
+
+    return jsonify({'message': "Job received."}), 201
     
 # def job_done(user_id, status):
 #     print("Job Finished")
