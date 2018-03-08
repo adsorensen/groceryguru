@@ -14,6 +14,7 @@ class Walmart(Store):
         self.browser.fill('email', user)
         self.browser.fill('password', password)
         self.browser.find_by_text('Sign In').click()
+        time.sleep(0.15)
 
     def get_price(self):
         # Keep trying to find the price until the page is loaded. Try both old and new versions of the product page.
@@ -94,7 +95,7 @@ class Walmart(Store):
                     print("Clicked old button...")
                     cont = False
                 except:
-                    time.sleep(0.1)
+                    time.sleep(0.5)
                     print("Sleeping...")
                     
 
