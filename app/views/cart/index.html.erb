@@ -145,6 +145,7 @@ function remove(r) {
   </div>
 </div>
 
+<%= form_tag checkout_path, :method => :post do %>
 <div class="column-right">
   <h2><center>Grocery List</center></h2>
   <center>
@@ -188,6 +189,7 @@ function remove(r) {
     <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll'%> 
   </center>
 </div>
+<% end %>
 <center>
 <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
 </center>

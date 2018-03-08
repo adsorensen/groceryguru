@@ -1,7 +1,7 @@
 require 'ostruct'
 
 class CartController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  # before_action :set_cart, only: [:show, :edit, :update, :destroy]
   
   def add_item
     ingr = params['ingr']
@@ -138,7 +138,6 @@ class CartController < ApplicationController
   
   def create
     @cart = Cart.new(cart_params)
-    @ingredients2 = {"egg" => 3}
   
     respond_to do |format|
       if @cart.save
