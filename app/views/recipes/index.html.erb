@@ -9,8 +9,8 @@
 <br>
 <div class="container1">
  <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "170x170", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
- <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "170x170", :style => "background-color: white;"), "/recipes") %><br><%= link_to 'Copy/Paste', "/recipes"%></div>
- <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "170x170", :style => "background-color: white;"), "/recipes" ) %><br><%= link_to 'URL', "/recipes"%></div>
+ <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "170x170", :style => "background-color: white;"), recipes_text_path) %><br><%= link_to 'Copy/Paste', recipes_text_path %></div>
+ <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "170x170", :style => "background-color: white;"), recipes_url_path ) %><br><%= link_to 'URL', recipes_url_path %></div>
 </div>
 <div class="bg-secondary text-center">
   <div class="container">

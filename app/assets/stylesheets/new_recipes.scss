@@ -124,3 +124,40 @@ input:focus, textarea:focus {
   text-shadow: none;
   background: #222222;
 }
+
+/***********************
+Url
+***********************/
+.wrapper {
+	width: 100%;
+	margin: 0 auto;
+}
+ 
+.header h2{
+}
+
+.wrapper .button {
+}
+ 
+.column-left {
+	width: 35%;
+	float: left;
+	padding: 10px;
+}
+ 
+.column-center {
+	width: 25%;
+	float: left;
+	padding: 10px;
+}
+ 
+.column-right {
+	width: 40%;
+	float: left;
+	padding: 10px;
+}
+.footer {
+	clear: both;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
