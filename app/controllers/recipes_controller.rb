@@ -22,6 +22,16 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit
   end
+  
+  # GET /recipes/url
+  def url
+    @recipe = Recipe.new
+  end
+  
+  # GET /recipes/text
+  def text
+    @recipe = Recipe.new
+  end
 
   # POST /recipes
   # POST /recipes.json
@@ -171,9 +181,6 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all.order("created_at DESC")
     end
-  end
-  
-  def url
   end
 
   private

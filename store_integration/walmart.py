@@ -107,7 +107,7 @@ class Walmart(Store):
     #*****************************************************************
     def run_job(self, user_id):
         # Connect to DB, grab checklist products 
-        self.login('robolsen92@gmail.com', 'FurOtpKw49gR')
+        self.login('', '')
         db = Database()
         ingredients = db.get_checklist_ingredients(user_id)
         print(ingredients)

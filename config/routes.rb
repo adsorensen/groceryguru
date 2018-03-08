@@ -12,13 +12,15 @@ Rails.application.routes.draw do
 
   get 'list/create'
 
+  get '/recipes/url', to: 'recipes#url'
+  get '/recipes/text', to: 'recipes#text'
+
   resources :saved_recipes
   resources :recipes
   resources :instructions
   resources :ingredients
   resources :prep_notes
   resources :ingredients
-  resources :recipes
   resources :users
   resources :carts
   resources :list, :collection => { :checkout => :post }
@@ -43,7 +45,6 @@ Rails.application.routes.draw do
   delete 'logout',  to: 'sessions#destroy'
   get 'create_list', to: 'list#create_list'
   post '/addReview', to: 'recipes#review'
-  get "/recipes/url" => "recipes#url"
   post '/saved_recipes/:id', to: "saved_recipes#destroy"
   post "/recipes/edit_review" => "recipes#edit_review"
   post "/recipes/delete_review" => "recipes#delete_review"
@@ -55,7 +56,7 @@ Rails.application.routes.draw do
   get '/mealplans/:id', to: "meal_plans#show"
   get '/mealplans', to: "meal_plans#index"
   post '/plans/:id', to: 'plans#destroy'
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
