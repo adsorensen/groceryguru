@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224192902) do
+ActiveRecord::Schema.define(version: 20180304184812) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -21,11 +21,13 @@ ActiveRecord::Schema.define(version: 20180224192902) do
   end
 
   create_table "checkout_lists", force: :cascade do |t|
-    t.integer  "user_id",       limit: 4, null: false
-    t.integer  "ingredient_id", limit: 4, null: false
+    t.integer  "user_id",       limit: 4,   null: false
+    t.integer  "ingredient_id", limit: 4,   null: false
     t.integer  "quantity",      limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "ingr_name",     limit: 255
+    t.boolean  "unit"
   end
 
   add_index "checkout_lists", ["ingredient_id"], name: "fk_rails_3db664d8bb", using: :btree
