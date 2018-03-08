@@ -157,7 +157,7 @@ function remove(r) {
   <h2><center>Grocery List</center></h2>
   <center>
     <h4>Need something else?</h4>
-    <input type="text" id="add_item_field" />
+    <input type="text" id="add_item_field" style="border-color: gray;border: 1px solid;" />
     <input type="button" value="Add Item" class="add_item" />
   </center>
   <br>
@@ -176,11 +176,11 @@ function remove(r) {
           <% if @blacklist.include? ingredient.name %>
             <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
             <td><h4></h4></td>
-            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
+            <td><input class="btn2" type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% else %>
             <td><input type="number" style="width:90px" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> /> </td>
             <td style="padding:0 10px 0 10px;"><h4>  oz</h4></td>
-            <td><input type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
+            <td><input class="btn2" type="button" id="remove_item" value="Remove Item" onclick="remove(this);" style="font-size:14px;" ></td>
           <% end %>
         </tr>
         <% end %>
