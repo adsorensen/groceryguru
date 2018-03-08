@@ -12,17 +12,17 @@ body,
   width: 405px;
   margin: auto;
   padding: 60px 60px;
-  background: url(http://mikeyoungweb.com/img/bg4.jpg) no-repeat   center center #505050;   
+  background: url(http://mikeyoungweb.com/img/bg4.jpg) no-repeat center center #505050;
   background-size: cover;
   box-shadow: 0px 30px 60px -5px #000;
   overflow: auto;
 }
 
-#login{
+#login {
   padding-top: 80px;
 }
 
-#signup{
+#signup {
   padding-top: 0px;
 }
 
@@ -51,7 +51,7 @@ h2:first-child {
 span {
   text-transform: uppercase;
   font-size: 12px;
-  opacity: 0.4; 
+  opacity: 0.4;
   display: inline-block;
   position: relative;
   top: -65px;
@@ -80,7 +80,7 @@ span {
   background: rgba(0, 0, 0, 0);
 }
 
-.text:focus + span {
+.text:focus+span {
   opacity: 0.6;
 }
 
@@ -173,42 +173,49 @@ hr {
   border-color: #5cdb95;
   border: 1px solid;
 }
+
 .btn-outline:hover,
 .btn-outline:focus,
 .btn-outline:active,
 .btn-outline.active {
-  color: white;
   background-color: #5cdb95;
   border-color: #5cdb95;
 }
+
 .btn {
   font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
   text-transform: uppercase;
   letter-spacing: 2px;
   border-radius: 300px;
 }
+
 .btn-xl {
   padding: 15px 45px;
   font-size: 11px;
 }
+
 ::-moz-selection {
   color: white;
   text-shadow: none;
   background: #222222;
 }
+
 ::selection {
   color: white;
   text-shadow: none;
   background: #222222;
 }
+
 img::selection {
   color: white;
   background: transparent;
 }
+
 img::-moz-selection {
   color: white;
   background: transparent;
 }
+
 body {
   webkit-tap-highlight-color: #222222;
 }

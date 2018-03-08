@@ -12,8 +12,8 @@
 #  picture     :string(255)
 #  servings    :integer
 #  prep_time   :integer
+#  calories    :decimal
 #  private     :boolean          not null
-#
 
 class Recipe < ActiveRecord::Base
     has_many :instructions
