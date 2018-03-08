@@ -168,7 +168,7 @@ function remove(r) {
       <tbody>
         <% @ingredients2.each do |ingredient, value| %>
         <tr id="<%= ingredient.name %>">
-          <!--<td><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>-->
+          <td style="display: none;"><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
           <td><h4><%= ingredient.name %></h4></td>
           <% if @blacklist.include? ingredient.name %>
             <td><input type="number" style="width:45px; border-color: gray;border: 1px solid; padding: 2px; margin-left: 5px;" min="0" name="amount_input" size="5" id='<%=ingredient.name %>' value=<%= value.round %> > </td>
@@ -191,7 +191,7 @@ function remove(r) {
     <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
     <div class="btn btn-outline btn-xl page-scroll" onclick=printpage() style="display: inline-block;"> Print</div>
       <a href="https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=5&store=walmart" class="btn btn-outline btn-xl page-scroll" style="display: inline-block;"> Fill Cart</a>
-    <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll', style: "display: none"%> 
+    <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll'%> 
   </center>
 </div>
 <% end %>
