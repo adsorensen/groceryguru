@@ -51,7 +51,7 @@ class Store(object):
     def execute_javascript(self, script):
         return self.browser.evaluate_script(script)
 
-    def wait_pageload(self, timeout=30):
+    def wait_pageload(self, timeout=5):
         wait_interval = 0.05
         elapsed = 0
 
@@ -60,7 +60,7 @@ class Store(object):
             elapsed += wait_interval
 
             if elapsed > timeout:
-                raise PageNotLoadedException
+                return
     
     def job_done(self, user_id, status):
         print("Job Finished")

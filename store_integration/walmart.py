@@ -14,7 +14,7 @@ class Walmart(Store):
         self.browser.fill('email', user)
         self.browser.fill('password', password)
         self.browser.find_by_text('Sign In').click()
-        time.sleep(2)
+        time.sleep(10)
 
     def get_price(self):
         # Keep trying to find the price until the page is loaded. Try both old and new versions of the product page.
@@ -113,7 +113,7 @@ class Walmart(Store):
     #*****************************************************************
     def run_job(self, user_id):
         # Connect to DB, grab checklist products 
-        self.login('robolsen92@gmail.com', 'FurOtpKw49gR')
+        self.login('adam.sorensen455@gmail.com', 'capstone2017')
         db = Database()
         ingredients = db.get_checklist_ingredients(user_id)
         print(ingredients)
