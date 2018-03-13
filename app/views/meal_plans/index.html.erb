@@ -36,7 +36,8 @@
                         <h2 class="section-heading"><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></h2>
                         <div class="carousel slide multi-item-carousel" id="theCarousel">
                             <div class="carousel-inner">
-                              <% @recipes_array = Plan.where(meal_plan_id: plan.id).pluck(:id)
+                              <% @recipes_array = Plan.where(meal_plan_id: plan.id).pluck(:recipe_id)
+                                    # puts(@recipes_array)
                                     @recipes_array.each do |index|
                                     recipe = Recipe.find(index)
                                     if recipe.picture?

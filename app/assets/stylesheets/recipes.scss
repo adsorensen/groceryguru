@@ -306,9 +306,20 @@ Recipe
 
 .recipe .recipe-ingredients {
   margin-bottom: 20px;
-  padding-right: 80px;
+  padding-right: 20px;
   font-size: 15px;
 }
+
+.recipe .recipe-ingredients table {
+  width: 100%;
+  border-bottom: 1px solid #9f9f9f;
+  margin-bottom: 5px;
+}
+
+.recipe .recipe-ingredients td {
+  width: 50%;
+}
+
 
 .recipe .recipe-ingredients ul {
   list-style: none;

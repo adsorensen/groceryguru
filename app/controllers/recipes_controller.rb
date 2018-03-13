@@ -181,23 +181,37 @@ class RecipesController < ApplicationController
       r.directions = recipe.instructions
       r.description = recipe.description
       r.origin = recipe.canonical_url
-      r.remote_picture_url = recipe.image_url.gsub('http://','https://')
-      r.servings = recipe.yield.split('\s')[0]
+      unless recipe.image_url.nil?
+        if recipe.image_url.is_a?(Hash)
+          r.remote_picture_url = recipe.image_url.values[0][0].gsub('http://','https://')
+        else 
+          r.remote_picture_url = recipe.image_url.gsub('http://','https://')
+        end
+      end
+      r.servings = recipe.yield.split('\s')[0] if recipe.yield
       r.prep_time = recipe.total_time
       r.private = true
-      r.calories = nutrition[:calories].split('\s')[0] if nutrition[:calories]
-      r.fat = nutrition[:total_fat].split('\s')[0] if nutrition[:total_fat]
-      r.saturated_fat = nutrition[:saturated_fat].split('\s')[0] if nutrition[:saturated_fat]
-      r.carbs = nutrition[:total_carbohydrates].split('\s')[0] if nutrition[:total_carbohydrates]
-      r.cholestrol = nutrition[:cholesterol].split('\s')[0] if nutrition[:cholesterol]
-      r.sugar = nutrition[:sugar].split('\s')[0] if nutrition[:sugar]
-      r.sodium = nutrition[:sodium].split('\s')[0] if nutrition[:sodium]
-      r.protein = nutrition[:protein].split('\s')[0] if nutrition[:protein]
+      unless nutrition.nil?
+        r.calories = nutrition[:calories].split('\s')[0] if nutrition[:calories]
+        r.fat = nutrition[:total_fat].split('\s')[0] if nutrition[:total_fat]
+        r.saturated_fat = nutrition[:saturated_fat].split('\s')[0] if nutrition[:saturated_fat]
+        r.carbs = nutrition[:total_carbohydrates].split('\s')[0] if nutrition[:total_carbohydrates]
+        r.cholestrol = nutrition[:cholesterol].split('\s')[0] if nutrition[:cholesterol]
+        r.sugar = nutrition[:sugar].split('\s')[0] if nutrition[:sugar]
+        r.sodium = nutrition[:sodium].split('\s')[0] if nutrition[:sodium]
+        r.protein = nutrition[:protein].split('\s')[0] if nutrition[:protein]
+      end
     end
     
     i = 0
     while i < recipe.ingredients.length do
-      ingredientDetails = Ingreedy.parse(recipe.ingredients[i])
+      line = recipe.ingredients[i]
+      
+      if (line !~ /\d.+/)
+        line.insert(0, "1 ")
+      end
+        
+      ingredientDetails = Ingreedy.parse(line)
       ingredient = ingredientDetails.ingredient
       quantity = ingredientDetails.amount
       unit = ingredientDetails.unit

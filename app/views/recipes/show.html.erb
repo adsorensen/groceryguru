@@ -56,8 +56,7 @@
 <div class="recipe" id="recipe">
   <div class="recipe-ingredients">
     <h2>Ingredients</h2>
-      <ul>
-        <% #Loop over ingredients
+            <% #Loop over ingredients
         ingredients = @recipe.instructions
         for i in ingredients do
             ingredient_string = Ingredient.find(i.ingredient_id).name 
@@ -68,9 +67,14 @@
             else
               amount = i.amount.ceil 
             end %>
-            <li><span><span class="amount"><%= amount %> <%= i.unit %></span> <span class="in"><%= ingredient_string %></span></span></li>
-        <% end %>  
-      </ul>
+
+    <table>
+  <tr>
+    <td style="font-weight: bold;"><%= amount %> <%= i.unit %></td>
+    <td style="text-align: left;"><%= ingredient_string %></td>
+  </tr>
+</table>
+         <% end %>  
   </div>
 
   <div class="recipe-directions">

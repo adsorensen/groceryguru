@@ -436,6 +436,20 @@ function parseUrl() {
             },
             success: function(result) {
                 swal.hideLoading()
+            },
+            error: function(result) {
+                swal.hideLoading()
+                swal({
+                    title: "We're Sorry..",
+                    text: "The Gurus were unable to parse your recipe due to formatting issues. Please try our point and click tool instead!",
+                    type: "error",
+                    showCancelButton: true,
+                    reverseButtons: true,
+                    cancelButtonText: 'Never Mind',
+                    confirmButtonText: 'Go There Now!',
+                }).then(function(e) {
+                    window.location.href = "/recipes/text";
+                })
             }
         });
     }
