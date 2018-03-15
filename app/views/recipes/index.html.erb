@@ -21,7 +21,7 @@
         <div class="carousel-inner">
           <div class="item active">
             <div class="col-xs-4">
-                <% recipe = Recipe.find(752)
+                <% recipe = Recipe.find(260)
                 if recipe.picture?
                     pic_url = recipe.picture_url
                 else
@@ -48,7 +48,7 @@
             </div>
           </div>
           
-          <% @recipes_array = [751, 754, 749, 750]
+          <% @recipes_array = [193, 243, 357, 55]
                 @recipes_array.each do |index|
                 recipe = Recipe.find(index)
                 if recipe.picture?
