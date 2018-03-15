@@ -29,13 +29,9 @@
     <% 
         @userPlans.each do |plan|
     %> 
-        <div class="bg-secondary text-center">
-          <div class="container">
-                  <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="section-heading"><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></h2>
-                        <div class="carousel slide multi-item-carousel" id="theCarousel">
-                            <div class="carousel-inner">
+            <h2 class="section-heading"><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></h2>
+            <%= link_to '<i class="fa fa-trash">Delete</i>'.html_safe, '/deleteplan/'+plan.id.to_s, method: :destroy, data: { confirm: 'Are you sure?' }, style: "display: inline-block; text-align: right"%>
+                             <br>
                               <% @recipes_array = Plan.where(meal_plan_id: plan.id).pluck(:recipe_id)
                                     # puts(@recipes_array)
                                     @recipes_array.each do |index|
@@ -48,9 +44,6 @@
                                         cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
                                         pic_url = cut_url.gsub!('%3A', ":/")
                                     end %>
-                        
-                                    <div class="item active">
-                                        <div class="col-xs-4">
                                             <div class="recipe">
                                                 <div class="image">
                                                     <a href="/recipes/<%=recipe.id%>"><%= image_tag(pic_url, size:"300x300")%></a>
@@ -63,20 +56,7 @@
                             		                <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
                       		                    </ul>
                                             </div>
-                                        </div>
-                                    </div>
-                                    
                                 <% end %>
-                              <!--  Example item end -->
-                            </div>
-                            <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></a>
-                            <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right" style="color:white;"></i></a>
-                        </div>
-                    </div>
-                    <%= link_to '<i class="fa fa-trash">Delete</i>'.html_safe, '/deleteplan/'+plan.id.to_s, method: :destroy, data: { confirm: 'Are you sure?' } %>
-                </div>
-            </div> 
-        </div>
     <br><br>
     <% end %>
 </body>
