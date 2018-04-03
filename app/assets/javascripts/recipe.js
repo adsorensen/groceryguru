@@ -436,7 +436,7 @@ function parseUrl() {
             },
             success: function(result) {
                 swal.hideLoading()
-            },
+                            },
             error: function(result) {
                 swal.hideLoading()
                 swal({

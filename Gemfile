@@ -74,3 +74,6 @@ gem 'frontend-generators'
 gem 'open_uri_redirections'
 gem 'hangry', :git => 'https://github.com/lukeasrodgers/hangry.git'
 gem 'ingreedy'
+
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'

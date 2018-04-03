@@ -1,0 +1,56 @@
+<head>
+  <meta charset="UTF-8">
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>
+<%= stylesheet_link_tag "calendar" %>
+<script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+<script src='https://code.jquery.com/ui/1.11.2/jquery-ui.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js'></script>
+    <script  src="/calendar.js"></script>
+</head>
+	<h2 style="font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+  font-weight: 200;
+  letter-spacing: 1px;">Meal-Planning Calendar</h2>
+  <div id='wrap'>
+		        <div id='external-events'>
+		        	
+		          <div id='external-events-listing'>
+		          	<p>Search</p>
+		            <h4>Recipes</h4>
+		            <div class='fc-event'>My Event 1</div>
+		            <div class='fc-event'>My Event 2</div>
+		            <div class='fc-event'>My Event 3</div>
+		            <div class='fc-event'>My Event 4</div>
+		            <div class='fc-event'>My Event 5</div>
+		          </div>
+		           <div id='external-events-listing-1'>
+		            <h4>Personal Recipes</h4>
+		            <% user = User.find_by(id: session[:user_id])
+		            @personal_recipes = SavedRecipe.where(user_id: user.id, personal: 1) 
+		            @personal_recipes.each do |personal_recipe| 
+		            	recipe = Recipe.find_by(id: personal_recipe.recipe_id) %>
+		                <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" data-info="<%= recipe.id %>"><%= recipe.name %></div>
+		            <% end %>
+		          </div>
+		           <div id='external-events-listing-2'>
+		            <h4>Favorite Recipes</h4>
+		             <% user = User.find_by(id: session[:user_id])
+		            @saved_recipes = SavedRecipe.where(user_id: user.id, personal: 0) 
+		            @saved_recipes.each do |saved_recipe| 
+		            	recipe = Recipe.find_by(id: saved_recipe.recipe_id) %>
+		                <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" data-info="<%= recipe.id %>"><%= recipe.name %></div>
+		            <% end %>
+		          </div>
+		         
+		        </div>
+		        <div class="container">
+		        	
+		            <div class="col-lg-10">
+		            	<div id='calendar1'></div>
+		            </div>
+		        </div>
+		        <div style='clear:both'></div>
+		</div>
+</html>

@@ -1,0 +1,16 @@
+Order to Update Databases:
+
+DELETE from instructions;
+DELETE from saved_recipes;
+DELETE from carts;
+DELETE from checkout_lists;
+DELETE from reviews;
+DELETE from plans;
+DELETE from ingredients;
+DELETE from recipes;
+
+source recipeQuery;
+source ingredientsQuery;
+source productsQuery;
+source ingredientsProductQuery;
+source instructionsQuery;

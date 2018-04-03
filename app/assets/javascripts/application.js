@@ -20,7 +20,6 @@
 // require 'open-uri'
 // require 'hangry'
 
-
 function printpage() {
    window.print()
 }
