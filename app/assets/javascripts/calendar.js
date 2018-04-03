@@ -31,7 +31,6 @@ $(document).on('turbolinks:load', function() {
         "html": true,
         "content": function() {
             var id = $(this).data('info');
-
             $.ajax({
                 url: '/recipes/' + id + '.json',
                 type: 'GET',
@@ -47,19 +46,20 @@ $(document).on('turbolinks:load', function() {
             });
 
             var myContent = "<center><a href='/recipes/" + id + "'>Go to recipe page</a>";
+
             myContent += "<br><img src='" +
                 getPictureUrl(picture) + "' height='100' width='200' style='object-fit: cover;'/></center><br>";
-            myContent += "<strong>Ingredients</strong><br>"
+            myContent += "<strong>Ingredients</strong><br><ul>"
 
             for (var i = 0; i < instructions.length; i++) {
-                myContent += instructions[i].amount;
+                myContent += "<li>" + instructions[i].amount;
                 if (instructions[i].unit != null) {
                     myContent += " " + instructions[i].unit;
                 }
-                myContent += " " + getIngredientName(instructions[i].ingredient_id);
-                myContent += "<br>";
+                myContent += " " + getIngredientName(instructions[i].ingredient_id) + "</li>";
+                //myContent += "<br>";
             }
-            myContent += "<br><strong>Directions</strong><br>" + directions
+            myContent += "</ul><strong>Directions</strong><br>" + directions
             return myContent;
         }
     });
@@ -95,12 +95,12 @@ $(document).on('turbolinks:load', function() {
         droppable: true, // this allows things to be dropped onto the calendar
         dragRevertDuration: 0,
         eventLimit: true, // allow "more" link when too many events
-        drop: function(date, jsEvent, ui) {
-            $('.fc-event').popover('hide');
-        },
-        eventDragStop: function(event, jsEvent, ui, view) {
-            $('.fc-event').popover('hide');
-        }
+        // drop: function(date, jsEvent, ui) {
+        //     $('.fc-event').popover('hide');
+        // },
+        // eventDragStop: function(event, jsEvent, ui, view) {
+        //     $('.fc-event').popover('hide');
+        // }
         // // eventReceive: function(event) {
         // //     console.log('calendar 1 eventReceive');
         // //     makeEventsDraggable(event.id);

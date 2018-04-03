@@ -38,6 +38,7 @@ class Recipe < ActiveRecord::Base
 
     def self.search(search)
         where("name LIKE ?", "%#{search}%") 
+        where("directions LIKE ?", "%#{search}%") 
     end
     
 end

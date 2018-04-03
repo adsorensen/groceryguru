@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   get '/mealplans/:id', to: "meal_plans#show"
   get '/mealplans', to: "meal_plans#index"
   post '/plans/:id', to: 'plans#destroy'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

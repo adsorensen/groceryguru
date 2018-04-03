@@ -25,7 +25,7 @@
   border: 0px;
   margin: 5px 0;
   cursor: pointer;
-  padding: 8px;
+  padding: 7px;
 }
 
 #external-events p {
@@ -51,4 +51,8 @@
 .popover-content {
   height: 200px;
   overflow-y: scroll;
+}
+
+#search-form {
+  padding-bottom: 5px;
 }
