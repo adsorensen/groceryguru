@@ -95,12 +95,12 @@ $(document).on('turbolinks:load', function() {
         droppable: true, // this allows things to be dropped onto the calendar
         dragRevertDuration: 0,
         eventLimit: true, // allow "more" link when too many events
-        // drop: function(date, jsEvent, ui) {
-        //     $('.fc-event').popover('hide');
-        // },
-        // eventDragStop: function(event, jsEvent, ui, view) {
-        //     $('.fc-event').popover('hide');
-        // }
+        drop: function(date, jsEvent, ui) {
+            $(this).popover("disable")
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+            $(this).popover("show")
+        }
         // // eventReceive: function(event) {
         // //     console.log('calendar 1 eventReceive');
         // //     makeEventsDraggable(event.id);
