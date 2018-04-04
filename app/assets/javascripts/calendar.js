@@ -22,9 +22,15 @@ function getIngredientName(id) {
     return name;
 }
 
-// Manage status of dragging event and calendar
 var calEventStatus = [];
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
+    $("[data-toggle=popover]").draggable({
+        stop: function() {
+            // show popover when drag stops
+            $(this).popover('hide');
+        }
+    });
+
     /* deal with popovers
     -----------------------------------------------------------------*/
     $('.fc-event').popover({
@@ -57,7 +63,6 @@ $(document).on('turbolinks:load', function() {
                     myContent += " " + instructions[i].unit;
                 }
                 myContent += " " + getIngredientName(instructions[i].ingredient_id) + "</li>";
-                //myContent += "<br>";
             }
             myContent += "</ul><strong>Directions</strong><br>" + directions
             return myContent;
@@ -96,10 +101,7 @@ $(document).on('turbolinks:load', function() {
         dragRevertDuration: 0,
         eventLimit: true, // allow "more" link when too many events
         drop: function(date, jsEvent, ui) {
-            $(this).popover("disable")
-        },
-        eventClick: function(calEvent, jsEvent, view) {
-            $(this).popover("show")
+            $(this).popover('hide');
         }
         // // eventReceive: function(event) {
         // //     console.log('calendar 1 eventReceive');

@@ -348,9 +348,6 @@ GEM
     thread_safe (0.3.6)
     tilt (1.4.1)
     trollop (2.1.2)
-    turbolinks (5.1.0)
-      turbolinks-source (~> 5.1)
-    turbolinks-source (5.1.0)
     turf (0.0.5)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
@@ -389,7 +386,6 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   spring
   sweet-alert2-rails
-  turbolinks
   web-console (~> 2.0)
 
 BUNDLED WITH
