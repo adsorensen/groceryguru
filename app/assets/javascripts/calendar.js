@@ -8,20 +8,6 @@ function getPictureUrl(url) {
     return url;
 }
 
-function getIngredientName(id) {
-    $.ajax({
-        url: '/ingredients/' + id + '.json',
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-            name = data.name
-        }
-    });
-
-    return name;
-}
-
 var calEventStatus = [];
 $(document).ready(function() {
     $("[data-toggle=popover]").draggable({
@@ -58,11 +44,20 @@ $(document).ready(function() {
             myContent += "<strong>Ingredients</strong><br><ul>"
 
             for (var i = 0; i < instructions.length; i++) {
+                $.ajax({
+                    url: '/ingredients/' + instructions[i].ingredient_id + '.json',
+                    type: 'GET',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        ing_name = data.name
+                    }
+                });
                 myContent += "<li>" + instructions[i].amount;
                 if (instructions[i].unit != null) {
                     myContent += " " + instructions[i].unit;
                 }
-                myContent += " " + getIngredientName(instructions[i].ingredient_id) + "</li>";
+                myContent += " " + ing_name + "</li>";
             }
             myContent += "</ul><strong>Directions</strong><br>" + directions
             return myContent;
@@ -89,7 +84,7 @@ $(document).ready(function() {
     /* initialize the Calendar
         -----------------------------------------------------------------*/
     $('#calendar1').fullCalendar({
-        eventColor: '#6B8E23',
+        eventColor: '#80b719',
         selectOverlap: true,
         header: {
             left: 'prev,next today',
@@ -102,61 +97,21 @@ $(document).ready(function() {
         eventLimit: true, // allow "more" link when too many events
         drop: function(date, jsEvent, ui) {
             $(this).popover('hide');
+        },
+        eventDragStop: function(event, jsEvent) {
+
+            var trashEl = jQuery('#calendarTrash');
+            var ofs = trashEl.offset();
+
+            var x1 = ofs.left;
+            var x2 = ofs.left + trashEl.outerWidth(true);
+            var y1 = ofs.top;
+            var y2 = ofs.top + trashEl.outerHeight(true);
+
+            if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 &&
+                jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
+                $('#calendar1').fullCalendar('removeEvents', event._id);
+            }
         }
-        // // eventReceive: function(event) {
-        // //     console.log('calendar 1 eventReceive');
-        // //     makeEventsDraggable(event.id);
-        // // },
-        // // eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
-        // //     console.log('calendar 1 eventDrop');
-        // //     //alert(event.id)
-        // //     makeEventsDraggable(event.id);
-        // // },
-        // eventDragStart: function(event, jsEvent, ui, view) {
-        //     console.log(event);
-        //     console.log(jsEvent);
-        //     console.log(ui);
-        //     console.log(view);
-
-        //     // Add dragging event in global var 
-        //     calEventStatus['calendar'] = '#calendar1';
-        //     calEventStatus['event_id'] = event._id;
-        //     console.log('calendar 1 eventDragStart');
-        // },
-        // eventDragStop: function(event, jsEvent, ui, view) {
-        //     console.log('calendar 1 eventDragStop');
-
-        //     if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
-        //         $('#calendar1').fullCalendar('removeEvents', event._id);
-        //         //alert(event.id)
-
-        //         if (event.id === 0) {
-        //             var el = $("<div class='fc-event' id='0'>").appendTo('#external-events-listing').text(event.title);
-        //         }
-        //         else if (event.id === 1) {
-        //             var el = $("<div class='fc-event' id='1'>").appendTo('#external-events-listing-1').text(event.title);
-        //         }
-        //         else {
-        //             var el = $("<div class='fc-event' id='2'>").appendTo('#external-events-listing-2').text(event.title);
-        //         }
-        //         el.draggable({
-        //             zIndex: 999,
-        //             revert: true,
-        //             revertDuration: 0
-        //         });
-
-        //         el.data('event', { title: event.title, id: event.id, stick: true });
-        //     }
-
-        //     calEventStatus = []; // Empty
-        //     //makeEventsDraggable();
-        // },
-        // eventResize: function(event, delta, revertFunc, jsEvent, ui, view) {
-        //     //makeEventsDraggable();
-        // },
-        // viewRender: function() {
-        //     console.log('calendar 1 viewRender');
-        //     //makeEventsDraggable();
-        // }
     });
 });

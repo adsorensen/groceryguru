@@ -1,6 +1,10 @@
 #wrap {
   width: 1500px;
   margin: 0 auto;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #external-events {
@@ -21,7 +25,7 @@
 #external-events .fc-event,
 .fc-event-1,
 .fc-event-2 {
-  background-color: #6B8E23;
+  background-color: #80b719;
   border: 0px;
   margin: 5px 0;
   cursor: pointer;
@@ -55,4 +59,12 @@
 
 #search-form {
   padding-bottom: 5px;
+}
+
+.fa-cog {
+  color: red;
+}
+
+#calendarTrash {
+  color: gray;
 }
