@@ -8,8 +8,40 @@ function getPictureUrl(url) {
     return url;
 }
 
+function getEvents() {
+    $.ajax({
+        type: 'GET',
+        url: "/event",
+        async: false,
+        dataType: "json",
+        success: function(data) {
+            array = data;
+        }
+    });
+    // alert(JSON.stringify(array));
+    var myJson = "[";
+    var count = array.length;
+    array.forEach(function(element) {
+        myJson += "{";
+        myJson += "\"id\": \"" + element.event_id + "\",";
+        myJson += "\"title\": \"" + element.title + "\",";
+        myJson += "\"start\": \"" + element.start_time + "\",";
+        myJson += "\"end\": \"" + element.end_time + "\",";
+        myJson += "\"allDay\": " + element.allday;
+        count--;
+        myJson += "}"
+        if (count != 0) {
+            myJson += ",";
+        }
+    });
+    myJson += "]";
+    return myJson;
+}
+
 var calEventStatus = [];
 $(document).ready(function() {
+    getEvents();
+
     $("[data-toggle=popover]").draggable({
         stop: function() {
             // show popover when drag stops
@@ -84,7 +116,8 @@ $(document).ready(function() {
     /* initialize the Calendar
         -----------------------------------------------------------------*/
     $('#calendar1').fullCalendar({
-        eventColor: '#80b719',
+        events: JSON.parse(getEvents()),
+        eventColor: '#55AE3A',
         selectOverlap: true,
         header: {
             left: 'prev,next today',
@@ -97,12 +130,44 @@ $(document).ready(function() {
         eventLimit: true, // allow "more" link when too many events
         drop: function(date, jsEvent, ui) {
             $(this).popover('hide');
+            $.ajax({
+                type: 'GET',
+                url: "/event",
+                async: false,
+                dataType: "json",
+            });
+        },
+        eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
+            $.ajax({
+                type: 'POST',
+                url: "/calendar/drag",
+                data: { event_id: event._id, start_time: String(event.start), end_time: String(event.end), allday: event.allDay },
+                async: false,
+                dataType: "json",
+            });
+        },
+        eventReceive: function(event, view) {
+            event._id = event._id + "" + Date.now();
+            $.ajax({
+                type: 'POST',
+                url: "/calendar",
+                data: { event_id: event._id, title: event.title, start_time: String(event.start), allday: event.allDay },
+                dataType: "json",
+            });
+            $('#calendar').fullCalendar('updateEvent', event);
+        },
+        eventResize: function(event, delta, revertFunc, jsEvent, ui, view) {
+            $.ajax({
+                type: 'POST',
+                url: "/calendar/drag",
+                data: { event_id: event._id, start_time: String(event.start), end_time: String(event.end), allday: event.allDay },
+                async: false,
+                dataType: "json",
+            });
         },
         eventDragStop: function(event, jsEvent) {
-
             var trashEl = jQuery('#calendarTrash');
             var ofs = trashEl.offset();
-
             var x1 = ofs.left;
             var x2 = ofs.left + trashEl.outerWidth(true);
             var y1 = ofs.top;
@@ -111,6 +176,12 @@ $(document).ready(function() {
             if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 &&
                 jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
                 $('#calendar1').fullCalendar('removeEvents', event._id);
+                $.ajax({
+                    type: 'DELETE',
+                    url: "/calendar",
+                    data: { event_id: event._id },
+                    dataType: "json",
+                });
             }
         }
     });

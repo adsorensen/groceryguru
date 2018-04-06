@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :users
   resources :carts
+  resources :event
   resources :cart, :collection => { :checkout => :post }
   get 'cart', to: 'cart#index'
   post 'checkout', to: 'cart#checkout'
@@ -35,6 +36,11 @@ Rails.application.routes.draw do
   get 'cart/loadcart'
   get 'sessions/new'
   post 'cart', to: 'cart#create'
+  post '/calendar' => 'event#save'
+  delete 'calendar', to: "event#destroy"
+  post '/calendar/drag' => 'event#update'
+  get '/event', to: "event#index"
+  get 'event/:id', to: 'event#show'
   post '/list/add_item' => 'list#add_item'
   post '/list/remove_item' => 'list#remove_item'
   delete 'cart', to: 'cart#destroy'

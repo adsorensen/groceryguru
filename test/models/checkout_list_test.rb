@@ -8,6 +8,8 @@
 #  quantity      :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  ingr_name     :string(255)
+#  unit          :boolean
 #
 
 require 'test_helper'
