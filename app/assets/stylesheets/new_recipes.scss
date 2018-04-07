@@ -6,27 +6,31 @@ label {
 	font-size: large;
 	padding: 5px;
 }
+
 p {
 	margin-bottom: 7px;
 }
+
 #form-div {
 	width: 80%;
-	 margin: 1em auto;
-  -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
-  padding-bottom: 10px;
+	margin: 1em auto;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	padding-bottom: 10px;
 }
 
-input[type="text"],input[type="number"], textarea {
-	color:#3c3c3c;
-	font-weight:500;
+input[type="text"],
+input[type="number"],
+textarea {
+	color: #3c3c3c;
+	font-weight: 500;
 	font-size: 18px;
 	border-radius: 0;
 	line-height: 22px;
 	background-color: #fbfbfb;
 	padding: 13px 13px 13px 13px;
 	margin-bottom: 10px;
-	width:100%;
+	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -35,10 +39,11 @@ input[type="text"],input[type="number"], textarea {
 }
 
 input[type="checkbox"] {
-	display:inline;
+	display: inline;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
 	background: #fff;
 	box-shadow: 0;
 	border: 3px solid #3498db;
@@ -47,27 +52,29 @@ input:focus, textarea:focus{
 	padding: 13px 13px 13px 13px;
 }
 
-.focused{
-	color:#30aed6;
-	border:#30aed6 solid 3px;
+.focused {
+	color: #30aed6;
+	border: #30aed6 solid 3px;
 }
 
 textarea {
-    width: 100%;
-    height: 150px;
-    line-height: 150%;
-    resize:vertical;
-} 
-
-input:hover, textarea:hover,
-input:focus, textarea:focus {
-	background-color:white;
+	width: 100%;
+	height: 150px;
+	line-height: 150%;
+	resize: vertical;
 }
-	
+
+input:hover,
+textarea:hover,
+input:focus,
+textarea:focus {
+	background-color: white;
+}
+
 .submit:hover {
 	color: #3498db;
 }
-	
+
 .ease {
 	width: 0px;
 	height: 74px;
@@ -79,13 +86,13 @@ input:focus, textarea:focus {
 	transition: .3s ease;
 }
 
-.submit:hover .ease{
-  width:100%;
-  background-color:white;
+.submit:hover .ease {
+	width: 100%;
+	background-color: white;
 }
 
 @media only screen and (max-width: 580px) {
-	#form-div{
+	#form-div {
 		left: 3%;
 		margin-right: 3%;
 		width: 88%;
@@ -94,79 +101,85 @@ input:focus, textarea:focus {
 		padding-right: 3%;
 	}
 }
+
 .btn-outline {
-  color: #5cdb95;
-  border-color: #5cdb95;
-  border: 1px solid;
+	color: #5cdb95;
+	border-color: #5cdb95;
+	border: 1px solid;
 }
+
 .btn-outline:hover,
 .btn-outline:focus,
 .btn-outline:active,
 .btn-outline.active {
-  color: white;
-  background-color: #5cdb95;
-  border-color: #5cdb95;
+	color: white;
+	background-color: #5cdb95;
+	border-color: #5cdb95;
 }
+
 .btn {
-  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  border-radius: 300px;
+	font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	border-radius: 300px;
 }
+
 .btn-xl {
-  padding: 15px 45px;
-  font-size: 11px;
+	padding: 15px 45px;
+	font-size: 11px;
 }
+
 ::-moz-selection {
-  color: white;
-  text-shadow: none;
-  background: #222222;
+	color: white;
+	text-shadow: none;
+	background: #222222;
 }
+
 ::selection {
-  color: white;
-  text-shadow: none;
-  background: #222222;
+	color: white;
+	text-shadow: none;
+	background: #222222;
 }
 
 /***********************
 Url
 ***********************/
+
 .wrapper {
 	width: 100%;
 	margin: 0 auto;
 }
- 
-.header h2{
-}
 
-.wrapper .button {
-}
- 
+.header h2 {}
+
+.wrapper .button {}
+
 .column-left {
 	width: 35%;
 	float: left;
 	padding: 10px;
 }
- 
+
 .column-center {
 	width: 25%;
 	float: left;
 	padding: 10px;
 	height: 1150px;
-  overflow-y: hidden;
-  z-index: 1;
+	overflow-y: hidden;
+	z-index: 1;
 }
 
 .btn btn-outline {
 	position: fixed;
 }
- 
+
 .column-right {
 	width: 40%;
 	float: left;
 	padding: 10px;
 }
-.footer {
+
+.footer-2 {
 	clear: both;
 	margin-top: 40px;
 	margin-bottom: 10px;
@@ -174,23 +187,27 @@ Url
 	position: relative;
 	background-color: white;
 }
+
 #popup {
-    height: 50px;
-    width: 200px;
-    text-align: center;
-    vertical-align:middle;
-    background-color: cornflowerblue;
-    color: white;
-    display: none;
-    padding-top: 8px;
-    position: absolute;
+	height: 50px;
+	width: 200px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: cornflowerblue;
+	color: white;
+	display: none;
+	padding-top: 8px;
+	position: absolute;
 }
+
 label.error {
 	color: red;
 }
+
 input.error {
 	border: solid 1px red;
 }
+
 textarea.error {
 	border: solid 1px red;
 }

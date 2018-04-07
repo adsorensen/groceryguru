@@ -5,7 +5,17 @@ function getPictureUrl(url) {
             url = url.replace("%3A", ":/");
         }
     }
+
+    if (!url) {
+        alert("here");
+        url = 'http://mushkilnahi.com/wp-content/uploads/2014/01/no-image-available.jpg';
+    }
     return url;
+}
+
+
+function emailPage() {
+    window.location = "mailto:xyz@abc.com";
 }
 
 function getEvents() {

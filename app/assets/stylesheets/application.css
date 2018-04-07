@@ -636,33 +636,43 @@ section.contact ul.list-social li.social-google-plus a:hover {
   background-color: #d73925;
 }
 
-footer {
+.footer {
+  position: fixed;
+  left: 0;
   bottom: 0;
-  background-color: #222222;
-  padding: 25px 0;
-  color: rgba(255, 255, 255, 0.3);
+  width: 100%;
   text-align: center;
+  z-index: 100000;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(34, 34, 34, 0.05);
+  padding: 5px;
 }
 
-footer p {
+.footer p {
   font-size: 12px;
   margin: 0;
 }
 
-footer ul {
+.footer ul {
   margin-bottom: 0;
 }
 
-footer ul li a {
+.footer ul li a {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.3);
 }
 
-footer ul li a:hover,
-footer ul li a:focus,
-footer ul li a:active,
-footer ul li a.active {
+.footer ul li a:hover,
+.footer ul li a:focus,
+.footer ul li a:active,
+.footer ul li a.active {
   text-decoration: none;
+}
+
+.footerSeparator {
+  padding: 30px;
 }
 
 .bg-secondary {
@@ -743,4 +753,39 @@ img::-moz-selection {
 
 body {
   webkit-tap-highlight-color: #222222;
+}
+
+/***********************
+Right icon bar
+***********************/
+
+.icon-bar {
+  position: fixed;
+  z-index: 2;
+  width: 40px;
+  /* Set a specific width */
+  background-color: #555;
+  /* Dark-grey background */
+  top: 50%;
+  right: 0;
+}
+
+.icon-bar a {
+  display: block;
+  /* Make the links appear below each other instead of side-by-side */
+  text-align: center;
+  /* Center-align text */
+  padding: 4px;
+  /* Add some padding */
+  transition: all 0.3s ease;
+  /* Add transition for hover effects */
+  color: white;
+  /* White text color */
+  font-size: 20px;
+  /* Increased font-size */
+}
+
+.icon-bar a:hover {
+  background-color: #000;
+  /* Add a hover color */
 }

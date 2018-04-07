@@ -46,6 +46,7 @@
 #calendar {
   float: right;
   width: 200px;
+  z-index: -5;
 }
 
 .mb-20 {
@@ -57,14 +58,36 @@
   overflow-y: scroll;
 }
 
-#search-form {
-  padding-bottom: 5px;
-}
-
 .fa-cog {
   color: red;
 }
 
 #calendarTrash {
-  color: gray;
+  color: #69747C;
+}
+
+.search-box {
+  padding: 7px;
+  border-radius: 5px 0 0 5px;
+  -moz-border-radius: 5px 0 0 5px;
+  -webkit-border-radius: 5px 0 0 5px;
+  -o-border-radius: 5px 0 0 5px;
+  border: 0 none;
+  width: 180px;
+  font-size: 1em;
+}
+
+.search-btn {
+  background: #706677;
+  color: white;
+  font: 'trebuchet ms', trebuchet;
+  padding: 7px 10px;
+  border-radius: 0 5px 5px 0;
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+  -o-border-radius: 0 5px 5px 0;
+  border: 0 none;
+  font-weight: bold;
+  margin-left: -3px;
+  font-size: 1em;
 }

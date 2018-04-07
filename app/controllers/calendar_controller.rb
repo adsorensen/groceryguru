@@ -7,8 +7,4 @@ class CalendarController < ApplicationController
       @recipes = Recipe.all.order("created_at DESC")
     end
   end
-  
-  def search
-    
-  end
 end
