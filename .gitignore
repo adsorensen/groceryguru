@@ -17,8 +17,4 @@
 !/log/.keep
 /tmp
 
-<<<<<<< HEAD
-/store_integration
-=======
-/store_integration
->>>>>>> 20354f03955d582997cf2aafa86d7f7ed6984b18
+/store_integration/*
