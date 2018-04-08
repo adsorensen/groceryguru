@@ -1,6 +1,67 @@
-<h1>Editing Recipe</h1>
+<head>
+  <%= stylesheet_link_tag "new_recipes" %>
+  <%= javascript_include_tag('recipe.js') %>
+</head>
+<h2>Edit Recipe</h2>
+<center>
+<%= form_for(@recipe) do |f| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-<%= render 'form' %>
+      <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Show', @recipe %> |
-<%= link_to 'Back', recipes_path %>
+  <div id="form-div">
+    <form class="form" id="form1">
+      <center><img id="picture" src="/assets/pic-generic.png"height="150" width="150"></center>
+      <%= f.label "Upload an image for your recipe:"%>
+      <%= f.file_field :picture,  :class => "uploadfield"%><br>
+      <%= f.text_field :name, value: @recipe.name, id: "title"%>
+      <%= f.text_area :description, value: @recipe.description%>
+      <%= f.text_area :directions, value: @recipe.directions%>
+      <br>
+      <%= f.label "Make this recipe private:" %>
+      <%= hidden_field_tag 'private', false %>
+      <%= check_box_tag  'private', 1, true, :class => "checkbox" %><br>
+      <%= f.text_field :prep_time, value: @recipe.prep_time%>
+      <%= f.text_field :servings, value: @recipe.servings%>
+      <%= f.text_field :origin, value: @recipe.origin%>
+      <h3>Ingredients</h3><div id='addIngredient' type="button" class="btn btn-outline btn-xl page-scroll">Add Ingredient</div>
+
+        <div id='header'>
+      <center>
+      <table id="ingredients">
+          <tbody>
+              <tr>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Ingredient</th>
+                <th>Preparation</th>
+              </tr>
+              <% instructions = @recipe.instructions
+                  for instruction in instructions do 
+                      ingredient_string = Ingredient.find(instruction.ingredient_id).name%>
+                      <tr>
+                        <td><%= instruction.amount %></td>
+                        <td><%= instruction.unit %></td>
+                        <td><%= ingredient_string %></td>
+                        <td><%= instruction.prep_note %></td>
+                      </tr>
+                  <%end%>
+          </tbody>
+          </table></center></div>
+  <br><br>
+      <div class="submit">
+        <input type="submit" value="Save Recipe" id="button-blue" class="btn btn-outline btn-xl page-scroll"/>
+    </form>
+      </div>
+  </div>
+<% end %>
+</center>
+
