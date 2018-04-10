@@ -1,0 +1,72 @@
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>
+<%= stylesheet_link_tag "calendar", media: 'screen' %>
+<%= stylesheet_link_tag "calendar_print", media:"print" %>
+<script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+<script src='https://code.jquery.com/ui/1.11.2/jquery-ui.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js'></script>
+    <script  src="/calendar.js"></script>
+</head>
+	<h2 style="font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+  font-weight: 200;
+  letter-spacing: 1px;">Meal-Planning Calendar <i class="fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Drag and drop recipes from the recipes pane on the left to your calendar on the right" style="color: #69747C;"></i><i id="calendarTrash" class="fa fa-trash" data-toggle="tooltip" title="Drag recipes here to delete them from calendar"></i></h2>
+  
+  <div class="icon-bar">
+  <a data-toggle="tooltip" title="Print" data-placement="left"><i class="fa fa-print" onclick=printpage()></i></a>
+  <a data-toggle="tooltip" title="Email" data-placement="left"><i class="fa fa-envelope" onclick=emailPage()></i></a>
+  </div>
+  
+  <div id='wrap'>
+		        <div id='external-events'>
+		          <div id='external-events-listing'><br>
+		          <h3 style="margin-top: -5px;">Recipes  <i class="fa fa-info-circle" data-toggle="tooltip" data-html="true" title="Click on the green recipe tiles to view specific details" style="color: #69747C;"></i></h3>
+        <%= form_tag("/calendar/", :method => "get", class: "search-box", style:"display:inline;") do %>
+   					<%= text_field_tag :search, params[:search], placeholder: "Search Recipes", class: 'search-box' %>
+            <%= button_tag type: 'submit', class: "search-btn" do %>
+            <i class="fa fa-search" aria-hidden="true" style="font-size: 1em;"></i>
+            <% end %>					
+        <% end %>
+				<% if @recipes.blank?%>
+		          	    <h4 style='color: black;'>There are no recipes containing the term: "<%= params[:search] %>"</h4>
+		    <% else unless params[:search].nil? %>
+		    <h4 style="color: #E34A6F">Search Results</h4>
+		    <div id= 'external-events-listing-1'>
+		      <% @recipes.each do |recipe| %>
+		      <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" data-info="<%= recipe.id %>"><%= recipe.name %></div>
+		      <% end %> 
+		    </div>
+		    <% end end %>
+		    </div>
+		           <div id='external-events-listing-1' style="height: auto;">
+		            <h4>Personal Recipes</h4>
+		            <% user = User.find_by(id: session[:user_id])
+		            @personal_recipes = SavedRecipe.where(user_id: user.id, personal: 1) 
+		            @personal_recipes.each do |personal_recipe| 
+		            	recipe = Recipe.find_by(id: personal_recipe.recipe_id) %>
+		                <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" data-info="<%= recipe.id %>"><%= recipe.name %></div>
+		            <% end %>
+		          </div>
+		           <div id='external-events-listing-2'>
+		            <h4>Favorite Recipes</h4>
+		             <% user = User.find_by(id: session[:user_id])
+		            @saved_recipes = SavedRecipe.where(user_id: user.id, personal: 0) 
+		            @saved_recipes.each do |saved_recipe| 
+		            	recipe = Recipe.find_by(id: saved_recipe.recipe_id) %>
+		                <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" data-info="<%= recipe.id %>"><%= recipe.name %></div>
+		            <% end %>
+		          </div>
+		        </div>
+		        <div class="container">
+		        	
+		            <div class="col-lg-10">
+		            	<div id="externalTitle"></div>
+		            	<div id='calendar1'></div>
+		            </div>
+		        </div>
+		        <div style='clear:both'></div>
+		</div>
+</html>

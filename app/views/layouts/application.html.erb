@@ -3,8 +3,8 @@
 <html>
 <head>
   <title>Grocery Guru</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   <%= javascript_include_tag 'new_age/manifest.js' %>
   <%= csrf_meta_tags %>
 </head>
@@ -22,6 +22,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="">
           <%= link_to 'Recipes', recipes_path %>
+        </li>
+        <li class="">
+          <%= link_to 'Calendar', '/calendar' %>
         </li>
         <li class="">
           <%= link_to 'Meal Plans', '/mealplans' %>
@@ -49,5 +52,10 @@
     <%= yield %>
   </div>
 </body>
+<div class="footerSeparator"></div>
+<div class="footer">
+  <a style="color: black;">About Us</a>
+  <p style="">&copy; 2018 Grocery Guru, LLC.</p>
+</div>
 </html>
 

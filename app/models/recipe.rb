@@ -35,9 +35,7 @@ class Recipe < ActiveRecord::Base
     
     mount_uploader :picture, PictureUploaderRecipes
 
-
     def self.search(search)
-        where("name LIKE ?", "%#{search}%") 
+        result = where("name LIKE ? OR directions LIKE ?", "%#{search}%", "%#{search}%") 
     end
-    
 end

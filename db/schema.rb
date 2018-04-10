@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20180330003056) do
   add_index "checkout_lists", ["ingredient_id"], name: "fk_rails_3db664d8bb", using: :btree
   add_index "checkout_lists", ["user_id"], name: "index_checkout_lists_on_user_id", using: :btree
 
+  create_table "events", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "title",      limit: 255
+    t.string   "start_time", limit: 255
+    t.string   "end_time",   limit: 255
+    t.boolean  "allday"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "event_id",   limit: 255
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false

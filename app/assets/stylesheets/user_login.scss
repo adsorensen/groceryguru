@@ -1,9 +1,13 @@
-body,
-.signin {
+label,
+input {
   font-family: 'Montserrat', sans-serif;
-  color: #FFF;
   font-size: 14px;
   letter-spacing: 1px;
+}
+
+label,
+h2 {
+  color: #FFF;
 }
 
 .login {
@@ -187,6 +191,15 @@ hr {
   text-transform: uppercase;
   letter-spacing: 2px;
   border-radius: 300px;
+  display: inline-block;
+  background-color: #FFF;
+}
+
+.btn:hover,
+  {
+  background-color: #5cdb95;
+  border-color: #5cdb95;
+  border: 1px solid;
 }
 
 .btn-xl {
@@ -214,8 +227,4 @@ img::selection {
 img::-moz-selection {
   color: white;
   background: transparent;
-}
-
-body {
-  webkit-tap-highlight-color: #222222;
 }

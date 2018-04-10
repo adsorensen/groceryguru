@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :users
   resources :carts
+  resources :events
+  resources :event
   resources :cart, :collection => { :checkout => :post }
   get 'cart', to: 'cart#index'
   post 'checkout', to: 'cart#checkout'
@@ -34,12 +36,17 @@ Rails.application.routes.draw do
 
   get 'cart/loadcart'
   get 'sessions/new'
+  
   post 'cart', to: 'cart#create'
+  post '/calendar' => 'event#save'
+  delete 'calendar', to: "event#destroy"
+  post '/calendar/drag' => 'event#update'
+  get '/event', to: "event#index"
+  get 'event/:id', to: 'event#show'
   post '/list/add_item' => 'list#add_item'
   post '/list/remove_item' => 'list#remove_item'
   delete 'cart', to: 'cart#destroy'
   get 'calendar', to: 'calendar#index'
-  #get 'welcome/index'
   get  'signup',  to: 'users#new'
   get    'login',   to: 'sessions#new'
   post   'login',   to: 'sessions#create'
@@ -60,6 +67,7 @@ Rails.application.routes.draw do
   get '/mealplans', to: "meal_plans#index"
   post '/plans/:id', to: 'plans#destroy'
   
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

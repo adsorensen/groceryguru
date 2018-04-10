@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  title      :string(255)
+#  start_time :string(255)
+#  end_time   :string(255)
+#  allday     :boolean
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  event_id   :string(255)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  title: MyString
+  start_time: 2018-04-05 01:08:57
+  end_time: 2018-04-05 01:08:57
+  allday: false
+
+two:
+  user_id: 
+  title: MyString
+  start_time: 2018-04-05 01:08:57
+  end_time: 2018-04-05 01:08:57
+  allday: false
