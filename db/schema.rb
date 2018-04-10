@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405193313) do
+ActiveRecord::Schema.define(version: 20180330003056) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user",       limit: 4
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20180405193313) do
     t.decimal  "sugar",                       precision: 10
     t.decimal  "sodium",                      precision: 10
     t.decimal  "protein",                     precision: 10
+    t.string   "tags",          limit: 255
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -142,6 +143,12 @@ ActiveRecord::Schema.define(version: 20180405193313) do
 
   add_index "saved_recipes", ["recipe_id"], name: "index_saved_recipes_on_recipe_id", using: :btree
   add_index "saved_recipes", ["user_id"], name: "index_saved_recipes_on_user_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "tag",        limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        limit: 255
