@@ -92,6 +92,7 @@
           	 </div>
           	 <ul class="media">
           	   		<%= link_to '<li><i class="fa fa-trash"></i>Delete</li>'.html_safe, recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
+          	   		<%= link_to '<li><i class="fa fa-edit"></i>Edit</li>'.html_safe, edit_recipe_path(recipe.id) %>
           		    <%= link_to '<li><i class="fa fa-list-ul"></i>Add to List</li>'.html_safe, carts_path(:user => session['user_id'], :recipe => recipe.id), :method => :post %>
             		  <li><a onclick="mealPlan()"><i class="fa fa-book">Add to Meal Plan</a></i></li>
             		</ul>
