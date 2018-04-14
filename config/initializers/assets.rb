@@ -24,6 +24,8 @@ Rails.application.config.assets.precompile += %w( recipe_search_results.css )
 Rails.application.config.assets.precompile += %w( new_age/new_age.css )
 Rails.application.config.assets.precompile += %w( new_age/manifest.js new_age/manifest.css )
 Rails.application.config.assets.precompile += %w( carousel.css )
+Rails.application.config.assets.precompile += %w( about.css )
+
 
 
 

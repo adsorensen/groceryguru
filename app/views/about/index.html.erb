@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Grocery Guru</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<%= stylesheet_link_tag "about" %>
+		<%= javascript_include_tag('application.js') %>
+	</head>
+	<body>
+
+		<!-- Banner -->
+			<section id="banner">
+				<h2>Our <strong>mission</strong> is to take the hassle out of cooking</h2>
+				<p>We aim to remove the unneccesary burdens of home-cooked meals by providing our users with the technology to quickly and easily plan meals and get groceries.</p>
+				<ul class="actions">
+					<li><a href="/" class="button special">Home</a></li>
+				</ul>
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper special">
+				<div class="inner">
+					<header class="major">
+						<h2 style="margin-bottom: -25px;">Meet Our Developers</h2>
+					</header>
+					<img src="https://i.imgur.com/HD77UHe.jpg" style="width: 50%; margin-bottom: 20px; margin-top: -20px;"></img>
+					<div class="features">
+						<div class="feature">
+							<i class="fa fa-diamond"></i>
+							<h3>Michelle Nguyen</h3>
+							<p>West Jordan, UT<br>@nguy3nmichelle</p>
+						</div>
+						<div class="feature">
+							<i class="fa fa-copy"></i>
+							<h3>Adam Sorensen</h3>
+							<p>Manti, UT<br>@revan1731</p>
+						</div>
+						<div class="feature">
+							<i class="fa fa-paper-plane-o"></i>
+							<h3>Grant Olsen</h3>
+							<p>Salt Lake City, UT<br>@rolsenrob</p>
+						</div>
+						<div class="feature">
+							<i class="fa fa-save"></i>
+							<h3>Tanner Wilson</h3>
+							<p>Woodland Park, CO<br>@wils00000n</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper style2 special">
+				<div class="inner narrow">
+					<header>
+						<h2>Get in touch</h2>
+					</header>
+					<%= form_tag '#', :class => "grid-form", :id => "grid-form", :remote => true do %>
+					<div class="form-control narrow">
+					<%= label_tag 'name', 'Name'%>
+					<%= text_field_tag 'name', '', :id => "name", :required => true %></div>
+					<div class="form-control narrow">
+					<%= label_tag 'email', 'Email'%>
+					<%= text_field_tag 'email', '', :required => true %>
+					</div>
+					<div class="form-control">
+					<%= label_tag 'message', 'Message'%>
+					<%= text_area_tag 'body', '', :required => true %></div>
+					<ul class="actions">
+					<%= submit_tag "submit", :id => "form-submit", :value => "Send Message", :onclick => "showAlert();" %></ul>
+					<% end %>
+				</div>
+			</section>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>

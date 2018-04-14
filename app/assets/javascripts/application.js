@@ -27,9 +27,21 @@ function openPopup() {
    alert("Recipe Has Been Saved");
 }
 
-function addReview() {
+$("#grid-form").bind('ajax:success', function() {
+   alert("yes");
+});
 
+function showAlert() {
+   if ($("#name").val().length != 0 && $("#email").val().length != 0 && $("#body").val().length != 0) {
+      swal({
+         type: "success",
+         title: "Your message was sent!",
+         showConfirmButton: false,
+         timer: 2500
+      });
+   }
 }
+
 
 function showIngredients() {
    document.getElementById('instructions').style.display = "none"

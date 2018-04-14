@@ -80,4 +80,20 @@ Rails.application.configure do
   config.action_controller.asset_host = "http://your-assets-server.com"
 config.action_controller.asset_host = "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"
 config.action_controller.asset_host = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => 'smtp.gmail.com',
+    :port                 => 587,
+    :domain               => 'gmail.com',
+    :user_name            => 'officialgroceryguru@gmail.com',
+    :password             => 'capstone-2017',
+    :authentication       => 'login',
+    :enable_starttls_auto => true,
+    :openssl_verify_mode => 'none'
+  }
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 end
