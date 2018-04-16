@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'store_display/index'
 
   get 'store_display/new'
-
+  
   get 'store_display/create'
 
   get 'list/new'
@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get '/recipes/url', to: 'recipes#url'
   get '/recipes/text', to: 'recipes#text'
   post '/recipes/text', to: 'recipes#create'
+  
+  get '/about', to: 'about#index'
+  post '/about', to: 'about#create'
 
   resources :saved_recipes
   resources :recipes
@@ -36,7 +39,7 @@ Rails.application.routes.draw do
 
   get 'cart/loadcart'
   get 'sessions/new'
-  
+
   post 'cart', to: 'cart#create'
   post '/calendar' => 'event#save'
   delete 'calendar', to: "event#destroy"
