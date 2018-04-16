@@ -116,7 +116,7 @@ class RecipesController < ApplicationController
     end
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully deleted.' }
+      format.html { redirect_to '/users/' + session["user_id"].to_s, notice: 'Recipe was successfully deleted.' }
       format.json { head :no_content }
     end
   end
