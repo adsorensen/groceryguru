@@ -13,7 +13,91 @@ $('document').ready(function() {
         count++;
         $("#ingredients").append(newRow);
     });
+
+    $('.nutrition').popover({
+        "html": true,
+        "trigger": "hover",
+        "content": function() {
+            var id = $(this).data('info');
+            $.ajax({
+                url: '/recipes/' + id + '.json',
+                type: 'GET',
+                dataType: 'json',
+                async: false,
+                success: function(data) {
+                    calories = data.calories
+                    total_fat = data.fat
+                    sat_fat = data.saturated_fat
+                    carbs = data.carbs
+                    cholesterol = data.cholestrol
+                    sugar = data.sugar
+                    sodium = data.sodium
+                    protein = data.protein
+                }
+            });
+
+            var myContent = "<section class='nutrition-facts'> <header-pop><h1>Nutrition Facts</h1></header-pop> <table class='main-nutrients'> <thead> <tr> <th colspan='4'> Amount per serving </th> </tr> <tr> <td colspan='4'> <strong>Calories</strong> " +
+                nullCheck(calories) + "</td> </tr> </thead> <tbody> <tr class='daily-value'> <th colspan='4'> <strong>% Daily Value*</strong> </th> </tr> <tr class='br'> <th colspan='3'> <strong>Total Fat</strong> " +
+                nullCheck(total_fat) + "g </th> <td>" + getFatDV(total_fat) + "% </td> </tr> <tr> <td>&nbsp;</td> <th colspan='2'> Saturated Fat " +
+                nullCheck(sat_fat) + "g </th> <td> " + getSatFatDV(sat_fat) + "% </td> </tr> <tr> <th colspan='3'><strong>Cholesterol</strong> " +
+                nullCheck(cholesterol) + "mg </th> <td> " + getCholesterolDV(cholesterol) + "% </td> </tr> <tr> <th colspan='3'> <strong>Sodium</strong> " +
+                nullCheck(sodium) + "mg </th> <td> " + getSodiumDV(sodium) + "% </td> </tr> <tr> <th colspan='3'> <strong>Total Carbohydrate</strong> " +
+                nullCheck(carbs) + "g </th> <td> " + getCarbsDV(carbs) + "% </td> </tr> <tr> <td>&nbsp;</td><th colspan='2'> Total Sugars " +
+                nullCheck(sugar) + "g </th> <td> </td> </tr> <tr> <th colspan='3'> <strong>Protein</strong> " +
+                nullCheck(protein) + "g </th> <td> </td> </tr> </tbody> </table> <p class='footnote' style='color: black; width: 100%; margin-bottom: 10px;'>Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs.</p> </section>"
+
+            return myContent;
+        }
+    });
 });
+
+function nullCheck(input) {
+    if (input == null) {
+        return "---"
+    }
+    else
+        return input;
+}
+
+function getFatDV(input) {
+    if (input == null) {
+        return "N/A"
+    }
+    else
+        return Math.round(parseInt(input) / 65 * 100);
+}
+
+function getSatFatDV(input) {
+    if (input == null) {
+        return "N/A"
+    }
+    else
+        return Math.round(parseInt(input) / 20 * 100);
+}
+
+function getSodiumDV(input) {
+    if (input == null) {
+        return "N/A"
+    }
+    else
+        return Math.round(parseInt(input) / 2400 * 100);
+}
+
+function getCholesterolDV(input) {
+    if (input == null) {
+        return "N/A"
+    }
+    else
+        return Math.round(parseInt(input) / 300 * 100);
+}
+
+function getCarbsDV(input) {
+    if (input == null) {
+        return "N/A"
+    }
+    else
+        return Math.round(parseInt(input) / 300 * 100);
+}
 
 function reviewEdit(id, oldReview, recipeId) {
     swal({
@@ -435,18 +519,19 @@ function parseUrl() {
                 url: url
             },
             success: function(result) {
-                swal.hideLoading()
-                            },
+                swal.hideLoading();
+                alert(result)
+            },
             error: function(result) {
-                swal.hideLoading()
+                swal.hideLoading();
                 swal({
                     title: "We're Sorry..",
                     text: "The Gurus were unable to parse your recipe due to formatting issues. Please try our point and click tool instead!",
                     type: "error",
                     showCancelButton: true,
                     reverseButtons: true,
-                    cancelButtonText: 'Never Mind',
-                    confirmButtonText: 'Go There Now!',
+                    cancelButtonText: 'Never mind',
+                    confirmButtonText: 'Go there now!',
                 }).then(function(e) {
                     window.location.href = "/recipes/text";
                 })
