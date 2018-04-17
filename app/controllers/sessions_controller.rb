@@ -1,9 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :ensure_logged_in, except: :destroy
   
-  def new
-  end
-  
   def create
     user = User.find_by(email: session_params[:email].downcase)
     if user && user.authenticate(session_params[:password])
