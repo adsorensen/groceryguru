@@ -57,7 +57,7 @@
 		            <h4>Favorite Recipes</h4>
 		             <% user = User.find_by(id: session[:user_id])
 		            @saved_recipes = SavedRecipe.where(user_id: user.id, personal: 0)
-		            if @personal_recipes.length == 0 %>
+		            if @saved_recipes.length == 0 %>
 		            <center><h4 style="color: gray;">You currently have 0 favorite recipes</h4></center>
 		            <% end 
 		            @saved_recipes.each do |saved_recipe| 

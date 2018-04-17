@@ -2,6 +2,7 @@ require 'ostruct'
 
 class CartController < ApplicationController
   # before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
   
   def add_item
     ingr = params['ingr']
@@ -137,7 +138,12 @@ class CartController < ApplicationController
   end
   
   def create
-    @cart = Cart.new(cart_params)
+    if params[:user].present? 
+          @cart = Cart.new(cart_params)
+    else
+      @cart = Cart.new(:user => session["user_id"], :recipe => params[:recipe])
+    end
+    
   
     respond_to do |format|
       if @cart.save

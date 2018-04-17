@@ -79,8 +79,8 @@ $(document).ready(function() {
                 }
             });
 
-            var myContent = "<center><a href='/recipes/" + id + "'>Go to recipe page</a>";
-
+            var myContent = "<center><a href='/recipes/" + id + "'>Go to recipe page</a><br>";
+            myContent += "<a id='tagit' class='" + id + "'>Add to grocery list</a>";
             myContent += "<br><img src='" +
                 getPictureUrl(picture) + "' height='100' width='200' style='object-fit: cover;'/></center><br>";
             myContent += "<strong>Ingredients</strong><br><ul>"
@@ -193,6 +193,25 @@ $(document).ready(function() {
                     dataType: "json",
                 });
             }
+        }
+    });
+});
+
+$(document).on('click', "#tagit", function() {
+    var id = $('#tagit').attr('class');
+    $.ajax({
+        type: 'POST',
+        url: "/cart",
+        data: {
+            recipe: id
+        },
+        dataType: "json",
+        success: function(response) {
+            swal({
+                type: 'success',
+                title: "Conversion Complete",
+                text: "Recipe successfully added to list"
+            });
         }
     });
 });

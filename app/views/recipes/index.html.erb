@@ -18,12 +18,12 @@
       <div class="row">
         <div class="col-md-12">
         <h2 class="section-heading">Trending Meals</h2>
-        <p style='color: #384048; font-weight: 200;'>Strike Gold With These St. Patrick's Day Recipes</p>
+        <p style='color: #384048; font-weight: 200;'>Kick off this summer with favorite Memorial Day recipes!</p>
 <div class="carousel slide multi-item-carousel" id="theCarousel">
         <div class="carousel-inner">
           <div class="item active">
             <div class="col-xs-4">
-                <% recipe = Recipe.find(260)
+                <% recipe = Recipe.find(247)
                 if recipe.picture?
                     pic_url = recipe.picture_url
                 else
@@ -50,7 +50,7 @@
             </div>
           </div>
           
-          <% @recipes_array = [193, 243, 357, 55]
+          <% @recipes_array = [348, 124, 253, 162]
                 @recipes_array.each do |index|
                 recipe = Recipe.find(index)
                 if recipe.picture?
