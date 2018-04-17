@@ -17,4 +17,5 @@
 !/log/.keep
 /tmp
 
+/store_integration
 /store_integration/*
