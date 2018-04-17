@@ -1,24 +1,38 @@
-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+iframe {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  box-sizing: border-box;
 }
+
+button {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 .container1 {
   overflow: scroll;
   background-color: #f2f2f2;
   width: 30%;
   height: 100%;
-  max-height:500px;
+  max-height: 500px;
   text-size: large;
 }
+
 thead th {
   margin: 2px 0px;
-  border-bottom: 2px solid #E3E3E3; 
+  border-bottom: 2px solid #E3E3E3;
   font-size: 20px;
   padding: 5px 0px;
   padding-left: 20px;
@@ -29,40 +43,53 @@ thead th {
 }
 
 tbody tr td {
-    border-bottom: 2px solid #E3E3E3; 
-    color: #004000;
-    font-size: large;
+  border-bottom: 2px solid #E3E3E3;
+  color: #004000;
+  font-size: large;
 }
+
 .icon-bar {
-    position: fixed;
-    z-index: 2;
-    width: 40px; /* Set a specific width */
-    background-color: #555; /* Dark-grey background */
-    top: 50%;
-    right: 0;
+  position: fixed;
+  z-index: 2;
+  width: 40px;
+  /* Set a specific width */
+  background-color: #555;
+  /* Dark-grey background */
+  top: 50%;
+  right: 0;
 }
 
 .icon-bar a {
-    display: block; /* Make the links appear below each other instead of side-by-side */
-    text-align: center; /* Center-align text */
-    padding: 4px; /* Add some padding */
-    transition: all 0.3s ease; /* Add transition for hover effects */
-    color: white; /* White text color */
-    font-size: 20px; /* Increased font-size */
+  display: block;
+  /* Make the links appear below each other instead of side-by-side */
+  text-align: center;
+  /* Center-align text */
+  padding: 4px;
+  /* Add some padding */
+  transition: all 0.3s ease;
+  /* Add transition for hover effects */
+  color: white;
+  /* White text color */
+  font-size: 20px;
+  /* Increased font-size */
 }
 
 .icon-bar a:hover {
-    background-color: #000; /* Add a hover color */
+  background-color: #000;
+  /* Add a hover color */
 }
 
 .active {
-    background-color: #4CAF50; /* Add an active/current color */
+  background-color: #4CAF50;
+  /* Add an active/current color */
 }
+
 .btn-outline {
   color: #5cdb95;
   border-color: #5cdb95;
   border: 1px solid;
 }
+
 .btn-outline:hover,
 .btn-outline:focus,
 .btn-outline:active,
@@ -71,21 +98,25 @@ tbody tr td {
   background-color: #5cdb95;
   border-color: #5cdb95;
 }
+
 .btn {
   font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
   text-transform: uppercase;
   letter-spacing: 2px;
   border-radius: 300px;
 }
+
 .btn-xl {
   padding: 15px 45px;
   font-size: 11px;
 }
+
 ::-moz-selection {
   color: white;
   text-shadow: none;
   background: #222222;
 }
+
 ::selection {
   color: white;
   text-shadow: none;
