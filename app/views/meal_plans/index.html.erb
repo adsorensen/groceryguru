@@ -1,32 +1,18 @@
 <head>
     <%= stylesheet_link_tag "users_show" %>
-    <script>
-            // Instantiate the Bootstrap carousel
-            $('.multi-item-carousel').carousel({
-              interval: false
-            });
-            
-            // for every slide in carousel, copy the next slide's item in the slide.
-            // Do the same for the next, next item.
-            $('.multi-item-carousel .item').each(function(){
-              var next = $(this).next();
-              if (!next.length) {
-                next = $(this).siblings(':first');
-              }
-              next.children(':first-child').clone().appendTo($(this));
-              
-              if (next.next().length>0) {
-                next.next().children(':first-child').clone().appendTo($(this));
-              } else {
-              	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-              }
-            });
-    </script>
+    <style>
+        body {
+            background-color: #FFF;
+        }
+    </style>
 </head>
 <body>
-    <center><h1>Meal Plans</h1>
-    <button onClick="newPlan()">New Meal Plan</button></center>
-    <% 
+    <h2>Meal Plans</h2>
+    <h4>Easily organize recipes into sets using meal plans</h4>
+    <center><br><button class="btn btn-outline" onClick="newPlan()">Create a new Meal Plan</button></center>
+    <% if @userPlans.length == 0 %> 
+    <center><p style="margin-top: 30px;">You currently have 0 meal plans.</p></center>
+    <% end
         @userPlans.each do |plan|
     %> 
             <h2 class="section-heading"><a href="/mealplans/<%= plan.id %>"><%= plan.name %></a></h2>

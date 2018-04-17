@@ -27,10 +27,6 @@ function openPopup() {
    alert("Recipe Has Been Saved");
 }
 
-$("#grid-form").bind('ajax:success', function() {
-   alert("yes");
-});
-
 function showAlert() {
    if ($("#name").val().length != 0 && $("#email").val().length != 0 && $("#body").val().length != 0) {
       swal({
@@ -72,37 +68,47 @@ function showReviews() {
 
 function newPlan() {
    swal({
-      title: 'Enter a Meal Plan name',
+      title: 'Enter a Meal Plan Title',
       input: 'text',
-      inputValue: 'New Meal Plan',
-      html: '<input type="radio" name="private" id="priv">Private<br>' +
-         '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
+      inputPlaceholder: 'Meal Plan',
+      html: '<input type="radio" name="private" id="priv"> Private<br>' +
+         '<input type="radio" name="private" checked="checked" id="pub"> Public<br>',
       showCancelButton: true,
       showCloseButton: true,
       confirmButtonText: 'Create',
       showLoaderOnConfirm: true,
       allowOutsideClick: () => !swal.isLoading(),
    }).then(function(value) {
-      var pri = false;
-      if ($('#priv').is(':checked'))
-         pri = true;
-      $.ajax({
-         type: "POST",
-         url: "/mealplans",
-         data: {
-            name: value,
-            priv: pri
-         },
-         success: function(data) {
-            swal({
-               type: 'success',
-               title: 'Recipe added to new Meal Plan!',
-               showConfirmButton: false,
-               timer: 1500
-            });
-            window.setTimeout(refresh, 1500);
-         }
-      });
+      if (value.length == 0) {
+         swal({
+            type: "error",
+            title: "The title cannot be left blank!",
+         }).then(function(e) {
+            newPlan();
+         })
+      }
+      else {
+         var pri = false;
+         if ($('#priv').is(':checked'))
+            pri = true;
+         $.ajax({
+            type: "POST",
+            url: "/mealplans",
+            data: {
+               name: value,
+               priv: pri
+            },
+            success: function(data) {
+               swal({
+                  type: 'success',
+                  title: 'Meal plan successfully created!',
+                  showConfirmButton: false,
+                  timer: 1500
+               });
+               window.setTimeout(refresh, 1500);
+            }
+         });
+      }
    });
 }
 

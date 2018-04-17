@@ -104,6 +104,11 @@
       
     <div id='meal-plans' style="display: none;"> 
     <h2>Meal Plans</h2>
+    <div id="content">
+    <% if @meal_plans.length == 0 %>
+    <p>You currently have 0 meal plans.</p>
+    <% end %>
+    </div>
     <% 
         @meal_plans.each do |plan|
           if !plan.private || plan.user_id == session['user_id'] # Ensure only public plans are shown
