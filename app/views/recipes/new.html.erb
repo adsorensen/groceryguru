@@ -1,6 +1,24 @@
 <head>
   <%= stylesheet_link_tag "new_recipes" %>
   <%= javascript_include_tag('recipe.js') %>
+  <%= stylesheet_link_tag "multi-select", media: 'screen' %>
+  <%= javascript_include_tag('jquery.multi-select.js') %>
+  <script>$(function(){
+      $('#tags').multiSelect();  
+      
+      
+      function showSelectsd(){
+        var sel = $('#tags')[0];
+        var selValues = "";
+        for(i=0; i < sel.length; i++){
+          if(sel.options[i].selected){
+            selValues += sel.options[i].value;
+            
+          }
+        }
+      }
+    });
+  </script>
 </head>
 <h2>Add New Recipe</h2>
 <center>
@@ -26,6 +44,12 @@
       <%= f.text_area :description, placeholder: "Enter a detailed description of your recipe here"%>
       <%= f.text_area :directions, placeholder: "List the directions for your recipe with each step separated by a period"%>
       <br>
+      <%= f.label "Add tags to recipe"%>
+      <%= select_tag "tags", "<option value='Gluten Free'>Gluten Free</option>
+        <option value='Vegan'>Vegan</option>
+        <option value='Lactose Intolerant'>Lactose Intolerant</option>
+        <option value='vegitarian'>Vegitarian</option>
+        <option value='Organic'>Organic</option>".html_safe, multiple: true %>
       <%= f.label "Make this recipe private:" %>
       <%= hidden_field_tag 'private', false %>
       <%= check_box_tag  'private', 1, true, :class => "checkbox" %><br>
