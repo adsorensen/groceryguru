@@ -216,8 +216,8 @@ function mealPlan() {
 }
 
 function startJob() {
-   alert("Job starting");
    var user = $("#jobBtn").data('session');
+   alert("Job starting" + user);
    $.ajax({
       type: "POST",
       url: "https://groceryguru-docrosco.c9users.io:8081",

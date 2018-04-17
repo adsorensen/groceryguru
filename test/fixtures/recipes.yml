@@ -21,6 +21,7 @@
 #  sugar         :decimal(10, )
 #  sodium        :decimal(10, )
 #  protein       :decimal(10, )
+#  tags          :string(255)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

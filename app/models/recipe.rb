@@ -21,6 +21,8 @@
 #  sugar         :decimal(10, )
 #  sodium        :decimal(10, )
 #  protein       :decimal(10, )
+#  tags          :string(255)
+#
 
 class Recipe < ActiveRecord::Base
     has_many :instructions

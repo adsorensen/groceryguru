@@ -196,8 +196,9 @@ function remove(r) {
   <center>
     <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
     <div class="btn btn-outline btn-xl page-scroll" onclick=printpage() style="display: inline-block;"> Print</div>
-      <a href="https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=5&store=walmart" class="btn btn-outline btn-xl page-scroll" style="display: inline-block;"> Fill Cart</a>
-    <%= submit_tag "Checkout", :class => 'btn btn-outline btn-xl page-scroll'%> 
+    <a href="https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=5&store=walmart"> <img src="https://www.walmartbrandcenter.com/uploadedImages/BrandCenter/Content/downloads/Logos/specifications/specifications-logo1.png?n=4208" title="Walmart" width="120" height="40" /></a>
+    <br>
+    <%= image_submit_tag("https://www.smithsfoodanddrug.com/asset/581a08e984aee6328a27fc26?data=1", height: "30", width: "100") %> 
   </center>
 </div>
 <% end %>
