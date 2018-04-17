@@ -24,8 +24,8 @@ Rails.application.config.assets.precompile += %w( recipe_search_results.css )
 Rails.application.config.assets.precompile += %w( new_age/new_age.css )
 Rails.application.config.assets.precompile += %w( new_age/manifest.js new_age/manifest.css )
 Rails.application.config.assets.precompile += %w( carousel.css )
-
-
+Rails.application.config.assets.precompile += %w( multi-select.css )
+Rails.application.config.assets.precompile += %w( jquery.multi-select.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
