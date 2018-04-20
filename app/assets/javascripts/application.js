@@ -18,6 +18,82 @@
 //= require bootstrap
 // require 'open-uri'
 // require 'hangry'
+$("#external-events-listing-1").scroll(function() {
+   if ($(this).scrollLeft() != 0) {
+      $(this).scrollLeft(0)
+   }
+});
+
+function searchFunction() {
+   var input, filter, content, error, recipes, recipe, i, count;
+   input = document.getElementById("recipe-search");
+   filter = input.value.toUpperCase();
+   error = document.getElementById("none_found_message");
+   content = document.getElementById("content");
+   recipes = content.getElementsByClassName("recipe");
+   count = 0;
+
+   if (filter === "") {
+      content.style.display = "none";
+   }
+   else {
+      for (i = 0; i < recipes.length; i++) {
+         recipe = recipes[i].getElementsByClassName("name")[0];
+         if (recipe) {
+            content.style.display = "";
+            error.style.display = "none";
+            if (recipe.innerHTML.toUpperCase().indexOf(filter) > -1) {
+               recipes[i].style.display = "";
+               count++;
+            }
+            else {
+               recipes[i].style.display = "none";
+            }
+         }
+      }
+      if (count == 0) {
+         error.style.display = "";
+         error.innerHTML = "<p>There are no recipes containing the term: <strong>" + String(input.value) + "</strong></p>";
+      }
+   }
+}
+
+function calendarSearchFunction() {
+   var input, filter, content, error, recipes, recipe, searchLabel, i, count;
+   input = document.getElementById("calendar-search");
+   filter = input.value.toUpperCase();
+   error = document.getElementById("none_found_message");
+   content = document.getElementById("external-events-listing-1");
+   recipes = content.getElementsByClassName("recipe");
+   searchLabel = document.getElementById("search-results-label")
+   count = 0;
+
+   if (filter === "") {
+      content.style.display = "none";
+   }
+   else {
+      for (i = 0; i < recipes.length; i++) {
+         recipe = recipes[i].getElementsByClassName("fc-event")[0];
+         if (recipe) {
+            content.style.display = "";
+            searchLabel.style.display = "";
+            error.style.display = "none";
+            if (recipe.innerHTML.toUpperCase().indexOf(filter) > -1) {
+               recipes[i].style.display = "";
+               count++;
+            }
+            else {
+               recipes[i].style.display = "none";
+            }
+         }
+      }
+      if (count == 0) {
+         error.style.display = "";
+         searchLabel.style.display = "none";
+         error.innerHTML = "<h4>There are no recipes containing the term: <strong>" + String(input.value) + "</strong></h4>";
+      }
+   }
+}
 
 function printpage() {
    window.print()

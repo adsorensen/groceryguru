@@ -21,25 +21,19 @@
   </div>
   
   <div id='wrap'>
-		        <div id='external-events'>
-		          <div id='external-events-listing'><br>
-		          <h3 style="margin-top: -5px;">Recipes  <i class="fa fa-info-circle" data-toggle="tooltip" data-html="true" title="Click on the green recipe tiles to view specific details" style="color: #69747C;"></i></h3>
-        <%= form_tag("/calendar/", :method => "get", class: "search-box", style:"display:inline;") do %>
-   					<%= text_field_tag :search, params[:search], placeholder: "Search Recipes", class: 'search-box' %>
-            <%= button_tag type: 'submit', class: "search-btn" do %>
-            <i class="fa fa-search" aria-hidden="true" style="font-size: 1em;"></i>
-            <% end %>					
-        <% end %>
-				<% if @recipes.blank?%>
-		          	    <h4 style='color: black;'>There are no recipes containing the term: "<%= params[:search] %>"</h4>
-		    <% else unless params[:search].nil? %>
-		    <h4 style="color: #E34A6F">Search Results</h4>
-		    <div id= 'external-events-listing-1'>
-		      <% @recipes.each do |recipe| %>
-		      <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" tabindex="0" data-trigger="focus" data-info="<%= recipe.id %>"><%= recipe.name %></div>
-		      <% end %> 
-		    </div>
-		    <% end end %>
+		      <div id='external-events'>
+		      <div id='external-events-listing' style="height: auto;"><br>
+		          <h3 style="margin-top: -5px;">Recipes <i class="fa fa-info-circle" data-toggle="tooltip" data-html="true" title="Click on the green recipe tiles to view specific details" style="color: #69747C;"></i></h3>
+		          <input type="text" id="calendar-search" onkeyup="calendarSearchFunction()" placeholder="Search for a recipe.." style="width: 100%; padding: 5px;">
+		          <div id="none_found_message" style='color: black;'></div>
+		          <div id= 'external-events-listing-1' style="display:none;">
+		              <h4 style="color: #E34A6F" id="search-results-label">Search Results</h4>
+		              <% @recipes.each do |recipe| %>
+		              <div class="recipe">
+		              <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" tabindex="0" data-trigger="focus" data-info="<%= recipe.id %>"><%= recipe.name %><a style="display:none;"><%= recipe.directions %></a><a style="display:none;"><%= recipe.tags %></a></div>		             
+		              </div>
+		              <% end %>
+		          </div>
 		    </div>
 		           <div id='external-events-listing-1' style="height: auto;">
 		            <h4>Personal Recipes</h4>
