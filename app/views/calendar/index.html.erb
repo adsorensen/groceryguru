@@ -30,7 +30,8 @@
 		              <h4 style="color: #E34A6F" id="search-results-label">Search Results</h4>
 		              <% @recipes.each do |recipe| %>
 		              <div class="recipe">
-		              <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" tabindex="0" data-trigger="focus" data-info="<%= recipe.id %>"><%= recipe.name %></div>		             
+		              <div class='fc-event' title="<%= recipe.name %>" data-toggle="popover" tabindex="0" data-trigger="focus" data-info="<%= recipe.id %>" data-directions="<%= recipe.directions %>" data-tags="<%= recipe.tags %>"><%= recipe.name %>
+		              </div>		             
 		              </div>
 		              <% end %>
 		          </div>
