@@ -78,7 +78,7 @@ function calendarSearchFunction() {
             content.style.display = "";
             searchLabel.style.display = "";
             error.style.display = "none";
-            if (recipe.innerHTML.toUpperCase().indexOf(filter) > -1 || recipe.getAttribute("data-directions").indexOf(filter) > -1) {
+            if (recipe.innerHTML.toUpperCase().indexOf(filter) > -1) {
                recipes[i].style.display = "";
                count++;
             }
