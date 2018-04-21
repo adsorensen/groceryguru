@@ -28,7 +28,7 @@
 
 
 <div class="container">
-  <span class="source">Recipe by: <a href="#">Michelle</a></span>
+  <span class="source">Recipe by: <a href="#">Grocery Guru</a></span>
   
   <div class="recipe-text">
     <div class="recipe-image" style="background-image: url(<%= asset_path pic_url %>)"></div>
@@ -37,8 +37,9 @@
       <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
       <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
       <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.calories %></p>
+      <!--<p><i class='fa fa-tag'></i> TAGS: <%#= @recipe.tags %></p>-->
+      <p><i class='fa fa-tag'></i> TAGS: popular, high-cal, protein, burger</p>
       <p><a class="nutrition" data-toggle="popover" data-info="<%= @recipe.id %>">View Nutritional Information</a></p>
-      <p><i class='fa fa-tag'></i> TAGS: <%= @recipe.tags %></p>
     <div class="cf"></div>
   </div>
 

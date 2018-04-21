@@ -117,6 +117,9 @@ function remove(r) {
 <div class="column-left">
   <h2><center>Your Recipes</center></h2>
   <div id="content">
+    <% if @recipes_list.length == 0 %>
+        <p>You currently have 0 recipes on your list.</p>
+    <% end %>
     <% @recipes_list.each do |recipeCart| %>
      <% recipeCart.recipe.each do |recipe| %>
     <div class="recipe"> 
@@ -166,6 +169,9 @@ function remove(r) {
         </tr>
       </thead>
       <tbody>
+        <% if @ingredients2.length == 0 %>
+          <div id="content"><p>Add recipes to your list in order to convert the ingredients to a shopping list!</p></div>
+        <% end %>
         <% @ingredients2.each do |ingredient, value| %>
         <tr id="<%= ingredient.name %>">
           <td style="display: none;"><%= check_box_tag "ingredient_ids[]", ingredient.id, true %></td>
@@ -190,9 +196,9 @@ function remove(r) {
   <center>
     <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
     <div class="btn btn-outline btn-xl page-scroll" onclick=printpage() style="display: inline-block;"> Print</div>
-    <a href="https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=5&store=walmart"> <img src="https://www.walmartbrandcenter.com/uploadedImages/BrandCenter/Content/downloads/Logos/specifications/specifications-logo1.png?n=4208" title="Walmart" width="120" height="40" /></a>
+    <a href="https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=5&store=walmart"><img src="https://www.walmartbrandcenter.com/uploadedImages/BrandCenter/Content/downloads/Logos/specifications/specifications-logo1.png?n=4208" title="Walmart" width="145" height="40" /></a>
     <br>
-    <%= image_submit_tag("https://www.smithsfoodanddrug.com/asset/581a08e984aee6328a27fc26?data=1", height: "30", width: "100") %> 
+<%= image_submit_tag("https://www.smithsfoodanddrug.com/asset/581a08e984aee6328a27fc26?data=1", height: "30", width: "100") %> 
   </center>
 </div>
 <% end %>

@@ -1,27 +1,61 @@
 <head>
     <%= stylesheet_link_tag "recipe_search_results"%>
     <%= stylesheet_link_tag "carousel" %>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
 </head>
 <h2>Recipes</h2>
 
-<h3>Upload Your Own!</h3>
+<h3>Search for a Recipe</h3>
 <br>
-<div class="container1">
- <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "170x170", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
- <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "170x170", :style => "background-color: white;"), recipes_text_path) %><br><%= link_to 'Copy/Paste', recipes_text_path %></div>
- <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "170x170", :style => "background-color: white;"), recipes_url_path ) %><br><%= link_to 'URL', recipes_url_path %></div>
+<center>
+<input type="text" id="recipe-search" onkeyup="searchFunction()" placeholder="Search for a recipe..">
+<br>
+</center>
+<div id="content" style="display:none;">
+    <div id="none_found_message" style='color: black;'></div>
+    <% @recipes.each do |recipe| %>
+    <div class="recipe">
+        <div class="image">
+            <%= if recipe.picture?
+                    link_to image_tag(recipe.picture_url, size: "100x325"), recipe 
+                else
+                    pic_url_length = recipe.picture.to_s.length
+                    beginning_index = recipe.picture.to_s.index('http')
+                    if (beginning_index.nil?)
+                        link_to image_tag('fallback/recipe-default.png', size: "100x350"), recipe
+                    else
+                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                        new_url = cut_url.gsub!('%3A', ":/")
+                        link_to image_tag(new_url, size:"100x325"), recipe
+                    end
+                end
+            %>
+            <div class="name">
+                <a href="/recipes/<%=recipe.id%>" style="color:white; padding-top: 5px; padding-bottom: 5px"><%= recipe.name %></a>
+                <a style="display:none;"><%= recipe.directions %></a>
+                <a style="display:none;"><%= recipe.tags %></a>
+            </div>
+        </div>
+        <ul class="media">
+	   		<li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+		    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+  		</ul>
+    </div>
+     <% end %>
 </div>
+<br><br><br>
 <div class="bg-secondary text-center">
   <div class="container">
       <div class="row">
         <div class="col-md-12">
         <h2 class="section-heading">Trending Meals</h2>
-        <p style='color: #384048; font-weight: 200;'>Strike Gold With These St. Patrick's Day Recipes</p>
+        <p style='color: #384048; font-weight: 200;'>Kick off this summer with favorite Memorial Day recipes!</p>
 <div class="carousel slide multi-item-carousel" id="theCarousel">
         <div class="carousel-inner">
           <div class="item active">
             <div class="col-xs-4">
-                <% recipe = Recipe.find(260)
+                <% recipe = Recipe.find(247)
                 if recipe.picture?
                     pic_url = recipe.picture_url
                 else
@@ -48,7 +82,7 @@
             </div>
           </div>
           
-          <% @recipes_array = [193, 243, 357, 55]
+          <% @recipes_array = [348, 124, 253, 162]
                 @recipes_array.each do |index|
                 recipe = Recipe.find(index)
                 if recipe.picture?
@@ -112,54 +146,10 @@
   </div> 
 </div>
 <br>
-<h3>Search for a Recipe</h3>
+<h3>Upload Your Own!</h3>
 <br>
-<center>
-<%#= form_tag(recipes_path, :method => "get", id: "search-form") do %>
-   <%#= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
-   <%#= submit_tag "Search", :name => nil %>
-<%# end %>
-<%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
-   <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
-   <%= button_tag type: 'submit', class: "button my-button", id: "register-button" do %>
-        <i class="fa fa-search" aria-hidden="true" style="font-size: 2em;"></i>
-    <% end %>
-
-<% end %>
-<br>
-</center>
-
-<% if @recipes.blank?%>
-  <h4 style='color: black;'>There are no recipes containing the term: "<%= params[:search] %>"</h4>
-<% else unless params[:search].nil? %>
-<div id="content">
-    <% @recipes.each do |recipe| %>
-    <div class="recipe">
-        <div class="image">
-            <%= if recipe.picture?
-                    link_to image_tag(recipe.picture_url, size: "100x325"), recipe 
-                else
-                    pic_url_length = recipe.picture.to_s.length
-                    beginning_index = recipe.picture.to_s.index('http')
-                    if (beginning_index.nil?)
-                        link_to image_tag('fallback/recipe-default.png', size: "100x350"), recipe
-                    else
-                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
-                        new_url = cut_url.gsub!('%3A', ":/")
-                        link_to image_tag(new_url, size:"100x325"), recipe
-                    end
-                end
-            %>
-            <div class="name">
-                <a href="/recipes/<%=recipe.id%>" style="color:white; padding-top: 5px; padding-bottom: 5px"><%= recipe.name %></a>
-            </div>
-        </div>
-        <ul class="media">
-	   		<li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
-		    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
-  		</ul>
-    </div>
-     <% end %>
-  <% end %>
-<% end %>
+<div class="container1">
+ <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "170x170", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
+ <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "170x170", :style => "background-color: white;"), recipes_text_path) %><br><%= link_to 'Copy/Paste', recipes_text_path %></div>
+ <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "170x170", :style => "background-color: white;"), recipes_url_path ) %><br><%= link_to 'URL', recipes_url_path %></div>
 </div>

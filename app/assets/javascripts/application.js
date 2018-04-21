@@ -18,6 +18,82 @@
 //= require bootstrap
 // require 'open-uri'
 // require 'hangry'
+$("#external-events-listing-1").scroll(function() {
+   if ($(this).scrollLeft() != 0) {
+      $(this).scrollLeft(0)
+   }
+});
+
+function searchFunction() {
+   var input, filter, content, error, recipes, recipe, i, count;
+   input = document.getElementById("recipe-search");
+   filter = input.value.toUpperCase();
+   error = document.getElementById("none_found_message");
+   content = document.getElementById("content");
+   recipes = content.getElementsByClassName("recipe");
+   count = 0;
+
+   if (filter === "") {
+      content.style.display = "none";
+   }
+   else {
+      for (i = 0; i < recipes.length; i++) {
+         recipe = recipes[i].getElementsByClassName("name")[0];
+         if (recipe) {
+            content.style.display = "";
+            error.style.display = "none";
+            if (recipe.innerHTML.toUpperCase().indexOf(filter) > -1) {
+               recipes[i].style.display = "";
+               count++;
+            }
+            else {
+               recipes[i].style.display = "none";
+            }
+         }
+      }
+      if (count == 0) {
+         error.style.display = "";
+         error.innerHTML = "<p>There are no recipes containing the term: <strong>" + String(input.value) + "</strong></p>";
+      }
+   }
+}
+
+function calendarSearchFunction() {
+   var input, filter, content, error, recipes, recipe, searchLabel, i, count;
+   input = document.getElementById("calendar-search");
+   filter = input.value.toUpperCase();
+   error = document.getElementById("none_found_message");
+   content = document.getElementById("external-events-listing-1");
+   recipes = content.getElementsByClassName("recipe");
+   searchLabel = document.getElementById("search-results-label")
+   count = 0;
+
+   if (filter === "") {
+      content.style.display = "none";
+   }
+   else {
+      for (i = 0; i < recipes.length; i++) {
+         recipe = recipes[i].getElementsByClassName("fc-event")[0];
+         if (recipe) {
+            content.style.display = "";
+            searchLabel.style.display = "";
+            error.style.display = "none";
+            if (recipe.innerHTML.toUpperCase().indexOf(filter) > -1 || recipe.getAttribute("data-directions").indexOf(filter) > -1 || recipe.getAttribute("data-tags").indexOf(filter) > -1) {
+               recipes[i].style.display = "";
+               count++;
+            }
+            else {
+               recipes[i].style.display = "none";
+            }
+         }
+      }
+      if (count == 0) {
+         error.style.display = "";
+         searchLabel.style.display = "none";
+         error.innerHTML = "<h4>There are no recipes containing the term: <strong>" + String(input.value) + "</strong></h4>";
+      }
+   }
+}
 
 function printpage() {
    window.print()
@@ -26,10 +102,6 @@ function printpage() {
 function openPopup() {
    alert("Recipe Has Been Saved");
 }
-
-$("#grid-form").bind('ajax:success', function() {
-   alert("yes");
-});
 
 function showAlert() {
    if ($("#name").val().length != 0 && $("#email").val().length != 0 && $("#body").val().length != 0) {
@@ -72,37 +144,47 @@ function showReviews() {
 
 function newPlan() {
    swal({
-      title: 'Enter a Meal Plan name',
+      title: 'Enter a Meal Plan Title',
       input: 'text',
-      inputValue: 'New Meal Plan',
-      html: '<input type="radio" name="private" id="priv">Private<br>' +
-         '<input type="radio" name="private" checked="checked" id="pub">Public<br>',
+      inputPlaceholder: 'Meal Plan',
+      html: '<input type="radio" name="private" id="priv"> Private<br>' +
+         '<input type="radio" name="private" checked="checked" id="pub"> Public<br>',
       showCancelButton: true,
       showCloseButton: true,
       confirmButtonText: 'Create',
       showLoaderOnConfirm: true,
       allowOutsideClick: () => !swal.isLoading(),
    }).then(function(value) {
-      var pri = false;
-      if ($('#priv').is(':checked'))
-         pri = true;
-      $.ajax({
-         type: "POST",
-         url: "/mealplans",
-         data: {
-            name: value,
-            priv: pri
-         },
-         success: function(data) {
-            swal({
-               type: 'success',
-               title: 'Recipe added to new Meal Plan!',
-               showConfirmButton: false,
-               timer: 1500
-            });
-            window.setTimeout(refresh, 1500);
-         }
-      });
+      if (value.length == 0) {
+         swal({
+            type: "error",
+            title: "The title cannot be left blank!",
+         }).then(function(e) {
+            newPlan();
+         })
+      }
+      else {
+         var pri = false;
+         if ($('#priv').is(':checked'))
+            pri = true;
+         $.ajax({
+            type: "POST",
+            url: "/mealplans",
+            data: {
+               name: value,
+               priv: pri
+            },
+            success: function(data) {
+               swal({
+                  type: 'success',
+                  title: 'Meal plan successfully created!',
+                  showConfirmButton: false,
+                  timer: 1500
+               });
+               window.setTimeout(refresh, 1500);
+            }
+         });
+      }
    });
 }
 
