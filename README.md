@@ -12,8 +12,8 @@ http://docs.python-guide.org/en/latest/starting/install3/linux/
 
 1. Set up git repo using code base.
 2. Pull down into a c9.io workspace.
-3. Run 'rake db:migrate'.
-4. Run 'bundle install'.
+3. Run 'rake db:migrate' in terminal.
+4. Run 'bundle install' in terminal.
 5. Open store_integration folder and run command 
    'python3 app.py' on a separate server machine. 
    Copy the code from store_integration to this folder. 
@@ -24,35 +24,7 @@ http://docs.python-guide.org/en/latest/starting/install3/linux/
 9. Next run 'mysql-ctl cli' and run the following commands: 'source productsQuery', 'source ingredientsProductQuery'
 10. In the following file update the URL currently set as: "https://grocery-guru-nguyenmichelle.c9users.io:8081/?userId=5&store=walmart" to point to your newly created Python server.  
 11. Now you can hit Run Project to run your ruby application.
- 
- 
- 
- 
- 
- 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
 
-
-Welcome to your Rails project on Cloud9 IDE!
-
-To get started, just do the following:
-
-1. Run the project with the "Run Project" button in the menu bar on top of the IDE.
-2. Preview your new app by clicking on the URL that appears in the Run panel below (https://HOSTNAME/).
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
 
 ----------------- General Notes ----------------------
 
