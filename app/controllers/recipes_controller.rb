@@ -32,6 +32,7 @@ class RecipesController < ApplicationController
   # original
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.id = Recipe.maximum(:id).next
     @recipe.private = params['private']
     
     # loop over ingredients from table
