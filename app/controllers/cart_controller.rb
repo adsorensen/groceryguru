@@ -45,7 +45,10 @@ class CartController < ApplicationController
       "TB" => 0.5, "KG" => 35.274, "ML" => 0.03381, "" => 1
     }
     noUnit = false
-    if conversions.include? unit.upcase
+    if unit.nil?
+      noUnit = true
+      newA = amount
+    elsif conversions.include? unit.upcase
       if unit == ""
         noUnit = true
       end
