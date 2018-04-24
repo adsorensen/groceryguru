@@ -190,7 +190,6 @@ class RecipesController < ApplicationController
     nutrition = recipe.nutrition
 
     @recipe = Recipe.new do |r|
-      r.id = 1000
       r.name = recipe.name
       r.directions = recipe.instructions
       r.description = recipe.description
