@@ -7,6 +7,6 @@ $('#notification_toggle').on('change', function() {
     $('.judgments-settings').removeClass('disabled').stop().animate({ height: listHeight + headerHeight + 1 }, 500);
   }
   else {
-    $('.judgments-settings').addClass('disabled').stop().animate({ height: 0 }, 500);;
+    $('.judgments-settings').addClass('disabled').stop().animate({ height: 0 }, 500);
   }
 });
