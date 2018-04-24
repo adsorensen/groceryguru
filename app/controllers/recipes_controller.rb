@@ -190,6 +190,7 @@ class RecipesController < ApplicationController
     nutrition = recipe.nutrition
 
     @recipe = Recipe.new do |r|
+      r.id = 1000
       r.name = recipe.name
       r.directions = recipe.instructions
       r.description = recipe.description
@@ -215,6 +216,8 @@ class RecipesController < ApplicationController
         r.protein = nutrition[:protein].split('\s')[0] if nutrition[:protein]
       end
     end
+    
+    printf "\n\nGot recipe created %s\n\n", recipe.name
     
     i = 0
     while i < recipe.ingredients.length do
@@ -256,13 +259,17 @@ class RecipesController < ApplicationController
       i +=1
     end
     
+    puts "\n\nGot past instruction creation\n\n"
+    printf "\n\n Recipe id: %s", @recipe.name
     @recipe.save
-    
+    puts "\n\n Recipe should be saved now\n\n"
     # Make saved recipe entry
     @saved_recipe = SavedRecipe.new user_id: session['user_id'], personal: true, private: true
     @recipe.saved_recipes << @saved_recipe
+    puts "\n\n Added to saved recipes \n\n"
 
     if @recipe.save
+      puts "\n\n Yay we're almost done, lets redirect \n\n"
       redirect_to "/recipes/" + @recipe.id.to_s
     end
   end
