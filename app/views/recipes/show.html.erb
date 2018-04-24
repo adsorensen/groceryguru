@@ -37,7 +37,22 @@
       <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
       <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
       <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.calories %></p>
-      <!--<p><i class='fa fa-tag'></i> TAGS: <%= @recipe.tags %></p>-->
+      <% 
+        tags = @recipe.tags.split(',')
+        tag_string = ''
+        for i in 0...tags.length
+          if tags[i] == 'Spoonacular'
+            continue
+          else
+            if i == tags.length-1
+              tag_string += tags[i]
+            else
+              tag_string += tags[i] + ', '
+            end
+          end
+        end
+      %>
+      <p><i class='fa fa-tag'></i> TAGS: <%= tag_string %></p>
       <p><a class="nutrition" data-toggle="popover" data-info="<%= @recipe.id %>">View Nutritional Information</a></p>
     <div class="cf"></div>
   </div>
