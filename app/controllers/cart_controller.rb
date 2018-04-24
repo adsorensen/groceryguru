@@ -63,6 +63,7 @@ class CartController < ApplicationController
   
   def index
     # get recipes in user's cart
+    @userId = session['user_id']
     recipe_ids = Cart.where(user: session['user_id']).order(created_at: :desc)
     recipes = Array.new
     for id_val in recipe_ids do
