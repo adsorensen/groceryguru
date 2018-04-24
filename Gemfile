@@ -72,8 +72,7 @@ gem 'fog',                     '1.40.0'
 gem 'frontend-generators'
 
 gem 'open_uri_redirections'
-gem 'hangry'
-# , :git => 'https://github.com/lukeasrodgers/hangry.git'
+gem 'hangry', :git => 'https://github.com/lukeasrodgers/hangry.git'
 gem 'ingreedy'
 
 gem 'fullcalendar-rails'
