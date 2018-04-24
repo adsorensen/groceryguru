@@ -62,6 +62,20 @@ class RecipesController < ApplicationController
       pri = false;
     end
     
+    if params['tags']
+      tag_string = ''
+      tags = params['tags']
+      for i in 0...tags.length
+        if i == tags.length-1
+          tag_string += tags[i]
+        else
+          tag_string += tags[i] + ','
+        end
+      end
+      
+      @recipe.tags = tag_string
+    end
+    
     # Make saved recipe entry
     @saved_recipe = SavedRecipe.new user_id: session['user_id'], personal: true, private: pri
     @recipe.saved_recipes << @saved_recipe
@@ -266,6 +280,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :directions, :description, :origin, :picture, :servings, :prep_time, :calories, :cholestrol)
+      params.require(:recipe).permit(:name, :directions, :description, :origin, :picture, :servings, :prep_time, :calories, :cholestrol, :tags)
     end
 end

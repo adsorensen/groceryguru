@@ -18,12 +18,6 @@
 //= require bootstrap
 // require 'open-uri'
 // require 'hangry'
-$("#external-events-listing-1").scroll(function() {
-   if ($(this).scrollLeft() != 0) {
-      $(this).scrollLeft(0)
-   }
-});
-
 function searchFunction() {
    var input, filter, content, error, recipes, recipe, i, count;
    input = document.getElementById("recipe-search");
@@ -100,7 +94,10 @@ function printpage() {
 }
 
 function openPopup() {
-   alert("Recipe Has Been Saved");
+   swal({
+      type: "success",
+      title: "Recipe has been saved!"
+   });
 }
 
 function showAlert() {
@@ -306,3 +303,27 @@ function startJob() {
       }
    });
 }
+
+$(document).ready(function() {
+   // Instantiate the Bootstrap carousel
+   $('.multi-item-carousel').carousel({
+      interval: false
+   });
+
+   // for every slide in carousel, copy the next slide's item in the slide.
+   // Do the same for the next, next item.
+   $('.multi-item-carousel .item').each(function() {
+      var next = $(this).next();
+      if (!next.length) {
+         next = $(this).siblings(':first');
+      }
+      next.children(':first-child').clone().appendTo($(this));
+
+      if (next.next().length > 0) {
+         next.next().children(':first-child').clone().appendTo($(this));
+      }
+      else {
+         $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+      }
+   });
+});

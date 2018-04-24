@@ -44,13 +44,20 @@
       <%= f.text_area :description, placeholder: "Enter a detailed description of your recipe here"%>
       <%= f.text_area :directions, placeholder: "List the directions for your recipe with each step separated by a period"%>
       <br>
-      <%= f.label "Add tags to recipe"%>
-      <%= select_tag "tags", "<option value='Gluten Free'>Gluten Free</option>
+      <%= f.label "Add tags to the recipe"%>
+      <%= select_tag "tags", 
+       "<option value='Gluten Free'>Gluten Free</option>
         <option value='Vegan'>Vegan</option>
         <option value='Lactose Intolerant'>Lactose Intolerant</option>
-        <option value='vegitarian'>Vegitarian</option>
-        <option value='Organic'>Organic</option>".html_safe, multiple: true %>
-      <%= f.label "Make this recipe private:" %>
+        <option value='Peanut Free'>Peanut Free</option>
+        <option value='Soy Free'>Soy Free</option>
+        <option value='Vegitarian'>Vegitarian</option>
+        <option value='Breakfast'>Breakfast</option>
+        <option value='Lunch'>Lunch</option>
+        <option value='Dinner'>Dinner</option>".html_safe, 
+        multiple: true %>
+      <br>  
+      <%= f.label "Make this recipe private:" %>                                     
       <%= hidden_field_tag 'private', false %>
       <%= check_box_tag  'private', 1, true, :class => "checkbox" %><br>
       <%= f.text_field :prep_time, placeholder: "How many minutes does it take to cook this recipe?"%>
