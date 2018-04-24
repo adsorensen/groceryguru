@@ -46,7 +46,10 @@ class ListController < ApplicationController
       "TB" => 0.5, "KG" => 35.274, "ML" => 0.03381, "" => 1
     }
     noUnit = false
-    if conversions.include? unit.upcase
+    if unit.nil?
+      noUnit = true
+      newA = amount
+    elsif conversions.include? unit.upcase 
       if unit == ""
         noUnit = true
       end
@@ -133,7 +136,7 @@ class ListController < ApplicationController
       @chosen_ingredients.append(Ingredient.find(id).name)
     end
     index = params[:index].to_i
-    @walmart_url = "https://www.smithsfoodanddrug.com/search?query=" + @chosen_ingredients[index].gsub(' ','+')
+    @walmart_url = "https://grocery.walmart.com/products?query=" + @chosen_ingredients[index].gsub(' ','+')
   end
   
   def checkout_get
@@ -153,9 +156,9 @@ class ListController < ApplicationController
     @relative_url_prev = "/checkout?index=" + (prevIndex).to_s
     
     if @displayNext 
-      @walmart_url = "https://www.smithsfoodanddrug.com/search?query=" + ingredients[index].gsub(' ','+')
+      @walmart_url = "https://grocery.walmart.com/products?query=" + ingredients[index].gsub(' ','+')
     else
-      @walmart_url = "https://www.smithsfoodanddrug.com/shopping/cart"
+      @walmart_url = "https://grocery.walmart.com/checkout"
     end
   end
 end
