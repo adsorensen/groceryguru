@@ -18,6 +18,7 @@
 //= require bootstrap
 // require 'open-uri'
 // require 'hangry'
+
 function searchFunction() {
    var input, filter, content, error, recipes, recipe, i, count;
    input = document.getElementById("recipe-search");

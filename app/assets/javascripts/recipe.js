@@ -520,6 +520,7 @@ function parseUrl() {
             },
             success: function(result) {
                 swal.hideLoading();
+                alert(result)
             },
             error: function(result) {
                 swal.hideLoading();
