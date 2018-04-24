@@ -58,7 +58,6 @@
         multiple: true %>
       <br>  
       <%= f.label "Make this recipe private:" %>                                     
-      <%= f.label "Make this recipe private:" %>
       <%= hidden_field_tag 'private', false %>
       <%= check_box_tag  'private', 1, true, :class => "checkbox" %><br>
       <%= f.text_field :prep_time, placeholder: "How many minutes does it take to cook this recipe?"%>
