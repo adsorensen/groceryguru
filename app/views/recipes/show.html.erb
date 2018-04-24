@@ -37,8 +37,8 @@
       <p><i class='fa fa-users'></i> SERVINGS: <%= @recipe.servings %></p>
       <p><i class='fa fa-hourglass-half'></i> READY IN: <%= @recipe.prep_time %></p>
       <p><i class='fa fa-cutlery'></i> CALORIES: <%= @recipe.calories %></p>
-      <!--<p><i class='fa fa-tag'></i> TAGS: <%#= @recipe.tags %></p>-->
-      <p><i class='fa fa-tag'></i> TAGS: popular, high-cal, protein, burger</p>
+      <p><i class='fa fa-tag'></i> TAGS: <%= @recipe.tags %></p>
+      <!--<p><i class='fa fa-tag'></i> TAGS: popular, high-cal, protein, burger</p>-->
       <p><a class="nutrition" data-toggle="popover" data-info="<%= @recipe.id %>">View Nutritional Information</a></p>
     <div class="cf"></div>
   </div>
