@@ -43,8 +43,8 @@
         
           tag_string = ''
           for i in 0...tags.length
-            if tags[i] == 'Spoonacular'
-              continue
+            if tags[i] == 'spoonacular'
+              next
             else
               if i == tags.length-1
                 tag_string += tags[i]
