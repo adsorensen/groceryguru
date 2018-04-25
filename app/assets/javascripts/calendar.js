@@ -199,6 +199,7 @@ $(document).ready(function() {
 
 $(document).on('click', "#tagit", function() {
     var id = $('#tagit').attr('class');
+    console.log("HERE HERE");
     $.ajax({
         type: 'POST',
         url: "/cart",
