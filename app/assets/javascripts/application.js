@@ -178,7 +178,7 @@ function newPlan() {
                   title: 'Success',
                   text: "Meal plan successfully created!",
                   showConfirmButton: false,
-                  timer: 1500
+                  timer: 1400
                });
                window.setTimeout(refresh, 1500);
             }
