@@ -291,7 +291,7 @@ function mealPlan() {
 }
 
 function startJob() {
-   var user = $("#jobBtn").data('session');
+   var user = $("#uid").val();
    swal({
       type: 'info',
       title: "Sign In <br><p style='font-weight:200;'>You must sign into your Walmart Grocery <br>account before proceeding!</p>",
@@ -305,18 +305,20 @@ function startJob() {
       confirmButtonText: 'Sign In',
       showLoaderOnConfirm: true,
    }).then(function(result) {
-      $.ajax({
-         type: "GET",
-         url: "https://http://128.110.73.168:8081/?userId=" + user + "&store=walmart",
-         // data: {
-         //    userId: user,
-         //    store: 'walmart'
-         // },
-         success: function(data) {
-            //alert("Job Sent");
-         }
-      });
-      $(location).attr('href', 'https://grocery.walmart.com')
+      var email = $("#mail").val();
+      var pass = $("#pass").val();
+      // $.ajax({
+      //    type: "GET",
+      //    url: "https://http://128.110.73.168:8081/?userId=" + user + "&store=walmart",
+      //    // data: {
+      //    //    userId: user,
+      //    //    store: 'walmart'
+      //    // },
+      //    success: function(data) {
+      //       //alert("Job Sent");
+      //    }
+      // });
+      $(location).attr('href', "http://128.110.73.109:8081/?userId="+user+"&store=walmart&email="+email+"&password="+pass)
    });
 }
 
