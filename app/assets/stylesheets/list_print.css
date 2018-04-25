@@ -1,0 +1,15 @@
+@media print {
+    body {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .column-left,
+    .footer-2,
+    .footer,
+    #list-header,
+    #remove_item,
+    .icon-bar {
+        display: none;
+    }
+}

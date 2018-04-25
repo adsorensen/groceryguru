@@ -1,5 +1,7 @@
 <head>
 <%= stylesheet_link_tag "cart" %>
+<%= stylesheet_link_tag "list_print", media:"print" %>
+
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -110,7 +112,9 @@ function remove(r) {
 };
 </script>
 
-
+<div class="icon-bar">
+  <a data-toggle="tooltip" title="Print" data-placement="left"><i class="fa fa-print" onclick=printpage()></i></a>
+</div>
 
 <br>
 
@@ -155,11 +159,13 @@ function remove(r) {
 <%= form_tag checkout_path, :method => :post do %>
 <div class="column-right">
   <h2><center>Grocery List</center></h2>
+    <div id="list-header">
   <center>
     <h4>Need something else?</h4>
     <input type="text" id="add_item_field"/>
     <input type="button" value="Add Item" class="add_item add_item-outline" />
   </center>
+  </div>
   <br>
   <div class="container1">
     <table class="ingredient_table" id="ingre_table">

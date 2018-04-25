@@ -192,9 +192,9 @@ function mealPlan() {
       showCancelButton: true,
       showCloseButton: true,
       showConfirmButton: false,
-      html: '<button id="new">New Meal Plan</button>' +
-         '<p>&nbsp;</p>' +
-         '<button id="add">Add to Existing</button>',
+      html: '<br><button id="new" class=\'btn btn-outline\'>New Meal Plan</button>' +
+         '<br><br>' +
+         '<button id="add" class=\'btn btn-outline\'>Add to Existing</button>',
 
    });
 
@@ -304,27 +304,3 @@ function startJob() {
       }
    });
 }
-
-$(document).ready(function() {
-   // Instantiate the Bootstrap carousel
-   $('.multi-item-carousel').carousel({
-      interval: false
-   });
-
-   // for every slide in carousel, copy the next slide's item in the slide.
-   // Do the same for the next, next item.
-   $('.multi-item-carousel .item').each(function() {
-      var next = $(this).next();
-      if (!next.length) {
-         next = $(this).siblings(':first');
-      }
-      next.children(':first-child').clone().appendTo($(this));
-
-      if (next.next().length > 0) {
-         next.next().children(':first-child').clone().appendTo($(this));
-      }
-      else {
-         $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-      }
-   });
-});

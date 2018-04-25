@@ -209,8 +209,7 @@ $(document).on('click', "#tagit", function() {
         success: function(response) {
             swal({
                 type: 'success',
-                title: "Conversion Complete",
-                text: "Recipe successfully added to list"
+                title: "Recipe added to list!",
             });
         }
     });
