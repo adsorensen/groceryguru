@@ -32,6 +32,7 @@ class RecipesController < ApplicationController
   # original
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.id = Recipe.maximum(:id).next
     @recipe.private = params['private']
     
     # loop over ingredients from table
@@ -60,6 +61,20 @@ class RecipesController < ApplicationController
       pri = true;
     else
       pri = false;
+    end
+    
+    if params['tags']
+      tag_string = ''
+      tags = params['tags']
+      for i in 0...tags.length
+        if i == tags.length-1
+          tag_string += tags[i]
+        else
+          tag_string += tags[i] + ','
+        end
+      end
+      
+      @recipe.tags = tag_string
     end
     
     # Make saved recipe entry
@@ -174,8 +189,8 @@ class RecipesController < ApplicationController
     html_string = open(url, :allow_redirections => :all)
     recipe = Hangry.parse(html_string)
     nutrition = recipe.nutrition
+    
     next_id = Recipe.maximum(:id).next
-
     @recipe = Recipe.new do |r|
       r.id = next_id
       r.name = recipe.name
@@ -203,6 +218,8 @@ class RecipesController < ApplicationController
         r.protein = nutrition[:protein].split('\s')[0] if nutrition[:protein]
       end
     end
+    
+    printf "\n\nGot recipe created %s\n\n", recipe.name
     
     i = 0
     while i < recipe.ingredients.length do
@@ -244,13 +261,17 @@ class RecipesController < ApplicationController
       i +=1
     end
     
+    puts "\n\nGot past instruction creation\n\n"
+    printf "\n\n Recipe id: %s", @recipe.name
     @recipe.save
-    
+    puts "\n\n Recipe should be saved now\n\n"
     # Make saved recipe entry
     @saved_recipe = SavedRecipe.new user_id: session['user_id'], personal: true, private: true
     @recipe.saved_recipes << @saved_recipe
+    puts "\n\n Added to saved recipes \n\n"
 
     if @recipe.save
+      puts "\n\n Yay we're almost done, lets redirect \n\n"
       redirect_to "/recipes/" + @recipe.id.to_s
     end
   end
@@ -268,6 +289,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :directions, :description, :origin, :picture, :servings, :prep_time, :calories, :cholestrol)
+      params.require(:recipe).permit(:name, :directions, :description, :origin, :picture, :servings, :prep_time, :calories, :cholestrol, :tags)
     end
 end
