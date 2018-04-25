@@ -369,6 +369,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   compass-rails (~> 1.1.2)
   fog (= 1.40.0)
+  fog-aws
   frontend-generators
   fullcalendar-rails
   hangry!
