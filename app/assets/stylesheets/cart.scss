@@ -25,6 +25,16 @@
   max-height: 710px;
 }
 
+input[type=text] {
+  width: 70%;
+  box-sizing: border-box;
+  border-color: gray;
+  border-radius: 1px;
+  font-size: 16px;
+  padding: 12px 20px 12px 20px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
 
 .footer-2 {
   clear: both;

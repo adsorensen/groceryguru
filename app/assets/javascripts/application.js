@@ -292,29 +292,31 @@ function mealPlan() {
 function startJob() {
    var user = $("#jobBtn").data('session');
    swal({
-         //input: 'text',
-         title: 'Please Sign Into Your Walmart Grocery Account',
-         //inputValue: 'User Name or Email',
-         html: 'Email:<br>'+
-               '<input type="text" name="Email" id="mail" style="border:2px solid black;"><br>'+
-               'Password:<br>' +
-               '<input type="text" name="Password" id="pass" style="border:2px solid black;">',
-         showCancelButton: true,
-         showCloseButton: true,
-         confirmButtonText: 'Sign In',
-         showLoaderOnConfirm: true,
-      }).then(function(result){
-          $.ajax({
-            type: "GET",
-            url: "https://http://128.110.73.168:8081/?userId="+user+"&store=walmart",
-            // data: {
-            //    userId: user,
-            //    store: 'walmart'
-            // },
-            success: function(data) {
-               //alert("Job Sent");
-            }
-         });
-         $(location).attr('href', 'https://grocery.walmart.com')
+      type: 'info',
+      title: "Sign In <br><p style='font-weight:200;'>You must sign into your Walmart Grocery <br>account before proceeding!</p>",
+      reverseButtons: true,
+      html: 'Email:<br>' +
+         '<input type="text" name="Email" id="mail" style="border:2px solid black;"><br>' +
+         'Password:<br>' +
+         '<input type="text" name="Password" id="pass" style="border:2px solid black;">',
+      showCancelButton: true,
+      showCloseButton: true,
+      confirmButtonText: 'Sign In',
+      showLoaderOnConfirm: true,
+   }).then(function(result) {
+      $.ajax({
+         type: "GET",
+         url: "https://http://128.110.73.168:8081/?userId=" + user + "&store=walmart",
+         // data: {
+         //    userId: user,
+         //    store: 'walmart'
+         // },
+         success: function(data) {
+            //alert("Job Sent");
+         }
       });
+      $(location).attr('href', 'https://grocery.walmart.com')
+   });
 }
+
+$("[data-toggle=tooltip]").tooltip();

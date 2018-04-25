@@ -519,7 +519,13 @@ function parseUrl() {
                 url: url
             },
             success: function(result) {
-                swal({ type: "success", title: "Success!", confirmButtonText: "Visit the recipe page", showCancelButton: true }).then(function(e) {
+                swal({
+                    type: "success",
+                    title: "Success!",
+                    confirmButtonText: "Visit the recipe page",
+                    showCancelButton: true,
+                    reverseButtons: true
+                }).then(function(e) {
                     window.location.href = "/recipes/" + result.id;
                 });
                 swal.hideLoading();
