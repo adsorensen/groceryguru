@@ -52,10 +52,9 @@
                 tag_string += tags[i] + ', '
               end
             end
-          end
-      end
-      %>
-      <p><i class='fa fa-tag'></i> TAGS: <%= tag_string %></p>
+          end %>
+          <p><i class='fa fa-tag'></i> TAGS: <%= tag_string %></p>
+      <% end %>
       <p><a class="nutrition" data-toggle="popover" data-info="<%= @recipe.id %>">View Nutritional Information</a></p>
     <div class="cf"></div>
   </div>
