@@ -1,75 +1,108 @@
-<!DOCTYPE html>
-<html lang="en" >
-
 <head>
-  <meta charset="UTF-8">
-  <title>Horizontal Slider</title>
-  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-  
-      <style>body {
-  overflow: hidden;
-}
-
-#slider {
-  white-space: nowrap;
-  margin-top: 20px;
-  width: calc((200px + 20px) * 16 + 20px);
-  height: 300px;
-  will-change: transition;
-  transition: 70ms all;
-}
-
-#slider div {
-  float: left;
-  height: 300px;
-  width: 200px;
-  margin-left: 20px;
-  color: white;
-  font-weight: 700;
-  text-align: center;
-  line-height: 300px;
-  font-size: 3em;
-  transition: transform 250ms ease;
-  transform: perspective(500px);
-}
-#slider div:hover {
-  transform: perspective(500px) translatez(50px);
-}
-#slider div::last-child {
-  margin-right: 20px;
-}
-</style>
-
-  
+    <%= stylesheet_link_tag "recipe_search_results"%>
+    <%= stylesheet_link_tag "carousel" %>
 </head>
-
 <body>
+<h2>Recipes</h2>
 
-  <div id='slider'>
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-  <div>6</div>
-  <div>7</div>
-  <div>8</div>
-  <div>9</div>
-  <div>10</div>
-  <div>11</div>
-  <div>12</div>
-  <div>13</div>
-  <div>14</div>
-  <div>15</div>
-  <div>16</div>
+<h3>Search for a Recipe</h3>
+<br>
+<center>
+<input type="text" id="recipe-search" onkeyup="searchFunction()" placeholder="Search for a recipe..">
+<br>
+</center>
+<div id="content" style="display:none;">
+    <div id="none_found_message" style='color: black;'></div>
+    <% @recipes.each do |recipe| %>
+    <div class="recipe">
+        <div class="image">
+            <%= if recipe.picture?
+                    link_to image_tag(recipe.picture_url, size: "100x325"), recipe 
+                else
+                    pic_url_length = recipe.picture.to_s.length
+                    beginning_index = recipe.picture.to_s.index('http')
+                    if (beginning_index.nil?)
+                        link_to image_tag('fallback/recipe-default.png', size: "100x350"), recipe
+                    else
+                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                        new_url = cut_url.gsub!('%3A', ":/")
+                        link_to image_tag(new_url, size:"100x325"), recipe
+                    end
+                end
+            %>
+            <div class="name">
+                <a href="/recipes/<%=recipe.id%>" style="color:white; padding-top: 5px; padding-bottom: 5px"><%= recipe.name %></a>
+                <a style="display:none;"><%= recipe.directions %></a>
+                <a style="display:none;"><%= recipe.tags %></a>
+            </div>
+        </div>
+        <ul class="media">
+	   		<li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+		    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+  		</ul>
+    </div>
+     <% end %>
 </div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<br><br><br>
+<div class="bg-secondary text-center">
+  <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        <h2 class="section-heading">Trending Meals</h2>
+        <p style='color: #384048; font-weight: 200;'>Kick off this summer with favorite Memorial Day recipes!</p>
+    <div style="white-space: nowrap; overflow-y: scroll; width: 98%;">
+        <% @recipes_array = [348, 124, 253, 162, 247]
+                @recipes_array.each do |index|
+                recipe = Recipe.find(index)
+                if recipe.picture?
+                    pic_url = recipe.picture_url
+                else
+                    pic_url_length = recipe.picture.to_s.length
+                    beginning_index = recipe.picture.to_s.index('http')
+                    if (beginning_index.nil?)
+                        pic_url = 'fallback/recipe-default.png'
+                    else
+                        cut_url = recipe.picture.to_s[beginning_index, pic_url_length]
+                        pic_url = cut_url.gsub!('%3A', ":/")
+                    end
+                end%>
+    
+                <div class="item" style="display: inline-block; margin: -10px;">
+                    <div class="col-xs-4">
+                    <div class="recipe" style="width: 300px; height: 300px;">
+                    <div class="image">
+                <a href="/recipes/<%=recipe.id%>"><%= image_tag(pic_url, size:"300x300")%></a>
+                <div class="name" style="white-space: normal;">
+                <a href="/recipes/<%=recipe.id%>" style="color:white;"><%= recipe.name %></a>
+                </div></div>
+                <ul class="media">
+                    <li><i class="fa fa-clock-o"></i> ><%= recipe.prep_time %> Minutes</li>
+                    <li><i class="fa fa-cutlery"></i> <%= recipe.servings %> People</li>
+  		        </ul>
+                </div>
+                    </div>
+                </div>
+            <% end %>
 
-  
+     </div>
+     </div>
+    </div>
+  </div> 
+</div>
 
-    <script>var sliderWidth = $('#slider').width();
+
+<br>
+<h3>Upload Your Own!</h3>
+<br>
+<div class="container1">
+ <div id="manualentry"><%= link_to(image_tag("cookbook.png", :alt => "cookbook", :size => "170x170", :style => "background-color: white;"), new_recipe_path) %><br><%= link_to 'Manual Entry', new_recipe_path %></div>
+ <div id="copypaste"><%= link_to(image_tag("copypaste.png", :alt => "clipboard", :size => "170x170", :style => "background-color: white;"), recipes_text_path) %><br><%= link_to 'Copy/Paste', recipes_text_path %></div>
+ <div id="url"><%= link_to(image_tag("url.png", :alt => "http", :size => "170x170", :style => "background-color: white;"), recipes_url_path ) %><br><%= link_to 'URL', recipes_url_path %></div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+var sliderWidth = $('#slider').width();
 var docWidth = $(window).width();
 var mouseX = 0;
 var mouseXPercentage = 0;
@@ -82,25 +115,20 @@ $(document.body).mousemove(function(event) {
   $('div#slider').css('transform', 'translate\(-' + translateValue + 'px' + '\, 0px\)');
 });
 
-var bgRed = 0;
-var bgBlue = 0;
-var bgGreen = 0;
-var colorProperty = 0;
-$('#slider div').each(function() {
-  bgRed = GenerateColor();
-  bgBlue = GenerateColor();
-  bgGreen = GenerateColor();
-  colorProperty = 'rgb\(' + bgRed + ', ' + bgGreen + ', ' + bgBlue + '\)'
-  $(this).css('background-color', colorProperty)
-})
+// var bgRed = 0;
+// var bgBlue = 0;
+// var bgGreen = 0;
+// var colorProperty = 0;
+// $('#slider div').each(function() {
+//   bgRed = GenerateColor();
+//   bgBlue = GenerateColor();
+//   bgGreen = GenerateColor();
+//   colorProperty = 'rgb\(' + bgRed + ', ' + bgGreen + ', ' + bgBlue + '\)'
+//   $(this).css('background-color', colorProperty)
+// })
 
 function GenerateColor() {
   return Math.floor(Math.random() * 255);
-}</script>
-
-
-
-
+}
+</script>
 </body>
-
-</html>
