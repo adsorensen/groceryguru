@@ -38,6 +38,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  config.action_controller.asset_host = "https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+  config.action_controller.asset_host = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+
     
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
