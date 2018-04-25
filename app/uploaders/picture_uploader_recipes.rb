@@ -7,7 +7,7 @@ class PictureUploaderRecipes < CarrierWave::Uploader::Base
   process resize_to_fill: [500, 300]
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  include CarrierWaveDirect::Uploader
   #storage :fog
 
   # Override the directory where uploaded files will be stored.
