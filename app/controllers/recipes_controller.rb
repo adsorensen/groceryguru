@@ -271,8 +271,11 @@ class RecipesController < ApplicationController
     puts "\n\n Added to saved recipes \n\n"
 
     if @recipe.save
-      puts "\n\n Yay we're almost done, lets redirect \n\n"
-      redirect_to "/recipes/" + @recipe.id.to_s
+      respond_to do |format|
+        format.json { render json: @recipe }
+      end
+      # puts "\n\n Yay we're almost done, lets redirect \n\n"
+      # redirect_to "/recipes/" + @recipe.id.to_s
     end
   end
   
