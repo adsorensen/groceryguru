@@ -199,14 +199,16 @@ function remove(r) {
 </div>
 <br>
 <div class="footer-2">
+    <% if @ingredients2.length != 0 %>
   <h2><center>Send Your List to a Store:</center></h2>
+  <div class="stores"></div>
   <center>
     <!--<button class="btn btn-outline btn-xl page-scroll" onclick=" $(location).attr('href', 'create_list')">Create Grocery List</button>-->
     <!--<div class="btn btn-outline btn-xl page-scroll" onclick=printpage() style="display: inline-block;"> Print</div>-->
 <%= image_submit_tag("https://www.smithsfoodanddrug.com/asset/581a08e984aee6328a27fc26?data=1", height: "30", width: "100") %> 
 <br>
 <a href="http://128.110.73.168:8081/?userId=<%= @userId %>&store=walmart"><img src="https://www.walmartbrandcenter.com/uploadedImages/BrandCenter/Content/downloads/Logos/specifications/specifications-logo1.png?n=4208" title="Walmart" width="145" height="40" /></a>
-
+<% end %>
   </center>
 </div>
 <% end %>
