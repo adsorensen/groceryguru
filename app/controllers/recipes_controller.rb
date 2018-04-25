@@ -174,8 +174,10 @@ class RecipesController < ApplicationController
     html_string = open(url, :allow_redirections => :all)
     recipe = Hangry.parse(html_string)
     nutrition = recipe.nutrition
+    next_id = Recipe.maximum(:id).next
 
     @recipe = Recipe.new do |r|
+      r.id = next_id
       r.name = recipe.name
       r.directions = recipe.instructions
       r.description = recipe.description
