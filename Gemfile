@@ -77,6 +77,4 @@ gem 'ingreedy'
 
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem 'fog-aws'
-gem 'carrierwave_direct'
 
