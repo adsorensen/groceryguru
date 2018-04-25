@@ -175,7 +175,8 @@ function newPlan() {
             success: function(data) {
                swal({
                   type: 'success',
-                  title: 'Meal plan successfully created!',
+                  title: 'Success',
+                  text: "Meal plan successfully created!",
                   showConfirmButton: false,
                   timer: 1500
                });
